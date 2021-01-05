@@ -1,0 +1,24 @@
+{
+    "common": {
+	"system": {
+	    "action_commands" : {
+		"build" : [
+		    { "type": "internal", "command": "build" }
+		]
+	    }
+	},
+	"project": {
+	    "JS_COPYRIGHT_NOTICE": "// Copyright 2020 Todd R. Haskell\\n// Distributed under the terms of the Gnu GPL 3.0"
+	}
+    },
+    "test": {
+	"project": {
+	    "SITE_PATH": ""
+	}
+    },
+    "production": {
+	"project": {
+	    "SITE_PATH": "dma/"
+	}
+    }
+}

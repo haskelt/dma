@@ -1,0 +1,31 @@
+<page modules="file-selector task-sequence">
+  <heading>EMARCS Data Management App</heading>
+  <task-sequence>
+    <task-wrapper label="Step 1">
+      <task-set>
+	<task/>
+	<task/>
+      </task-set>
+    </task-wrapper>
+    <task-wrapper label="Step 2">
+      <task-set>
+	<file-selector/>
+      </task-set>
+    </task-wrapper>
+    <task-wrapper label="Step 3">
+      <task-set>
+	My step 3
+      </task-set>
+    </task-wrapper>
+    <task-wrapper label="Step 4">
+      <task-set>
+	My step 4
+      </task-set>
+    </task-wrapper>
+    <task-wrapper label="Step 5">
+      <task-set>
+	My step 5
+      </task-set>
+    </task-wrapper>
+  </task-sequence>
+</page>

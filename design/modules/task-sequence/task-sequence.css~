@@ -1,0 +1,30 @@
+.task-sequence__task-wrapper--header {
+    padding: 1.0rem;
+    background-color: hsl(180, 50%, 80%);
+    font-size: 1.6rem;
+}
+
+.task-sequence__task-wrapper--container.collapsed {
+    display: none;
+}
+
+.task-sequence__task {
+    padding: 1.5rem;
+}
+
+.task-sequence__task-wrapper--footer {
+    padding: 1.0rem;
+}
+
+.task-sequence__task-wrapper--button {
+    margin: 0.6rem;
+    font-size: 1.1rem;
+}
+
+.task-sequence__task-wrapper--button.hidden {
+    visibility: hidden;
+}
+
+.task-sequence__task-wrapper--button.disabled {
+    disabled: true;
+}

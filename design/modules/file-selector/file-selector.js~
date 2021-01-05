@@ -1,0 +1,12 @@
+import TaskBuilder from '{{ SITE_PATH }}/js/task-sequence/TaskBuilder.js';
+
+
+static initialize (file_uploader) {
+
+	DialogSelector.file_uploader = file_uploader;
+	for (let selector of document.querySelectorAll('.file-selectors__dialog-selector')) {
+	    console.log('adding selector');
+	    new DialogSelector(selector);
+	}
+	
+    } // constructor
