@@ -1,0 +1,3 @@
+<div id="{{this.id}}" class="task-sequence__task" data-task-type="toggle">
+  <button class="task-sequence__task--button">False</button>
+</div>

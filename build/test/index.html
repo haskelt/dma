@@ -4,7 +4,7 @@
   <head>
     <meta charset=utf-8>
     <title>DMA</title>
-    <link rel="stylesheet" href="/css/task-sequence/task-sequence.css" type="text/css" />
+    <link rel="stylesheet" href="/css/tasks/tasks.css" type="text/css" />
   </head>
   
   <body>
@@ -12,99 +12,110 @@
       <h1>
   EMARCS Data Management App
 </h1>
-<div class="task-sequence">
-<div class="task-sequence__task-wrapper">
-  <div class="task-sequence__task-wrapper--header">
+<div id="tasksequence" class="tasks__task-sequence">
+<div class="tasks__task-wrapper">
+  <div class="tasks__task-wrapper--header">
     Step 1
   </div>
-  <div class="task-sequence__task-wrapper--container collapsed">
-    <div class="task-sequence__task-set">
-  <div class="task-sequence__task">
-  <button class="task-sequence__task--button">False</button>
+  <div class="tasks__task-wrapper--container collapsed">
+    <div id="taskset1" class="tasks__task-set">
+  <div id="task1a" class="tasks__task" data-task-type="toggle">
+  <button class="tasks__task--button">False</button>
 </div>
-<div class="task-sequence__task">
-  <button class="task-sequence__task--button">False</button>
+<div id="task1b" class="fields__text-input tasks__task" data-task-type="text-input">
+  <span class="fields__text-input--label">Type something</span>
+  <input type="text" class="fields__text-input--input"/>
+</div>
+<div id="task1c" class="fields__multiple-choice tasks__task" data-task-type="multiple-choice">
+  <span>Is this data from Calc II or Statics?</span>
+  <div>
+  <input class="fields__multiple-choice--option" type="radio" name="task1c" value="Calc II">
+  <label for="Calc II">Calc II</a>
+  </div>
+  <div>
+  <input class="fields__multiple-choice--option" type="radio" name="task1c" value="	  Statics">
+  <label for="	  Statics">	  Statics</a>
+  </div>
 </div>
 
 </div>
 
 
-    <div class="task-sequence__task-wrapper--footer">
-      <button class="task-sequence__task-wrapper--button" data-action="previous">Previous</button>
-      <button class="task-sequence__task-wrapper--button" data-action="next" disabled>Next</button>
+    <div class="tasks__task-wrapper--footer">
+      <button class="tasks__task-wrapper--button" data-action="previous">Previous</button>
+      <button class="tasks__task-wrapper--button" data-action="next" disabled>Next</button>
     </div>
   </div>
 </div>
-<div class="task-sequence__task-wrapper">
-  <div class="task-sequence__task-wrapper--header">
+<div class="tasks__task-wrapper">
+  <div class="tasks__task-wrapper--header">
     Step 2
   </div>
-  <div class="task-sequence__task-wrapper--container collapsed">
-    <div class="task-sequence__task-set">
-  <div class="file-selector">
-  <p>Please select a file, then click "Upload".</p>
-  <input type="file" class="file-selector__input"/>
-  <div>
-    <button class="file-selector__button">
-      Upload
-    </button>
-  </div>
+  <div class="tasks__task-wrapper--container collapsed">
+    <div id="taskset2" class="tasks__task-set">
+  <div id="task2a" class="fields__file-selector tasks__task" data-task-type="file-selector">
+  <span class="fields__file-selector--label">Consent and Demographics</span>
+  <input type="file" class="fields__file-selector--input"/>
+</div>
+<div id="task2b" class="fields__file-selector tasks__task" data-task-type="file-selector">
+  <span class="fields__file-selector--label">MCT Pretest</span>
+  <input type="file" class="fields__file-selector--input"/>
 </div>
 
 </div>
 
 
-    <div class="task-sequence__task-wrapper--footer">
-      <button class="task-sequence__task-wrapper--button" data-action="previous">Previous</button>
-      <button class="task-sequence__task-wrapper--button" data-action="next" disabled>Next</button>
+    <div class="tasks__task-wrapper--footer">
+      <button class="tasks__task-wrapper--button" data-action="previous">Previous</button>
+      <button class="tasks__task-wrapper--button" data-action="next" disabled>Next</button>
     </div>
   </div>
 </div>
-<div class="task-sequence__task-wrapper">
-  <div class="task-sequence__task-wrapper--header">
+<div class="tasks__task-wrapper">
+  <div class="tasks__task-wrapper--header">
     Step 3
   </div>
-  <div class="task-sequence__task-wrapper--container collapsed">
-    <div class="task-sequence__task-set">
+  <div class="tasks__task-wrapper--container collapsed">
+    <div id="taskset3" class="tasks__task-set">
   My step 3
 </div>
 
 
-    <div class="task-sequence__task-wrapper--footer">
-      <button class="task-sequence__task-wrapper--button" data-action="previous">Previous</button>
-      <button class="task-sequence__task-wrapper--button" data-action="next" disabled>Next</button>
+    <div class="tasks__task-wrapper--footer">
+      <button class="tasks__task-wrapper--button" data-action="previous">Previous</button>
+      <button class="tasks__task-wrapper--button" data-action="next" disabled>Next</button>
     </div>
   </div>
 </div>
-<div class="task-sequence__task-wrapper">
-  <div class="task-sequence__task-wrapper--header">
+<div class="tasks__task-wrapper">
+  <div class="tasks__task-wrapper--header">
     Step 4
   </div>
-  <div class="task-sequence__task-wrapper--container collapsed">
-    <div class="task-sequence__task-set">
+  <div class="tasks__task-wrapper--container collapsed">
+    <div id="taskset4" class="tasks__task-set">
   My step 4
 </div>
 
 
-    <div class="task-sequence__task-wrapper--footer">
-      <button class="task-sequence__task-wrapper--button" data-action="previous">Previous</button>
-      <button class="task-sequence__task-wrapper--button" data-action="next" disabled>Next</button>
+    <div class="tasks__task-wrapper--footer">
+      <button class="tasks__task-wrapper--button" data-action="previous">Previous</button>
+      <button class="tasks__task-wrapper--button" data-action="next" disabled>Next</button>
     </div>
   </div>
 </div>
-<div class="task-sequence__task-wrapper">
-  <div class="task-sequence__task-wrapper--header">
+<div class="tasks__task-wrapper">
+  <div class="tasks__task-wrapper--header">
     Step 5
   </div>
-  <div class="task-sequence__task-wrapper--container collapsed">
-    <div class="task-sequence__task-set">
+  <div class="tasks__task-wrapper--container collapsed">
+    <div id="taskset5" class="tasks__task-set">
   My step 5
 </div>
 
 
-    <div class="task-sequence__task-wrapper--footer">
-      <button class="task-sequence__task-wrapper--button" data-action="previous">Previous</button>
-      <button class="task-sequence__task-wrapper--button" data-action="next" disabled>Next</button>
+    <div class="tasks__task-wrapper--footer">
+      <button class="tasks__task-wrapper--button" data-action="previous">Previous</button>
+      <button class="tasks__task-wrapper--button" data-action="next" disabled>Next</button>
     </div>
   </div>
 </div>
@@ -115,12 +126,11 @@
 
     
     <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
-    <script type="module" src="/js/app.js"></script>
     <script type="module">
-      import "/js/file-selector/file-selector.js"
+      import "/js/fields/fields.js"
     </script>
     <script type="module">
-      import "/js/task-sequence/task-sequence.js"
+      import "/js/tasks/tasks.js"
     </script>
 
   </body>

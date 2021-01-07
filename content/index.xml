@@ -1,29 +1,34 @@
-<page modules="file-selector task-sequence">
+<page modules="fields tasks">
   <heading>EMARCS Data Management App</heading>
-  <task-sequence>
+  <task-sequence id="tasksequence">
     <task-wrapper label="Step 1">
-      <task-set>
-	<task/>
-	<task/>
+      <task-set id="taskset1">
+	<toggle id="task1a"/>
+	<text-input id="task1b" label="Type something"/>
+	<multiple-choice id="task1c" label="Is this data from Calc II or Statics?">
+	  Calc II
+	  Statics
+	</multiple-choice>
       </task-set>
     </task-wrapper>
     <task-wrapper label="Step 2">
-      <task-set>
-	<file-selector/>
+      <task-set id="taskset2">
+	<file-selector id="task2a" label="Consent and Demographics"/>
+	<file-selector id="task2b" label="MCT Pretest"/>
       </task-set>
     </task-wrapper>
     <task-wrapper label="Step 3">
-      <task-set>
+      <task-set id="taskset3">
 	My step 3
       </task-set>
     </task-wrapper>
     <task-wrapper label="Step 4">
-      <task-set>
+      <task-set id="taskset4">
 	My step 4
       </task-set>
     </task-wrapper>
     <task-wrapper label="Step 5">
-      <task-set>
+      <task-set id="taskset5">
 	My step 5
       </task-set>
     </task-wrapper>

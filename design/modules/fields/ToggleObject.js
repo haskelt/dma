@@ -1,0 +1,32 @@
+import logger from '{{ SITE_PATH }}/js/logger.js';
+import TaskHierarchyObject from '{{ SITE_PATH }}/js/tasks/TaskHierarchyObject.js';
+
+class ToggleObject extends TaskHierarchyObject {
+
+/*****************************************************************************/
+
+    constructor (element) {
+
+	super(element);
+	this.button = element.querySelector('.tasks__task--button');
+	this.button.addEventListener('click', this.handleButton.bind(this));
+	this.isCompleted = false;
+	
+    } // constructor
+
+/******************************************************************************/
+    
+    handleButton (e) {
+
+	this.isCompleted = !this.isCompleted;
+	this.button.innerText = (this.isCompleted ? 'True' : 'False');
+	logger.postMessage('DEBUG', 'fields', 'Status of toggle task ' + this.id + ' has changed to ' + this.isCompleted);
+	this.parent.setChildStatus(this, this.isCompleted ? 'complete' : 'incomplete');
+	
+    } // handleButton
+	
+/******************************************************************************/
+    
+} // ToggleObject
+
+export default ToggleObject;

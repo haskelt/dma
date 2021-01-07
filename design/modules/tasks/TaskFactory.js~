@@ -1,0 +1,25 @@
+class TaskFactory {
+
+    static builders = {};
+    
+/*****************************************************************************/
+
+    static registerBuilder (taskType, builder) {
+
+	TaskFactory.builders[taskType] = builder;
+	
+    } // registerBuilder
+
+/*****************************************************************************/
+
+    static build (element) {
+
+	return new TaskFactory.builders[element.dataset.taskType](element);
+	
+    } // build
+
+/*****************************************************************************/
+    
+}
+
+export default TaskFactory;

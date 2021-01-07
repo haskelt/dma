@@ -1,0 +1,3 @@
+<div id="{{this.id}}" class="task-sequence">
+{{this.content}}
+</div>

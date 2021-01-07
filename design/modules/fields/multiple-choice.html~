@@ -1,0 +1,8 @@
+<div id="{{ this.id }}" class="survey-input multiple-choice" data-input-type="multiple-choice" data-validation="{{ this.validation }}">
+  {% for option in this.options.split('|') %}
+  <div>
+  <input class="multiple-choice-option" type="radio" name="{{ this.id }}" value="{{ option }}">
+  <label for="{{ option }}">{{option}}</a>
+  </div>
+  {% endfor %}
+</div>

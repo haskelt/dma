@@ -1,0 +1,9 @@
+<div id="{{this.id}}" class="fields__multiple-choice tasks__task" data-task-type="multiple-choice">
+  <span>{{this.label}}</span>
+  {% for option in this.content.split('\n') %}
+  <div>
+  <input class="fields__multiple-choice--option" type="radio" name="{{ this.id }}" value="{{ option }}">
+  <label for="{{ option }}">{{option}}</a>
+  </div>
+  {% endfor %}
+</div>
