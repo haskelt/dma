@@ -1,35 +1,38 @@
 <page modules="fields tasks">
   <heading>EMARCS Data Management App</heading>
   <task-sequence id="tasksequence">
-    <task-wrapper label="Step 1">
+    <task-wrapper label="Step 1 - Course Information">
       <task-set id="taskset1">
-	<toggle id="task1a"/>
-	<text-input id="task1b" label="Type something"/>
-	<multiple-choice id="task1c" label="Is this data from Calc II or Statics?">
+	<text-input id="instructor" label="Name of instructor"/>
+	<text-input id="institution" label="Institution"/>
+	<multiple-choice id="course" label="Is this data from Calc II or Statics?">
 	  Calc II
 	  Statics
 	</multiple-choice>
+	<multiple-choice id="condition" label="Is this an intervention or control section?">
+	  Intervention
+	  Control
+	</multiple-choice>
       </task-set>
     </task-wrapper>
-    <task-wrapper label="Step 2">
+    <task-wrapper label="Step 2 - Roster">
       <task-set id="taskset2">
-	<file-selector id="task2a" label="Consent and Demographics"/>
-	<file-selector id="task2b" label="MCT Pretest"/>
+	<file-selector id="roster" label="Master Student Roster"/>
       </task-set>
     </task-wrapper>
-    <task-wrapper label="Step 3">
+    <task-wrapper label="Step 3 - Data Files">
       <task-set id="taskset3">
-	My step 3
+	<file-selector id="consent" label="Consent and Demographics"/>
       </task-set>
     </task-wrapper>
-    <task-wrapper label="Step 4">
+    <task-wrapper label="Step 4 - Target Columns">
       <task-set id="taskset4">
-	My step 4
+	<toggle id="dummy_task"/>
       </task-set>
     </task-wrapper>
-    <task-wrapper label="Step 5">
+    <task-wrapper label="Step 5 - Review and Submit">
       <task-set id="taskset5">
-	My step 5
+	<validation id="validation"/>
       </task-set>
     </task-wrapper>
   </task-sequence>

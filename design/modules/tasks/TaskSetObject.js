@@ -1,3 +1,5 @@
+{{ JS_COPYRIGHT_NOTICE }}
+
 import logger from '{{ SITE_PATH }}/js/logger.js';
 import TaskHierarchyObject from '{{ SITE_PATH }}/js/tasks/TaskHierarchyObject.js';
 

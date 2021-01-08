@@ -39,8 +39,29 @@ class TaskHierarchyObject {
 	this.children[childIndex]['status'] = status;
 	
     } // setChildStatus
+
+/******************************************************************************/
+
+    setup () {
+
+	for(let child of this.children){
+	    child['object'].setup();
+	}
+	
+    } // setup
     
 /******************************************************************************/
+
+    wrapup () {
+
+	for(let child of this.children){
+	    child['object'].wrapup();
+	}
+	
+    } // wrapup
+    
+/******************************************************************************/
+
     
 } // TaskHierarchyObject
 

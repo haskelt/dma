@@ -3,8 +3,10 @@ import ToggleObject from '{{ SITE_PATH }}/js/fields/ToggleObject.js';
 import TextInputObject from '{{ SITE_PATH }}/js/fields/TextInputObject.js';
 import MultipleChoiceObject from '{{ SITE_PATH }}/js/fields/MultipleChoiceObject.js';
 import FileSelectorObject from '{{ SITE_PATH }}/js/fields/FileSelectorObject.js';
+import ValidationObject from '{{ SITE_PATH }}/js/fields/ValidationObject.js';
 
 TaskFactory.registerBuilder('toggle', ToggleObject);
 TaskFactory.registerBuilder('text-input', TextInputObject);
 TaskFactory.registerBuilder('multiple-choice', MultipleChoiceObject);
 TaskFactory.registerBuilder('file-selector', FileSelectorObject);
+TaskFactory.registerBuilder('validation', ValidationObject);

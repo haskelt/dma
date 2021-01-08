@@ -1,6 +1,7 @@
 {{ JS_COPYRIGHT_NOTICE }}
 import logger from '{{ SITE_PATH }}/js/logger.js';
 import TaskHierarchyObject from '{{ SITE_PATH }}/js/tasks/TaskHierarchyObject.js';
+import DataManager from '{{ SITE_PATH }}/js/data/DataManager.js';
 
 class TextInputObject extends TaskHierarchyObject {
     
@@ -28,6 +29,14 @@ class TextInputObject extends TaskHierarchyObject {
 	}
 
     } // handleInput
+    
+/*****************************************************************************/
+
+    wrapup () {
+
+	DataManager.postData(this.id, this.input.value);
+	
+    } // wrapup
     
 /*****************************************************************************/
     

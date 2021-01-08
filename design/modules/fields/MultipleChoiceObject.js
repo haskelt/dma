@@ -1,6 +1,7 @@
 {{ JS_COPYRIGHT_NOTICE }}
 import logger from '{{ SITE_PATH }}/js/logger.js';
 import TaskHierarchyObject from '{{ SITE_PATH }}/js/tasks/TaskHierarchyObject.js';
+import DataManager from '{{ SITE_PATH }}/js/data/DataManager.js';
 
 class MultipleChoiceObject extends TaskHierarchyObject {
     
@@ -14,6 +15,7 @@ class MultipleChoiceObject extends TaskHierarchyObject {
 	    option.addEventListener('input', this.handleInput.bind(this));
 	}
 	this.hasContent = false;
+	this.choice = null;
 	
     } // constructor
     
@@ -25,6 +27,7 @@ class MultipleChoiceObject extends TaskHierarchyObject {
 	for(let option of this.options){
 	    if(option.checked){
 		newHasContent = true;
+		this.choice = option.value;
 	    }
 	}
 	if(newHasContent != this.hasContent){
@@ -34,6 +37,14 @@ class MultipleChoiceObject extends TaskHierarchyObject {
 	}
 
     } // handleInput
+    
+/*****************************************************************************/
+
+    wrapup () {
+
+	DataManager.postData(this.id, this.choice);
+	
+    } // wrapup
     
 /*****************************************************************************/
     

@@ -1,0 +1,22 @@
+{{ JS_COPYRIGHT_NOTICE }}
+
+import logger from '{{ SITE_PATH }}/js/logger.js';
+
+class DataManager {
+
+    static data = {};
+    
+    /**************************************************************************/
+
+    static receiveData (tag, data) {
+
+	logger.postMessage('DEBUG', 'data', 'Receiving data for tag ' + tag + ' of ' + data);
+	DataManager.data[tag] = data;
+	
+    } // receiveData
+    
+    /**************************************************************************/
+
+}
+
+export default DataManager;

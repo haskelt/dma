@@ -1,3 +1,4 @@
+{{ JS_COPYRIGHT_NOTICE }}
 import logger from "{{SITE_PATH}}/js/logger.js";
 
 class TaskFactory {

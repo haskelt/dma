@@ -1,3 +1,5 @@
+// Copyright 2020 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
+
 class Logger {
 
     static levels = {
@@ -30,7 +32,7 @@ class Logger {
 
     static logging_level = 'TRACE';
 
-    static namespaces_to_post = ['tasks', 'fields'];
+    static namespaces_to_post = ['tasks', 'fields', 'data'];
 
     /**************************************************************************/
 

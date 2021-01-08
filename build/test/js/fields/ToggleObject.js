@@ -19,7 +19,7 @@ class ToggleObject extends TaskHierarchyObject {
     handleButton (e) {
 
 	this.isCompleted = !this.isCompleted;
-	this.button.innerText = (this.isCompleted ? 'True' : 'False');
+	this.button.innerText = (this.isCompleted ? 'Click me to undo this task' : 'Click me to complete this task');
 	logger.postMessage('DEBUG', 'fields', 'Status of toggle task ' + this.id + ' has changed to ' + this.isCompleted);
 	this.parent.setChildStatus(this, this.isCompleted ? 'complete' : 'incomplete');
 	

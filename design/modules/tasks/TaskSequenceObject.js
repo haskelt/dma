@@ -26,12 +26,20 @@ class TaskSequenceObject extends TaskHierarchyObject {
 	// hide the <previous> button for the first task
 	this.setButtonState(0, 'previous_button', 'hidden');
 	// hide the <next> button for the last task
-	this.setButtonState(this.task_wrappers.length - 1, 'next_button', 'hidden');
+//	this.setButtonState(this.task_wrappers.length - 1, 'next_button', 'hidden');
 	
     } // constructor
 
 /******************************************************************************/
 
+    setup () {
+
+	this.children[this.cur_task]['object'].setup();
+	
+    } // setup
+    
+/******************************************************************************/
+    
     show (task_index) {
 
 	this.task_wrappers[task_index]['container'].classList.remove('collapsed');
@@ -84,9 +92,11 @@ class TaskSequenceObject extends TaskHierarchyObject {
 
 	if(this.cur_task < this.task_wrappers.length - 1){
 	    logger.postMessage('DEBUG', 'tasks', 'Moving forward from task wrapper ' + this.cur_task + ' to task wrapper ' + (this.cur_task + 1));
+	    this.children[this.cur_task]['object'].wrapup();
 	    this.hide(this.cur_task);
 	    this.show(this.cur_task + 1);
 	    this.cur_task++;
+	    this.children[this.cur_task]['object'].setup();
 	}
 	
     } // goToNext

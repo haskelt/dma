@@ -14,5 +14,6 @@ for (let sequenceElement of document.querySelectorAll('.tasks__task-sequence')) 
 	    task.setParent(taskSet);
 	}
     }
+    sequence.setup();
 }
 

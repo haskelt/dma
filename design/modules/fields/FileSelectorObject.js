@@ -1,6 +1,8 @@
 {{ JS_COPYRIGHT_NOTICE }}
+
 import logger from '{{ SITE_PATH }}/js/logger.js';
 import TaskHierarchyObject from '{{ SITE_PATH }}/js/tasks/TaskHierarchyObject.js';
+import DataManager from '{{ SITE_PATH }}/js/data/DataManager.js';
 
 class FileSelectorObject extends TaskHierarchyObject {
     
@@ -22,6 +24,14 @@ class FileSelectorObject extends TaskHierarchyObject {
 	this.parent.setChildStatus(this, this.input.value == '' ? 'incomplete' : 'complete');
 
     } // handleChange
+    
+/*****************************************************************************/
+
+    wrapup () {
+
+	DataManager.postData(this.id, this.input.value);
+	
+    } // wrapup
     
 /*****************************************************************************/
     

@@ -1,7 +1,7 @@
 import logger from '{{ SITE_PATH }}/js/logger.js';
 import TaskHierarchyObject from '{{ SITE_PATH }}/js/tasks/TaskHierarchyObject.js';
 
-class ToggleObject extends TaskHierarchyObject {
+class ValidationObject extends TaskHierarchyObject {
 
 /*****************************************************************************/
 
@@ -27,6 +27,6 @@ class ToggleObject extends TaskHierarchyObject {
 	
 /******************************************************************************/
     
-} // ToggleObject
+} // ValidationObject
 
-export default ToggleObject;
+export default ValidationObject;
