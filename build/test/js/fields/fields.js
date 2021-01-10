@@ -1,12 +1,14 @@
-import TaskFactory from '/js/tasks/TaskFactory.js';
-import ToggleObject from '/js/fields/ToggleObject.js';
-import TextInputObject from '/js/fields/TextInputObject.js';
-import MultipleChoiceObject from '/js/fields/MultipleChoiceObject.js';
-import FileSelectorObject from '/js/fields/FileSelectorObject.js';
-import ValidationObject from '/js/fields/ValidationObject.js';
+// Copyright 2020 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-TaskFactory.registerBuilder('toggle', ToggleObject);
-TaskFactory.registerBuilder('text-input', TextInputObject);
-TaskFactory.registerBuilder('multiple-choice', MultipleChoiceObject);
-TaskFactory.registerBuilder('file-selector', FileSelectorObject);
-TaskFactory.registerBuilder('validation', ValidationObject);
+import TaskFactory from '/js/tasks/TaskFactory.js';
+import ToggleTask from '/js/fields/ToggleTask.js';
+import TextInputTask from '/js/fields/TextInputTask.js';
+import MultipleChoiceTask from '/js/fields/MultipleChoiceTask.js';
+import SpreadsheetSelectorTask from '/js/fields/SpreadsheetSelectorTask.js';
+import ValidationTask from '/js/fields/ValidationTask.js';
+
+TaskFactory.registerBuilder('toggle', ToggleTask);
+TaskFactory.registerBuilder('text-input', TextInputTask);
+TaskFactory.registerBuilder('multiple-choice', MultipleChoiceTask);
+TaskFactory.registerBuilder('spreadsheet-selector', SpreadsheetSelectorTask);
+TaskFactory.registerBuilder('validation', ValidationTask);

@@ -65,9 +65,9 @@
   </div>
   <div class="tasks__task-wrapper--container collapsed">
     <div id="taskset2" class="tasks__task-set">
-  <div id="roster" class="fields__file-selector tasks__task" data-task-type="file-selector">
-  <span class="fields__file-selector--label">Master Student Roster</span>
-  <input type="file" class="fields__file-selector--input"/>
+  <div id="roster" class="fields__spreadsheet-selector tasks__task" data-task-type="spreadsheet-selector">
+  <span class="fields__spreadsheet-selector--label">Master Student Roster</span>
+  <input type="file" class="fields__spreadsheet-selector--input"/>
 </div>
 
 </div>
@@ -85,9 +85,9 @@
   </div>
   <div class="tasks__task-wrapper--container collapsed">
     <div id="taskset3" class="tasks__task-set">
-  <div id="consent" class="fields__file-selector tasks__task" data-task-type="file-selector">
-  <span class="fields__file-selector--label">Consent and Demographics</span>
-  <input type="file" class="fields__file-selector--input"/>
+  <div id="mct_pre" class="fields__spreadsheet-selector tasks__task" data-task-type="spreadsheet-selector">
+  <span class="fields__spreadsheet-selector--label">MCT Pretest</span>
+  <input type="file" class="fields__spreadsheet-selector--input"/>
 </div>
 
 </div>
@@ -144,6 +144,7 @@
 
     
     <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+    <script src="/js/papaparse/papaparse.min.js"></script>
     <script type="module">
       import "/js/fields/fields.js"
     </script>

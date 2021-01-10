@@ -1,11 +1,12 @@
 // Copyright 2020 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
-import logger from "/js/logger.js";
+
+import logger from '/js/logger.js';
 
 class TaskFactory {
 
     static builders = {};
     
-/*****************************************************************************/
+    /**************************************************************************/
 
     static registerBuilder (taskType, builder) {
 
@@ -14,7 +15,7 @@ class TaskFactory {
 	
     } // registerBuilder
 
-/*****************************************************************************/
+    /**************************************************************************/
 
     static build (taskType, element) {
 
@@ -23,7 +24,7 @@ class TaskFactory {
 	
     } // build
 
-/*****************************************************************************/
+    /**************************************************************************/
     
 }
 

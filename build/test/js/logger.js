@@ -30,9 +30,9 @@ class Logger {
         }
     };
 
-    static logging_level = 'TRACE';
+    static loggingLevel = 'TRACE';
 
-    static namespaces_to_post = ['tasks', 'fields', 'data'];
+    static namespacesToPost = ['tasks', 'fields', 'data', 'files'];
 
     /**************************************************************************/
 
@@ -40,11 +40,11 @@ class Logger {
     // will post for the specified namespace and all child namespaces of it
 
 	// first check if messages at this level should be logged
-	if(Logger.levels[level]['severity'] >= Logger.levels[Logger.logging_level]['severity']){
+	if(Logger.levels[level]['severity'] >= Logger.levels[Logger.loggingLevel]['severity']){
 	    // then check if messages for this namespace should be logged
-	    for(let namespace_to_post of this.namespaces_to_post){
-		if(namespace.startsWith(namespace_to_post)){
-		    console.log(Logger.levels[level]['prefix'] + "<" + namespace + "> " + message);
+	    for(let namespaceToPost of this.namespacesToPost){
+		if(namespace.startsWith(namespaceToPost)){
+		    console.log(Logger.levels[level]['prefix'] + '<' + namespace + '> ' + message);
 		    break;
 		}
 	    }

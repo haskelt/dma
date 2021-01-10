@@ -1,12 +1,12 @@
 // Copyright 2020 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
 import logger from '/js/logger.js';
-import TaskHierarchyObject from '/js/tasks/TaskHierarchyObject.js';
+import Task from '/js/tasks/Task.js';
 import XLSXReader from '/js/files/XLSXReader.js';
 import CSVReader from '/js/files/CSVReader.js';
 import DataManager from '/js/data/DataManager.js';
 
-class FileSelectorObject extends TaskHierarchyObject {
+class FileSelectorTask extends Task {
     
     /**************************************************************************/
 
@@ -25,11 +25,11 @@ class FileSelectorObject extends TaskHierarchyObject {
 	logger.postMessage('DEBUG', 'fields', 'Content of file selector ' + this.id + ' has changed to ' + this.input.value);
 	// if a file has been selected
         if (this.input.files.length > 0) {
-	    let excel_regex = /(.xls|.xlsx)$/;
-	    let csv_regex = /.csv$/;
-	    if(excel_regex.test(this.input.files[0].name.toLowerCase())) {
+	    let excelRegex = /(.xls|.xlsx|.csv)$/;
+	    let csvRegex = /.csv$/;
+	    if(excelRegex.test(this.input.files[0].name.toLowerCase())) {
 		new XLSXReader().read(this.input.files[0], this.fileReadCallback.bind(this));
-	    } else if(csv_regex.test(this.input.files[0].name.toLowerCase())){
+	    } else if(csvRegex.test(this.input.files[0].name.toLowerCase())){
 		new CSVReader().read(this.input.files[0], this.fileReadCallback.bind(this));
 	    } else {
 		alert('Please choose an Excel or CSV file');
@@ -57,14 +57,14 @@ class FileSelectorObject extends TaskHierarchyObject {
     
     /**************************************************************************/
 
-    wrapup () {
+    wrapUp () {
 
 	DataManager.postData(this.id, this.data);
 	
-    } // wrapup
+    } // wrapUp
     
     /**************************************************************************/
     
-} // FileSelectorObject
+} // FileSelectorTask
 
-export default FileSelectorObject;
+export default FileSelectorTask;

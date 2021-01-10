@@ -17,12 +17,12 @@
     </task-wrapper>
     <task-wrapper label="Step 2 - Roster">
       <task-set id="taskset2">
-	<file-selector id="roster" label="Master Student Roster"/>
+	<spreadsheet-selector id="roster" label="Master Student Roster"/>
       </task-set>
     </task-wrapper>
     <task-wrapper label="Step 3 - Data Files">
       <task-set id="taskset3">
-	<file-selector id="consent" label="Consent and Demographics"/>
+	<spreadsheet-selector id="mct_pre" label="MCT Pretest"/>
       </task-set>
     </task-wrapper>
     <task-wrapper label="Step 4 - Target Columns">

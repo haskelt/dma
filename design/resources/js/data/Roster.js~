@@ -1,0 +1,58 @@
+{{ JS_COPYRIGHT_NOTICE }}
+
+import logger from '{{ SITE_PATH }}/js/logger.js';
+import CryptoJS from '{{ SITE_PATH }}/js/cryptojs/sha256.js';
+
+class Roster {
+
+    static requiredFields = ['Name', 'ID', 'E-mail'];
+    static data = [];
+    
+    /**************************************************************************/
+
+    static initialize (data) {
+
+	logger.postMessage('TRACE', 'data', 'Initializing roster');
+
+	this.validate(data);
+	// iterate over the rows of the first worksheet
+	for(let row of data[Object.keys(data)[0]]){
+	    console.log(CryptoJS.SHA256(row['Name'] + row['ID'] + row['E-mail']).toString());
+	}
+	
+    } // initialize
+    
+    /**************************************************************************/
+
+    static validate (data) {
+
+	/* Check that there's only one worksheet. With multiple worksheets,
+	   we don't know which one we're supposed to be looking at. */
+	if(Object.keys(data).length != 1){
+	    throw Error('Roster can only have one worksheet. Please fix and then reupload the roster.');
+	}
+
+	/* Check that each row has the same number of fields */
+	var worksheet = data[Object.keys(data)[0]];
+	var lastNumFields = null;
+	for(let row of worksheet){
+	    if(lastNumFields && Object.keys(row).length != lastNumFields){
+		throw Error('Each row in the roster must have the same number of cells. Please fix and then reupload the roster.');
+	    }
+	    lastNumFields = Object.keys(row).length;
+	}
+
+	/* Check that the required fields are present. Extra fields are okay. */
+	for(let field of this.requiredFields){
+	    if(!(field in worksheet[0])){
+		throw Error('Roster must have a column for ' + field + '. Please fix and then reupload the roster.');
+	    }
+	}
+	
+    } // validate
+
+    /**************************************************************************/
+
+}
+
+export default Roster;

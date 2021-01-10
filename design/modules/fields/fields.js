@@ -1,12 +1,14 @@
-import TaskFactory from '{{ SITE_PATH }}/js/tasks/TaskFactory.js';
-import ToggleObject from '{{ SITE_PATH }}/js/fields/ToggleObject.js';
-import TextInputObject from '{{ SITE_PATH }}/js/fields/TextInputObject.js';
-import MultipleChoiceObject from '{{ SITE_PATH }}/js/fields/MultipleChoiceObject.js';
-import FileSelectorObject from '{{ SITE_PATH }}/js/fields/FileSelectorObject.js';
-import ValidationObject from '{{ SITE_PATH }}/js/fields/ValidationObject.js';
+{{ JS_COPYRIGHT_NOTICE }}
 
-TaskFactory.registerBuilder('toggle', ToggleObject);
-TaskFactory.registerBuilder('text-input', TextInputObject);
-TaskFactory.registerBuilder('multiple-choice', MultipleChoiceObject);
-TaskFactory.registerBuilder('file-selector', FileSelectorObject);
-TaskFactory.registerBuilder('validation', ValidationObject);
+import TaskFactory from '{{ SITE_PATH }}/js/tasks/TaskFactory.js';
+import ToggleTask from '{{ SITE_PATH }}/js/fields/ToggleTask.js';
+import TextInputTask from '{{ SITE_PATH }}/js/fields/TextInputTask.js';
+import MultipleChoiceTask from '{{ SITE_PATH }}/js/fields/MultipleChoiceTask.js';
+import SpreadsheetSelectorTask from '{{ SITE_PATH }}/js/fields/SpreadsheetSelectorTask.js';
+import ValidationTask from '{{ SITE_PATH }}/js/fields/ValidationTask.js';
+
+TaskFactory.registerBuilder('toggle', ToggleTask);
+TaskFactory.registerBuilder('text-input', TextInputTask);
+TaskFactory.registerBuilder('multiple-choice', MultipleChoiceTask);
+TaskFactory.registerBuilder('spreadsheet-selector', SpreadsheetSelectorTask);
+TaskFactory.registerBuilder('validation', ValidationTask);
