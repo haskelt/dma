@@ -1,59 +1,56 @@
 {{ JS_COPYRIGHT_NOTICE }}
 
-import logger from '{{ SITE_PATH }}/js/logger.js';
-import CryptoJS from '{{ SITE_PATH }}/js/cryptojs/sha256.js';
+import logger from '{{SITE_PATH}}/js/logger.js';
+import CryptoJS from '{{SITE_PATH}}/js/cryptojs/sha256.js';
+import DataSpecialist from '{{SITE_PATH}}/js/data/DataSpecialist.js';
 
-class Roster {
+class Roster extends DataSpecialist {
 
-    static requiredIdentifiers = ['Name', 'ID', 'E-mail'];
+    /**************************************************************************/
+
     static data = [];
     
     /**************************************************************************/
 
-    static setData (tag, raw_data) {
+    constructor () {
+
+	super();
+
+    } // constructor
+    
+    /**************************************************************************/
+
+    setData (tag, raw_data, requiredFields) {
 
 	logger.postMessage('DEBUG', 'data', 'Setting roster data');
 
 	/* Do a set of validation checks on the data */
 	this.doSingleWorksheetCheck(raw_data);
-	var data = raw_data[Object.keys(raw_data)[0]]
-	this.doRowLengthCheck(data);
-	this.doRequiredIdentifiersCheck(data);
-	this.doUniqueIdentifiersCheck(data);
+	this.doRowLengthCheck();
+	this.doRequiredFieldsCheck(requiredFields);
+	this.doUniqueIdentifiersCheck(requiredFields);
 
 	/* Create identifiers based on a cryptographic hash of the required
 	   fields, and save a local copy of the original data plus the 
 	   identifier */
-	for(let row of data){
+	for(let row of this.curData){
 	    let stringToHash = '';
-	    for(let field of this.requiredIdentifiers){
+	    for(let field of requiredFields){
 		stringToHash += row[field];
 	    }
-	    let anonID = CryptoJS.SHA256(stringToHash).toString();
-	    this.data.push(Object.assign({ 'anonID': anonID }, row));
+	    row['anonID'] = CryptoJS.SHA256(stringToHash).toString();
 	}
+	Roster.data = this.curData;
 	
     } // setData
     
     /**************************************************************************/
-
-    static doSingleWorksheetCheck (raw_data) {
-	/* Check that there's only one worksheet. With multiple worksheets,
-	   we don't know which one we're supposed to be looking at. */
-
-	if(Object.keys(raw_data).length != 1){
-	    throw Error('Roster can only have one worksheet. Please fix and then reupload the roster.');
-	}
-
-    } // doSingleWorksheetCheck
-
-    /**************************************************************************/
     
-    static doRowLengthCheck (data) {
+    doRowLengthCheck (data) {
     	/* Check that each row has the same number of fields */
 
 	var lastNumFields = null;
-	for(let row of data){
+	for(let row of this.curData){
 	    if(lastNumFields && Object.keys(row).length != lastNumFields){
 		throw Error('Each row in the roster must have the same number of cells. Please fix and then reupload the roster.');
 	    }
@@ -64,27 +61,13 @@ class Roster {
     
     /**************************************************************************/
 
-    static doRequiredIdentifiersCheck (data) {
-	/* Check that the required identifiers are present as fields in the 
-	   data. Extra fields are okay. */
-
-	for(let field of this.requiredIdentifiers){
-	    if(!(field in data[0])){
-		throw Error('Roster must have a column for ' + field + '. Please fix and then reupload the roster.');
-	    }
-	}
-	    
-    } // doRequiredFieldsCheck
-
-    /**************************************************************************/
-
-    static doUniqueIdentifiersCheck (data) {
+    doUniqueIdentifiersCheck (requiredFields) {
 	/* For each required identifier field, make sure all the values in
 	   the roster are unique */
 	
-	for(let field of this.requiredIdentifiers){
-	    let uniqueValues = new Set(data.map(entry => entry[field]));
-	    if(uniqueValues.size != data.length){
+	for(let field of requiredFields){
+	    let uniqueValues = new Set(this.curData.map(entry => entry[field]));
+	    if(uniqueValues.size != this.curData.length){
 		throw Error('The ' + field + ' column in the roster has one or more duplicate entries. Please fix and then reupload the roster.');
 	    }
 	}

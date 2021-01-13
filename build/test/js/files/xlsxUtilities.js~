@@ -2,7 +2,7 @@
 
 import logger from '{{ SITE_PATH }}/js/logger.js';
 
-class xlsxReader {
+class xlsxIO {
 
     /**************************************************************************/
 
@@ -54,6 +54,18 @@ class xlsxReader {
     
     /**************************************************************************/
 
-} // xlsxReader
+    write (data, file) {
 
-export default xlsxReader;
+	for(let tag in data){
+	    let sheet = data[tag];
+	}
+	
+    } // write
+    
+    /**************************************************************************/
+    
+} // xlsxIO
+
+export default xlsxIO;
+
+

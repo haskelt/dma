@@ -1,19 +1,17 @@
 {{ JS_COPYRIGHT_NOTICE }}
 
-import logger from '{{SITE_PATH}}/js/logger.js';
-import xlsxUtilities from '{{SITE_PATH}}/js/files/xlsxUtilities.js';
-import DataSpecialist from '{{SITE_PATH}}/js/data/DataSpecialist.js';
-import Roster from '{{SITE_PATH}}/js/data/Roster.js';
-import DataSets from '{{SITE_PATH}}/js/data/DataSets.js';
+import logger from '{{ SITE_PATH }}/js/logger.js';
+import xlsxUtilities from '{{ SITE_PATH }}/js/files/xlsxUtilities.js';
+import DataSpecialist from '{{ SITE_PATH }}/js/data/DataSpecialist.js';
+import Roster from '{{ SITE_PATH }}/js/data/Roster.js';
 
-class StudentData extends DataSpecialist {
+class CWData extends StudentData {
 
     /**************************************************************************/
 
     constructor () {
 
 	super();
-	this.possibleIdentifiers = {'name': 'Name', 'id': 'ID'};
 
     } // constructor
     
@@ -24,10 +22,10 @@ class StudentData extends DataSpecialist {
 	logger.postMessage('DEBUG', 'data', 'Setting student data ' + tag);
 
 	/* Do a set of validation checks on the data */
-	this.doSingleWorksheetCheck(raw_data);
-	this.trimLongHeadings();
-	this.doIdentifierCheck();
-	this.doRequiredFieldsCheck(requiredFields);
+	var data = this.doSingleWorksheetCheck(raw_data);
+	this.trimLongHeadings(data);
+	var identifiers = this.doIdentifierCheck(data);
+	this.doRequiredFieldsCheck(data, requiredFields);
 	    
 	/* Store the data. We use the first identifier that was found in the 
 	   data file to look up student anonymous IDs. This could throw an
@@ -37,31 +35,31 @@ class StudentData extends DataSpecialist {
 	   an additional object to hold the lookup results until we're ready
 	   to store the data. */
 	var newData = [];
-	var rosterIDType = this.possibleIdentifiers[this.curIdentifiers[0]];
-	for(let row of this.curData){
-	    let anonID = Roster.getAnonID(rosterIDType, row[this.curIdentifiers[0]]);
+	var rosterIDType = this.possibleIdentifiers[identifiers[0]];
+	for(let row of data){
+	    let anonID = Roster.getAnonID(rosterIDType, row[identifiers[0]]);
 	    let newRow = { 'anonID': anonID };
 	    for(let field in row){
-		if(!(this.curIdentifiers.includes(field))){
+		if(!(identifiers.includes(field))){
 		    newRow[field] = row[field];
 		}
 	    }
 	    newData.push(newRow); 
 	}
-	DataSets.setDataSet(tag, newData);
+	DataSpecialist.dataSets[tag] = newData;
 	
     } // setData
     
     /**************************************************************************/
 
-    trimLongHeadings () {
+    trimLongHeadings (data) {
 	/* Take fields with lengthy multi-word names, and replace them with just
 	   the first word */
 
 	/* Identify the field names to change, and determine the appropriate
 	   replacement values */
 	var replacements = [];
-	for(let field in this.curData[0]){
+	for(let field in data[0]){
 	    // THESE CRITERIA ARE A HACK
 	    if(field.length > 12 && field.includes(' ')){
 		let newField = field.split(' ')[0];
@@ -71,7 +69,7 @@ class StudentData extends DataSpecialist {
 	}
 
 	/* Do the replacements */
-	for(let row of this.curData){
+	for(let row of data){
 	    for(let replacement of replacements){
 		row[replacement.newField] = row[replacement.oldField];
 		delete row[replacement.oldField];
@@ -82,26 +80,57 @@ class StudentData extends DataSpecialist {
 
     /**************************************************************************/
 
-    doIdentifierCheck () {
+    doIdentifierCheck (data) {
 	/* Check that the data has a field for a recognized student
 	   identifier */
 
 	var matches = [];
 	for(let identifier of Object.keys(this.possibleIdentifiers)){
-	    if(identifier in this.curData[0]){
+	    if(identifier in data[0]){
 		matches.push(identifier);
 	    }
 	}
 	if(matches.length == 0){
 	    throw Error('Data file does not have any columns with valid student identifiers. Please fix and reupload.');
 	} else {
-	    this.curIdentifiers = matches;
+	    return matches;
 	}
 
     } // doIdentifierCheck
 
     /**************************************************************************/
-    
-} // StudentData
 
-export default StudentData;
+    applyFilter (tag, field, value) {
+	/* Remove students from the data if the data point indicated by
+	   <tag> and <field> is NOT <value> */
+
+	logger.postMessage('DEBUG', 'data', 'Filtering: Keeping students where ' + tag + '::' + field + ' has value ' + value);
+	// generate a list of students whose data we are keeping
+	var keepList = [];
+	for(let row of this.dataSets[tag]){
+	    if(row[field] == value){
+		keepList.push(row['anonID']);
+	    }
+	}
+	/* go through all the datasets and gather data rows for only
+	   students who are in the list */
+	for(let tag in this.dataSets){
+	    this.dataSets[tag] = this.dataSets[tag].filter(entry => keepList.includes(entry['anonID']));
+	}
+	
+    } // applyFilter
+    
+    /**************************************************************************/
+
+    exportData () {
+
+	logger.postMessage('DEBUG', 'data', 'Exporting student data');
+	xlsxUtilities.write(DataSpecialist.dataSets);
+	
+    } // exportData
+    
+    /**************************************************************************/
+    
+} // CWData
+
+export default new CWData();

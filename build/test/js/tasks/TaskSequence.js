@@ -94,11 +94,17 @@ class TaskSequence extends Task {
 
 	if(this.curTask < this.taskWrappers.length - 1){
 	    logger.postMessage('DEBUG', 'tasks', 'Moving forward from task wrapper ' + this.curTask + ' to task wrapper ' + (this.curTask + 1));
-	    this.children[this.curTask]['object'].wrapUp();
-	    this.hide(this.curTask);
-	    this.show(this.curTask + 1);
-	    this.curTask++;
-	    this.children[this.curTask]['object'].setup();
+	    try {
+		this.children[this.curTask]['object'].wrapUp();
+		this.hide(this.curTask);
+		this.show(this.curTask + 1);
+		this.curTask++;
+		this.children[this.curTask]['object'].setup();
+	    }
+	    catch (error) {
+		alert(error.message);
+		throw(error);
+	    }
 	}
 	
     } // goToNext

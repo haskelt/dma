@@ -2,7 +2,7 @@
 
 import logger from '/js/logger.js';
 
-class XLSXReader {
+class xlsxReader {
 
     /**************************************************************************/
 
@@ -54,7 +54,6 @@ class XLSXReader {
     
     /**************************************************************************/
 
-} // XLSXReader
+} // xlsxReader
 
-export default XLSXReader;
-
+export default xlsxReader;

@@ -6,9 +6,11 @@ import TextInputTask from '/js/fields/TextInputTask.js';
 import MultipleChoiceTask from '/js/fields/MultipleChoiceTask.js';
 import SpreadsheetSelectorTask from '/js/fields/SpreadsheetSelectorTask.js';
 import ValidationTask from '/js/fields/ValidationTask.js';
+import ExportButtonTask from '/js/fields/ExportButtonTask.js';
 
 TaskFactory.registerBuilder('toggle', ToggleTask);
 TaskFactory.registerBuilder('text-input', TextInputTask);
 TaskFactory.registerBuilder('multiple-choice', MultipleChoiceTask);
 TaskFactory.registerBuilder('spreadsheet-selector', SpreadsheetSelectorTask);
 TaskFactory.registerBuilder('validation', ValidationTask);
+TaskFactory.registerBuilder('export-button', ExportButtonTask);

@@ -15,14 +15,16 @@
 	</multiple-choice>
       </task-set>
     </task-wrapper>
-    <task-wrapper label="Step 2 - Roster">
+    <task-wrapper label="Step 2 - Roster and Consent">
       <task-set id="taskset2">
 	<spreadsheet-selector id="roster" label="Master Student Roster"/>
+	<spreadsheet-selector id="demographics" label="Consent and Demographics"/>
       </task-set>
     </task-wrapper>
     <task-wrapper label="Step 3 - Data Files">
       <task-set id="taskset3">
 	<spreadsheet-selector id="mct_pre" label="MCT Pretest"/>
+	<spreadsheet-selector id="mct_post" label="MCT Posttest"/>
       </task-set>
     </task-wrapper>
     <task-wrapper label="Step 4 - Target Columns">
@@ -33,6 +35,7 @@
     <task-wrapper label="Step 5 - Review and Submit">
       <task-set id="taskset5">
 	<validation id="validation"/>
+	<export-button id="export" label="Export"/>
       </task-set>
     </task-wrapper>
   </task-sequence>

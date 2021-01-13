@@ -46,6 +46,7 @@ class Task {
 
     setup () {
 
+	logger.postMessage('TRACE', 'tasks', 'Doing setup for task ' + this.id);
 	for(let child of this.children){
 	    child['object'].setup();
 	}
@@ -56,11 +57,12 @@ class Task {
 
     wrapUp () {
 
+	logger.postMessage('TRACE', 'tasks', 'Doing wrap-up for task ' + this.id);
 	for(let child of this.children){
 	    child['object'].wrapUp();
 	}
 	
-    } // wrapup
+    } // wrapUp
     
     /**************************************************************************/
 

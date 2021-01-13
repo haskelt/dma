@@ -24,7 +24,3 @@
 .tasks__task-wrapper--button.hidden {
     visibility: hidden;
 }
-
-.tasks__task-wrapper--button.disabled {
-    disabled: true;
-}

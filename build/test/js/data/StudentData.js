@@ -1,79 +1,107 @@
 // Copyright 2020 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
 import logger from '/js/logger.js';
+import xlsxUtilities from '/js/files/xlsxUtilities.js';
+import DataSpecialist from '/js/data/DataSpecialist.js';
 import Roster from '/js/data/Roster.js';
+import DataSets from '/js/data/DataSets.js';
 
-class StudentData {
+class StudentData extends DataSpecialist {
 
-    static possibleIdentifiers = {'name': 'Name', 'id': 'ID'};
-    static data = {};
+    /**************************************************************************/
+
+    constructor () {
+
+	super();
+	this.possibleIdentifiers = {'name': 'Name', 'id': 'ID'};
+
+    } // constructor
     
     /**************************************************************************/
 
-    static setData (tag, raw_data) {
+    setData (tag, raw_data, requiredFields) {
 
 	logger.postMessage('DEBUG', 'data', 'Setting student data ' + tag);
 
 	/* Do a set of validation checks on the data */
 	this.doSingleWorksheetCheck(raw_data);
-	var data = raw_data[Object.keys(raw_data)[0]]
-	var identifiers = this.doIdentifierCheck(data);
+	this.trimLongHeadings();
+	this.doIdentifierCheck();
+	this.doRequiredFieldsCheck(requiredFields);
 	    
-	/* Store the data */
-	var temp = {};
-	/* We use the first identifier that was found in the data file
-	   to look up student anonymous IDs */
-	var rosterIDType = this.possibleIdentifiers[identifiers[0]];
-	for(let row of data){
-	    let anonID = Roster.getAnonID(rosterIDType, row[identifiers[0]]);
-	    temp[anonID] = row; 
+	/* Store the data. We use the first identifier that was found in the 
+	   data file to look up student anonymous IDs. This could throw an
+	   error if the identifier isn't in the roster, but we put the lookup
+	   here rather than as a separate validation check for efficiency
+	   reasons - to avoid looking up the identifier twice, or creating
+	   an additional object to hold the lookup results until we're ready
+	   to store the data. */
+	var newData = [];
+	var rosterIDType = this.possibleIdentifiers[this.curIdentifiers[0]];
+	for(let row of this.curData){
+	    let anonID = Roster.getAnonID(rosterIDType, row[this.curIdentifiers[0]]);
+	    let newRow = { 'anonID': anonID };
+	    for(let field in row){
+		if(!(this.curIdentifiers.includes(field))){
+		    newRow[field] = row[field];
+		}
+	    }
+	    newData.push(newRow); 
 	}
-	data[tag] = temp;
+	DataSets.setDataSet(tag, newData);
 	
     } // setData
     
     /**************************************************************************/
 
-    static doSingleWorksheetCheck (raw_data) {
-	/* Check that there's only one worksheet. With multiple worksheets,
-	   we don't know which one we're supposed to be looking at. */
+    trimLongHeadings () {
+	/* Take fields with lengthy multi-word names, and replace them with just
+	   the first word */
 
-	if(Object.keys(raw_data).length != 1){
-	    throw Error('Roster can only have one worksheet. Please fix and then reupload the roster.');
+	/* Identify the field names to change, and determine the appropriate
+	   replacement values */
+	var replacements = [];
+	for(let field in this.curData[0]){
+	    // THESE CRITERIA ARE A HACK
+	    if(field.length > 12 && field.includes(' ')){
+		let newField = field.split(' ')[0];
+		logger.postMessage('DEBUG', 'data', 'replacing ' + field + ' with ' + newField);
+		replacements.push({'oldField': field, 'newField': newField});
+	    }
 	}
 
-    } // doSingleWorksheetCheck
+	/* Do the replacements */
+	for(let row of this.curData){
+	    for(let replacement of replacements){
+		row[replacement.newField] = row[replacement.oldField];
+		delete row[replacement.oldField];
+	    }
+	}
+	
+    } // trimLongHeadings
 
     /**************************************************************************/
 
-    static doIdentifierCheck (data) {
+    doIdentifierCheck () {
 	/* Check that the data has a field for a recognized student
 	   identifier */
 
 	var matches = [];
 	for(let identifier of Object.keys(this.possibleIdentifiers)){
-	    if(identifier in data[0]){
+	    if(identifier in this.curData[0]){
 		matches.push(identifier);
 	    }
 	}
 	if(matches.length == 0){
 	    throw Error('Data file does not have any columns with valid student identifiers. Please fix and reupload.');
 	} else {
-	    return matches;
+	    this.curIdentifiers = matches;
 	}
 
     } // doIdentifierCheck
 
     /**************************************************************************/
-
-    static getData (tag, anonID) {
-
-	return this.data[tag][anonID];
-	
-    } // getData
-
-    /**************************************************************************/
-
+    
 } // StudentData
 
 export default StudentData;

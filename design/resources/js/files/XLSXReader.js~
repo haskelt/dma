@@ -2,24 +2,24 @@
 
 import logger from '{{ SITE_PATH }}/js/logger.js';
 
-class XLSXReader {
+class xlsxReader {
 
     /**************************************************************************/
 
-    read (file_object, callback) {
+    read (fileObject, callback) {
 
-        if (typeof (FileReader) != "undefined") {
+        if (typeof (FileReader) != 'undefined') {
 	    this.callback = callback;
             var reader = new FileReader();
             //For Browsers other than IE.
             if (reader.readAsBinaryString) {
                 reader.onload = this.finishRead.bind(this);                     
-                reader.readAsBinaryString(file_object);
+                reader.readAsBinaryString(fileObject);
             } else {
-		alert("This app doesn't work on Internet Explorer");
+		alert('This app does not work on Internet Explorer');
             }
         } else {
-            alert("This app doesn't work on browsers that don't support HTML5.");
+            alert('This app does not work on browsers without HTML5 support.');
         }
 	
     } // read
@@ -53,75 +53,3 @@ class XLSXReader {
     } // finishRead
     
     /**************************************************************************/
-
-    dummy () {
-	    
-	//Create a HTML Table element.
-        var myTable  = document.createElement("table");
-        myTable.border = "1";
-	
-        //Add the header row.
-        var row = myTable.insertRow(-1);
-	
-        //Add the header cells.
-        var headerCell = document.createElement("TH");
-        headerCell.innerHTML = "Id";
-        row.appendChild(headerCell);
-	
-        headerCell = document.createElement("TH");
-        headerCell.innerHTML = "Name";
-        row.appendChild(headerCell);
-	
-        headerCell = document.createElement("TH");
-        headerCell.innerHTML = "Country";
-        row.appendChild(headerCell);
-        
-        headerCell = document.createElement("TH");
-        headerCell.innerHTML = "Age";
-        row.appendChild(headerCell);
-        
-        headerCell = document.createElement("TH");
-        headerCell.innerHTML = "Date";
-        row.appendChild(headerCell);
-        
-        headerCell = document.createElement("TH");
-        headerCell.innerHTML = "Gender";
-        row.appendChild(headerCell);
-	    
-        //Add the data rows from Excel file.
-        for (var i = 0; i < excelRows.length; i++) {
-	    //Add the data row.
-	    var row = myTable.insertRow(-1);
-	    
-	    //Add the data cells.
-	    var cell = row.insertCell(-1);
-	    cell.innerHTML = excelRows[i].Id;
-	    
-	    cell = row.insertCell(-1);
-	    cell.innerHTML = excelRows[i].Name;
-	    
-	    cell = row.insertCell(-1);
-	    cell.innerHTML = excelRows[i].Country;
-	    
-	    cell = row.insertCell(-1);
-	    cell.innerHTML = excelRows[i].Age;
-	    
-	    cell = row.insertCell(-1);
-	    cell.innerHTML = excelRows[i].Date;
-	    
-	    cell = row.insertCell(-1);
-	    cell.innerHTML = excelRows[i].Gender;
-        }
-        
-	/*        var ExcelTable = document.getElementById("ExcelTable");
-		  ExcelTable.innerHTML = "";
-		  ExcelTable.appendChild(myTable);*/
-    } // dummy
-
-    /**************************************************************************/
-    
-} // XLSXReader
-
-export default XLSXReader;
-
-

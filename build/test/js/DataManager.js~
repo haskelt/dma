@@ -1,8 +1,0 @@
-{{ JS_COPYRIGHT_NOTICE }}
-
-class DataManager {
-
-
-}
-
-export default DataManager;

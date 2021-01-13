@@ -1,0 +1,29 @@
+
+class DataSets {
+
+    /**************************************************************************/
+
+    static setDataSet (tag, data) {
+
+    } // getDataSet
+
+    /**************************************************************************/
+    
+    static getDataSet (tag) {
+
+    } // getDataSet
+    
+    /**************************************************************************/
+
+    static exportData () {
+
+	logger.postMessage('DEBUG', 'data', 'Exporting student data');
+	xlsxUtilities.write(DataSpecialist.dataSets);
+	
+    } // exportData
+    
+    /**************************************************************************/
+
+} // DataSets
+
+export default DataSets
