@@ -24,3 +24,7 @@
 .tasks__task-wrapper--button.hidden {
     visibility: hidden;
 }
+
+.tasks__task {
+    padding: 0.5rem 0;
+}

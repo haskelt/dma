@@ -1,3 +1,0 @@
-<div id="{{this.id}}" class="fields__export-button tasks__task" data-task-type="export-button">
-  <button class="fields__export-button--button">{{this.label}}</button>
-</div>

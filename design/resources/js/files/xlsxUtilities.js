@@ -23,7 +23,7 @@ class xlsxUtilities {
 	    workbook.Sheets[tag] = XLSX.utils.json_to_sheet(data[tag]);
 	    workbook.SheetNames.push(tag);
 	}
-	XLSX.writeFile(workbook, 'test.xlsx');
+	XLSX.writeFile(workbook, file);
 	
     } // write
     

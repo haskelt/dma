@@ -12,9 +12,9 @@ class DataManager {
 	'demographics': { 'dataClass': 'Canvas', 'requiredFields': ['117284167:'] },
 	'mct_pre': { 'dataClass': 'Canvas', 'requiredFields': [] },
 	'mct_post': { 'dataClass': 'Canvas', 'requiredFields': [] },
-	'trcv': { 'dataClass': 'CW', 'requiredFields': [] }
+	'cw': { 'dataClass': 'CW', 'requiredFields': [] },
+	'exam': { 'dataClass': 'Exam', 'requiredFields': [] }
     };
-    static dataValidityFlag = false;
     
     /**************************************************************************/
 
@@ -33,31 +33,17 @@ class DataManager {
     
     /**************************************************************************/
 
-    static validateData () {
+    static finalizeData () {
 
-	try {
-	    DataSets.applyFilter('demographics', '117284167:', 'I give permission to include my responses in this study');
-	    this.dataValidityFlag = true;
-	}
-	catch (error) {
-	    alert(error.message);
-	}
+	DataSets.applyFilter('demographics', '117284167:', 'I give permission to include my responses in this study');
 	
-    } // validateData
+    } // finalizeData
 
-    /**************************************************************************/
-    
-    static dataIsValid () {
-
-	return this.dataValidityFlag;
-
-    } // isDataValid
-    
     /**************************************************************************/
     
     static exportData () {
 
-	DataSets.exportData();
+	DataSets.exportData('EMARCS Data.xlsx');
 	
     } // exportData
     

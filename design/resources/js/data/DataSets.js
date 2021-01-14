@@ -65,7 +65,7 @@ class DataSets {
     
     /**************************************************************************/
     
-    static exportData () {
+    static exportData (file) {
 
 	logger.postMessage('DEBUG', 'data', 'Exporting student data');
 	var exportableDataSets = {};
@@ -76,7 +76,7 @@ class DataSets {
 		exportableDataSets[tag] = this.dataSets[tag];
 	    }
 	}
-	xlsxUtilities.write(exportableDataSets);
+	xlsxUtilities.write(exportableDataSets, file);
 	
     } // exportData
     

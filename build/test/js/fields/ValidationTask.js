@@ -1,4 +1,4 @@
-// Copyright 2020 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
+// Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
 import logger from '/js/logger.js';
 import Task from '/js/tasks/Task.js';
@@ -11,6 +11,7 @@ class ValidationTask extends Task {
     constructor (element) {
 
 	super(element);
+	this.message = document.querySelector('.fields__validation--message');
 	
     } // constructor
 
@@ -20,6 +21,7 @@ class ValidationTask extends Task {
 
 	try {
 	    DataManager.validateData();
+	    this.message.classList.remove('hidden');
 	    this.parent.setChildStatus(this, 'complete');
 	}
 	catch(error){

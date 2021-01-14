@@ -1,3 +1,0 @@
-.fields__export-button--button.disabled {
-    disabled: true;
-}

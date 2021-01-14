@@ -1,4 +1,4 @@
-// Copyright 2020 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
+// Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
 import logger from '/js/logger.js';
 import Task from '/js/tasks/Task.js';
@@ -20,15 +20,18 @@ class ExportButtonTask extends Task {
 
     setup () {
 
-	if(DataManager.dataIsValid()){
+	try {
+	    DataManager.finalizeData();
 	    logger.postMessage('TRACE', 'fields', 'Enabling export button');
 	    this.button.disabled = false;;
 	    /* Set the task as complete from the start, on the logic that
 	       clicking the button is optional. */
 	    this.parent.setChildStatus(this, 'complete');
-	} else {
+	}
+	catch (error) {
 	    logger.postMessage('TRACE', 'fields', 'Disabling export button');
 	    this.button.disabled = true;
+	    throw error;
 	}
 	
     } // setup

@@ -1,4 +1,4 @@
-// Copyright 2020 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
+// Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
 import logger from '/js/logger.js';
 import Task from '/js/tasks/Task.js';
@@ -28,7 +28,7 @@ class TaskSequence extends Task {
 	// hide the <previous> button for the first task
 	this.setButtonState(0, 'previous_button', 'hidden');
 	// hide the <next> button for the last task
-//	this.setButtonState(this.taskWrappers.length - 1, 'next_button', 'hidden');
+	this.setButtonState(this.taskWrappers.length - 1, 'next_button', 'hidden');
 	
     } // constructor
 

@@ -1,4 +1,0 @@
-<div id="{{this.id}}" class="fields__file-selector tasks__task" data-task-type="file-selector">
-  <span class="fields__file-selector--label">{{this.label}}</span>
-  <input type="file" class="fields__file-selector--input"/>
-</div>

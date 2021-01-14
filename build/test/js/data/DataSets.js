@@ -1,4 +1,4 @@
-// Copyright 2020 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
+// Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
 import logger from '/js/logger.js';
 import xlsxUtilities from '/js/files/xlsxUtilities.js';
@@ -65,7 +65,7 @@ class DataSets {
     
     /**************************************************************************/
     
-    static exportData () {
+    static exportData (file) {
 
 	logger.postMessage('DEBUG', 'data', 'Exporting student data');
 	var exportableDataSets = {};
@@ -76,7 +76,7 @@ class DataSets {
 		exportableDataSets[tag] = this.dataSets[tag];
 	    }
 	}
-	xlsxUtilities.write(exportableDataSets);
+	xlsxUtilities.write(exportableDataSets, file);
 	
     } // exportData
     

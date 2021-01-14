@@ -1,4 +1,4 @@
-// Copyright 2020 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
+// Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
 import TaskSet from '/js/tasks/TaskSet.js';
 import TaskSequence from '/js/tasks/TaskSequence.js';
