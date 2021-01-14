@@ -1,0 +1,115 @@
+{{ JS_COPYRIGHT_NOTICE }}
+
+import logger from '{{SITE_PATH}}/js/logger.js';
+import xlsxUtilities from '{{SITE_PATH}}/js/files/xlsxUtilities.js';
+import DataSpecialist from '{{SITE_PATH}}/js/data/DataSpecialist.js';
+import DataSets from '{{SITE_PATH}}/js/data/DataSets.js';
+
+class CanvasSpecialist extends DataSpecialist {
+
+    /**************************************************************************/
+
+    constructor () {
+
+	super();
+	this.possibleIdentifiers = {'id': 'ID', 'name': 'Name'};
+	this.processingSteps = [
+	    this.convertWorkbookToJSON,
+	    this.doSingleWorksheetCheck,
+	    this.trimLongHeadings,
+	    this.doIdentifierCheck,
+	    this.doRequiredFieldsCheck,
+	    this.anonymizeData 
+	];
+
+    } // constructor
+    
+    /**************************************************************************/
+
+    trimLongHeadings () {
+	/* Take fields with lengthy multi-word names, and replace them with just
+	   the first word */
+
+	for(let sheet in this.curData){
+	    /* Identify the field names to change, and determine the appropriate
+	       replacement values */
+	    var replacements = [];
+	    for(let field in this.curData[sheet][0]){
+		// THESE CRITERIA ARE A HACK
+		if(field.length > 12 && field.includes(' ')){
+		    let newField = field.split(' ')[0];
+		    logger.postMessage('DEBUG', 'data', 'replacing ' + field + ' with ' + newField);
+		    replacements.push({'oldField': field, 'newField': newField});
+		}
+	    }
+	    
+	    /* Do the replacements */
+	    for(let row of this.curData[sheet]){
+		for(let replacement of replacements){
+		    row[replacement.newField] = row[replacement.oldField];
+		    delete row[replacement.oldField];
+		}
+	    }
+	}
+	
+    } // trimLongHeadings
+
+    /**************************************************************************/
+
+    doIdentifierCheck () {
+	/* Check that the data has a field for a recognized student
+	   identifier */
+
+	this.identifiers = {};
+	for(let sheet in this.curData){
+	    var matches = [];
+	    for(let identifier of Object.keys(this.possibleIdentifiers)){
+		if(identifier in this.curData[sheet][0]){
+		    matches.push(identifier);
+		}
+	    }
+	    if(matches.length == 0){
+		throw Error('Sheet ' + sheet + ' does not have any columns with valid student identifiers. Please fix and reupload.');
+	    } else {
+		this.identifiers[sheet] = matches;
+	    }
+	}
+
+    } // doIdentifierCheck
+
+    /**************************************************************************/
+
+    anonymizeData () {
+    	/* We use the first identifier that was found in the data file
+	   to look up student anonymous IDs. We then add that to each
+	   row, while simultaneously removing any other identifiers. */
+
+	for(let sheet in this.curData){
+	    let newData = [];
+	    let rosterIDType = this.possibleIdentifiers[this.identifiers[sheet][0]];
+	    for(let row of this.curData[sheet]){
+		try {
+		    let anonID = DataSets.findData('_roster', rosterIDType, row[this.identifiers[sheet][0]], 'anonID');
+		    let newRow = { 'anonID': anonID };
+		    for(let field in row){
+			if(!(this.identifiers[sheet].includes(field))){
+			    newRow[field] = row[field];
+			}
+		    }
+		    newData.push(newRow);
+		}
+		catch (error) {
+		    console.log(error);
+		    alert('Unable to find student ' + row[this.identifiers[sheet][0]] + ' in the roster, skipping.');
+		}
+	    }
+	    this.curData[sheet] = newData;
+	}
+
+    } // anonymizeData
+
+    /**************************************************************************/
+    
+} // CanvasSpecialist
+
+export default CanvasSpecialist;

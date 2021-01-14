@@ -1,20 +1,18 @@
 // Copyright 2020 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
 import logger from '/js/logger.js';
-import Roster from '/js/data/Roster.js';
-import StudentData from '/js/data/StudentData.js';
-import CWData from '/js/data/CWData.js';
+import DataSpecialistFactory from '/js/data/DataSpecialistFactory.js';
 import DataSets from '/js/data/DataSets.js';
 
 class DataManager {
 
     static data = {};
     static dataConfig = {
-	'roster': { 'dataClass': Roster, 'requiredFields': ['Name', 'ID', 'E-mail'] },
-	'demographics': { 'dataClass': StudentData, 'requiredFields': ['117284167:'] },
-	'mct_pre': { 'dataClass': StudentData, 'requiredFields': [] },
-	'mct_post': { 'dataClass': StudentData, 'requiredFields': [] },
-	'trcv': { 'dataClass': CWData, 'requiredFields': [] }
+	'_roster': { 'dataClass': 'Roster', 'requiredFields': ['Name', 'ID', 'E-mail'] },
+	'demographics': { 'dataClass': 'Canvas', 'requiredFields': ['117284167:'] },
+	'mct_pre': { 'dataClass': 'Canvas', 'requiredFields': [] },
+	'mct_post': { 'dataClass': 'Canvas', 'requiredFields': [] },
+	'trcv': { 'dataClass': 'CW', 'requiredFields': [] }
     };
     static dataValidityFlag = false;
     
@@ -24,10 +22,8 @@ class DataManager {
 
 	logger.postMessage('DEBUG', 'data', 'Posting data for tag ' + tag + ' of ' + data);
 	if(tag in this.dataConfig){
-	    let dataClass = this.dataConfig[tag]['dataClass'];
-	    let settingObject = new dataClass();
-	    let settingFunction = settingObject.setData.bind(settingObject);
-	    settingFunction(tag, data, this.dataConfig[tag]['requiredFields']);
+	    let specialist = DataSpecialistFactory.build(this.dataConfig[tag]['dataClass']);
+	    specialist.setData.bind(specialist)(tag, data, this.dataConfig[tag]['requiredFields']);
 	} else {
 	    this.data[tag] = data;
 	    //throw Error('No data handling configured for ' + tag);

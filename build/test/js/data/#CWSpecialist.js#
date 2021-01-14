@@ -1,0 +1,30 @@
+{{ JS_COPYRIGHT_NOTICE }}
+
+import logger from '{{ SITE_PATH }}/js/logger.js';
+import StudentDataSpecialist from '{{ SITE_PATH }}/js/data/StudentDataSpecialist.js';
+
+class CWSpecialist extends StudentDataSpecialist {
+
+    /**************************************************************************/
+
+    constructor () {
+
+	super();
+	this.possibleIdentifiers = {'id': 'ID', 'name': 'Name'};
+	this.processingSteps = [
+	    this.convertWorkbookToJSON,
+	    this.doSingleWorksheetCheck,
+	    this.trimLongHeadings,
+	    this.doIdentifierCheck,
+	    this.doRequiredFieldsCheck,
+	    this.anonymizeData 
+	];
+
+    } // constructor
+    
+    /**************************************************************************/
+
+
+} // CWData
+
+export default CWData;

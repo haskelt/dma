@@ -1,7 +1,8 @@
 // Copyright 2020 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
+// DEPENDS ON XLSX
 import logger from '/js/logger.js';
-
+import DataSets from '/js/data/DataSets.js';
 
 class DataSpecialist {
 
@@ -9,33 +10,70 @@ class DataSpecialist {
     
     constructor () {
 
+	this.processingSteps = [];
+	
     } // constructor
     
     /**************************************************************************/
 
-    doSingleWorksheetCheck (raw_data) {
-	/* Check that there's only one worksheet. With multiple worksheets,
-	   we don't know which one we're supposed to be looking at. */
+    setData (tag, data, requiredFields) {
 
-	if(Object.keys(raw_data).length != 1){
-	    throw Error('Data file can only have one worksheet. Please fix and then reupload the file.');
-	} else {
-	    this.curData = raw_data[Object.keys(raw_data)[0]];
+	logger.postMessage('DEBUG', 'data', 'Setting student data ' + tag);
+
+	this.curData = data;
+	this.requiredFields = requiredFields;
+
+	for(let step of this.processingSteps){
+	    step.bind(this)();
 	}
 
-    } // doSingleWorksheetCheck
+	var sheetNames = Object.keys(this.curData);
+	if(sheetNames.length == 1){
+	    DataSets.setDataSet(tag, this.curData[sheetNames[0]]);
+	} else {
+	    for(let sheet of sheetNames){
+		DataSets.setDataSet(tag + '.' + sheet, this.curData[sheet]);
+	    }
+	}
+	
+    } // setData
+    
+    /**************************************************************************/
+    
+    convertWorkbookToJSON () {
+	/* Convert the data from a workbook object to a JSON object */
+	
+	var JSONData = {};
+	for(let sheet in this.curData.Sheets){
+	    console.log(sheet);
+	    JSONData[sheet] = XLSX.utils.sheet_to_json(this.curData.Sheets[sheet]);
+	}
+	this.curData = JSONData;
+	
+    } // convertWorkbookToJSON
+    
+    /**************************************************************************/
+
+    doSingleWorksheetCheck () {
+	/* Check that there's only one worksheet */
+
+	console.log(Object.keys(this.curData));
+	if(Object.keys(this.curData).length != 1){
+	    throw Error('Data file can only have one worksheet. Please fix and then reupload the file.');
+	}
+
+    } // doSingleWorksheetcheck
 
     /**************************************************************************/
 
-    doRequiredFieldsCheck (requiredFields) {
+    doRequiredFieldsCheck () {
 	/* Check that any required fields are present */
 	
-	/* The header value for Canvas fields can be very long (e.g.,
-	   containing the full question text), hence the use of
-	   'startsWith' */
-	for(let field of requiredFields){
-	    if(!(field in this.curData[0])){
-		throw Error('A column for ' + field + ' is required. Please fix and then reupload the file.');
+	for(let field of this.requiredFields){
+	    for(let sheet in this.curData){
+		if(!(field in this.curData[sheet][0])){
+		    throw Error('A column for ' + field + ' is required. Please fix and then reupload the file.');
+		}
 	    }
 	}
 	    

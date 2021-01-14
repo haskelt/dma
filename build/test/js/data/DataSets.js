@@ -47,10 +47,36 @@ class DataSets {
 
     /**************************************************************************/
 
+    static findData (searchTag, searchField, searchValue, returnField) {
+	/* In the data set <searchTag>, look through the values of
+	   <searchField> for the first match with <searchValue>. If
+	   found, return the value of <returnField> from the same
+	   row. Returns null if no match is found. */
+
+	logger.postMessage('DEBUG', 'data', 'Looking up value of ' + returnField + ' for record of ' + searchTag + ' where ' + searchField + ' is ' + searchValue);
+	for(let row of this.dataSets[searchTag]){
+	    if(row[searchField] == searchValue){
+		return row[returnField];
+	    }
+	}
+	return null;   
+	
+    } // findData
+    
+    /**************************************************************************/
+    
     static exportData () {
 
 	logger.postMessage('DEBUG', 'data', 'Exporting student data');
-	xlsxUtilities.write(this.dataSets);
+	var exportableDataSets = {};
+	for(let tag in this.dataSets){
+	    /* a tag beginning with '_' indicates data that should not
+	       be exported */
+	    if(!tag.startsWith('_')){
+		exportableDataSets[tag] = this.dataSets[tag];
+	    }
+	}
+	xlsxUtilities.write(exportableDataSets);
 	
     } // exportData
     

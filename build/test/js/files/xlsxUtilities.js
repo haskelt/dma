@@ -1,5 +1,6 @@
 // Copyright 2020 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
+// DEPENDS ON XLSX
 import logger from '/js/logger.js';
 import xlsxReader from '/js/files/xlsxReader.js';
 

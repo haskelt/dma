@@ -1,5 +1,6 @@
 {{ JS_COPYRIGHT_NOTICE }}
 
+// DEPENDS ON XLSX
 import logger from '{{ SITE_PATH }}/js/logger.js';
 import xlsxReader from '{{ SITE_PATH }}/js/files/xlsxReader.js';
 

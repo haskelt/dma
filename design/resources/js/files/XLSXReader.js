@@ -36,13 +36,7 @@ class xlsxReader {
 	try {
             var workbook = XLSX.read(e.target.result, { type: 'binary' });
 	    logger.postMessage('TRACE', 'files', 'Successfully parsed Excel file');
-	    /* we return a JSON object with an entry for each sheet, which
-	       consists of an array of objects (1 object for each row) */
-	    var results = {};
-	    for(let sheet in workbook.Sheets){
-		results[sheet] = XLSX.utils.sheet_to_json(workbook.Sheets[sheet]);
-	    }
-	    this.callback(results);
+	    this.callback(workbook);
 	}
 	catch (err) {
 	    logger.postMessage('ERROR', 'files', err.message);
