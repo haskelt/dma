@@ -1,5 +1,6 @@
 {{ JS_COPYRIGHT_NOTICE }}
 
+import sheetjs from '{{SITE_PATH}}/js/sheetjs/xlsx.full.min.js';
 import logger from '{{ SITE_PATH }}/js/logger.js';
 
 class xlsxReader {
@@ -34,16 +35,9 @@ class xlsxReader {
 	   to validate after the read to make sure you're getting something
 	   reasonable. */
 	try {
-            var workbook = XLSX.read(e.target.result, { type: 'binary' });
+            var workbook = sheetjs.read(e.target.result, { type: 'binary' });
 	    logger.postMessage('TRACE', 'files', 'Successfully parsed Excel file');
 	    this.callback(workbook);
-	    /* we return a JSON object with an entry for each sheet, which
-	       consists of an array of objects (1 object for each row) */
-//	    var results = {};
-//	    for(let sheet in workbook.Sheets){
-//		results[sheet] = XLSX.utils.sheet_to_json(workbook.Sheets[sheet]);
-//	    }
-//	    this.callback(results);
 	}
 	catch (err) {
 	    logger.postMessage('ERROR', 'files', err.message);

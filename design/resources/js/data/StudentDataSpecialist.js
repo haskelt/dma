@@ -1,7 +1,6 @@
 {{ JS_COPYRIGHT_NOTICE }}
 
 import logger from '{{SITE_PATH}}/js/logger.js';
-import xlsxUtilities from '{{SITE_PATH}}/js/files/xlsxUtilities.js';
 import DataSpecialist from '{{SITE_PATH}}/js/data/DataSpecialist.js';
 import DataSets from '{{SITE_PATH}}/js/data/DataSets.js';
 

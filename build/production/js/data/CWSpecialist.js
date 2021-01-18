@@ -10,7 +10,7 @@ class CWSpecialist extends StudentDataSpecialist {
     constructor () {
 
 	super();
-	this.possibleIdentifiers = {'id': 'ID', 'name': 'Name', 'E-mail': 'E-mail'};
+	this.possibleIdentifiers = {'E-mail': 'Email'};
 	this.processingSteps = [
 	    this.convertCWToJSON,
 	    this.doIdentifierCheck,

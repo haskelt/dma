@@ -1,7 +1,7 @@
-{{ JS_COPYRIGHT_NOTICE }}
+// Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-// DEPENDS ON XLSX
-import logger from '{{ SITE_PATH }}/js/logger.js';
+import sheetjs from '/js/sheetjs/xlsx.full.min.js';
+import logger from '/js/logger.js';
 
 class xlsxReader {
 
@@ -35,7 +35,7 @@ class xlsxReader {
 	   to validate after the read to make sure you're getting something
 	   reasonable. */
 	try {
-            var workbook = XLSX.read(e.target.result, { type: 'binary' });
+            var workbook = sheetjs.read(e.target.result, { type: 'binary' });
 	    logger.postMessage('TRACE', 'files', 'Successfully parsed Excel file');
 	    this.callback(workbook);
 	}

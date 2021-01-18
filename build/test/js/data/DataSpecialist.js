@@ -1,8 +1,8 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-// DEPENDS ON XLSX
 import logger from '/js/logger.js';
 import DataSets from '/js/data/DataSets.js';
+import xlsx from '/js/xlsx/xlsx.js';
 
 class DataSpecialist {
 
@@ -46,7 +46,7 @@ class DataSpecialist {
 	var JSONData = {};
 	for(let sheet in this.curData.Sheets){
 	    console.log(sheet);
-	    JSONData[sheet] = XLSX.utils.sheet_to_json(this.curData.Sheets[sheet]);
+	    JSONData[sheet] = xlsx.sheetToJSON(this.curData.Sheets[sheet]);
 	}
 	this.curData = JSONData;
 	

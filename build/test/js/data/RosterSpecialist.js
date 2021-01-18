@@ -17,6 +17,8 @@ class RosterSpecialist extends DataSpecialist {
 	    this.doRowLengthCheck,
 	    this.doRequiredFieldsCheck,
 	    this.doUniqueIdentifiersCheck,
+	    this.computePrettyNames,
+	    this.computePrettySIDs,
 	    this.computeIdentifiers
 	];
 
@@ -59,6 +61,33 @@ class RosterSpecialist extends DataSpecialist {
     
     /**************************************************************************/
 
+    computePrettyNames () {
+	
+	for(let sheet in this.curData){
+	    for(let row of this.curData[sheet]){
+		let nameFields = row["Student's Name"].split(' ');
+		row['pretty_name'] = nameFields[1] + ' ' + nameFields[0];
+	    }
+	}
+	
+    } // computePrettyNames
+    
+    /**************************************************************************/
+
+    computePrettySIDs () {
+	
+	for(let sheet in this.curData){
+	    for(let row of this.curData[sheet]){
+		let sidFields = row['SID'].split('-');
+		row['pretty_sid'] = sidFields[0] + sidFields[1] + sidFields[2];
+	    }
+	}
+	
+    } // computePrettySIDs
+    
+    /**************************************************************************/
+
+    
     computeIdentifiers () {
 	/* Create identifiers based on a cryptographic hash of the required
 	   fields, and add them to the data */

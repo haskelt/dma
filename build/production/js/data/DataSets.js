@@ -59,7 +59,7 @@ class DataSets {
 		return row[returnField];
 	    }
 	}
-	return null;   
+	throw Error('Data lookup failed');
 	
     } // findData
     

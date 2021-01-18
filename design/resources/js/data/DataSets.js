@@ -1,7 +1,7 @@
 {{ JS_COPYRIGHT_NOTICE }}
 
 import logger from '{{SITE_PATH}}/js/logger.js';
-import xlsxUtilities from '{{SITE_PATH}}/js/files/xlsxUtilities.js';
+import xlsx from '{{SITE_PATH}}/js/xlsx/xlsx.js';
 
 class DataSets {
 
@@ -59,7 +59,7 @@ class DataSets {
 		return row[returnField];
 	    }
 	}
-	return null;   
+	throw Error('Data lookup failed');
 	
     } // findData
     
@@ -76,7 +76,7 @@ class DataSets {
 		exportableDataSets[tag] = this.dataSets[tag];
 	    }
 	}
-	xlsxUtilities.write(exportableDataSets, file);
+	xlsx.write(exportableDataSets, file);
 	
     } // exportData
     

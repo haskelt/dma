@@ -8,7 +8,7 @@ class DataManager {
 
     static data = {};
     static dataConfig = {
-	'_roster': { 'dataClass': 'Roster', 'requiredFields': ['Name', 'ID', 'E-mail'] },
+	'_roster': { 'dataClass': 'Roster', 'requiredFields': ["Student's Name", 'SID', 'Email'] },
 	'demographics': { 'dataClass': 'Canvas', 'requiredFields': ['117284167:'] },
 	'mct_pre': { 'dataClass': 'Canvas', 'requiredFields': [] },
 	'mct_post': { 'dataClass': 'Canvas', 'requiredFields': [] },

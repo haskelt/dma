@@ -10,7 +10,7 @@ class ExamSpecialist extends StudentDataSpecialist {
     constructor () {
 
 	super();
-	this.possibleIdentifiers = {'id': 'ID', 'name': 'Name', 'E-mail': 'E-mail'};
+	this.possibleIdentifiers = {'name': 'pretty_name', 'sis_id': 'SID', 'id': 'sis_id'};
 	this.processingSteps = [
 	    this.convertExamToJSON,
 	    this.doIdentifierCheck,

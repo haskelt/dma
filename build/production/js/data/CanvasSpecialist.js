@@ -10,7 +10,11 @@ class CanvasSpecialist extends StudentDataSpecialist {
     constructor () {
 
 	super();
-	this.possibleIdentifiers = {'id': 'ID', 'name': 'Name'};
+	/* Canvas ID isn't in the roster but we want to scrub it from the
+	   data anyway. By listing it as the last possible identifier,
+	   it should never be used to look a student up, but will still
+	   get removed when the data is anonymized. */
+	this.possibleIdentifiers = {'sis_id': 'pretty_sid', 'name': 'pretty_name', 'id': 'SID'};
 	this.processingSteps = [
 	    this.convertCanvasToJSON,
 	    this.doSingleWorksheetCheck,

@@ -1,8 +1,8 @@
 {{ JS_COPYRIGHT_NOTICE }}
 
-// DEPENDS ON XLSX
 import logger from '{{SITE_PATH}}/js/logger.js';
 import DataSets from '{{SITE_PATH}}/js/data/DataSets.js';
+import xlsx from '{{SITE_PATH}}/js/xlsx/xlsx.js';
 
 class DataSpecialist {
 
@@ -46,7 +46,7 @@ class DataSpecialist {
 	var JSONData = {};
 	for(let sheet in this.curData.Sheets){
 	    console.log(sheet);
-	    JSONData[sheet] = XLSX.utils.sheet_to_json(this.curData.Sheets[sheet]);
+	    JSONData[sheet] = xlsx.sheetToJSON(this.curData.Sheets[sheet]);
 	}
 	this.curData = JSONData;
 	

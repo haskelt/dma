@@ -2,7 +2,7 @@
 
 import logger from '{{ SITE_PATH }}/js/logger.js';
 import Task from '{{ SITE_PATH }}/js/tasks/Task.js';
-import xlsxUtilities from '{{SITE_PATH}}/js/files/xlsxUtilities.js';
+import xlsx from '{{SITE_PATH}}/js/xlsx/xlsx.js';
 import DataManager from '{{ SITE_PATH }}/js/data/DataManager.js';
 
 class SpreadsheetSelectorTask extends Task {
@@ -26,7 +26,7 @@ class SpreadsheetSelectorTask extends Task {
         if (this.input.files.length > 0) {
 	    let excelRegex = /(.xls|.xlsx|.csv)$/;
 	    if(excelRegex.test(this.input.files[0].name.toLowerCase())) {
-		xlsxUtilities.read(this.input.files[0], this.fileReadCallback.bind(this));
+		xlsx.read(this.input.files[0], this.fileReadCallback.bind(this));
 	    } else {
 		alert('Please choose an Excel or CSV file');
 		this.input.value = null;

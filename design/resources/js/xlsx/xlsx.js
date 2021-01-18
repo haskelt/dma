@@ -1,10 +1,10 @@
 {{ JS_COPYRIGHT_NOTICE }}
 
-// DEPENDS ON XLSX
+import sheetjs from '{{SITE_PATH}}/js/sheetjs/xlsx.full.min.js';
 import logger from '{{ SITE_PATH }}/js/logger.js';
-import xlsxReader from '{{ SITE_PATH }}/js/files/xlsxReader.js';
+import xlsxReader from '{{ SITE_PATH }}/js/xlsx/xlsxReader.js';
 
-class xlsxUtilities {
+class XLSX {
 
     /**************************************************************************/
 
@@ -16,21 +16,29 @@ class xlsxUtilities {
 
     /**************************************************************************/
 
+    static sheetToJSON (sheet, config) {
+
+	return sheetjs.utils.sheet_to_json(sheet, config);
+	
+    } // workbookToJSON
+    
+    /**************************************************************************/
+    
     static write (data, file) {
 
-	var workbook = XLSX.utils.book_new();
+	var workbook = sheetjs.utils.book_new();
 	for(let tag in data){
-	    workbook.Sheets[tag] = XLSX.utils.json_to_sheet(data[tag]);
+	    workbook.Sheets[tag] = sheetjs.utils.json_to_sheet(data[tag]);
 	    workbook.SheetNames.push(tag);
 	}
-	XLSX.writeFile(workbook, file);
+	sheetjs.writeFile(workbook, file);
 	
     } // write
     
     /**************************************************************************/
     
-} // xlsxUtilities
+} // XLSX
 
-export default xlsxUtilities;
+export default XLSX;
 
 

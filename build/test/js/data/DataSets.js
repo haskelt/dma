@@ -1,7 +1,7 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
 import logger from '/js/logger.js';
-import xlsxUtilities from '/js/files/xlsxUtilities.js';
+import xlsx from '/js/xlsx/xlsx.js';
 
 class DataSets {
 
@@ -59,7 +59,7 @@ class DataSets {
 		return row[returnField];
 	    }
 	}
-	return null;   
+	throw Error('Data lookup failed');
 	
     } // findData
     
@@ -76,7 +76,7 @@ class DataSets {
 		exportableDataSets[tag] = this.dataSets[tag];
 	    }
 	}
-	xlsxUtilities.write(exportableDataSets, file);
+	xlsx.write(exportableDataSets, file);
 	
     } // exportData
     
