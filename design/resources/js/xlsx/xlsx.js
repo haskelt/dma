@@ -34,6 +34,22 @@ class XLSX {
 	sheetjs.writeFile(workbook, file);
 	
     } // write
+
+    /**************************************************************************/
+
+    static decodeRange (rangeString) {
+
+	return sheetjs.utils.decode_range(rangeString);
+
+    } // decodeRange
+	
+    /**************************************************************************/
+
+    static encodeAddress (addressObject) {
+
+	return sheetjs.utils.encode_cell(addressObject);
+	
+    } // encodeAddress
     
     /**************************************************************************/
     

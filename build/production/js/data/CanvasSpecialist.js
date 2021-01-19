@@ -2,6 +2,7 @@
 
 import logger from '/dma/js/logger.js';
 import StudentDataSpecialist from '/dma/js/data/StudentDataSpecialist.js';
+import xlsx from '/dma/js/xlsx/xlsx.js';
 
 class CanvasSpecialist extends StudentDataSpecialist {
 
@@ -10,13 +11,14 @@ class CanvasSpecialist extends StudentDataSpecialist {
     constructor () {
 
 	super();
-	/* Canvas ID isn't in the roster but we want to scrub it from the
-	   data anyway. By listing it as the last possible identifier,
-	   it should never be used to look a student up, but will still
-	   get removed when the data is anonymized. */
-	this.possibleIdentifiers = {'sis_id': 'pretty_sid', 'name': 'pretty_name', 'id': 'SID'};
+	/* Canvas ID ('id') isn't in the roster but we want to scrub
+	   it from the data anyway. By listing it as the last possible
+	   identifier, it should never be used to look a student up,
+	   but will still get removed when the data is anonymized. */
+	this.possibleIdentifiers = {'sis_id': 'pretty_sid', 'name': 'pretty_name', 'id': null};
 	this.processingSteps = [
-	    this.convertCanvasToJSON,
+	    this.fixHeadings,
+	    this.convertWorkbookToJSON,
 	    this.doSingleWorksheetCheck,
 	    this.doIdentifierCheck,
 	    this.doRequiredFieldsCheck,
@@ -27,8 +29,36 @@ class CanvasSpecialist extends StudentDataSpecialist {
     
     /**************************************************************************/
 
+    fixHeadings () {
+	/* For each key in the 'headerMappings' attribute of the config
+	   object, look for that text within the column headings in the
+	   workbook. If it is found, replace that heading with the
+	   value that goes with that key. */
+
+	if('headerMappings' in this.config){
+	    for(let sheet of Object.values(this.curData.Sheets)){
+		let sheetRange = xlsx.decodeRange(sheet['!ref']);
+		for(let col = sheetRange.s.c; col <= sheetRange.e.c; col++){
+		    let address = xlsx.encodeAddress({c: col, r: 0});
+		    for(let pattern in this.config.headerMappings){
+			if(sheet[address].t == 's' && sheet[address].v.includes(pattern)){
+			    sheet[address].v = this.config.headerMappings[pattern];
+			}
+		    }
+		}
+	    }
+	}
+	
+    } // fixHeadings
+    
+    /**************************************************************************/
+
+    
     convertCanvasToJSON () {
 
+	console.log('canvas to JSON');
+	
+	
 	this.convertWorkbookToJSON();
 
 	/* Take fields with lengthy multi-word names, and replace them with just
@@ -41,7 +71,7 @@ class CanvasSpecialist extends StudentDataSpecialist {
 		// THESE CRITERIA ARE A HACK
 		if(field.length > 12 && field.includes(' ')){
 		    let newField = field.split(' ')[0];
-		    logger.postMessage('DEBUG', 'data', 'replacing ' + field + ' with ' + newField);
+		    logger.postMessage('TRACE', 'data', 'replacing ' + field + ' with ' + newField);
 		    replacements.push({'oldField': field, 'newField': newField});
 		}
 	    }

@@ -30,7 +30,7 @@ class Logger {
         }
     };
 
-    static loggingLevel = 'TRACE';
+    static loggingLevel = 'DEBUG';
 
     static namespacesToPost = ['tasks', 'fields', 'data', 'files'];
 

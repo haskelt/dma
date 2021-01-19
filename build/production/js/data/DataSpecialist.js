@@ -10,6 +10,7 @@ class DataSpecialist {
     
     constructor () {
 
+	this.headerRow = 0;
 	this.processingSteps = [];
 	
     } // constructor
@@ -39,8 +40,7 @@ class DataSpecialist {
 	
 	var JSONData = {};
 	for(let sheet in this.curData.Sheets){
-	    console.log(sheet);
-	    JSONData[sheet] = xlsx.sheetToJSON(this.curData.Sheets[sheet]);
+	    JSONData[sheet] = xlsx.sheetToJSON(this.curData.Sheets[sheet], {range: this.headerRow});
 	}
 	this.curData = JSONData;
 	
@@ -51,7 +51,6 @@ class DataSpecialist {
     doSingleWorksheetCheck () {
 	/* Check that there's only one worksheet */
 
-	console.log(Object.keys(this.curData));
 	if(Object.keys(this.curData).length != 1){
 	    throw Error('Data file can only have one worksheet. Please fix and then reupload the file.');
 	}

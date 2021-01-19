@@ -73,7 +73,7 @@ class DataSets {
 	   found, return the value of <returnField> from the same
 	   row. Returns null if no match is found. */
 
-	logger.postMessage('DEBUG', 'data', 'Looking up value of ' + returnField + ' for record of ' + searchTag + ' where ' + searchField + ' is ' + searchValue);
+	logger.postMessage('TRACE', 'data', 'Looking up value of ' + returnField + ' for record of ' + searchTag + ' where ' + searchField + ' is ' + searchValue);
 	for(let row of this.dataSets[searchTag]){
 	    if(row[searchField] == searchValue){
 		return row[returnField];

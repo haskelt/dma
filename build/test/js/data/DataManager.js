@@ -13,7 +13,16 @@ class DataManager {
 	'course': { 'class': 'Metadata' },
 	'condition': { 'class': 'Metadata' },
 	'_roster': { 'class': 'Roster', 'requiredFields': ["Student's Name", 'SID', 'Email'] },
-	'demographics': { 'class': 'Canvas', 'requiredFields': ['117284167:'] },
+	'demographics': { 'class': 'Canvas', 'headerMappings': {
+	    'first time taking this course': 'first_time',
+	    'grade you received in Engineering Physics 1': 'phys1_grade',
+	    'grade you received in Calculus 2': 'calc2_grade',
+	    'your age fall in': 'age',
+	    'parents earned a 4-year college degree': 'parent_degree',
+	    'gender do you most identify with': 'gender',
+	    'best describes your race/ethnicity': 'ethnicity',
+	    'Purpose and Benefit': 'consent'
+	}, 'requiredFields': ['consent'] },
 	'mct_pre': { 'class': 'Canvas' },
 	'mct_post': { 'class': 'Canvas' },
 	'cw': { 'class': 'CW' },
@@ -50,7 +59,7 @@ class DataManager {
 	}
 	DataSets.setDataSet('course_info', courseInfo);
 	
-	DataSets.applyFilter('demographics', '117284167:', 'I give permission to include my responses in this study');
+	DataSets.applyFilter('demographics', 'consent', 'I give permission to include my responses in this study');
 	
     } // finalizeData
 

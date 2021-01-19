@@ -13,7 +13,8 @@ class CWSpecialist extends StudentDataSpecialist {
 	super();
 	this.possibleIdentifiers = {'E-mail': 'Email'};
 	this.processingSteps = [
-	    this.convertCWToJSON,
+	    this.fixHeadings,
+	    this.convertWorkbookToJSON,
 	    this.doIdentifierCheck,
 	    this.doRequiredFieldsCheck,
 	    this.anonymizeData 
@@ -23,22 +24,27 @@ class CWSpecialist extends StudentDataSpecialist {
     
     /**************************************************************************/
 
-    convertCWToJSON () {
-	
-	var JSONData = {};
-	for(let sheet in this.curData.Sheets){
-	    this.curData.Sheets[sheet]['B3'].t = 's';
-	    this.curData.Sheets[sheet]['B3'].v = 'E-mail';
-	    this.curData.Sheets[sheet]['B3'].w = undefined;
-	    JSONData[sheet] = xlsx.sheetToJSON(this.curData.Sheets[sheet], {range: 2});
-	    console.log(this.curData.Sheets[sheet]);
-	}
-	this.curData = JSONData;
+    fixHeadings () {
 
-    } // convertCWToJSON
+	for(let sheet of Object.values(this.curData.Sheets)){
+	    let sheetRange = xlsx.decodeRange(sheet['!ref']);
+	    for(let col = sheetRange.s.c; col <= sheetRange.e.c; col++){
+		let top = xlsx.encodeAddress({c: col, r: 0});
+		let middle = xlsx.encodeAddress({c: col, r: 1});
+		let bottom = xlsx.encodeAddress({c: col, r: 2});
+		if(sheet[top].t == 's' && sheet[middle].t == 's' && sheet[bottom].t == 's'){
+		    let fullHeading = sheet[top].v + ':' + sheet[middle].v + ':' + sheet[bottom].v;
+		    sheet[bottom] = {t: 's', v: fullHeading};
+		}
+	    }
+	    sheet['B3'] = { t: 's', v: 'E-mail' };
+	}
+	this.headerRow = 2;
 	
+    } // fixHeadings
+    
     /**************************************************************************/
-	
+    
 } // CWSpecialist
 
 export default CWSpecialist;

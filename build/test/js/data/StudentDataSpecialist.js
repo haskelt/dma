@@ -12,6 +12,13 @@ class StudentDataSpecialist extends DataSpecialist {
 
 	super();
 
+	this.processingSteps = [
+	    this.convertWorkbookToJSON,
+	    this.doIdentifierCheck,
+	    this.doRequiredFieldsCheck,
+	    this.anonymizeData 
+	];
+	
     } // constructor
     
     /**************************************************************************/
