@@ -48,7 +48,7 @@ class RosterSpecialist extends DataSpecialist {
 	/* For each worksheet and required identifier field, make sure
 	   all the values in the sheet are unique. */
 	
-	for(let field of this.requiredFields){
+	for(let field of this.config.requiredFields){
 	    for(let sheet in this.curData){
 		let uniqueValues = new Set(this.curData[sheet].map(entry => entry[field]));
 		if(uniqueValues.size != this.curData[sheet].length){
@@ -95,7 +95,7 @@ class RosterSpecialist extends DataSpecialist {
 	for(let sheet in this.curData){
 	    for(let row of this.curData[sheet]){
 		let stringToHash = '';
-		for(let field of this.requiredFields){
+		for(let field of this.config.requiredFields){
 		    stringToHash += row[field];
 		}
 		row['anonID'] = CryptoJS.SHA256(stringToHash).toString();

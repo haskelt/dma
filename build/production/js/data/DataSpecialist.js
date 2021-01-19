@@ -1,8 +1,8 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-// DEPENDS ON XLSX
 import logger from '/dma/js/logger.js';
 import DataSets from '/dma/js/data/DataSets.js';
+import xlsx from '/dma/js/xlsx/xlsx.js';
 
 class DataSpecialist {
 
@@ -16,27 +16,21 @@ class DataSpecialist {
     
     /**************************************************************************/
 
-    setData (tag, data, requiredFields) {
+    processData (tag, data, config) {
 
-	logger.postMessage('DEBUG', 'data', 'Setting student data ' + tag);
+	logger.postMessage('DEBUG', 'data', 'Setting data ' + tag);
 
+	this.tag = tag;
 	this.curData = data;
-	this.requiredFields = requiredFields;
+	this.config = config;
 
 	for(let step of this.processingSteps){
 	    step.bind(this)();
 	}
 
-	var sheetNames = Object.keys(this.curData);
-	if(sheetNames.length == 1){
-	    DataSets.setDataSet(tag, this.curData[sheetNames[0]]);
-	} else {
-	    for(let sheet of sheetNames){
-		DataSets.setDataSet(tag + '.' + sheet, this.curData[sheet]);
-	    }
-	}
+	this.setData();
 	
-    } // setData
+    } // processData
     
     /**************************************************************************/
     
@@ -46,7 +40,7 @@ class DataSpecialist {
 	var JSONData = {};
 	for(let sheet in this.curData.Sheets){
 	    console.log(sheet);
-	    JSONData[sheet] = XLSX.utils.sheet_to_json(this.curData.Sheets[sheet]);
+	    JSONData[sheet] = xlsx.sheetToJSON(this.curData.Sheets[sheet]);
 	}
 	this.curData = JSONData;
 	
@@ -68,11 +62,13 @@ class DataSpecialist {
 
     doRequiredFieldsCheck () {
 	/* Check that any required fields are present */
-	
-	for(let field of this.requiredFields){
-	    for(let sheet in this.curData){
-		if(!(field in this.curData[sheet][0])){
-		    throw Error('A column for ' + field + ' is required. Please fix and then reupload the file.');
+
+	if('requiredFields' in this.config){
+	    for(let field of this.config.requiredFields){
+		for(let sheet in this.curData){
+		    if(!(field in this.curData[sheet][0])){
+			throw Error('A column for ' + field + ' is required. Please fix and then reupload the file.');
+		    }
 		}
 	    }
 	}
@@ -80,7 +76,22 @@ class DataSpecialist {
     } // doRequiredFieldsCheck
 
     /**************************************************************************/
-    
+
+    setData () {
+	
+    	var sheetNames = Object.keys(this.curData);
+	if(sheetNames.length == 1){
+	    DataSets.setDataSet(this.tag, this.curData[sheetNames[0]]);
+	} else {
+	    for(let sheet of sheetNames){
+		DataSets.setDataSet(this.tag + '.' + sheet, this.curData[sheet]);
+	    }
+	}
+
+    } // setData
+
+    /**************************************************************************/
+
 } // DataSpecialist
 
 export default DataSpecialist;

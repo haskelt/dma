@@ -1,6 +1,7 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
 import logger from '/dma/js/logger.js';
+import MetadataSpecialist from '/dma/js/data/MetadataSpecialist.js';
 import RosterSpecialist from '/dma/js/data/RosterSpecialist.js';
 import CanvasSpecialist from '/dma/js/data/CanvasSpecialist.js';
 import CWSpecialist from '/dma/js/data/CWSpecialist.js';
@@ -9,6 +10,7 @@ import ExamSpecialist from '/dma/js/data/ExamSpecialist.js';
 class DataSpecialistFactory {
 
     static specialists = {
+	'Metadata': MetadataSpecialist,
 	'Roster': RosterSpecialist,
 	'Canvas': CanvasSpecialist,
 	'CW': CWSpecialist,

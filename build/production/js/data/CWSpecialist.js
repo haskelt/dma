@@ -2,6 +2,7 @@
 
 import logger from '/dma/js/logger.js';
 import StudentDataSpecialist from '/dma/js/data/StudentDataSpecialist.js';
+import xlsx from '/dma/js/xlsx/xlsx.js';
 
 class CWSpecialist extends StudentDataSpecialist {
 
@@ -29,7 +30,7 @@ class CWSpecialist extends StudentDataSpecialist {
 	    this.curData.Sheets[sheet]['B3'].t = 's';
 	    this.curData.Sheets[sheet]['B3'].v = 'E-mail';
 	    this.curData.Sheets[sheet]['B3'].w = undefined;
-	    JSONData[sheet] = XLSX.utils.sheet_to_json(this.curData.Sheets[sheet], {range: 2});
+	    JSONData[sheet] = xlsx.sheetToJSON(this.curData.Sheets[sheet], {range: 2});
 	    console.log(this.curData.Sheets[sheet]);
 	}
 	this.curData = JSONData;

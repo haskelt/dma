@@ -28,12 +28,8 @@ class CanvasSpecialist extends StudentDataSpecialist {
     /**************************************************************************/
 
     convertCanvasToJSON () {
-	
-	var JSONData = {};
-	for(let sheet in this.curData.Sheets){
-	    JSONData[sheet] = XLSX.utils.sheet_to_json(this.curData.Sheets[sheet]);
-	}
-	this.curData = JSONData;
+
+	this.convertWorkbookToJSON();
 
 	/* Take fields with lengthy multi-word names, and replace them with just
 	       the first word */

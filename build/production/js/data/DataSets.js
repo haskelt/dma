@@ -1,7 +1,7 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
 import logger from '/dma/js/logger.js';
-import xlsxUtilities from '/dma/js/files/xlsxUtilities.js';
+import xlsx from '/dma/js/xlsx/xlsx.js';
 
 class DataSets {
 
@@ -16,12 +16,28 @@ class DataSets {
     } // getDataSet
 
     /**************************************************************************/
-    
+
     static getDataSet (tag) {
 
-	return this.dataSets[tag];
+	if(tag in this.dataSets){
+	    return this.dataSets[tag];
+	} else {
+	    return null;
+	}
 
     } // getDataSet
+    
+    /**************************************************************************/
+
+    static getDataField (tag, field) {
+
+	let values = [];
+	for(let row of this.dataSets[tag]){
+	    values.push(row[field]);
+	}
+	return values;
+
+    } // getDataField
     
     /**************************************************************************/
     
@@ -40,7 +56,11 @@ class DataSets {
 	/* go through all the datasets and gather data rows for only
 	   students who are in the list */
 	for(let tag in this.dataSets){
-	    this.dataSets[tag] = this.dataSets[tag].filter(entry => keepList.includes(entry['anonID']));
+	    /* a tag beginning with '_' indicates data for internal use that
+	       may or may not have an 'anonID' field, so we don't filter it */
+	    if(!tag.startsWith('_')){
+		this.dataSets[tag] = this.dataSets[tag].filter(entry => keepList.includes(entry['anonID']));
+	    }
 	}
 	
     } // applyFilter
@@ -76,7 +96,7 @@ class DataSets {
 		exportableDataSets[tag] = this.dataSets[tag];
 	    }
 	}
-	xlsxUtilities.write(exportableDataSets, file);
+	xlsx.write(exportableDataSets, file);
 	
     } // exportData
     
