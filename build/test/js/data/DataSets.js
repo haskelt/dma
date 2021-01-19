@@ -16,12 +16,28 @@ class DataSets {
     } // getDataSet
 
     /**************************************************************************/
-    
+
     static getDataSet (tag) {
 
-	return this.dataSets[tag];
+	if(tag in this.dataSets){
+	    return this.dataSets[tag];
+	} else {
+	    return null;
+	}
 
     } // getDataSet
+    
+    /**************************************************************************/
+
+    static getDataField (tag, field) {
+
+	let values = [];
+	for(let row of this.dataSets[tag]){
+	    values.push(row[field]);
+	}
+	return values;
+
+    } // getDataField
     
     /**************************************************************************/
     
@@ -40,7 +56,11 @@ class DataSets {
 	/* go through all the datasets and gather data rows for only
 	   students who are in the list */
 	for(let tag in this.dataSets){
-	    this.dataSets[tag] = this.dataSets[tag].filter(entry => keepList.includes(entry['anonID']));
+	    /* a tag beginning with '_' indicates data for internal use that
+	       may or may not have an 'anonID' field, so we don't filter it */
+	    if(!tag.startsWith('_')){
+		this.dataSets[tag] = this.dataSets[tag].filter(entry => keepList.includes(entry['anonID']));
+	    }
 	}
 	
     } // applyFilter

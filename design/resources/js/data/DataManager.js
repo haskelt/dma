@@ -8,12 +8,16 @@ class DataManager {
 
     static data = {};
     static dataConfig = {
-	'_roster': { 'dataClass': 'Roster', 'requiredFields': ["Student's Name", 'SID', 'Email'] },
-	'demographics': { 'dataClass': 'Canvas', 'requiredFields': ['117284167:'] },
-	'mct_pre': { 'dataClass': 'Canvas', 'requiredFields': [] },
-	'mct_post': { 'dataClass': 'Canvas', 'requiredFields': [] },
-	'cw': { 'dataClass': 'CW', 'requiredFields': [] },
-	'exam': { 'dataClass': 'Exam', 'requiredFields': [] }
+	'instructor': { 'class': 'Metadata' },
+	'institution': { 'class': 'Metadata' },
+	'course': { 'class': 'Metadata' },
+	'condition': { 'class': 'Metadata' },
+	'_roster': { 'class': 'Roster', 'requiredFields': ["Student's Name", 'SID', 'Email'] },
+	'demographics': { 'class': 'Canvas', 'requiredFields': ['117284167:'] },
+	'mct_pre': { 'class': 'Canvas' },
+	'mct_post': { 'class': 'Canvas' },
+	'cw': { 'class': 'CW' },
+	'exam': { 'class': 'Exam' }
     };
     
     /**************************************************************************/
@@ -22,11 +26,10 @@ class DataManager {
 
 	logger.postMessage('DEBUG', 'data', 'Posting data for tag ' + tag + ' of ' + data);
 	if(tag in this.dataConfig){
-	    let specialist = DataSpecialistFactory.build(this.dataConfig[tag]['dataClass']);
-	    specialist.setData.bind(specialist)(tag, data, this.dataConfig[tag]['requiredFields']);
+	    let specialist = DataSpecialistFactory.build(this.dataConfig[tag]['class']);
+	    specialist.processData.bind(specialist)(tag, data, this.dataConfig[tag]);
 	} else {
-	    this.data[tag] = data;
-	    //throw Error('No data handling configured for ' + tag);
+	    throw Error('No data handling configured for ' + tag);
 	}
 	
     } // postData
@@ -35,6 +38,18 @@ class DataManager {
 
     static finalizeData () {
 
+	var metadata = DataSets.getDataSet('_meta');
+	var ids = DataSets.getDataField('_roster', 'anonID');
+	var courseInfo = [];
+	for(let id of ids){
+	    let row = { 'anonID': id };
+	    for(let field in metadata){
+		row[field] = metadata[field];
+	    }
+	    courseInfo.push(row);
+	}
+	DataSets.setDataSet('course_info', courseInfo);
+	
 	DataSets.applyFilter('demographics', '117284167:', 'I give permission to include my responses in this study');
 	
     } // finalizeData

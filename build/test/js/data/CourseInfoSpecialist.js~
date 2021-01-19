@@ -4,7 +4,7 @@ import logger from '{{SITE_PATH}}/js/logger.js';
 import DataSets from '{{SITE_PATH}}/js/data/DataSets.js';
 import xlsx from '{{SITE_PATH}}/js/xlsx/xlsx.js';
 
-class DataSpecialist {
+class CourseInfoSpecialist {
 
     /**************************************************************************/
     
@@ -16,21 +16,27 @@ class DataSpecialist {
     
     /**************************************************************************/
 
-    processData (tag, data, config) {
+    setData (tag, data, requiredFields) {
 
-	logger.postMessage('DEBUG', 'data', 'Setting data ' + tag);
+	logger.postMessage('DEBUG', 'data', 'Setting student data ' + tag);
 
-	this.tag = tag;
 	this.curData = data;
-	this.config = config;
+	this.requiredFields = requiredFields;
 
 	for(let step of this.processingSteps){
 	    step.bind(this)();
 	}
 
-	this.setData();
+	var sheetNames = Object.keys(this.curData);
+	if(sheetNames.length == 1){
+	    DataSets.setDataSet(tag, this.curData[sheetNames[0]]);
+	} else {
+	    for(let sheet of sheetNames){
+		DataSets.setDataSet(tag + '.' + sheet, this.curData[sheet]);
+	    }
+	}
 	
-    } // processData
+    } // setData
     
     /**************************************************************************/
     
@@ -62,13 +68,11 @@ class DataSpecialist {
 
     doRequiredFieldsCheck () {
 	/* Check that any required fields are present */
-
-	if('requiredFields' in this.config){
-	    for(let field of this.config.requiredFields){
-		for(let sheet in this.curData){
-		    if(!(field in this.curData[sheet][0])){
-			throw Error('A column for ' + field + ' is required. Please fix and then reupload the file.');
-		    }
+	
+	for(let field of this.requiredFields){
+	    for(let sheet in this.curData){
+		if(!(field in this.curData[sheet][0])){
+		    throw Error('A column for ' + field + ' is required. Please fix and then reupload the file.');
 		}
 	    }
 	}
@@ -76,22 +80,7 @@ class DataSpecialist {
     } // doRequiredFieldsCheck
 
     /**************************************************************************/
+    
+} // CourseInfoSpecialist
 
-    setData () {
-	
-    	var sheetNames = Object.keys(this.curData);
-	if(sheetNames.length == 1){
-	    DataSets.setDataSet(this.tag, this.curData[sheetNames[0]]);
-	} else {
-	    for(let sheet of sheetNames){
-		DataSets.setDataSet(this.tag + '.' + sheet, this.curData[sheet]);
-	    }
-	}
-
-    } // setData
-
-    /**************************************************************************/
-
-} // DataSpecialist
-
-export default DataSpecialist;
+export default CourseInfoSpecialist;
