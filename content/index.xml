@@ -13,6 +13,17 @@
 	  Intervention
 	  Control
 	</multiple-choice>
+	<select id="term" label="What term was this data collected?">
+	  Fall 2019
+	  Winter 2020
+	  Spring 2020
+	  Fall 2020
+	  Winter 2021
+	  Spring 2021
+	  Fall 2021
+	  Winter 2022
+	  Spring 2022
+	</select>
       </task-set>
     </task-wrapper>
     <task-wrapper label="Step 2 - Roster and Consent">

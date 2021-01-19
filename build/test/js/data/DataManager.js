@@ -12,6 +12,7 @@ class DataManager {
 	'institution': { 'class': 'Metadata' },
 	'course': { 'class': 'Metadata' },
 	'condition': { 'class': 'Metadata' },
+	'term': { 'class': 'Metadata' },
 	'_roster': { 'class': 'Roster', 'requiredFields': ["Student's Name", 'SID', 'Email'] },
 	'demographics': { 'class': 'Canvas', 'headerMappings': {
 	    'first time taking this course': 'first_time',

@@ -1,3 +1,7 @@
 .fields__validation--message.hidden {
     display: none;
-};
+}
+
+.fields__select--hidden-option {
+    display: none;
+}

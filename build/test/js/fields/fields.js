@@ -4,11 +4,13 @@ import TaskFactory from '/js/tasks/TaskFactory.js';
 import ToggleTask from '/js/fields/ToggleTask.js';
 import TextInputTask from '/js/fields/TextInputTask.js';
 import MultipleChoiceTask from '/js/fields/MultipleChoiceTask.js';
+import SelectTask from '/js/fields/SelectTask.js';
 import SpreadsheetSelectorTask from '/js/fields/SpreadsheetSelectorTask.js';
 import ExportButtonTask from '/js/fields/ExportButtonTask.js';
 
 TaskFactory.registerBuilder('toggle', ToggleTask);
 TaskFactory.registerBuilder('text-input', TextInputTask);
 TaskFactory.registerBuilder('multiple-choice', MultipleChoiceTask);
+TaskFactory.registerBuilder('select', SelectTask);
 TaskFactory.registerBuilder('spreadsheet-selector', SpreadsheetSelectorTask);
 TaskFactory.registerBuilder('export-button', ExportButtonTask);

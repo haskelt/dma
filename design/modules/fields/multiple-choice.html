@@ -3,7 +3,7 @@
   {% for option in this.content.split('\n') %}
   <div>
   <input class="fields__multiple-choice--option" type="radio" name="{{ this.id }}" value="{{ option }}">
-  <label for="{{ option }}">{{option}}</a>
+  <label for="{{ option }}">{{option}}</label>
   </div>
   {% endfor %}
 </div>
