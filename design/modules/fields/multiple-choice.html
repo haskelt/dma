@@ -1,6 +1,7 @@
 <div id="{{this.id}}" class="fields__multiple-choice tasks__task" data-task-type="multiple-choice">
   <span>{{this.label}}</span>
-  {% for option in this.content.split('\n') %}
+  {% for raw_option in this.content.split('\n') %}
+  {% set option = raw_option.strip() %}
   <div>
   <input class="fields__multiple-choice--option" type="radio" name="{{ this.id }}" value="{{ option }}">
   <label for="{{ option }}">{{option}}</label>

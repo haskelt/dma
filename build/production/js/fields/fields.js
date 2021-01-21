@@ -4,11 +4,13 @@ import TaskFactory from '/dma/js/tasks/TaskFactory.js';
 import ToggleTask from '/dma/js/fields/ToggleTask.js';
 import TextInputTask from '/dma/js/fields/TextInputTask.js';
 import MultipleChoiceTask from '/dma/js/fields/MultipleChoiceTask.js';
+import SelectTask from '/dma/js/fields/SelectTask.js';
 import SpreadsheetSelectorTask from '/dma/js/fields/SpreadsheetSelectorTask.js';
 import ExportButtonTask from '/dma/js/fields/ExportButtonTask.js';
 
 TaskFactory.registerBuilder('toggle', ToggleTask);
 TaskFactory.registerBuilder('text-input', TextInputTask);
 TaskFactory.registerBuilder('multiple-choice', MultipleChoiceTask);
+TaskFactory.registerBuilder('select', SelectTask);
 TaskFactory.registerBuilder('spreadsheet-selector', SpreadsheetSelectorTask);
 TaskFactory.registerBuilder('export-button', ExportButtonTask);
