@@ -1,6 +1,7 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
 import logger from '/dma/js/logger.js';
+import DataWarning from '/dma/js/errors/DataWarning.js';
 import xlsx from '/dma/js/xlsx/xlsx.js';
 
 class DataSets {
@@ -79,7 +80,7 @@ class DataSets {
 		return row[returnField];
 	    }
 	}
-	throw Error('Data lookup failed');
+	throw new DataWarning('Unable to find record of "' + searchTag + '" where "' + searchField + '" is "' + searchValue + '"');
 	
     } // findData
     

@@ -10,7 +10,7 @@ class ExamSpecialist extends StudentDataSpecialist {
 
 	super();
 
-	this.possibleIdentifiers = {'name': 'pretty_name', 'sis_id': 'SID', 'id': 'sis_id'};
+	this.possibleIdentifiers = {'sis_id': 'pretty_sid', 'name': 'pretty_name', 'id': null};
 	this.headerRow = 1;
 
     } // constructor

@@ -1,6 +1,7 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
 import logger from '/dma/js/logger.js';
+import DataError from '/dma/js/errors/DataError.js';
 import Task from '/dma/js/tasks/Task.js';
 
 class TaskSequence extends Task {
@@ -102,8 +103,11 @@ class TaskSequence extends Task {
 		this.children[this.curTask]['object'].setup();
 	    }
 	    catch (error) {
-		alert(error.message);
-		throw(error);
+		if (error instanceof DataError) {
+		    logger.postMessage('ERROR', 'tasks', 'Advancing to next task sequence interrupted by error.');
+		} else {
+		    throw error;
+		}
 	    }
 	}
 	

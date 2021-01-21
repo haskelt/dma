@@ -1,11 +1,10 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
 import logger from '/dma/js/logger.js';
-import Task from '/dma/js/tasks/Task.js';
+import FieldTask from '/dma/js/fields/FieldTask.js';
 import xlsx from '/dma/js/xlsx/xlsx.js';
-import DataManager from '/dma/js/data/DataManager.js';
 
-class SpreadsheetSelectorTask extends Task {
+class SpreadsheetSelectorTask extends FieldTask {
     
     /**************************************************************************/
 
@@ -53,19 +52,11 @@ class SpreadsheetSelectorTask extends Task {
     
     /**************************************************************************/
 
-    wrapUp () {
+    clearField () {
 
-	try {
-	    DataManager.postData(this.id, this.data);
-	    return true;
-	}
-	catch (error) {
-	    this.input.value = null;
-	    this.parent.setChildStatus(this, 'incomplete');
-	    throw(error);
-	}
+	this.input.value = null;
 	
-    } // wrapUp
+    } // clearField
     
     /**************************************************************************/
     
