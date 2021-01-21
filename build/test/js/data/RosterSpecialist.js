@@ -47,7 +47,7 @@ class RosterSpecialist extends DataSpecialist {
 	
 	for(let sheet in this.curData){
 	    for(let row of this.curData[sheet]){
-		let nameFields = row["Student's Name"].split(' ');
+		let nameFields = row["STUDENT'S NAME"].split(' ');
 		row['pretty_name'] = nameFields[1] + ' ' + nameFields[0];
 	    }
 	}

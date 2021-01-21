@@ -13,8 +13,9 @@ class DataManager {
 	'institution': { 'class': 'Metadata' },
 	'course': { 'class': 'Metadata' },
 	'condition': { 'class': 'Metadata' },
+	'modality': { 'class': 'Metadata' },
 	'term': { 'class': 'Metadata' },
-	'_roster': { 'class': 'Roster', 'requiredFields': ["Student's Name", 'SID', 'Email'] },
+	'_roster': { 'class': 'Roster', 'requiredFields': ["STUDENT'S NAME", 'SID', 'EMAIL'] },
 	'demographics': { 'class': 'Canvas', 'headerMappings': {
 	    'first time taking this course': 'first_time',
 	    'grade you received in Engineering Physics 1': 'phys1_grade',

@@ -13,6 +13,10 @@
 	  Intervention
 	  Control
 	</multiple-choice>
+	<multiple-choice id="modality" label="Course modality">
+	  F2F
+	  On-line
+	</multiple-choice>
 	<select id="term" label="What term was this data collected?">
 	  Fall 2019
 	  Winter 2020

@@ -11,7 +11,7 @@ class CWSpecialist extends StudentDataSpecialist {
     constructor () {
 
 	super();
-	this.possibleIdentifiers = {'E-mail': 'Email'};
+	this.possibleIdentifiers = {'E-mail': 'EMAIL'};
 	this.processingSteps = [
 	    this.fixHeadings,
 	    this.convertWorkbookToJSON,
