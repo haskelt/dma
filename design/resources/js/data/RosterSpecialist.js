@@ -1,6 +1,7 @@
 {{ JS_COPYRIGHT_NOTICE }}
 
 import logger from '{{SITE_PATH}}/js/logger.js';
+import DataError from '{{SITE_PATH}}/js/errors/DataError.js';
 import CryptoJS from '{{SITE_PATH}}/js/cryptojs/sha256.js';
 import DataSpecialist from '{{SITE_PATH}}/js/data/DataSpecialist.js';
 
@@ -14,7 +15,6 @@ class RosterSpecialist extends DataSpecialist {
 	this.processingSteps = [
 	    this.convertWorkbookToJSON,
 	    this.doSingleWorksheetCheck,
-	    this.doRowLengthCheck,
 	    this.doRequiredFieldsCheck,
 	    this.doUniqueIdentifiersCheck,
 	    this.computePrettyNames,
@@ -23,24 +23,6 @@ class RosterSpecialist extends DataSpecialist {
 	];
 
     } // constructor
-    
-    /**************************************************************************/
-    
-    doRowLengthCheck () {
-    	/* For each worksheet, check that each row has the same number
-	 * of fields */
-
-	for(let sheet in this.curData){
-	    for(let row of this.curData[sheet]){
-		var lastNumFields = null;
-		if(lastNumFields && Object.keys(row).length != lastNumFields){
-		    throw Error('Each row in the file must have the same number of cells. Please fix and then reupload the file.');
-		}
-		lastNumFields = Object.keys(row).length;
-	    }
-	}
-
-    } // doRowLengthCheck
     
     /**************************************************************************/
 
@@ -52,7 +34,7 @@ class RosterSpecialist extends DataSpecialist {
 	    for(let sheet in this.curData){
 		let uniqueValues = new Set(this.curData[sheet].map(entry => entry[field]));
 		if(uniqueValues.size != this.curData[sheet].length){
-		    throw Error('The ' + field + ' column in the sheet ' + sheet + ' has one or more duplicate entries. Please fix and then reupload the file.');
+		    throw new DataError('The "' + field + '" column in the sheet "' + sheet + '" has one or more duplicate entries. Please fix and then reupload the file.');
 		}
 	    }
 	}

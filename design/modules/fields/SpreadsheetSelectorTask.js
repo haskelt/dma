@@ -1,11 +1,10 @@
 {{ JS_COPYRIGHT_NOTICE }}
 
-import logger from '{{ SITE_PATH }}/js/logger.js';
-import Task from '{{ SITE_PATH }}/js/tasks/Task.js';
+import logger from '{{SITE_PATH}}/js/logger.js';
+import FieldTask from '{{SITE_PATH}}/js/fields/FieldTask.js';
 import xlsx from '{{SITE_PATH}}/js/xlsx/xlsx.js';
-import DataManager from '{{ SITE_PATH }}/js/data/DataManager.js';
 
-class SpreadsheetSelectorTask extends Task {
+class SpreadsheetSelectorTask extends FieldTask {
     
     /**************************************************************************/
 
@@ -53,19 +52,11 @@ class SpreadsheetSelectorTask extends Task {
     
     /**************************************************************************/
 
-    wrapUp () {
+    clearField () {
 
-	try {
-	    DataManager.postData(this.id, this.data);
-	    return true;
-	}
-	catch (error) {
-	    this.input.value = null;
-	    this.parent.setChildStatus(this, 'incomplete');
-	    throw(error);
-	}
+	this.input.value = null;
 	
-    } // wrapUp
+    } // clearField
     
     /**************************************************************************/
     

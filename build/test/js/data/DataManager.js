@@ -1,6 +1,7 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
 import logger from '/js/logger.js';
+import DataError from '/js/errors/DataError.js';
 import DataSpecialistFactory from '/js/data/DataSpecialistFactory.js';
 import DataSets from '/js/data/DataSets.js';
 

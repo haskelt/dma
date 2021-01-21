@@ -1,6 +1,7 @@
 {{ JS_COPYRIGHT_NOTICE }}
 
 import logger from '{{ SITE_PATH }}/js/logger.js';
+import DataError from '{{ SITE_PATH }}/js/errors/DataError.js';
 import Task from '{{ SITE_PATH }}/js/tasks/Task.js';
 
 class TaskSequence extends Task {
@@ -102,8 +103,11 @@ class TaskSequence extends Task {
 		this.children[this.curTask]['object'].setup();
 	    }
 	    catch (error) {
-		alert(error.message);
-		throw(error);
+		if (error instanceof DataError) {
+		    logger.postMessage('ERROR', 'tasks', 'Advancing to next task sequence interrupted by error.');
+		} else {
+		    throw error;
+		}
 	    }
 	}
 	

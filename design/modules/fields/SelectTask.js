@@ -1,10 +1,9 @@
 {{ JS_COPYRIGHT_NOTICE }}
 
 import logger from '{{ SITE_PATH }}/js/logger.js';
-import Task from '{{ SITE_PATH }}/js/tasks/Task.js';
-import DataManager from '{{ SITE_PATH }}/js/data/DataManager.js';
+import FieldTask from '{{ SITE_PATH }}/js/fields/FieldTask.js';
 
-class SelectTask extends Task {
+class SelectTask extends FieldTask {
     
     /**************************************************************************/
 
@@ -13,7 +12,6 @@ class SelectTask extends Task {
 	super(element);
 	this.select = element.querySelector('.fields__select--select');
 	this.select.addEventListener('change', this.handleChange.bind(this));
-	this.choice = null;
 	
     } // constructor
     
@@ -21,21 +19,21 @@ class SelectTask extends Task {
 
     handleChange (e) {
 
-	if(!this.choice){
+	if(!this.data){
 	    logger.postMessage('DEBUG', 'fields', 'Select option has been chosen for ' + this.id);	
 	    this.parent.setChildStatus(this, 'complete');
 	}
-	this.choice = this.select.children[this.select.selectedIndex].value;
+	this.data = this.select.children[this.select.selectedIndex].value;
 
     } // handleChange
     
     /**************************************************************************/
 
-    wrapUp () {
+    clearField () {
 
-	DataManager.postData(this.id, this.choice);
+	this.select.selectedIndex = -1;
 	
-    } // wrapUp
+    } // clearField
     
     /**************************************************************************/
     

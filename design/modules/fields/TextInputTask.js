@@ -1,10 +1,9 @@
 {{ JS_COPYRIGHT_NOTICE }}
 
 import logger from '{{ SITE_PATH }}/js/logger.js';
-import Task from '{{ SITE_PATH }}/js/tasks/Task.js';
-import DataManager from '{{ SITE_PATH }}/js/data/DataManager.js';
+import FieldTask from '{{ SITE_PATH }}/js/fields/FieldTask.js';
 
-class TextInputTask extends Task {
+class TextInputTask extends FieldTask {
     
     /**************************************************************************/
 
@@ -14,6 +13,7 @@ class TextInputTask extends Task {
 	this.input = element.querySelector('.fields__text-input--input');
 	this.input.addEventListener('input', this.handleInput.bind(this));
 	this.hasContent = false;
+	this.data = null;
 	
     } // constructor
     
@@ -27,17 +27,18 @@ class TextInputTask extends Task {
 	    logger.postMessage('DEBUG', 'fields', 'Content of text input ' + this.id + ' has changed to ' + this.input.value);	
 	    this.parent.setChildStatus(this, this.hasContent ? 'complete' : 'incomplete');
 	}
+	this.data = this.input.value;
 
     } // handleInput
     
     /**************************************************************************/
 
-    wrapUp () {
+    clearField () {
 
-	DataManager.postData(this.id, this.input.value);
+	this.input.value = '';
 	
-    } // wrapUp
-    
+    } // clearField
+
     /**************************************************************************/
     
 } // TextInputTask

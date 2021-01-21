@@ -20,15 +20,15 @@
   </div>
   <div class="tasks__task-wrapper--container collapsed">
     <div id="taskset1" class="tasks__task-set">
-  <div id="instructor" class="fields__text-input tasks__task" data-task-type="text-input">
+  <div id="instructor" class="fields__text-input tasks__task" data-label="Name of instructor" data-task-type="text-input">
   <span class="fields__text-input--label">Name of instructor</span>
   <input type="text" class="fields__text-input--input"/>
 </div>
-<div id="institution" class="fields__text-input tasks__task" data-task-type="text-input">
+<div id="institution" class="fields__text-input tasks__task" data-label="Institution" data-task-type="text-input">
   <span class="fields__text-input--label">Institution</span>
   <input type="text" class="fields__text-input--input"/>
 </div>
-<div id="course" class="fields__multiple-choice tasks__task" data-task-type="multiple-choice">
+<div id="course" class="fields__multiple-choice tasks__task" data-label="Is this data from Calc II or Statics?" data-task-type="multiple-choice">
   <span>Is this data from Calc II or Statics?</span>
   <div>
   <input class="fields__multiple-choice--option" type="radio" name="course" value="Calc II">
@@ -39,7 +39,7 @@
   <label for="Statics">Statics</label>
   </div>
 </div>
-<div id="condition" class="fields__multiple-choice tasks__task" data-task-type="multiple-choice">
+<div id="condition" class="fields__multiple-choice tasks__task" data-label="Is this an intervention or control section?" data-task-type="multiple-choice">
   <span>Is this an intervention or control section?</span>
   <div>
   <input class="fields__multiple-choice--option" type="radio" name="condition" value="Intervention">
@@ -50,7 +50,7 @@
   <label for="Control">Control</label>
   </div>
 </div>
-<div id="term" class="fields__select tasks__task" data-task-type="select">
+<div id="term" class="fields__select tasks__task" data-label="What term was this data collected?" data-task-type="select">
   <div>What term was this data collected?</div>
   <select class="fields__select--select">
     <option class="fields__select--hidden-option" selected disabled></option>
@@ -81,11 +81,11 @@
   </div>
   <div class="tasks__task-wrapper--container collapsed">
     <div id="taskset2" class="tasks__task-set">
-  <div id="_roster" class="fields__spreadsheet-selector tasks__task" data-task-type="spreadsheet-selector">
+  <div id="_roster" class="fields__spreadsheet-selector tasks__task" data-label="Master Student Roster" data-task-type="spreadsheet-selector">
   <span class="fields__spreadsheet-selector--label">Master Student Roster</span>
   <input type="file" class="fields__spreadsheet-selector--input"/>
 </div>
-<div id="demographics" class="fields__spreadsheet-selector tasks__task" data-task-type="spreadsheet-selector">
+<div id="demographics" class="fields__spreadsheet-selector tasks__task" data-label="Consent and Demographics" data-task-type="spreadsheet-selector">
   <span class="fields__spreadsheet-selector--label">Consent and Demographics</span>
   <input type="file" class="fields__spreadsheet-selector--input"/>
 </div>
@@ -105,19 +105,19 @@
   </div>
   <div class="tasks__task-wrapper--container collapsed">
     <div id="taskset3" class="tasks__task-set">
-  <div id="mct_pre" class="fields__spreadsheet-selector tasks__task" data-task-type="spreadsheet-selector">
+  <div id="mct_pre" class="fields__spreadsheet-selector tasks__task" data-label="MCT Pretest" data-task-type="spreadsheet-selector">
   <span class="fields__spreadsheet-selector--label">MCT Pretest</span>
   <input type="file" class="fields__spreadsheet-selector--input"/>
 </div>
-<div id="mct_post" class="fields__spreadsheet-selector tasks__task" data-task-type="spreadsheet-selector">
+<div id="mct_post" class="fields__spreadsheet-selector tasks__task" data-label="MCT Posttest" data-task-type="spreadsheet-selector">
   <span class="fields__spreadsheet-selector--label">MCT Posttest</span>
   <input type="file" class="fields__spreadsheet-selector--input"/>
 </div>
-<div id="cw" class="fields__spreadsheet-selector tasks__task" data-task-type="spreadsheet-selector">
+<div id="cw" class="fields__spreadsheet-selector tasks__task" data-label="Concept Warehouse Data" data-task-type="spreadsheet-selector">
   <span class="fields__spreadsheet-selector--label">Concept Warehouse Data</span>
   <input type="file" class="fields__spreadsheet-selector--input"/>
 </div>
-<div id="exam" class="fields__spreadsheet-selector tasks__task" data-task-type="spreadsheet-selector">
+<div id="exam" class="fields__spreadsheet-selector tasks__task" data-label="Exam MC plus Explain" data-task-type="spreadsheet-selector">
   <span class="fields__spreadsheet-selector--label">Exam MC plus Explain</span>
   <input type="file" class="fields__spreadsheet-selector--input"/>
 </div>

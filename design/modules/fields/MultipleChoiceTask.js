@@ -1,10 +1,9 @@
 {{ JS_COPYRIGHT_NOTICE }}
 
 import logger from '{{ SITE_PATH }}/js/logger.js';
-import Task from '{{ SITE_PATH }}/js/tasks/Task.js';
-import DataManager from '{{ SITE_PATH }}/js/data/DataManager.js';
+import FieldTask from '{{ SITE_PATH }}/js/fields/FieldTask.js';
 
-class MultipleChoiceTask extends Task {
+class MultipleChoiceTask extends FieldTask {
     
     /**************************************************************************/
 
@@ -15,8 +14,6 @@ class MultipleChoiceTask extends Task {
 	for(let option of this.options){
 	    option.addEventListener('input', this.handleInput.bind(this));
 	}
-	this.hasContent = false;
-	this.choice = null;
 	
     } // constructor
     
@@ -28,7 +25,7 @@ class MultipleChoiceTask extends Task {
 	for(let option of this.options){
 	    if(option.checked){
 		newHasContent = true;
-		this.choice = option.value;
+		this.data = option.value;
 	    }
 	}
 	if(newHasContent != this.hasContent){
@@ -41,11 +38,15 @@ class MultipleChoiceTask extends Task {
     
     /**************************************************************************/
 
-    wrapUp () {
+    clearField () {
 
-	DataManager.postData(this.id, this.choice);
+	for(let option of this.options){
+	    if(option.checked){
+		option.checked = false;
+	    }
+	}
 	
-    } // wrapUp
+    } // clearField
     
     /**************************************************************************/
     

@@ -1,6 +1,7 @@
 {{ JS_COPYRIGHT_NOTICE }}
 
 import logger from '{{SITE_PATH}}/js/logger.js';
+import DataWarning from '{{SITE_PATH}}/js/errors/DataWarning.js';
 import DataSpecialist from '{{SITE_PATH}}/js/data/DataSpecialist.js';
 import DataSets from '{{SITE_PATH}}/js/data/DataSets.js';
 
@@ -36,7 +37,7 @@ class StudentDataSpecialist extends DataSpecialist {
 		}
 	    }
 	    if(matches.length == 0){
-		throw Error('Sheet ' + sheet + ' does not have any columns with valid student identifiers. Please fix and reupload.');
+		throw new DataError('Sheet "' + sheet + '" does not have any columns with valid student identifiers. Please fix and reupload.');
 	    } else {
 		this.identifiers[sheet] = matches;
 	    }
@@ -57,6 +58,7 @@ class StudentDataSpecialist extends DataSpecialist {
 	    for(let row of this.curData[sheet]){
 		try {
 		    let anonID = DataSets.findData('_roster', rosterIDType, row[this.identifiers[sheet][0]], 'anonID');
+
 		    let newRow = { 'anonID': anonID };
 		    for(let field in row){
 			if(!(this.identifiers[sheet].includes(field))){
@@ -66,8 +68,12 @@ class StudentDataSpecialist extends DataSpecialist {
 		    newData.push(newRow);
 		}
 		catch (error) {
-		    console.log(error);
-		    alert('Unable to find student ' + row[this.identifiers[sheet][0]] + ' in the roster, skipping.');
+		    if (error instanceof DataWarning) {
+			alert('Unable to find student with ' + this.identifiers[sheet][0] + ' "' + row[this.identifiers[sheet][0]] + '" in the roster, skipping');
+			logger.postMessage('ERROR', 'data', error.message);
+		    } else {
+			throw error;
+		    }
 		}
 	    }
 	    this.curData[sheet] = newData;

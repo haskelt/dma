@@ -1,6 +1,7 @@
 {{ JS_COPYRIGHT_NOTICE }}
 
 import logger from '{{SITE_PATH}}/js/logger.js';
+import DataWarning from '{{SITE_PATH}}/js/errors/DataWarning.js';
 import xlsx from '{{SITE_PATH}}/js/xlsx/xlsx.js';
 
 class DataSets {
@@ -79,7 +80,7 @@ class DataSets {
 		return row[returnField];
 	    }
 	}
-	throw Error('Data lookup failed');
+	throw new DataWarning('Unable to find record of "' + searchTag + '" where "' + searchField + '" is "' + searchValue + '"');
 	
     } // findData
     

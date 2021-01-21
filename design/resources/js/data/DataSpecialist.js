@@ -1,6 +1,7 @@
 {{ JS_COPYRIGHT_NOTICE }}
 
 import logger from '{{SITE_PATH}}/js/logger.js';
+import DataError from '{{SITE_PATH}}/js/errors/DataError.js';
 import DataSets from '{{SITE_PATH}}/js/data/DataSets.js';
 import xlsx from '{{SITE_PATH}}/js/xlsx/xlsx.js';
 
@@ -52,7 +53,7 @@ class DataSpecialist {
 	/* Check that there's only one worksheet */
 
 	if(Object.keys(this.curData).length != 1){
-	    throw Error('Data file can only have one worksheet. Please fix and then reupload the file.');
+	    throw new DataError('Data file can only have one worksheet. Please fix and then reupload the file.');
 	}
 
     } // doSingleWorksheetcheck
@@ -66,7 +67,7 @@ class DataSpecialist {
 	    for(let field of this.config.requiredFields){
 		for(let sheet in this.curData){
 		    if(!(field in this.curData[sheet][0])){
-			throw Error('A column for ' + field + ' is required. Please fix and then reupload the file.');
+			throw new DataError('A column "' + field + '" is required. Please fix and then reupload the file.');
 		    }
 		}
 	    }
