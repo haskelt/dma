@@ -2,6 +2,7 @@
 
 import logger from '{{SITE_PATH}}/js/logger.js';
 import DataWarning from '{{SITE_PATH}}/js/errors/DataWarning.js';
+import DataError from '{{SITE_PATH}}/js/errors/DataError.js';
 import DataSpecialist from '{{SITE_PATH}}/js/data/DataSpecialist.js';
 import DataSets from '{{SITE_PATH}}/js/data/DataSets.js';
 
@@ -55,10 +56,14 @@ class StudentDataSpecialist extends DataSpecialist {
 	for(let sheet in this.curData){
 	    let newData = [];
 	    let rosterIDType = this.possibleIdentifiers[this.identifiers[sheet][0]];
+	    let processedStudents = [];
 	    for(let row of this.curData[sheet]){
 		try {
 		    let anonID = DataSets.findData('_roster', rosterIDType, row[this.identifiers[sheet][0]], 'anonID');
-
+		    if(processedStudents.includes(anonID)){
+			throw new DataError('Sheet "' + sheet + '" has duplicate entry for student with ' + this.identifiers[sheet][0] + ' "' + row[this.identifiers[sheet][0]] + '"; please fix and re-upload the file');
+		    }
+		    processedStudents.push(anonID);
 		    let newRow = { 'anonID': anonID };
 		    for(let field in row){
 			if(!(this.identifiers[sheet].includes(field))){

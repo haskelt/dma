@@ -61,8 +61,10 @@ class DataManager {
 	    courseInfo.push(row);
 	}
 	DataSets.setDataSet('course_info', courseInfo);
-	
+
+	DataSets.generateMissingRecords('_roster');
 	DataSets.applyFilter('demographics', 'consent', 'I give permission to include my responses in this study');
+	DataSets.sortBy('anonID');
 	
     } // finalizeData
 

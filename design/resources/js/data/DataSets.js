@@ -39,6 +39,46 @@ class DataSets {
 	return values;
 
     } // getDataField
+
+    /**************************************************************************/
+
+    static generateMissingRecords (referenceTag) {
+	/* Goes through all the datasets and ensures that they contain
+	   a record for each student in the <referenceTag> dataset,
+	   creating that record if necessary */
+	
+	logger.postMessage('DEBUG', 'data', 'Coordinating data: Ensuring all datasets contain records for each student in dataset "' + referenceTag + '"');
+	for(let referenceRecord of this.dataSets[referenceTag]){
+	    for(let targetTag in this.dataSets){
+		/* a tag beginning with '_' indicates data for
+		   internal use that may or may not have an 'anonID'
+		   field, so we don't generate missing records in that
+		   case */
+		if(targetTag != referenceTag && !targetTag.startsWith('_')){
+		    if(!this.dataSets[targetTag].find(entry => entry['anonID'] == referenceRecord['anonID'])){
+			this.dataSets[targetTag].push({ anonID: referenceRecord['anonID'] });	
+		    }
+		}
+	    }
+	}
+	
+    } // generateMissingRecords 
+
+    /**************************************************************************/
+
+    static sortBy (field) {
+
+	logger.postMessage('DEBUG', 'data', 'Sorting datasets by field "' + field + '"');
+	for(let tag in this.dataSets){
+	    /* a tag beginning with '_' indicates data for
+	       internal use that may or may not have an 'anonID'
+	       field, so we don't sort in that case */
+	    if(!tag.startsWith('_')){
+		this.dataSets[tag].sort((a, b) => a['anonID'] > b['anonID'] ? 1 : (a['anonID'] < b['anonID'] ? -1 : 0));
+	    }
+	}
+	
+    } // sortBy
     
     /**************************************************************************/
     
