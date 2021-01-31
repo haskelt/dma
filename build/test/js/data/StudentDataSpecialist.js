@@ -1,10 +1,10 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/js/logger.js';
-import DataWarning from '/js/errors/DataWarning.js';
-import DataError from '/js/errors/DataError.js';
-import DataSpecialist from '/js/data/DataSpecialist.js';
-import DataSets from '/js/data/DataSets.js';
+import logger from '/js/logger.js?v=0.1.2-beta';
+import DataWarning from '/js/errors/DataWarning.js?v=0.1.2-beta';
+import DataError from '/js/errors/DataError.js?v=0.1.2-beta';
+import DataSpecialist from '/js/data/DataSpecialist.js?v=0.1.2-beta';
+import DataSets from '/js/data/DataSets.js?v=0.1.2-beta';
 
 class StudentDataSpecialist extends DataSpecialist {
 

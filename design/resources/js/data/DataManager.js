@@ -1,9 +1,9 @@
 {{ JS_COPYRIGHT_NOTICE }}
 
-import logger from '{{SITE_PATH}}/js/logger.js';
-import DataError from '{{SITE_PATH}}/js/errors/DataError.js';
-import DataSpecialistFactory from '{{SITE_PATH}}/js/data/DataSpecialistFactory.js';
-import DataSets from '{{SITE_PATH}}/js/data/DataSets.js';
+import logger from '{{SITE_PATH}}/js/logger.js?v={{VERSION}}';
+import DataError from '{{SITE_PATH}}/js/errors/DataError.js?v={{VERSION}}';
+import DataSpecialistFactory from '{{SITE_PATH}}/js/data/DataSpecialistFactory.js?v={{VERSION}}';
+import DataSets from '{{SITE_PATH}}/js/data/DataSets.js?v={{VERSION}}';
 
 class DataManager {
 

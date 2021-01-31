@@ -1,6 +1,6 @@
 {{ JS_COPYRIGHT_NOTICE }}
 
-import StudentDataSpecialist from '{{ SITE_PATH }}/js/data/StudentDataSpecialist.js';
+import StudentDataSpecialist from '{{ SITE_PATH }}/js/data/StudentDataSpecialist.js?v={{VERSION}}';
 
 class ExamSpecialist extends StudentDataSpecialist {
 

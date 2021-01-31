@@ -1,8 +1,8 @@
 {{ JS_COPYRIGHT_NOTICE }}
 
-import logger from '{{SITE_PATH}}/js/logger.js';
-import DataWarning from '{{SITE_PATH}}/js/errors/DataWarning.js';
-import xlsx from '{{SITE_PATH}}/js/xlsx/xlsx.js';
+import logger from '{{SITE_PATH}}/js/logger.js?v={{VERSION}}';
+import DataWarning from '{{SITE_PATH}}/js/errors/DataWarning.js?v={{VERSION}}';
+import xlsx from '{{SITE_PATH}}/js/xlsx/xlsx.js?v={{VERSION}}';
 
 class DataSets {
 

@@ -1,9 +1,9 @@
 {{ JS_COPYRIGHT_NOTICE }}
 
-import logger from '{{SITE_PATH}}/js/logger.js';
-import DataError from '{{SITE_PATH}}/js/errors/DataError.js';
-import CryptoJS from '{{SITE_PATH}}/js/cryptojs/sha256.js';
-import DataSpecialist from '{{SITE_PATH}}/js/data/DataSpecialist.js';
+import logger from '{{SITE_PATH}}/js/logger.js?v={{VERSION}}';
+import DataError from '{{SITE_PATH}}/js/errors/DataError.js?v={{VERSION}}';
+import CryptoJS from '{{SITE_PATH}}/js/cryptojs/sha256.js?v={{VERSION}}';
+import DataSpecialist from '{{SITE_PATH}}/js/data/DataSpecialist.js?v={{VERSION}}';
 
 class RosterSpecialist extends DataSpecialist {
 

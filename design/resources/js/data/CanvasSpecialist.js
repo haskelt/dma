@@ -1,8 +1,8 @@
 {{ JS_COPYRIGHT_NOTICE }}
 
-import logger from '{{SITE_PATH}}/js/logger.js';
-import StudentDataSpecialist from '{{SITE_PATH}}/js/data/StudentDataSpecialist.js';
-import xlsx from '{{SITE_PATH}}/js/xlsx/xlsx.js';
+import logger from '{{SITE_PATH}}/js/logger.js?v={{VERSION}}';
+import StudentDataSpecialist from '{{SITE_PATH}}/js/data/StudentDataSpecialist.js?v={{VERSION}}';
+import xlsx from '{{SITE_PATH}}/js/xlsx/xlsx.js?v={{VERSION}}';
 
 class CanvasSpecialist extends StudentDataSpecialist {
 

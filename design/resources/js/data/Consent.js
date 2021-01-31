@@ -1,7 +1,7 @@
 {{ JS_COPYRIGHT_NOTICE }}
 
-import logger from '{{SITE_PATH}}/js/logger.js';
-import Roster from '{{SITE_PATH}}/js/data/Roster.js';
+import logger from '{{SITE_PATH}}/js/logger.js?v={{VERSION}}';
+import Roster from '{{SITE_PATH}}/js/data/Roster.js?v={{VERSION}}';
 
 class Consent {
 

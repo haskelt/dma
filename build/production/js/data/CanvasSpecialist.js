@@ -1,8 +1,8 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/dma/js/logger.js';
-import StudentDataSpecialist from '/dma/js/data/StudentDataSpecialist.js';
-import xlsx from '/dma/js/xlsx/xlsx.js';
+import logger from '/dma/js/logger.js?v=0.1.2-beta';
+import StudentDataSpecialist from '/dma/js/data/StudentDataSpecialist.js?v=0.1.2-beta';
+import xlsx from '/dma/js/xlsx/xlsx.js?v=0.1.2-beta';
 
 class CanvasSpecialist extends StudentDataSpecialist {
 

@@ -1,9 +1,9 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/dma/js/logger.js';
-import DataError from '/dma/js/errors/DataError.js';
-import DataSpecialistFactory from '/dma/js/data/DataSpecialistFactory.js';
-import DataSets from '/dma/js/data/DataSets.js';
+import logger from '/dma/js/logger.js?v=0.1.2-beta';
+import DataError from '/dma/js/errors/DataError.js?v=0.1.2-beta';
+import DataSpecialistFactory from '/dma/js/data/DataSpecialistFactory.js?v=0.1.2-beta';
+import DataSets from '/dma/js/data/DataSets.js?v=0.1.2-beta';
 
 class DataManager {
 

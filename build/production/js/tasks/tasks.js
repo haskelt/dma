@@ -1,8 +1,8 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import TaskSet from '/dma/js/tasks/TaskSet.js';
-import TaskSequence from '/dma/js/tasks/TaskSequence.js';
-import TaskFactory from '/dma/js/tasks/TaskFactory.js';
+import TaskSet from '/dma/js/tasks/TaskSet.js?v=0.1.2-beta';
+import TaskSequence from '/dma/js/tasks/TaskSequence.js?v=0.1.2-beta';
+import TaskFactory from '/dma/js/tasks/TaskFactory.js?v=0.1.2-beta';
 
 for (let taskSequenceElement of document.querySelectorAll('.tasks__task-sequence')) {
     let taskSequence = new TaskSequence(taskSequenceElement, null);

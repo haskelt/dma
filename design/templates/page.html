@@ -28,7 +28,7 @@
     {% set script_data = this.scripts.split() %}
     {% for script in script_data %}
     <script type="module">
-      import "{{ SITE_PATH }}{{script}}"
+      import "{{ SITE_PATH }}{{script}}?v={{VERSION}}"
     </script>
     {% endfor %}
     {% endif %}

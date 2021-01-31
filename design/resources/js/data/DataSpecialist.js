@@ -1,9 +1,9 @@
 {{ JS_COPYRIGHT_NOTICE }}
 
-import logger from '{{SITE_PATH}}/js/logger.js';
-import DataError from '{{SITE_PATH}}/js/errors/DataError.js';
-import DataSets from '{{SITE_PATH}}/js/data/DataSets.js';
-import xlsx from '{{SITE_PATH}}/js/xlsx/xlsx.js';
+import logger from '{{SITE_PATH}}/js/logger.js?v={{VERSION}}';
+import DataError from '{{SITE_PATH}}/js/errors/DataError.js?v={{VERSION}}';
+import DataSets from '{{SITE_PATH}}/js/data/DataSets.js?v={{VERSION}}';
+import xlsx from '{{SITE_PATH}}/js/xlsx/xlsx.js?v={{VERSION}}';
 
 class DataSpecialist {
 

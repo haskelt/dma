@@ -1,8 +1,8 @@
 {{ JS_COPYRIGHT_NOTICE }}
 
-import logger from '{{ SITE_PATH }}/js/logger.js';
-import Task from '{{ SITE_PATH }}/js/tasks/Task.js';
-import DataManager from '{{ SITE_PATH }}/js/data/DataManager.js';
+import logger from '{{ SITE_PATH }}/js/logger.js?v={{VERSION}}';
+import Task from '{{ SITE_PATH }}/js/tasks/Task.js?v={{VERSION}}';
+import DataManager from '{{ SITE_PATH }}/js/data/DataManager.js?v={{VERSION}}';
 
 class ExportButtonTask extends Task {
     

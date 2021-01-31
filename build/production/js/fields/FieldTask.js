@@ -1,9 +1,9 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/dma/js/logger.js';
-import DataError from '/dma/js/errors/DataError.js';
-import Task from '/dma/js/tasks/Task.js';
-import DataManager from '/dma/js/data/DataManager.js';
+import logger from '/dma/js/logger.js?v=0.1.2-beta';
+import DataError from '/dma/js/errors/DataError.js?v=0.1.2-beta';
+import Task from '/dma/js/tasks/Task.js?v=0.1.2-beta';
+import DataManager from '/dma/js/data/DataManager.js?v=0.1.2-beta';
 
 class FieldTask extends Task {
     
@@ -40,6 +40,7 @@ class FieldTask extends Task {
 		this.hasContent = false;
 		this.parent.setChildStatus(this, 'incomplete');
 		error.message = 'Error while processing data for "' + this.label + '": ' + error.message;
+		logger.postMessage('ERROR', 'fields', error.message);
 		alert(error.message);
 	    }
 	    throw error;

@@ -1,7 +1,7 @@
 {{ JS_COPYRIGHT_NOTICE }}
 
-import logger from '{{ SITE_PATH }}/js/logger.js';
-import FieldTask from '{{ SITE_PATH }}/js/fields/FieldTask.js';
+import logger from '{{ SITE_PATH }}/js/logger.js?v={{VERSION}}';
+import FieldTask from '{{ SITE_PATH }}/js/fields/FieldTask.js?v={{VERSION}}';
 
 class TextInputTask extends FieldTask {
     

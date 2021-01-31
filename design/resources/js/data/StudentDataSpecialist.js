@@ -1,10 +1,10 @@
 {{ JS_COPYRIGHT_NOTICE }}
 
-import logger from '{{SITE_PATH}}/js/logger.js';
-import DataWarning from '{{SITE_PATH}}/js/errors/DataWarning.js';
-import DataError from '{{SITE_PATH}}/js/errors/DataError.js';
-import DataSpecialist from '{{SITE_PATH}}/js/data/DataSpecialist.js';
-import DataSets from '{{SITE_PATH}}/js/data/DataSets.js';
+import logger from '{{SITE_PATH}}/js/logger.js?v={{VERSION}}';
+import DataWarning from '{{SITE_PATH}}/js/errors/DataWarning.js?v={{VERSION}}';
+import DataError from '{{SITE_PATH}}/js/errors/DataError.js?v={{VERSION}}';
+import DataSpecialist from '{{SITE_PATH}}/js/data/DataSpecialist.js?v={{VERSION}}';
+import DataSets from '{{SITE_PATH}}/js/data/DataSets.js?v={{VERSION}}';
 
 class StudentDataSpecialist extends DataSpecialist {
 
