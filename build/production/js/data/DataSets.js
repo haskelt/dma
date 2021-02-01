@@ -1,8 +1,8 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/dma/js/logger/logger.js?v=0.2.0-beta';
-import DataWarning from '/dma/js/errors/DataWarning.js?v=0.2.0-beta';
-import xlsx from '/dma/js/xlsx/xlsx.js?v=0.2.0-beta';
+import logger from '/dma/js/logger/logger.js?v=0.3.0-beta';
+import DataWarning from '/dma/js/errors/DataWarning.js?v=0.3.0-beta';
+import xlsx from '/dma/js/xlsx/xlsx.js?v=0.3.0-beta';
 
 class DataSets {
 

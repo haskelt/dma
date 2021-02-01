@@ -1,8 +1,8 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/js/logger/logger.js?v=0.2.0-beta';
-import StudentDataSpecialist from '/js/data/StudentDataSpecialist.js?v=0.2.0-beta';
-import xlsx from '/js/xlsx/xlsx.js?v=0.2.0-beta';
+import logger from '/js/logger/logger.js?v=0.3.0-beta';
+import StudentDataSpecialist from '/js/data/StudentDataSpecialist.js?v=0.3.0-beta';
+import xlsx from '/js/xlsx/xlsx.js?v=0.3.0-beta';
 
 class CWSpecialist extends StudentDataSpecialist {
 
