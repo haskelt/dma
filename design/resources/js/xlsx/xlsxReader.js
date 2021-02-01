@@ -1,7 +1,7 @@
 {{ JS_COPYRIGHT_NOTICE }}
 
 import sheetjs from '{{SITE_PATH}}/js/sheetjs/xlsx.full.min.js?v={{VERSION}}';
-import logger from '{{ SITE_PATH }}/js/logger.js?v={{VERSION}}';
+import logger from '{{ SITE_PATH }}/js/logger/logger.js?v={{VERSION}}';
 
 class xlsxReader {
 
@@ -17,10 +17,10 @@ class xlsxReader {
                 reader.onload = this.finishRead.bind(this);                     
                 reader.readAsBinaryString(fileObject);
             } else {
-		alert('This app does not work on Internet Explorer');
+		logger.postMessage('ERROR', 'xlsx', 'This app does not work on Internet Explorer');
             }
         } else {
-            alert('This app does not work on browsers without HTML5 support.');
+            logger.postMessage('ERROR', 'xlsx', 'This app does not work on browsers without HTML5 support.');
         }
 	
     } // read

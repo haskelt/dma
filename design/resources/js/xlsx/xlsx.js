@@ -1,7 +1,7 @@
 {{ JS_COPYRIGHT_NOTICE }}
 
 import sheetjs from '{{SITE_PATH}}/js/sheetjs/xlsx.full.min.js?v={{VERSION}}';
-import logger from '{{ SITE_PATH }}/js/logger.js?v={{VERSION}}';
+import logger from '{{ SITE_PATH }}/js/logger/logger.js?v={{VERSION}}';
 import xlsxReader from '{{ SITE_PATH }}/js/xlsx/xlsxReader.js?v={{VERSION}}';
 
 class XLSX {

@@ -1,6 +1,6 @@
 {{ JS_COPYRIGHT_NOTICE }}
 
-import logger from '{{SITE_PATH}}/js/logger.js?v={{VERSION}}';
+import logger from '{{SITE_PATH}}/js/logger/logger.js?v={{VERSION}}';
 import DataSets from '{{SITE_PATH}}/js/data/DataSets.js?v={{VERSION}}';
 
 class CourseInfoSpecialist {

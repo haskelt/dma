@@ -1,6 +1,6 @@
 {{ JS_COPYRIGHT_NOTICE }}
 
-import logger from '{{ SITE_PATH }}/js/logger.js?v={{VERSION}}';
+import logger from '{{ SITE_PATH }}/js/logger/logger.js?v={{VERSION}}';
 import FieldTask from '{{ SITE_PATH }}/js/fields/FieldTask.js?v={{VERSION}}';
 
 class MultipleChoiceTask extends FieldTask {

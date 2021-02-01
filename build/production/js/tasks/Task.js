@@ -1,6 +1,6 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/dma/js/logger.js?v=0.1.2-beta';
+import logger from '/dma/js/logger/logger.js?v=0.2.0-beta';
 
 class Task {
 
@@ -75,7 +75,7 @@ class Task {
 	    this.choice = null;
 	    this.parent.setChildStatus(this, 'incomplete');
 	    error.message = 'Error while recording data from field "' + this.id + '": ' + error.message;
-	    alert(error.message);
+	    logger.postMessage('ERROR', 'tasks', error.message);
 	    throw error;
 	}
 	

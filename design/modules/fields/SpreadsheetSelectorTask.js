@@ -1,6 +1,6 @@
 {{ JS_COPYRIGHT_NOTICE }}
 
-import logger from '{{SITE_PATH}}/js/logger.js?v={{VERSION}}';
+import logger from '{{SITE_PATH}}/js/logger/logger.js?v={{VERSION}}';
 import FieldTask from '{{SITE_PATH}}/js/fields/FieldTask.js?v={{VERSION}}';
 import xlsx from '{{SITE_PATH}}/js/xlsx/xlsx.js?v={{VERSION}}';
 
@@ -27,7 +27,7 @@ class SpreadsheetSelectorTask extends FieldTask {
 	    if(excelRegex.test(this.input.files[0].name.toLowerCase())) {
 		xlsx.read(this.input.files[0], this.fileReadCallback.bind(this));
 	    } else {
-		alert('Please choose an Excel or CSV file');
+		logger.postMessage('ERROR', 'fields', 'Please choose an Excel or CSV file', 'error');
 		this.input.value = null;
 	    }
 	} else {
@@ -41,7 +41,7 @@ class SpreadsheetSelectorTask extends FieldTask {
     fileReadCallback (data) {
 
 	if(data == null){
-	    alert('Error while parsing the selected file; please verify that it is in the correct format.');
+	    logger.postMessage('ERROR', 'fields', 'Error while parsing the selected file; please verify that it is in the correct format.');
 	    this.input.value = null;
 	} else {
 	    this.data = data;

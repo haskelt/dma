@@ -1,6 +1,6 @@
 {{ JS_COPYRIGHT_NOTICE }}
 
-import logger from '{{SITE_PATH}}/js/logger.js?v={{VERSION}}';
+import logger from '{{SITE_PATH}}/js/logger/logger.js?v={{VERSION}}';
 import MetadataSpecialist from '{{SITE_PATH}}/js/data/MetadataSpecialist.js?v={{VERSION}}';
 import RosterSpecialist from '{{SITE_PATH}}/js/data/RosterSpecialist.js?v={{VERSION}}';
 import CanvasSpecialist from '{{SITE_PATH}}/js/data/CanvasSpecialist.js?v={{VERSION}}';

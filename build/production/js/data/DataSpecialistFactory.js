@@ -1,11 +1,11 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/dma/js/logger.js?v=0.1.2-beta';
-import MetadataSpecialist from '/dma/js/data/MetadataSpecialist.js?v=0.1.2-beta';
-import RosterSpecialist from '/dma/js/data/RosterSpecialist.js?v=0.1.2-beta';
-import CanvasSpecialist from '/dma/js/data/CanvasSpecialist.js?v=0.1.2-beta';
-import CWSpecialist from '/dma/js/data/CWSpecialist.js?v=0.1.2-beta';
-import ExamSpecialist from '/dma/js/data/ExamSpecialist.js?v=0.1.2-beta';
+import logger from '/dma/js/logger/logger.js?v=0.2.0-beta';
+import MetadataSpecialist from '/dma/js/data/MetadataSpecialist.js?v=0.2.0-beta';
+import RosterSpecialist from '/dma/js/data/RosterSpecialist.js?v=0.2.0-beta';
+import CanvasSpecialist from '/dma/js/data/CanvasSpecialist.js?v=0.2.0-beta';
+import CWSpecialist from '/dma/js/data/CWSpecialist.js?v=0.2.0-beta';
+import ExamSpecialist from '/dma/js/data/ExamSpecialist.js?v=0.2.0-beta';
 
 class DataSpecialistFactory {
 

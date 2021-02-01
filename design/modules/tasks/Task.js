@@ -1,6 +1,6 @@
 {{ JS_COPYRIGHT_NOTICE }}
 
-import logger from '{{SITE_PATH}}/js/logger.js?v={{VERSION}}';
+import logger from '{{SITE_PATH}}/js/logger/logger.js?v={{VERSION}}';
 
 class Task {
 
@@ -75,7 +75,7 @@ class Task {
 	    this.choice = null;
 	    this.parent.setChildStatus(this, 'incomplete');
 	    error.message = 'Error while recording data from field "' + this.id + '": ' + error.message;
-	    alert(error.message);
+	    logger.postMessage('ERROR', 'tasks', error.message);
 	    throw error;
 	}
 	

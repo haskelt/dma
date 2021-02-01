@@ -1,8 +1,8 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/js/logger.js?v=0.1.2-beta';
-import FieldTask from '/js/fields/FieldTask.js?v=0.1.2-beta';
-import xlsx from '/js/xlsx/xlsx.js?v=0.1.2-beta';
+import logger from '/js/logger/logger.js?v=0.2.0-beta';
+import FieldTask from '/js/fields/FieldTask.js?v=0.2.0-beta';
+import xlsx from '/js/xlsx/xlsx.js?v=0.2.0-beta';
 
 class SpreadsheetSelectorTask extends FieldTask {
     
@@ -27,7 +27,7 @@ class SpreadsheetSelectorTask extends FieldTask {
 	    if(excelRegex.test(this.input.files[0].name.toLowerCase())) {
 		xlsx.read(this.input.files[0], this.fileReadCallback.bind(this));
 	    } else {
-		alert('Please choose an Excel or CSV file');
+		logger.postMessage('ERROR', 'fields', 'Please choose an Excel or CSV file', 'error');
 		this.input.value = null;
 	    }
 	} else {
@@ -41,7 +41,7 @@ class SpreadsheetSelectorTask extends FieldTask {
     fileReadCallback (data) {
 
 	if(data == null){
-	    alert('Error while parsing the selected file; please verify that it is in the correct format.');
+	    logger.postMessage('ERROR', 'fields', 'Error while parsing the selected file; please verify that it is in the correct format.');
 	    this.input.value = null;
 	} else {
 	    this.data = data;

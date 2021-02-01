@@ -4,16 +4,19 @@
   <head>
     <meta charset=utf-8>
     <title>DMA</title>
-    <link rel="stylesheet" href="/css/fields/fields.css" type="text/css" />
-    <link rel="stylesheet" href="/css/tasks/tasks.css" type="text/css" />
+    <link rel="stylesheet" href="/css/app.css?v=0.2.0-beta" type="text/css" />
+    <link rel="stylesheet" href="/css/status/status.css?v=0.2.0-beta" type="text/css" />
+    <link rel="stylesheet" href="/css/fields/fields.css?v=0.2.0-beta" type="text/css" />
+    <link rel="stylesheet" href="/css/tasks/tasks.css?v=0.2.0-beta" type="text/css" />
   </head>
   
   <body>
+    <header>
+      <h1>EMARCS Data Management App</h1>
+    </header>
     <main>
-      <h1>
-  EMARCS Data Management App
-</h1>
-<div id="tasksequence" class="tasks__task-sequence">
+      <section id="content">
+  <div id="tasksequence" class="tasks__task-sequence">
 <div class="tasks__task-wrapper">
   <div class="tasks__task-wrapper--header">
     Step 1 - Course Information
@@ -164,14 +167,29 @@
 
 </div>
 
+</section>
+<aside id="sidebar">
+  <div id="status-wrapper">
+  <h2>Processing Status</h2>
+  <div id="status-messages">
+
+  </div>
+</div>
+
+</aside>
+
     </main>
 
     
+    <script src="/js/app.js?v=0.2.0-beta" type="module"></script>
     <script type="module">
-      import "/js/fields/fields.js?v=0.1.2-beta"
+      import "/js/status/status.js?v=0.2.0-beta"
     </script>
     <script type="module">
-      import "/js/tasks/tasks.js?v=0.1.2-beta"
+      import "/js/fields/fields.js?v=0.2.0-beta"
+    </script>
+    <script type="module">
+      import "/js/tasks/tasks.js?v=0.2.0-beta"
     </script>
 
   </body>

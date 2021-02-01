@@ -1,6 +1,6 @@
 {{ JS_COPYRIGHT_NOTICE }}
 
-import logger from '{{SITE_PATH}}/js/logger.js?v={{VERSION}}';
+import logger from '{{SITE_PATH}}/js/logger/logger.js?v={{VERSION}}';
 import DataWarning from '{{SITE_PATH}}/js/errors/DataWarning.js?v={{VERSION}}';
 import DataError from '{{SITE_PATH}}/js/errors/DataError.js?v={{VERSION}}';
 import DataSpecialist from '{{SITE_PATH}}/js/data/DataSpecialist.js?v={{VERSION}}';
@@ -74,7 +74,7 @@ class StudentDataSpecialist extends DataSpecialist {
 		}
 		catch (error) {
 		    if (error instanceof DataWarning) {
-			alert('Unable to find student with ' + this.identifiers[sheet][0] + ' "' + row[this.identifiers[sheet][0]] + '" in the roster, skipping');
+			error.message = 'Unable to find student with ' + this.identifiers[sheet][0] + ' "' + row[this.identifiers[sheet][0]] + '" in the roster, skipping';
 			logger.postMessage('ERROR', 'data', error.message);
 		    } else {
 			throw error;

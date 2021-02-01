@@ -5,10 +5,11 @@
     <meta charset=utf-8>
     <title>DMA</title>
     {% block css %}
+    <link rel="stylesheet" href="{{SITE_PATH}}/css/app.css?v={{VERSION}}" type="text/css" />
     {% if this.styles %}
     {% set style_data = this.styles.split() %}
     {% for style in style_data %}
-    <link rel="stylesheet" href="{{ SITE_PATH }}{{style}}" type="text/css" />
+    <link rel="stylesheet" href="{{ SITE_PATH }}{{style}}?v={{VERSION}}" type="text/css" />
     {% endfor %}
     {% endif %}
     {% endblock %}
@@ -16,6 +17,9 @@
   
   <body>
     {% block body %}
+    <header>
+      <h1>EMARCS Data Management App</h1>
+    </header>
     <main>
       {% block content %}
       {{ this.content }}
@@ -24,6 +28,7 @@
 
     
     {% block javascript %}
+    <script src="{{SITE_PATH}}/js/app.js?v={{VERSION}}" type="module"></script>
     {% if this.scripts %}
     {% set script_data = this.scripts.split() %}
     {% for script in script_data %}

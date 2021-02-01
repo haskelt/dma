@@ -1,9 +1,9 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/dma/js/logger.js?v=0.1.2-beta';
-import DataError from '/dma/js/errors/DataError.js?v=0.1.2-beta';
-import CryptoJS from '/dma/js/cryptojs/sha256.js?v=0.1.2-beta';
-import DataSpecialist from '/dma/js/data/DataSpecialist.js?v=0.1.2-beta';
+import logger from '/dma/js/logger/logger.js?v=0.2.0-beta';
+import DataError from '/dma/js/errors/DataError.js?v=0.2.0-beta';
+import CryptoJS from '/dma/js/cryptojs/sha256.js?v=0.2.0-beta';
+import DataSpecialist from '/dma/js/data/DataSpecialist.js?v=0.2.0-beta';
 
 class RosterSpecialist extends DataSpecialist {
 
