@@ -17,7 +17,8 @@ class CWSpecialist extends StudentDataSpecialist {
 	    this.convertWorkbookToJSON,
 	    this.doIdentifierCheck,
 	    this.doRequiredFieldsCheck,
-	    this.anonymizeData 
+	    this.anonymizeData,
+	    this.setData
 	];
 
     } // constructor

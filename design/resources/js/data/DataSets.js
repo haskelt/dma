@@ -1,6 +1,7 @@
 {{ JS_COPYRIGHT_NOTICE }}
 
 import logger from '{{SITE_PATH}}/js/logger/logger.js?v={{VERSION}}';
+import DataError from '{{SITE_PATH}}/js/errors/DataError.js?v={{VERSION}}';
 import DataWarning from '{{SITE_PATH}}/js/errors/DataWarning.js?v={{VERSION}}';
 import xlsx from '{{SITE_PATH}}/js/xlsx/xlsx.js?v={{VERSION}}';
 
@@ -126,7 +127,37 @@ class DataSets {
     } // findData
     
     /**************************************************************************/
-    
+
+    static partitionDataSet (sourceTag, targetTag, fields) {
+	/* Take the fields <fields> from the data set <sourceTag>, and
+	   move them to a new data set called <targetTag> */
+
+	// check to make sure all fields are present in the source data set
+	console.log(this.dataSets[sourceTag][0]);
+	for(let field of fields){
+	    if(!(field in this.dataSets[sourceTag][0])){
+		throw new DataError('Error during data set partition: Field "' + field + '" is not in the source data set');
+	    }
+	}
+
+	// move the fields
+	var targetDataSet = [];
+	for(let row of this.dataSets[sourceTag]){
+	    console.log(row);
+	    let newRow = {'anonID': row['anonID']};
+	    for(let field of fields){
+		newRow[field] = row[field];
+		delete row[field];
+	    }
+	    targetDataSet.push(newRow);
+	}
+
+	this.dataSets[targetTag] = targetDataSet;
+	
+    } // partitionDataSet
+
+    /**************************************************************************/
+
     static exportData (file) {
 
 	logger.postMessage('DEBUG', 'data', 'Exporting student data');

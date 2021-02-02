@@ -18,7 +18,8 @@ class StudentDataSpecialist extends DataSpecialist {
 	    this.convertWorkbookToJSON,
 	    this.doIdentifierCheck,
 	    this.doRequiredFieldsCheck,
-	    this.anonymizeData 
+	    this.anonymizeData,
+	    this.setData
 	];
 	
     } // constructor

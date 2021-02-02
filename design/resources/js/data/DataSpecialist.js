@@ -29,8 +29,6 @@ class DataSpecialist {
 	for(let step of this.processingSteps){
 	    step.bind(this)();
 	}
-
-	this.setData();
 	
     } // processData
     
@@ -41,7 +39,7 @@ class DataSpecialist {
 	
 	var JSONData = {};
 	for(let sheet in this.curData.Sheets){
-	    JSONData[sheet] = xlsx.sheetToJSON(this.curData.Sheets[sheet], {range: this.headerRow});
+	    JSONData[sheet] = xlsx.sheetToJSON(this.curData.Sheets[sheet], {range: this.headerRow, defval: ''});
 	}
 	this.curData = JSONData;
 	

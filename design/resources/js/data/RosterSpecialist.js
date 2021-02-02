@@ -4,6 +4,7 @@ import logger from '{{SITE_PATH}}/js/logger/logger.js?v={{VERSION}}';
 import DataError from '{{SITE_PATH}}/js/errors/DataError.js?v={{VERSION}}';
 import CryptoJS from '{{SITE_PATH}}/js/cryptojs/sha256.js?v={{VERSION}}';
 import DataSpecialist from '{{SITE_PATH}}/js/data/DataSpecialist.js?v={{VERSION}}';
+import DataSets from '{{SITE_PATH}}/js/data/DataSets.js?v={{VERSION}}';
 
 class RosterSpecialist extends DataSpecialist {
 
@@ -19,7 +20,9 @@ class RosterSpecialist extends DataSpecialist {
 	    this.doUniqueIdentifiersCheck,
 	    this.computePrettyNames,
 	    this.computePrettySIDs,
-	    this.computeIdentifiers
+	    this.computeIdentifiers,
+	    this.setData,
+	    this.partitionRoster
 	];
 
     } // constructor
@@ -85,6 +88,14 @@ class RosterSpecialist extends DataSpecialist {
 	}
 
     } // computeIdentifiers
+
+    /**************************************************************************/
+
+    partitionRoster () {
+	
+	DataSets.partitionDataSet('_roster', 'course_grade', ['GRADE']);
+
+    } // partitionRoster
 
     /**************************************************************************/
 

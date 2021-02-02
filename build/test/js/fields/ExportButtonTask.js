@@ -1,8 +1,8 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/js/logger/logger.js?v=0.4.0-beta';
-import Task from '/js/tasks/Task.js?v=0.4.0-beta';
-import DataManager from '/js/data/DataManager.js?v=0.4.0-beta';
+import logger from '/js/logger/logger.js?v=0.5.0-beta';
+import Task from '/js/tasks/Task.js?v=0.5.0-beta';
+import DataManager from '/js/data/DataManager.js?v=0.5.0-beta';
 
 class ExportButtonTask extends Task {
     
@@ -30,6 +30,7 @@ class ExportButtonTask extends Task {
 	    logger.postMessage('INFO', 'fields', 'Completed final processing of the data');
 	}
 	catch (error) {
+	    logger.postMessage('ERROR', 'fields', error.message);
 	    logger.postMessage('TRACE', 'fields', 'Disabling export button');
 	    this.button.disabled = true;
 	    throw error;

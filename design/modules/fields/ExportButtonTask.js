@@ -30,6 +30,7 @@ class ExportButtonTask extends Task {
 	    logger.postMessage('INFO', 'fields', 'Completed final processing of the data');
 	}
 	catch (error) {
+	    logger.postMessage('ERROR', 'fields', error.message);
 	    logger.postMessage('TRACE', 'fields', 'Disabling export button');
 	    this.button.disabled = true;
 	    throw error;

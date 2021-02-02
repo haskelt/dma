@@ -49,7 +49,7 @@ class DataManager {
     /**************************************************************************/
 
     static finalizeData () {
-
+	
 	var metadata = DataSets.getDataSet('@meta');
 	var ids = DataSets.getDataField('_roster', 'anonID');
 	var courseInfo = [];

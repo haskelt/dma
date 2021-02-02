@@ -1,8 +1,8 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/dma/js/logger/logger.js?v=0.4.0-beta';
-import StudentDataSpecialist from '/dma/js/data/StudentDataSpecialist.js?v=0.4.0-beta';
-import xlsx from '/dma/js/xlsx/xlsx.js?v=0.4.0-beta';
+import logger from '/dma/js/logger/logger.js?v=0.5.0-beta';
+import StudentDataSpecialist from '/dma/js/data/StudentDataSpecialist.js?v=0.5.0-beta';
+import xlsx from '/dma/js/xlsx/xlsx.js?v=0.5.0-beta';
 
 class CWSpecialist extends StudentDataSpecialist {
 
@@ -17,7 +17,8 @@ class CWSpecialist extends StudentDataSpecialist {
 	    this.convertWorkbookToJSON,
 	    this.doIdentifierCheck,
 	    this.doRequiredFieldsCheck,
-	    this.anonymizeData 
+	    this.anonymizeData,
+	    this.setData
 	];
 
     } // constructor

@@ -22,7 +22,8 @@ class CanvasSpecialist extends StudentDataSpecialist {
 	    this.doSingleWorksheetCheck,
 	    this.doIdentifierCheck,
 	    this.doRequiredFieldsCheck,
-	    this.anonymizeData 
+	    this.anonymizeData,
+	    this.setData
 	];
 
     } // constructor
