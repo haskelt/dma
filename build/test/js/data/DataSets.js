@@ -1,9 +1,9 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/js/logger/logger.js?v=0.5.0-beta';
-import DataError from '/js/errors/DataError.js?v=0.5.0-beta';
-import DataWarning from '/js/errors/DataWarning.js?v=0.5.0-beta';
-import xlsx from '/js/xlsx/xlsx.js?v=0.5.0-beta';
+import logger from '/js/logger/logger.js?v=0.6.0-beta';
+import DataError from '/js/errors/DataError.js?v=0.6.0-beta';
+import DataWarning from '/js/errors/DataWarning.js?v=0.6.0-beta';
+import xlsx from '/js/xlsx/xlsx.js?v=0.6.0-beta';
 
 class DataSets {
 
@@ -28,6 +28,14 @@ class DataSets {
 	}
 
     } // getDataSet
+
+    /**************************************************************************/
+
+    static getDataTags () {
+
+	return Object.keys(this.dataSets);
+	
+    } // getDataTags
     
     /**************************************************************************/
 
@@ -43,68 +51,58 @@ class DataSets {
 
     /**************************************************************************/
 
-    static generateMissingRecords (referenceTag) {
-	/* Goes through all the datasets and ensures that they contain
-	   a record for each student in the <referenceTag> dataset,
-	   creating that record if necessary */
-	
-	logger.postMessage('DEBUG', 'data', 'Coordinating data: Ensuring all datasets contain records for each student in dataset "' + referenceTag + '"');
-	for(let referenceRecord of this.dataSets[referenceTag]){
-	    for(let targetTag in this.dataSets){
-		/* a tag beginning with '@' indicates data for
-		   internal use that may or may not have an 'anonID'
-		   field, so we don't generate missing records in that
-		   case */
-		if(targetTag != referenceTag && !targetTag.startsWith('@')){
-		    if(!this.dataSets[targetTag].find(entry => entry['anonID'] == referenceRecord['anonID'])){
-			logger.postMessage('WARN', 'data', 'Data set "' + targetTag + '" is missing student with anonID "' + referenceRecord['anonID'] + '", creating empty record.');
-			this.dataSets[targetTag].push({ anonID: referenceRecord['anonID'] });	
-		    }
+    static generateMissingRecords (targetDataSet, referenceDataSet, matchField, missingList) {
+	/* Goes through dataset <targetDataSet> and ensures that it
+	   contains a record for each student in the
+	   <referenceDataSet> dataset based on the contents of the
+	   field <matchField>. A new record is created for
+	   <targetDataSet> if necessary. Returns the new dataset
+	   (original is unmodified), and populates the array
+	   <missingList> with the value of <matchField> for each
+	   student where a new record is created. */
+		
+	var newDataSet = [];
+	for(let referenceRecord of referenceDataSet){
+	    let matchingRecord = targetDataSet.find(entry => entry[matchField] == referenceRecord[matchField]);
+	    if(!matchingRecord){
+		if(missingList){
+		    missingList.push(referenceRecord[matchField]);
 		}
+		matchingRecord = {};
+		matchingRecord[matchField] = referenceRecord[matchField];
 	    }
+	    newDataSet.push(matchingRecord);
 	}
+	return newDataSet;
 	
     } // generateMissingRecords 
 
     /**************************************************************************/
 
-    static sortBy (field) {
+    static sortBy (dataSet, field) {
 
-	logger.postMessage('DEBUG', 'data', 'Sorting datasets by field "' + field + '"');
-	for(let tag in this.dataSets){
-	    /* a tag beginning with '@' indicates data for
-	       internal use that may or may not have an 'anonID'
-	       field, so we don't sort in that case */
-	    if(!tag.startsWith('@')){
-		this.dataSets[tag].sort((a, b) => a['anonID'] > b['anonID'] ? 1 : (a['anonID'] < b['anonID'] ? -1 : 0));
-	    }
-	}
+	var newDataSet = Array.from(dataSet)
+	newDataSet.sort((a, b) => a[field] > b[field] ? 1 : (a[field] < b[field] ? -1 : 0));
+	return newDataSet;
 	
     } // sortBy
     
     /**************************************************************************/
     
-    static applyFilter (tag, field, value) {
-	/* Remove students from the data if the data point indicated by
-	   <tag> and <field> is NOT <value> */
+    static applyFilter (targetDataSet, referenceDataSet, matchField, filterField, value) {
+	/* Remove students from <targetDataSet> for whom the value of
+	   <field> in <referenceDataSet> is not <value>. Returns a new
+	   dataset (original is unmodified). */
 
-	logger.postMessage('DEBUG', 'data', 'Filtering: Keeping students where ' + tag + '::' + field + ' has value ' + value);
 	// generate a list of students whose data we are keeping
-	var keepList = [];
-	for(let row of this.dataSets[tag]){
-	    if(row[field] == value){
-		keepList.push(row['anonID']);
+	var keepList = referenceDataSet.filter(entry => entry[filterField] == value).map(entry => entry[matchField]);
+/*	var keepList = [];
+	for(let row of referenceDataSet){
+	    if(row[filterField] == value){
+		keepList.push(row[matchField]);
 	    }
-	}
-	/* go through all the datasets and gather data rows for only
-	   students who are in the list */
-	for(let tag in this.dataSets){
-	    /* a tag beginning with '@' indicates data for internal use that
-	       may or may not have an 'anonID' field, so we don't filter it */
-	    if(!tag.startsWith('@')){
-		this.dataSets[tag] = this.dataSets[tag].filter(entry => keepList.includes(entry['anonID']));
-	    }
-	}
+	}*/
+	return targetDataSet.filter(entry => keepList.includes(entry[matchField]));
 	
     } // applyFilter
 
@@ -133,7 +131,6 @@ class DataSets {
 	   move them to a new data set called <targetTag> */
 
 	// check to make sure all fields are present in the source data set
-	console.log(this.dataSets[sourceTag][0]);
 	for(let field of fields){
 	    if(!(field in this.dataSets[sourceTag][0])){
 		throw new DataError('Error during data set partition: Field "' + field + '" is not in the source data set');
@@ -143,7 +140,6 @@ class DataSets {
 	// move the fields
 	var targetDataSet = [];
 	for(let row of this.dataSets[sourceTag]){
-	    console.log(row);
 	    let newRow = {'anonID': row['anonID']};
 	    for(let field of fields){
 		newRow[field] = row[field];
@@ -158,18 +154,10 @@ class DataSets {
 
     /**************************************************************************/
 
-    static exportData (file) {
+    static exportData (dataSets, file) {
 
 	logger.postMessage('DEBUG', 'data', 'Exporting student data');
-	var exportableDataSets = {};
-	for(let tag in this.dataSets){
-	    /* a tag beginning with '_' or '@' indicates data that should not
-	       be exported */
-	    if(!tag.startsWith('_') && !tag.startsWith('@')){
-		exportableDataSets[tag] = this.dataSets[tag];
-	    }
-	}
-	xlsx.write(exportableDataSets, file);
+	xlsx.write(dataSets, file);
 	
     } // exportData
     

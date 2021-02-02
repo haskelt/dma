@@ -1,4 +1,5 @@
-<div id="{{this.id}}" class="fields__spreadsheet-selector tasks__task" data-label="{{this.label}}" data-task-type="spreadsheet-selector">
+<div id="{{this.id}}" class="fields__spreadsheet-selector tasks__task" data-label="{{this.label}}" data-task-type="spreadsheet-selector" data-optional="{{this.optional}}">
   <span class="fields__spreadsheet-selector--label">{{this.label}}</span>
-  <input type="file" class="fields__spreadsheet-selector--input"/>
+  {% if this.optional == 'true' %}<input type="checkbox" class="fields__spreadsheet-selector--checkbox"/><span class="fields__spreadsheet-selector--checkbox-label">Skip</span>{% endif %}
+  <input type="file" class="fields__spreadsheet-selector--selector"/>
 </div>

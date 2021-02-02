@@ -4,10 +4,10 @@
   <head>
     <meta charset=utf-8>
     <title>DMA</title>
-    <link rel="stylesheet" href="/dma/css/app.css?v=0.5.0-beta" type="text/css" />
-    <link rel="stylesheet" href="/dma/css/status/status.css?v=0.5.0-beta" type="text/css" />
-    <link rel="stylesheet" href="/dma/css/fields/fields.css?v=0.5.0-beta" type="text/css" />
-    <link rel="stylesheet" href="/dma/css/tasks/tasks.css?v=0.5.0-beta" type="text/css" />
+    <link rel="stylesheet" href="/dma/css/app.css?v=0.6.0-beta" type="text/css" />
+    <link rel="stylesheet" href="/dma/css/status/status.css?v=0.6.0-beta" type="text/css" />
+    <link rel="stylesheet" href="/dma/css/fields/fields.css?v=0.6.0-beta" type="text/css" />
+    <link rel="stylesheet" href="/dma/css/tasks/tasks.css?v=0.6.0-beta" type="text/css" />
   </head>
   
   <body>
@@ -95,13 +95,13 @@
   </div>
   <div class="tasks__task-wrapper--container collapsed">
     <div id="taskset2" class="tasks__task-set">
-  <div id="_roster" class="fields__spreadsheet-selector tasks__task" data-label="Master Student Roster" data-task-type="spreadsheet-selector">
+  <div id="_roster" class="fields__spreadsheet-selector tasks__task" data-label="Master Student Roster" data-task-type="spreadsheet-selector" data-optional="">
   <span class="fields__spreadsheet-selector--label">Master Student Roster</span>
-  <input type="file" class="fields__spreadsheet-selector--input"/>
+  <input type="file" class="fields__spreadsheet-selector--selector"/>
 </div>
-<div id="demographics" class="fields__spreadsheet-selector tasks__task" data-label="Consent and Demographics" data-task-type="spreadsheet-selector">
+<div id="demographics" class="fields__spreadsheet-selector tasks__task" data-label="Consent and Demographics" data-task-type="spreadsheet-selector" data-optional="">
   <span class="fields__spreadsheet-selector--label">Consent and Demographics</span>
-  <input type="file" class="fields__spreadsheet-selector--input"/>
+  <input type="file" class="fields__spreadsheet-selector--selector"/>
 </div>
 
 </div>
@@ -119,21 +119,21 @@
   </div>
   <div class="tasks__task-wrapper--container collapsed">
     <div id="taskset3" class="tasks__task-set">
-  <div id="mct_pre" class="fields__spreadsheet-selector tasks__task" data-label="MCT Pretest" data-task-type="spreadsheet-selector">
+  <div id="mct_pre" class="fields__spreadsheet-selector tasks__task" data-label="MCT Pretest" data-task-type="spreadsheet-selector" data-optional="true">
   <span class="fields__spreadsheet-selector--label">MCT Pretest</span>
-  <input type="file" class="fields__spreadsheet-selector--input"/>
+<input type="checkbox" class="fields__spreadsheet-selector--checkbox"/><span class="fields__spreadsheet-selector--checkbox-label">Skip</span>  <input type="file" class="fields__spreadsheet-selector--selector"/>
 </div>
-<div id="mct_post" class="fields__spreadsheet-selector tasks__task" data-label="MCT Posttest" data-task-type="spreadsheet-selector">
+<div id="mct_post" class="fields__spreadsheet-selector tasks__task" data-label="MCT Posttest" data-task-type="spreadsheet-selector" data-optional="true">
   <span class="fields__spreadsheet-selector--label">MCT Posttest</span>
-  <input type="file" class="fields__spreadsheet-selector--input"/>
+<input type="checkbox" class="fields__spreadsheet-selector--checkbox"/><span class="fields__spreadsheet-selector--checkbox-label">Skip</span>  <input type="file" class="fields__spreadsheet-selector--selector"/>
 </div>
-<div id="cw" class="fields__spreadsheet-selector tasks__task" data-label="Concept Warehouse Data" data-task-type="spreadsheet-selector">
+<div id="cw" class="fields__spreadsheet-selector tasks__task" data-label="Concept Warehouse Data" data-task-type="spreadsheet-selector" data-optional="true">
   <span class="fields__spreadsheet-selector--label">Concept Warehouse Data</span>
-  <input type="file" class="fields__spreadsheet-selector--input"/>
+<input type="checkbox" class="fields__spreadsheet-selector--checkbox"/><span class="fields__spreadsheet-selector--checkbox-label">Skip</span>  <input type="file" class="fields__spreadsheet-selector--selector"/>
 </div>
-<div id="exam" class="fields__spreadsheet-selector tasks__task" data-label="Exam MC plus Explain" data-task-type="spreadsheet-selector">
+<div id="exam" class="fields__spreadsheet-selector tasks__task" data-label="Exam MC plus Explain" data-task-type="spreadsheet-selector" data-optional="true">
   <span class="fields__spreadsheet-selector--label">Exam MC plus Explain</span>
-  <input type="file" class="fields__spreadsheet-selector--input"/>
+<input type="checkbox" class="fields__spreadsheet-selector--checkbox"/><span class="fields__spreadsheet-selector--checkbox-label">Skip</span>  <input type="file" class="fields__spreadsheet-selector--selector"/>
 </div>
 
 </div>
@@ -181,15 +181,15 @@
     </main>
 
     
-    <script src="/dma/js/app.js?v=0.5.0-beta" type="module"></script>
+    <script src="/dma/js/app.js?v=0.6.0-beta" type="module"></script>
     <script type="module">
-      import "/dma/js/status/status.js?v=0.5.0-beta"
+      import "/dma/js/status/status.js?v=0.6.0-beta"
     </script>
     <script type="module">
-      import "/dma/js/fields/fields.js?v=0.5.0-beta"
+      import "/dma/js/fields/fields.js?v=0.6.0-beta"
     </script>
     <script type="module">
-      import "/dma/js/tasks/tasks.js?v=0.5.0-beta"
+      import "/dma/js/tasks/tasks.js?v=0.6.0-beta"
     </script>
 
   </body>

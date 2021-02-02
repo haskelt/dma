@@ -31,7 +31,9 @@ class FieldTask extends Task {
     wrapUp () {
 
 	try {
-	    DataManager.postData(this.id, this.data);
+	    if(this.data){
+		DataManager.postData(this.id, this.data);
+	    }
 	}
 	catch (error) {
 	    if (error instanceof DataError) {

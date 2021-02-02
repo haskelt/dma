@@ -11,7 +11,10 @@ class MetadataSpecialist extends DataSpecialist {
     constructor () {
 
 	super();
-	this.processingSteps = [ this.mergeMetadata ];
+	this.processingSteps = [
+	    this.mergeMetadata,
+	    this.setData
+	];
 	
     } // constructor
     

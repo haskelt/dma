@@ -38,10 +38,10 @@
       </task-wrapper>
       <task-wrapper label="Step 3 - Data Files">
 	<task-set id="taskset3">
-	  <spreadsheet-selector id="mct_pre" label="MCT Pretest"/>
-	  <spreadsheet-selector id="mct_post" label="MCT Posttest"/>
-	  <spreadsheet-selector id="cw" label="Concept Warehouse Data"/>
-	  <spreadsheet-selector id="exam" label="Exam MC plus Explain"/>
+	  <spreadsheet-selector id="mct_pre" label="MCT Pretest" optional="true"/>
+	  <spreadsheet-selector id="mct_post" label="MCT Posttest" optional="true"/>
+	  <spreadsheet-selector id="cw" label="Concept Warehouse Data" optional="true"/>
+	  <spreadsheet-selector id="exam" label="Exam MC plus Explain" optional="true"/>
 	</task-set>
       </task-wrapper>
       <task-wrapper label="Step 4 - Export">

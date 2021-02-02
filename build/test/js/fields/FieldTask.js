@@ -1,9 +1,9 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/js/logger/logger.js?v=0.5.0-beta';
-import DataError from '/js/errors/DataError.js?v=0.5.0-beta';
-import Task from '/js/tasks/Task.js?v=0.5.0-beta';
-import DataManager from '/js/data/DataManager.js?v=0.5.0-beta';
+import logger from '/js/logger/logger.js?v=0.6.0-beta';
+import DataError from '/js/errors/DataError.js?v=0.6.0-beta';
+import Task from '/js/tasks/Task.js?v=0.6.0-beta';
+import DataManager from '/js/data/DataManager.js?v=0.6.0-beta';
 
 class FieldTask extends Task {
     
@@ -31,7 +31,9 @@ class FieldTask extends Task {
     wrapUp () {
 
 	try {
-	    DataManager.postData(this.id, this.data);
+	    if(this.data){
+		DataManager.postData(this.id, this.data);
+	    }
 	}
 	catch (error) {
 	    if (error instanceof DataError) {

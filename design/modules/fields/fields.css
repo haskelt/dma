@@ -1,5 +1,5 @@
-.fields__validation--message.hidden {
-    display: none;
+.fields__spreadsheet-selector--skip-label {
+    color: hsl(0, 10%, 90%);
 }
 
 .fields__select--hidden-option {

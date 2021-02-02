@@ -1,6 +1,6 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import StudentDataSpecialist from '/dma/js/data/StudentDataSpecialist.js?v=0.5.0-beta';
+import StudentDataSpecialist from '/dma/js/data/StudentDataSpecialist.js?v=0.6.0-beta';
 
 class ExamSpecialist extends StudentDataSpecialist {
 

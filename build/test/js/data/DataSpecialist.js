@@ -1,9 +1,9 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/js/logger/logger.js?v=0.5.0-beta';
-import DataError from '/js/errors/DataError.js?v=0.5.0-beta';
-import DataSets from '/js/data/DataSets.js?v=0.5.0-beta';
-import xlsx from '/js/xlsx/xlsx.js?v=0.5.0-beta';
+import logger from '/js/logger/logger.js?v=0.6.0-beta';
+import DataError from '/js/errors/DataError.js?v=0.6.0-beta';
+import DataSets from '/js/data/DataSets.js?v=0.6.0-beta';
+import xlsx from '/js/xlsx/xlsx.js?v=0.6.0-beta';
 
 class DataSpecialist {
 
