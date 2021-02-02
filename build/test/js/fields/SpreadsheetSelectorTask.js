@@ -1,8 +1,8 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/js/logger/logger.js?v=0.3.0-beta';
-import FieldTask from '/js/fields/FieldTask.js?v=0.3.0-beta';
-import xlsx from '/js/xlsx/xlsx.js?v=0.3.0-beta';
+import logger from '/js/logger/logger.js?v=0.4.0-beta';
+import FieldTask from '/js/fields/FieldTask.js?v=0.4.0-beta';
+import xlsx from '/js/xlsx/xlsx.js?v=0.4.0-beta';
 
 class SpreadsheetSelectorTask extends FieldTask {
     
@@ -45,6 +45,9 @@ class SpreadsheetSelectorTask extends FieldTask {
 	    this.input.value = null;
 	} else {
 	    this.data = data;
+	    let filenameRegex = /[^\\/]+$/;
+	    let filename = this.input.value.match(filenameRegex);
+	    logger.postMessage('INFO', 'fields', 'File "' + filename + '" chosen for "' + this.label + '"');
 	    this.parent.setChildStatus(this, 'complete');
 	}
 	

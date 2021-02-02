@@ -26,11 +26,12 @@ class MultipleChoiceTask extends FieldTask {
 	    if(option.checked){
 		newHasContent = true;
 		this.data = option.value;
+		logger.postMessage('INFO', 'fields', 'Option "' + this.data + '" chosen for "' + this.label + '"');
 	    }
 	}
 	if(newHasContent != this.hasContent){
 	    this.hasContent = newHasContent;
-	    logger.postMessage('DEBUG', 'fields', 'Multiple choice option has been selected for ' + this.id);	
+	    logger.postMessage('DEBUG', 'fields', 'Task ' + this.id + ' is now complete');	
 	    this.parent.setChildStatus(this, this.hasContent ? 'complete' : 'incomplete');
 	}
 

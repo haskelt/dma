@@ -1,8 +1,8 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/dma/js/logger/logger.js?v=0.3.0-beta';
-import DataError from '/dma/js/errors/DataError.js?v=0.3.0-beta';
-import Task from '/dma/js/tasks/Task.js?v=0.3.0-beta';
+import logger from '/dma/js/logger/logger.js?v=0.4.0-beta';
+import DataError from '/dma/js/errors/DataError.js?v=0.4.0-beta';
+import Task from '/dma/js/tasks/Task.js?v=0.4.0-beta';
 
 class TaskSequence extends Task {
 
@@ -14,6 +14,7 @@ class TaskSequence extends Task {
 	this.taskWrappers = [];
 	for (let taskWrapperElement of sequenceElement.querySelectorAll('.tasks__task-wrapper')){
 	    let taskWrapperData = {};
+	    taskWrapperData['label'] = taskWrapperElement.dataset.label;
 	    taskWrapperData['container'] = taskWrapperElement.querySelector('.tasks__task-wrapper--container');
 	    taskWrapperData['previous_button'] = taskWrapperElement.querySelector('.tasks__task-wrapper--button[data-action="previous"]');
 	    taskWrapperData['previous_button'].addEventListener('click', this.goToPrevious.bind(this));
@@ -81,7 +82,7 @@ class TaskSequence extends Task {
     goToPrevious () {
 
 	if(this.curTask > 0){
-	    logger.postMessage('DEBUG', 'tasks', 'Moving backward from task wrapper ' + this.curTask + ' to task wrapper ' + (this.curTask - 1));
+	    logger.postMessage('INFO', 'tasks', 'Going back to "' + this.taskWrappers[this.curTask - 1].label + '"');
 	    this.hide(this.curTask);
 	    this.show(this.curTask - 1);
 	    this.curTask--;
@@ -97,6 +98,7 @@ class TaskSequence extends Task {
 	    logger.postMessage('DEBUG', 'tasks', 'Moving forward from task wrapper ' + this.curTask + ' to task wrapper ' + (this.curTask + 1));
 	    try {
 		this.children[this.curTask]['object'].wrapUp();
+		logger.postMessage('INFO', 'tasks', 'Completed "' + this.taskWrappers[this.curTask].label + '"');
 		this.hide(this.curTask);
 		this.show(this.curTask + 1);
 		this.curTask++;
@@ -104,7 +106,7 @@ class TaskSequence extends Task {
 	    }
 	    catch (error) {
 		if (error instanceof DataError) {
-		    logger.postMessage('ERROR', 'tasks', 'Advancing to next task sequence interrupted by error.');
+		    logger.postMessage('DEBUG', 'tasks', 'Advancing to next task sequence interrupted by error.');
 		} else {
 		    throw error;
 		}

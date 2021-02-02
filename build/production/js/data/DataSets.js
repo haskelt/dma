@@ -1,8 +1,8 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/dma/js/logger/logger.js?v=0.3.0-beta';
-import DataWarning from '/dma/js/errors/DataWarning.js?v=0.3.0-beta';
-import xlsx from '/dma/js/xlsx/xlsx.js?v=0.3.0-beta';
+import logger from '/dma/js/logger/logger.js?v=0.4.0-beta';
+import DataWarning from '/dma/js/errors/DataWarning.js?v=0.4.0-beta';
+import xlsx from '/dma/js/xlsx/xlsx.js?v=0.4.0-beta';
 
 class DataSets {
 
@@ -50,12 +50,13 @@ class DataSets {
 	logger.postMessage('DEBUG', 'data', 'Coordinating data: Ensuring all datasets contain records for each student in dataset "' + referenceTag + '"');
 	for(let referenceRecord of this.dataSets[referenceTag]){
 	    for(let targetTag in this.dataSets){
-		/* a tag beginning with '_' indicates data for
+		/* a tag beginning with '@' indicates data for
 		   internal use that may or may not have an 'anonID'
 		   field, so we don't generate missing records in that
 		   case */
-		if(targetTag != referenceTag && !targetTag.startsWith('_')){
+		if(targetTag != referenceTag && !targetTag.startsWith('@')){
 		    if(!this.dataSets[targetTag].find(entry => entry['anonID'] == referenceRecord['anonID'])){
+			logger.postMessage('WARN', 'data', 'Data set "' + targetTag + '" is missing student with anonID "' + referenceRecord['anonID'] + '", creating empty record.');
 			this.dataSets[targetTag].push({ anonID: referenceRecord['anonID'] });	
 		    }
 		}
@@ -70,10 +71,10 @@ class DataSets {
 
 	logger.postMessage('DEBUG', 'data', 'Sorting datasets by field "' + field + '"');
 	for(let tag in this.dataSets){
-	    /* a tag beginning with '_' indicates data for
+	    /* a tag beginning with '@' indicates data for
 	       internal use that may or may not have an 'anonID'
 	       field, so we don't sort in that case */
-	    if(!tag.startsWith('_')){
+	    if(!tag.startsWith('@')){
 		this.dataSets[tag].sort((a, b) => a['anonID'] > b['anonID'] ? 1 : (a['anonID'] < b['anonID'] ? -1 : 0));
 	    }
 	}
@@ -97,9 +98,9 @@ class DataSets {
 	/* go through all the datasets and gather data rows for only
 	   students who are in the list */
 	for(let tag in this.dataSets){
-	    /* a tag beginning with '_' indicates data for internal use that
+	    /* a tag beginning with '@' indicates data for internal use that
 	       may or may not have an 'anonID' field, so we don't filter it */
-	    if(!tag.startsWith('_')){
+	    if(!tag.startsWith('@')){
 		this.dataSets[tag] = this.dataSets[tag].filter(entry => keepList.includes(entry['anonID']));
 	    }
 	}
@@ -131,9 +132,9 @@ class DataSets {
 	logger.postMessage('DEBUG', 'data', 'Exporting student data');
 	var exportableDataSets = {};
 	for(let tag in this.dataSets){
-	    /* a tag beginning with '_' indicates data that should not
+	    /* a tag beginning with '_' or '@' indicates data that should not
 	       be exported */
-	    if(!tag.startsWith('_')){
+	    if(!tag.startsWith('_') && !tag.startsWith('@')){
 		exportableDataSets[tag] = this.dataSets[tag];
 	    }
 	}

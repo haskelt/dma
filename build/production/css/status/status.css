@@ -14,11 +14,21 @@
     padding: 0.5rem;
 }
 
-#status-messages .warning {
-
+#status-messages .warn {
+    color: hsl(25, 100%, 50%);
+    font-weight: bold;
 }
+
+#status-messages .warn::before {
+    content: '! ';
+}
+
 
 #status-messages .error {
     color: hsl(0, 100%, 30%);
     font-weight: bold;
+}
+
+#status-messages .error::before {
+    content: 'X ';
 }

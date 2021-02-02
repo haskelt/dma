@@ -75,7 +75,7 @@ class StudentDataSpecialist extends DataSpecialist {
 		catch (error) {
 		    if (error instanceof DataWarning) {
 			error.message = 'Unable to find student with ' + this.identifiers[sheet][0] + ' "' + row[this.identifiers[sheet][0]] + '" in the roster, skipping';
-			logger.postMessage('ERROR', 'data', error.message);
+			logger.postMessage('WARN', 'data', error.message);
 		    } else {
 			throw error;
 		    }

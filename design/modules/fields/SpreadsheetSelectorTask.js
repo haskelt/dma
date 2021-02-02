@@ -45,6 +45,9 @@ class SpreadsheetSelectorTask extends FieldTask {
 	    this.input.value = null;
 	} else {
 	    this.data = data;
+	    let filenameRegex = /[^\\/]+$/;
+	    let filename = this.input.value.match(filenameRegex);
+	    logger.postMessage('INFO', 'fields', 'File "' + filename + '" chosen for "' + this.label + '"');
 	    this.parent.setChildStatus(this, 'complete');
 	}
 	

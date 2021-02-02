@@ -19,7 +19,7 @@ class MetadataSpecialist extends DataSpecialist {
 
     mergeMetadata () {
 
-	var metadata = DataSets.getDataSet('_meta');
+	var metadata = DataSets.getDataSet('@meta');
 	if(!metadata){
 	    metadata = {};
 	}
@@ -32,7 +32,7 @@ class MetadataSpecialist extends DataSpecialist {
 
     setData () {
 
-	DataSets.setDataSet('_meta', this.curData);
+	DataSets.setDataSet('@meta', this.curData);
 	
     } // setData
     

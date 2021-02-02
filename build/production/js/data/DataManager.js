@@ -1,9 +1,9 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/dma/js/logger/logger.js?v=0.3.0-beta';
-import DataError from '/dma/js/errors/DataError.js?v=0.3.0-beta';
-import DataSpecialistFactory from '/dma/js/data/DataSpecialistFactory.js?v=0.3.0-beta';
-import DataSets from '/dma/js/data/DataSets.js?v=0.3.0-beta';
+import logger from '/dma/js/logger/logger.js?v=0.4.0-beta';
+import DataError from '/dma/js/errors/DataError.js?v=0.4.0-beta';
+import DataSpecialistFactory from '/dma/js/data/DataSpecialistFactory.js?v=0.4.0-beta';
+import DataSets from '/dma/js/data/DataSets.js?v=0.4.0-beta';
 
 class DataManager {
 
@@ -50,7 +50,7 @@ class DataManager {
 
     static finalizeData () {
 
-	var metadata = DataSets.getDataSet('_meta');
+	var metadata = DataSets.getDataSet('@meta');
 	var ids = DataSets.getDataField('_roster', 'anonID');
 	var courseInfo = [];
 	for(let id of ids){
@@ -61,9 +61,8 @@ class DataManager {
 	    courseInfo.push(row);
 	}
 	DataSets.setDataSet('course_info', courseInfo);
-
-	DataSets.generateMissingRecords('_roster');
 	DataSets.applyFilter('demographics', 'consent', 'I give permission to include my responses in this study');
+	DataSets.generateMissingRecords('_roster');
 	DataSets.sortBy('anonID');
 	
     } // finalizeData

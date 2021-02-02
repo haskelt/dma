@@ -1,7 +1,7 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/js/logger/logger.js?v=0.3.0-beta';
-import FieldTask from '/js/fields/FieldTask.js?v=0.3.0-beta';
+import logger from '/js/logger/logger.js?v=0.4.0-beta';
+import FieldTask from '/js/fields/FieldTask.js?v=0.4.0-beta';
 
 class TextInputTask extends FieldTask {
     
@@ -12,7 +12,9 @@ class TextInputTask extends FieldTask {
 	super(element);
 	this.input = element.querySelector('.fields__text-input--input');
 	this.input.addEventListener('input', this.handleInput.bind(this));
+	this.input.addEventListener('blur', this.handleBlur.bind(this));
 	this.hasContent = false;
+	this.hasChanged = false;
 	this.data = null;
 	
     } // constructor
@@ -22,17 +24,33 @@ class TextInputTask extends FieldTask {
     handleInput (e) {
 
 	var newHasContent = (this.input.value != '');
-	if(newHasContent != this.hasContent){
-	    this.hasContent = newHasContent;
-	    logger.postMessage('DEBUG', 'fields', 'Content of text input ' + this.id + ' has changed to ' + this.input.value);	
-	    this.parent.setChildStatus(this, this.hasContent ? 'complete' : 'incomplete');
+	if(!this.hasContent && newHasContent){
+	    logger.postMessage('DEBUG', 'fields', 'Task "' + this.id + '" is now complete');
+	    this.hasContent = true;
+	    this.parent.setChildStatus(this, 'complete');
+	} else if(this.hasContent && !newHasContent){
+	    logger.postMessage('DEBUG', 'fields', 'Task "' + this.id + '" is now incomplete');
+	    this.hasContent = false;
+	    this.parent.setChildStatus(this, 'incomplete');
 	}
+	this.hasChanged = true;
 	this.data = this.input.value;
 
     } // handleInput
     
     /**************************************************************************/
 
+    handleBlur (e) {
+
+	if(this.hasChanged){
+	    this.hasChanged = false;
+	    logger.postMessage('INFO', 'fields', 'Text "' +this.data + '" entered for "' + this.label + '"');
+	}
+
+    } // handleBlur
+    
+    /**************************************************************************/
+    
     clearField () {
 
 	this.input.value = '';

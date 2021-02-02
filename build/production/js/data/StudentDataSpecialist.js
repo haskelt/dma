@@ -1,10 +1,10 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/dma/js/logger/logger.js?v=0.3.0-beta';
-import DataWarning from '/dma/js/errors/DataWarning.js?v=0.3.0-beta';
-import DataError from '/dma/js/errors/DataError.js?v=0.3.0-beta';
-import DataSpecialist from '/dma/js/data/DataSpecialist.js?v=0.3.0-beta';
-import DataSets from '/dma/js/data/DataSets.js?v=0.3.0-beta';
+import logger from '/dma/js/logger/logger.js?v=0.4.0-beta';
+import DataWarning from '/dma/js/errors/DataWarning.js?v=0.4.0-beta';
+import DataError from '/dma/js/errors/DataError.js?v=0.4.0-beta';
+import DataSpecialist from '/dma/js/data/DataSpecialist.js?v=0.4.0-beta';
+import DataSets from '/dma/js/data/DataSets.js?v=0.4.0-beta';
 
 class StudentDataSpecialist extends DataSpecialist {
 
@@ -75,7 +75,7 @@ class StudentDataSpecialist extends DataSpecialist {
 		catch (error) {
 		    if (error instanceof DataWarning) {
 			error.message = 'Unable to find student with ' + this.identifiers[sheet][0] + ' "' + row[this.identifiers[sheet][0]] + '" in the roster, skipping';
-			logger.postMessage('ERROR', 'data', error.message);
+			logger.postMessage('WARN', 'data', error.message);
 		    } else {
 			throw error;
 		    }

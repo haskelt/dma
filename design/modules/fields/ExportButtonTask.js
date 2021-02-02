@@ -27,6 +27,7 @@ class ExportButtonTask extends Task {
 	    /* Set the task as complete from the start, on the logic that
 	       clicking the button is optional. */
 	    this.parent.setChildStatus(this, 'complete');
+	    logger.postMessage('INFO', 'fields', 'Completed final processing of the data');
 	}
 	catch (error) {
 	    logger.postMessage('TRACE', 'fields', 'Disabling export button');
@@ -40,8 +41,8 @@ class ExportButtonTask extends Task {
     
     handleClick (e) {
 
-	logger.postMessage('DEBUG', 'fields', 'Beginning export');
 	DataManager.exportData();
+	logger.postMessage('INFO', 'fields', 'Exported data');
 	
     } // handleClick
 

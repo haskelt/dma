@@ -53,7 +53,7 @@ class TaskSet extends Task {
 	}
 	catch (error) {
 	    if (error instanceof DataError){
-		logger.postMessage('ERROR', 'tasks', 'Interrupted wrap-up for task ' + this.id + ' due to error.');
+		logger.postMessage('DEBUG', 'tasks', 'Interrupted wrap-up for task ' + this.id + ' due to error.');
 	    }
 	    throw error;
 	}

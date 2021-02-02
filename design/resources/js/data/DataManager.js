@@ -50,7 +50,7 @@ class DataManager {
 
     static finalizeData () {
 
-	var metadata = DataSets.getDataSet('_meta');
+	var metadata = DataSets.getDataSet('@meta');
 	var ids = DataSets.getDataField('_roster', 'anonID');
 	var courseInfo = [];
 	for(let id of ids){
@@ -61,9 +61,8 @@ class DataManager {
 	    courseInfo.push(row);
 	}
 	DataSets.setDataSet('course_info', courseInfo);
-
-	DataSets.generateMissingRecords('_roster');
 	DataSets.applyFilter('demographics', 'consent', 'I give permission to include my responses in this study');
+	DataSets.generateMissingRecords('_roster');
 	DataSets.sortBy('anonID');
 	
     } // finalizeData

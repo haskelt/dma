@@ -1,8 +1,8 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/js/logger/logger.js?v=0.3.0-beta';
-import DataError from '/js/errors/DataError.js?v=0.3.0-beta';
-import Task from '/js/tasks/Task.js?v=0.3.0-beta';
+import logger from '/js/logger/logger.js?v=0.4.0-beta';
+import DataError from '/js/errors/DataError.js?v=0.4.0-beta';
+import Task from '/js/tasks/Task.js?v=0.4.0-beta';
 
 class TaskSet extends Task {
 
@@ -53,7 +53,7 @@ class TaskSet extends Task {
 	}
 	catch (error) {
 	    if (error instanceof DataError){
-		logger.postMessage('ERROR', 'tasks', 'Interrupted wrap-up for task ' + this.id + ' due to error.');
+		logger.postMessage('DEBUG', 'tasks', 'Interrupted wrap-up for task ' + this.id + ' due to error.');
 	    }
 	    throw error;
 	}
