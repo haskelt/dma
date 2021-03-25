@@ -1,5 +1,6 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
+import config from '/js/config.js?v=0.6.1-beta';
 import message_dispatcher from '/js/logger/MessageDispatcher.js?v=0.6.1-beta';
 
 class StatusMessageHandler {
@@ -30,4 +31,4 @@ class StatusMessageHandler {
     
 } // StatusMessageHandler
 
-StatusMessageHandler.initialize();
+config.registerModule('status', StatusMessageHandler.initialize.bind(StatusMessageHandler));

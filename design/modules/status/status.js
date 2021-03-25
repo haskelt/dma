@@ -1,5 +1,6 @@
 {{project.js_copyright_notice}}
 
+import config from '{{project.site_path}}/js/config.js?v={{project.version}}';
 import message_dispatcher from '{{project.site_path}}/js/logger/MessageDispatcher.js?v={{project.version}}';
 
 class StatusMessageHandler {
@@ -30,5 +31,5 @@ class StatusMessageHandler {
     
 } // StatusMessageHandler
 
-StatusMessageHandler.initialize();
+config.registerModule('status', StatusMessageHandler.initialize.bind(StatusMessageHandler));
 

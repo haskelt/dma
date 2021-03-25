@@ -14,7 +14,7 @@ class ConsoleMessageHandler {
 
     static loggingLevel = 'DEBUG';
 
-    static namespacesToPost = ['tasks', 'fields', 'data', 'files', 'xlsx'];
+    static namespacesToPost = ['config', 'tasks', 'fields', 'data', 'files', 'xlsx'];
 
     /**************************************************************************/
 

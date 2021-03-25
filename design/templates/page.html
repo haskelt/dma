@@ -28,7 +28,6 @@
 
     
     {% block javascript %}
-    <script src="{{project.site_path}}/js/app.js?v={{project.version}}" type="module"></script>
     {% if this.scripts %}
     {% set script_data = this.scripts.split() %}
     {% for script in script_data %}
@@ -37,6 +36,7 @@
     </script>
     {% endfor %}
     {% endif %}
+    <script src="{{project.site_path}}/js/app.js?v={{project.version}}" type="module"></script>
     {% endblock %}
 
   {% endblock %}
