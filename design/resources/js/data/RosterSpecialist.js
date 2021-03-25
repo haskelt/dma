@@ -1,10 +1,10 @@
-{{ JS_COPYRIGHT_NOTICE }}
+{{project.js_copyright_notice}}
 
-import logger from '{{SITE_PATH}}/js/logger/logger.js?v={{VERSION}}';
-import DataError from '{{SITE_PATH}}/js/errors/DataError.js?v={{VERSION}}';
-import CryptoJS from '{{SITE_PATH}}/js/cryptojs/sha256.js?v={{VERSION}}';
-import DataSpecialist from '{{SITE_PATH}}/js/data/DataSpecialist.js?v={{VERSION}}';
-import DataSets from '{{SITE_PATH}}/js/data/DataSets.js?v={{VERSION}}';
+import logger from '{{project.site_path}}/js/logger/logger.js?v={{project.version}}';
+import DataError from '{{project.site_path}}/js/errors/DataError.js?v={{project.version}}';
+import CryptoJS from '{{project.site_path}}/js/cryptojs/sha256.js?v={{project.version}}';
+import DataSpecialist from '{{project.site_path}}/js/data/DataSpecialist.js?v={{project.version}}';
+import DataSets from '{{project.site_path}}/js/data/DataSets.js?v={{project.version}}';
 
 class RosterSpecialist extends DataSpecialist {
 
@@ -72,7 +72,6 @@ class RosterSpecialist extends DataSpecialist {
     
     /**************************************************************************/
 
-    
     computeIdentifiers () {
 	/* Create identifiers based on a cryptographic hash of the required
 	   fields, and add them to the data */

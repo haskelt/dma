@@ -8,13 +8,13 @@
 	    }
 	},
 	"project": {
-	    "JS_COPYRIGHT_NOTICE": "// Copyright 2021 Todd R. Haskell\\n// Distributed under the terms of the Gnu GPL 3.0",
-	    "VERSION": "0.6.0-beta"
+	    "js_copyright_notice": "// Copyright 2021 Todd R. Haskell\\n// Distributed under the terms of the Gnu GPL 3.0",
+	    "version": "0.6.1-beta"
 	}
     },
     "test": {
 	"project": {
-	    "SITE_PATH": ""
+	    "site_path": ""
 	}
     },
     "production": {
@@ -22,7 +22,7 @@
 	    "deploy_destination": "todhas2@trapline.dreamhost.com:apps.craggypeak.com/dma/"
 	},
 	"project": {
-	    "SITE_PATH": "/dma"
+	    "site_path": "/dma"
 	}
     }
 }

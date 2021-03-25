@@ -1,8 +1,8 @@
-{{ JS_COPYRIGHT_NOTICE }}
+{{project.js_copyright_notice}}
 
-import TaskSet from '{{ SITE_PATH }}/js/tasks/TaskSet.js?v={{VERSION}}';
-import TaskSequence from '{{ SITE_PATH }}/js/tasks/TaskSequence.js?v={{VERSION}}';
-import TaskFactory from '{{ SITE_PATH }}/js/tasks/TaskFactory.js?v={{VERSION}}';
+import TaskSet from '{{project.site_path}}/js/tasks/TaskSet.js?v={{project.version}}';
+import TaskSequence from '{{project.site_path}}/js/tasks/TaskSequence.js?v={{project.version}}';
+import TaskFactory from '{{project.site_path}}/js/tasks/TaskFactory.js?v={{project.version}}';
 
 for (let taskSequenceElement of document.querySelectorAll('.tasks__task-sequence')) {
     let taskSequence = new TaskSequence(taskSequenceElement, null);

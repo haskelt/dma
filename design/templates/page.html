@@ -5,11 +5,11 @@
     <meta charset=utf-8>
     <title>DMA</title>
     {% block css %}
-    <link rel="stylesheet" href="{{SITE_PATH}}/css/app.css?v={{VERSION}}" type="text/css" />
+    <link rel="stylesheet" href="{{project.site_path}}/css/app.css?v={{project.version}}" type="text/css" />
     {% if this.styles %}
     {% set style_data = this.styles.split() %}
     {% for style in style_data %}
-    <link rel="stylesheet" href="{{ SITE_PATH }}{{style}}?v={{VERSION}}" type="text/css" />
+    <link rel="stylesheet" href="{{project.site_path}}{{style}}?v={{project.version}}" type="text/css" />
     {% endfor %}
     {% endif %}
     {% endblock %}
@@ -28,12 +28,12 @@
 
     
     {% block javascript %}
-    <script src="{{SITE_PATH}}/js/app.js?v={{VERSION}}" type="module"></script>
+    <script src="{{project.site_path}}/js/app.js?v={{project.version}}" type="module"></script>
     {% if this.scripts %}
     {% set script_data = this.scripts.split() %}
     {% for script in script_data %}
     <script type="module">
-      import "{{ SITE_PATH }}{{script}}?v={{VERSION}}"
+      import "{{project.site_path}}{{script}}?v={{project.version}}"
     </script>
     {% endfor %}
     {% endif %}

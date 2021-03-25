@@ -1,12 +1,12 @@
-{{ JS_COPYRIGHT_NOTICE }}
+{{project.js_copyright_notice}}
 
-import TaskFactory from '{{ SITE_PATH }}/js/tasks/TaskFactory.js?v={{VERSION}}';
-import ToggleTask from '{{ SITE_PATH }}/js/fields/ToggleTask.js?v={{VERSION}}';
-import TextInputTask from '{{ SITE_PATH }}/js/fields/TextInputTask.js?v={{VERSION}}';
-import MultipleChoiceTask from '{{ SITE_PATH }}/js/fields/MultipleChoiceTask.js?v={{VERSION}}';
-import SelectTask from '{{ SITE_PATH }}/js/fields/SelectTask.js?v={{VERSION}}';
-import SpreadsheetSelectorTask from '{{ SITE_PATH }}/js/fields/SpreadsheetSelectorTask.js?v={{VERSION}}';
-import ExportButtonTask from '{{ SITE_PATH }}/js/fields/ExportButtonTask.js?v={{VERSION}}';
+import TaskFactory from '{{project.site_path}}/js/tasks/TaskFactory.js?v={{project.version}}';
+import ToggleTask from '{{project.site_path}}/js/fields/ToggleTask.js?v={{project.version}}';
+import TextInputTask from '{{project.site_path}}/js/fields/TextInputTask.js?v={{project.version}}';
+import MultipleChoiceTask from '{{project.site_path}}/js/fields/MultipleChoiceTask.js?v={{project.version}}';
+import SelectTask from '{{project.site_path}}/js/fields/SelectTask.js?v={{project.version}}';
+import SpreadsheetSelectorTask from '{{project.site_path}}/js/fields/SpreadsheetSelectorTask.js?v={{project.version}}';
+import ExportButtonTask from '{{project.site_path}}/js/fields/ExportButtonTask.js?v={{project.version}}';
 
 TaskFactory.registerBuilder('toggle', ToggleTask);
 TaskFactory.registerBuilder('text-input', TextInputTask);

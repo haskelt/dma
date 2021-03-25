@@ -1,4 +1,4 @@
-{{ JS_COPYRIGHT_NOTICE }}
+{{project.js_copyright_notice}}
 
-import '{{SITE_PATH}}/js/logger/ConsoleMessageHandler.js?v={{VERSION}}';
+import '{{project.site_path}}/js/logger/ConsoleMessageHandler.js?v={{project.version}}';
 

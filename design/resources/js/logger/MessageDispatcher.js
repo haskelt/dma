@@ -1,4 +1,4 @@
-{{ JS_COPYRIGHT_NOTICE }}
+{{project.js_copyright_notice}}
 
 class MessageDispatcher {
 

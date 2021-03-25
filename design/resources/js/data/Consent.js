@@ -1,7 +1,7 @@
-{{ JS_COPYRIGHT_NOTICE }}
+{{project.js_copyright_notice}}
 
-import logger from '{{SITE_PATH}}/js/logger/logger.js?v={{VERSION}}';
-import Roster from '{{SITE_PATH}}/js/data/Roster.js?v={{VERSION}}';
+import logger from '{{project.site_path}}/js/logger/logger.js?v={{project.version}}';
+import Roster from '{{project.site_path}}/js/data/Roster.js?v={{project.version}}';
 
 class Consent {
 
@@ -20,8 +20,6 @@ class Consent {
 	var data = raw_data[Object.keys(raw_data)[0]]
 	this.doConsentFieldCheck(data);
 	var identifiers = this.doIdentifierCheck(data);
-
-
 
     } // setData
     

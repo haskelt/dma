@@ -1,11 +1,11 @@
-{{ JS_COPYRIGHT_NOTICE }}
+{{project.js_copyright_notice}}
 
-import logger from '{{SITE_PATH}}/js/logger/logger.js?v={{VERSION}}';
-import MetadataSpecialist from '{{SITE_PATH}}/js/data/MetadataSpecialist.js?v={{VERSION}}';
-import RosterSpecialist from '{{SITE_PATH}}/js/data/RosterSpecialist.js?v={{VERSION}}';
-import CanvasSpecialist from '{{SITE_PATH}}/js/data/CanvasSpecialist.js?v={{VERSION}}';
-import CWSpecialist from '{{SITE_PATH}}/js/data/CWSpecialist.js?v={{VERSION}}';
-import ExamSpecialist from '{{SITE_PATH}}/js/data/ExamSpecialist.js?v={{VERSION}}';
+import logger from '{{project.site_path}}/js/logger/logger.js?v={{project.version}}';
+import MetadataSpecialist from '{{project.site_path}}/js/data/MetadataSpecialist.js?v={{project.version}}';
+import RosterSpecialist from '{{project.site_path}}/js/data/RosterSpecialist.js?v={{project.version}}';
+import CanvasSpecialist from '{{project.site_path}}/js/data/CanvasSpecialist.js?v={{project.version}}';
+import CWSpecialist from '{{project.site_path}}/js/data/CWSpecialist.js?v={{project.version}}';
+import ExamSpecialist from '{{project.site_path}}/js/data/ExamSpecialist.js?v={{project.version}}';
 
 class DataSpecialistFactory {
 
