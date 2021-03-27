@@ -8,14 +8,6 @@ class ConfigManager {
     
     /**************************************************************************/
 
-    static registerModule (name, initializer) {
-
-	this.moduleRegistry.push({'name': name, 'initializer': initializer})
-	
-    } // registerModule
-
-    /**************************************************************************/
-
     static fetchJSON (filename) {
 
 	return fetch(filename)
@@ -38,6 +30,22 @@ class ConfigManager {
 	return Promise.resolve(true);
 
     } // storeConfig
+
+    /**************************************************************************/
+
+    static getConfig (key) {
+
+	return this.configData[key];
+	
+    } // getConfig
+    
+    /**************************************************************************/
+    
+    static registerModule (name, initializer) {
+
+	this.moduleRegistry.push({'name': name, 'initializer': initializer})
+	
+    } // registerModule
 
     /**************************************************************************/
 

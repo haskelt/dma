@@ -4,7 +4,7 @@ import logger from '{{project.site_path}}/js/logger/logger.js?v={{project.versio
 import StudentDataSpecialist from '{{project.site_path}}/js/data/StudentDataSpecialist.js?v={{project.version}}';
 import xlsx from '{{project.site_path}}/js/xlsx/xlsx.js?v={{project.version}}';
 
-class CanvasSpecialist extends StudentDataSpecialist {
+class WAMAPSpecialist extends StudentDataSpecialist {
 
     /**************************************************************************/
 

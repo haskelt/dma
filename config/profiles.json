@@ -5,7 +5,8 @@
 		"build" : [
 		    { "type": "internal", "command": "build" }
 		]
-	    }
+	    },
+	    "content_file_types": [ "xml", "png", "jpg", "svg", "json" ]
 	},
 	"project": {
 	    "js_copyright_notice": "// Copyright 2021 Todd R. Haskell\\n// Distributed under the terms of the Gnu GPL 3.0",

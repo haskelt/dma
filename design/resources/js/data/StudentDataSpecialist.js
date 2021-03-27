@@ -33,7 +33,7 @@ class StudentDataSpecialist extends DataSpecialist {
 	this.identifiers = {};
 	for(let sheet in this.curData){
 	    var matches = [];
-	    for(let identifier of Object.keys(this.possibleIdentifiers)){
+	    for(let identifier of Object.keys(this.config.possibleIdentifiers)){
 		if(identifier in this.curData[sheet][0]){
 		    matches.push(identifier);
 		}
@@ -56,7 +56,7 @@ class StudentDataSpecialist extends DataSpecialist {
 
 	for(let sheet in this.curData){
 	    let newData = [];
-	    let rosterIDType = this.possibleIdentifiers[this.identifiers[sheet][0]];
+	    let rosterIDType = this.config.possibleIdentifiers[this.identifiers[sheet][0]];
 	    let processedStudents = [];
 	    for(let row of this.curData[sheet]){
 		try {

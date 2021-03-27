@@ -4,7 +4,7 @@ import logger from '{{project.site_path}}/js/logger/logger.js?v={{project.versio
 import StudentDataSpecialist from '{{project.site_path}}/js/data/StudentDataSpecialist.js?v={{project.version}}';
 import xlsx from '{{project.site_path}}/js/xlsx/xlsx.js?v={{project.version}}';
 
-class CanvasSpecialist extends StudentDataSpecialist {
+class WAMAPSpecialist extends StudentDataSpecialist {
 
     /**************************************************************************/
 
@@ -14,7 +14,6 @@ class CanvasSpecialist extends StudentDataSpecialist {
 	this.processingSteps = [
 	    this.fixHeadings,
 	    this.convertWorkbookToJSON,
-	    this.doSingleWorksheetCheck,
 	    this.doIdentifierCheck,
 	    this.doRequiredFieldsCheck,
 	    this.anonymizeData,
@@ -26,29 +25,33 @@ class CanvasSpecialist extends StudentDataSpecialist {
     /**************************************************************************/
 
     fixHeadings () {
-	/* For each key in the 'headerMappings' attribute of the config
-	   object, look for that text within the column headings in the
-	   workbook. If it is found, replace that heading with the
-	   value that goes with that key. */
 
-	if('headerMappings' in this.config){
-	    for(let sheet of Object.values(this.curData.Sheets)){
-		let sheetRange = xlsx.decodeRange(sheet['!ref']);
+	for(let sheet in this.curData.Sheets){
+	    if('!ref' in this.curData.Sheets[sheet]){
+		let sheetRange = xlsx.decodeRange(this.curData.Sheets[sheet]['!ref']);
 		for(let col = sheetRange.s.c; col <= sheetRange.e.c; col++){
-		    let address = xlsx.encodeAddress({c: col, r: 0});
-		    for(let pattern in this.config.headerMappings){
-			if(sheet[address].t == 's' && sheet[address].v.includes(pattern)){
-			    sheet[address].v = this.config.headerMappings[pattern];
-			}
+		    let top = xlsx.encodeAddress({c: col, r: 0});
+		    let bottom = xlsx.encodeAddress({c: col, r: 1});
+		    let fullHeading = this.curData.Sheets[sheet][top].v;
+		    if(bottom in this.curData.Sheets[sheet] && this.curData.Sheets[sheet][bottom].t == 's'){
+			fullHeading += ':' + this.curData.Sheets[sheet][bottom].v
 		    }
+		    this.curData.Sheets[sheet][bottom] = {t: 's', v: fullHeading};
 		}
+	    } else {
+		/* WAMAP sometimes generates empty sheets in a workbook,
+		   this removes them */
+		delete this.curData.Sheets[sheet];
+		let index = this.curData.SheetNames.indexOf(sheet);
+		this.curData.SheetNames.splice(index, 1);
 	    }
 	}
+	this.headerRow = 1;
 	
     } // fixHeadings
     
     /**************************************************************************/
 
-} // CanvasSpecialist
+} // WAMAPSpecialist
 
-export default CanvasSpecialist;
+export default WAMAPSpecialist;

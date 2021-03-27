@@ -28,6 +28,8 @@
 
     
     {% block javascript %}
+    <script src="{{project.site_path}}/js/logger/logger.js?v={{project.version}}" type="module"></script>
+    <script src="{{project.site_path}}/js/data/data.js?v={{project.version}}" type="module"></script>
     {% if this.scripts %}
     {% set script_data = this.scripts.split() %}
     {% for script in script_data %}

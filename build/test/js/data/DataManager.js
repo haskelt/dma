@@ -8,29 +8,15 @@ import DataSets from '/js/data/DataSets.js?v=0.6.1-beta';
 class DataManager {
 
     static data = {};
-    static dataConfig = {
-	'instructor': { 'class': 'Metadata' },
-	'institution': { 'class': 'Metadata' },
-	'course': { 'class': 'Metadata' },
-	'condition': { 'class': 'Metadata' },
-	'modality': { 'class': 'Metadata' },
-	'term': { 'class': 'Metadata' },
-	'_roster': { 'class': 'Roster', 'requiredFields': ["STUDENT'S NAME", 'SID', 'EMAIL'] },
-	'demographics': { 'class': 'Canvas', 'headerMappings': {
-	    'first time taking this course': 'first_time',
-	    'grade you received in Engineering Physics 1': 'phys1_grade',
-	    'grade you received in Calculus 2': 'calc2_grade',
-	    'your age fall in': 'age',
-	    'parents earned a 4-year college degree': 'parent_degree',
-	    'gender do you most identify with': 'gender',
-	    'best describes your race/ethnicity': 'ethnicity',
-	    'Purpose and Benefit': 'consent'
-	}, 'requiredFields': ['consent'] },
-	'mct_pre': { 'class': 'Canvas' },
-	'mct_post': { 'class': 'Canvas' },
-	'cw': { 'class': 'CW' },
-	'exam': { 'class': 'Exam' }
-    };
+    static dataConfig = {};
+
+    /**************************************************************************/
+
+    static configure (configuration) {
+
+	this.dataConfig = configuration;
+	
+    } // configure
     
     /**************************************************************************/
 

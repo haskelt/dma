@@ -36,12 +36,16 @@ class DataSpecialist {
     
     convertWorkbookToJSON () {
 	/* Convert the data from a workbook object to a JSON object */
-	
+
+	console.log('converting to JSON');
+	console.log(this.curData);
 	var JSONData = {};
 	for(let sheet in this.curData.Sheets){
+	    console.log(sheet);
 	    JSONData[sheet] = xlsx.sheetToJSON(this.curData.Sheets[sheet], {range: this.headerRow, defval: ''});
 	}
 	this.curData = JSONData;
+	console.log('done converting');
 	
     } // convertWorkbookToJSON
     

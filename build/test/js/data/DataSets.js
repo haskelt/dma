@@ -14,6 +14,8 @@ class DataSets {
     static setDataSet (tag, data) {
 
 	this.dataSets[tag] = data;
+	console.log('setDataSet ' + tag);
+	console.log(data);
 	
     } // getDataSet
 

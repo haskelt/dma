@@ -36,9 +36,10 @@ class DataSpecialist {
     
     convertWorkbookToJSON () {
 	/* Convert the data from a workbook object to a JSON object */
-	
+
 	var JSONData = {};
 	for(let sheet in this.curData.Sheets){
+	    console.log(sheet);
 	    JSONData[sheet] = xlsx.sheetToJSON(this.curData.Sheets[sheet], {range: this.headerRow, defval: ''});
 	}
 	this.curData = JSONData;
