@@ -10,7 +10,7 @@
 	},
 	"project": {
 	    "js_copyright_notice": "// Copyright 2021 Todd R. Haskell\\n// Distributed under the terms of the Gnu GPL 3.0",
-	    "version": "0.7.0-beta"
+	    "version": "0.8.0-beta"
 	}
     },
     "test": {

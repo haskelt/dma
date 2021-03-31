@@ -20,7 +20,8 @@
 		},
 		"_roster" : {
 			"class" : "WAMAPRoster",
-			"requiredFields" : [ "Name", "Code" ]
+			"requiredFields" : [ "Name", "SID" ],
+			"canonicalIdentifier" : "SID"
 		},
 		"demographics" : {
 			"class" : "WAMAPData",
@@ -32,6 +33,10 @@
 				"Question 5:Scored Answer" : "gender",
 				"Question 6:Scored Answer" : "ethnicity",
 				"Question 7:Scored Answer" : "consent"
+			},
+			"requiredFields" : [ "consent" ],
+			"possibleIdentifiers" : {
+				"Name" : "Name"
 			},
 			"responseMappings" : {
 				"first_time" : {
@@ -84,10 +89,6 @@
 					"6" : "A race/ethnicity not listed here",
 					"7" : "Prefer not to answer"
 				}
-			},
-			"requiredFields" : [ "consent" ],
-			"possibleIdentifiers" : {
-				"Name" : "Name"
 			}
 		},
 		"psvt" : {

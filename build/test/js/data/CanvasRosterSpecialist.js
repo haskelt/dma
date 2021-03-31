@@ -16,7 +16,7 @@ class CanvasRosterSpecialist extends DataSpecialist {
 	    this.doUniqueIdentifiersCheck,
 	    this.computeCanvasPrettyNames,
 	    this.computeCanvasPrettySIDs,
-	    this.computeIdentifiers,
+	    this.computeAnonymousIdentifier,
 	    this.setData,
 	    this.partitionCanvasRoster
 	];

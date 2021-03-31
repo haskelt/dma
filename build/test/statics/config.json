@@ -20,7 +20,8 @@
 		},
 		"_roster" : {
 			"class" : "CanvasRoster",
-			"requiredFields" : [ "STUDENT'S NAME", "SID", "EMAIL" ]
+			"requiredFields" : [ "STUDENT'S NAME", "SID", "EMAIL" ],
+			"canonicalIdentifier" : "pretty_sid"
 		},
 		"demographics" : {
 			"class" : "CanvasData",

@@ -16,7 +16,7 @@ class WAMAPRosterSpecialist extends DataSpecialist {
 	    this.doSingleWorksheetCheck,
 	    this.doRequiredFieldsCheck,
 	    this.doUniqueIdentifiersCheck,
-	    this.computeIdentifiers,
+	    this.computeAnonymousIdentifier,
 	    this.setData
 	];
 

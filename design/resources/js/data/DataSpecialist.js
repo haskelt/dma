@@ -259,21 +259,20 @@ class DataSpecialist {
     
     /**************************************************************************/
     
-    computeIdentifiers () {
-	/* Create identifiers based on a cryptographic hash of the required
-	   fields, and add them to the data */
+    computeAnonymousIdentifier () {
+	/* Create identifiers based on a cryptographic hash of the 
+	   canonicalIdentifier field */
 
+	console.log(this.config.canonicalIdentifier);
 	for(let sheet in this.curData){
 	    for(let row of this.curData[sheet]){
-		let stringToHash = '';
-		for(let field of this.config.requiredFields){
-		    stringToHash += row[field];
-		}
-		row['anonID'] = CryptoJS.SHA256(stringToHash).toString();
+		console.log(row[this.config.canonicalIdentifier]);
+		
+		row['anonID'] = CryptoJS.SHA256(row[this.config.canonicalIdentifier].toString()).toString();
 	    }
 	}
 
-    } // computeIdentifiers
+    } // computeAnonymousIdentifier
 
     /**************************************************************************/
 
