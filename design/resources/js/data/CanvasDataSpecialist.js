@@ -15,6 +15,7 @@ class CanvasDataSpecialist extends DataSpecialist {
 	    this.doSingleWorksheetCheck,
 	    this.doIdentifierCheck,
 	    this.doRequiredFieldsCheck,
+	    this.applyResponseMappings,
 	    this.anonymizeData,
 	    this.setData
 	];

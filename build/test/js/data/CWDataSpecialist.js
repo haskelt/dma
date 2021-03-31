@@ -1,6 +1,6 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import DataSpecialist from '/js/data/DataSpecialist.js?v=0.7.0-beta';
+import DataSpecialist from '/js/data/DataSpecialist.js?v=0.9.0-beta';
 
 class CWDataSpecialist extends DataSpecialist {
 
@@ -15,6 +15,7 @@ class CWDataSpecialist extends DataSpecialist {
 	    this.convertWorkbookToJSON,
 	    this.doIdentifierCheck,
 	    this.doRequiredFieldsCheck,
+	    this.applyResponseMappings,
 	    this.anonymizeData,
 	    this.setData
 	];

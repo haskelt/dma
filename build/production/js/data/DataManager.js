@@ -1,22 +1,25 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/dma/js/logger/logger.js?v=0.8.0-beta';
-import DataError from '/dma/js/errors/DataError.js?v=0.8.0-beta';
-import DataSpecialistFactory from '/dma/js/data/DataSpecialistFactory.js?v=0.8.0-beta';
-import DataSets from '/dma/js/data/DataSets.js?v=0.8.0-beta';
+import logger from '/dma/js/logger/logger.js?v=0.9.0-beta';
+import config from '/dma/js/config.js?v=0.9.0-beta';
+import DataError from '/dma/js/errors/DataError.js?v=0.9.0-beta';
+import DataSpecialistFactory from '/dma/js/data/DataSpecialistFactory.js?v=0.9.0-beta';
+import DataSets from '/dma/js/data/DataSets.js?v=0.9.0-beta';
 
 class DataManager {
 
     static data = {};
     static dataConfig = {};
+    static consentOptions = {};
 
     /**************************************************************************/
 
-    static configure (configuration) {
+    static initialize () {
 
-	this.dataConfig = configuration;
+	this.dataConfig = config.getConfig('data');
+	this.consentOptions = config.getConfig('consentOptions');
 	
-    } // configure
+    } // initialize
     
     /**************************************************************************/
 
@@ -52,8 +55,9 @@ class DataManager {
     
     /**************************************************************************/
     
-    static filterData (dataSets) {
+    static checkConsent (dataSets) {
 
+	console.log(this.consentOptions);
 	var demographicsDataSet = DataSets.getDataSet('demographics');
 	var filteredDataSets = {};
 	for(let targetTag in dataSets){
@@ -62,13 +66,13 @@ class DataManager {
 	       field, so we don't generate missing records in that
 	       case */
 	    if(!targetTag.startsWith('@')){
-		logger.postMessage('DEBUG', 'data', 'Removing students from "' + targetTag + '" where field "consent" of dataset "demographics" is not "I give permission to include my responses in this study"');
-		filteredDataSets[targetTag] = DataSets.applyFilter(dataSets[targetTag], demographicsDataSet, 'anonID', 'consent', 'I give permission to include my responses in this study');
+		logger.postMessage('DEBUG', 'data', 'Removing students from "' + targetTag + '" who do not meet the consent criteria');
+		filteredDataSets[targetTag] = DataSets.applyFilterSet(dataSets[targetTag], demographicsDataSet, 'anonID', this.consentOptions);
 	    }
 	}
 	return filteredDataSets;
 	
-    } // filterData
+    } // checkConsent
 
     /**************************************************************************/
 
@@ -133,8 +137,8 @@ class DataManager {
 		rawDataSets[targetTag] = DataSets.getDataSet(targetTag);
 	    }
 	}
-	var filteredDataSets = this.filterData(rawDataSets);
-	var noMissingRecordsDataSets = this.generateMissingRecords(filteredDataSets);
+	var consentedDataSets = this.checkConsent(rawDataSets);
+	var noMissingRecordsDataSets = this.generateMissingRecords(consentedDataSets);
 	var sortedDataSets = this.sortData(noMissingRecordsDataSets);
 	this.exportableDataSets = this.prepareExports(sortedDataSets);
 	

@@ -1,9 +1,9 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/dma/js/logger/logger.js?v=0.8.0-beta';
-import DataError from '/dma/js/errors/DataError.js?v=0.8.0-beta';
-import DataWarning from '/dma/js/errors/DataWarning.js?v=0.8.0-beta';
-import xlsx from '/dma/js/xlsx/xlsx.js?v=0.8.0-beta';
+import logger from '/dma/js/logger/logger.js?v=0.9.0-beta';
+import DataError from '/dma/js/errors/DataError.js?v=0.9.0-beta';
+import DataWarning from '/dma/js/errors/DataWarning.js?v=0.9.0-beta';
+import xlsx from '/dma/js/xlsx/xlsx.js?v=0.9.0-beta';
 
 class DataSets {
 
@@ -96,18 +96,59 @@ class DataSets {
 
 	// generate a list of students whose data we are keeping
 	var keepList = referenceDataSet.filter(entry => entry[filterField] == value).map(entry => entry[matchField]);
-/*	var keepList = [];
-	for(let row of referenceDataSet){
-	    if(row[filterField] == value){
-		keepList.push(row[matchField]);
-	    }
-	}*/
 	return targetDataSet.filter(entry => keepList.includes(entry[matchField]));
 	
     } // applyFilter
 
     /**************************************************************************/
 
+    static applyFilterSet (targetDataSet, referenceDataSet, matchField, keepOptions) {
+	/* Remove students from <targetDataSet> who meet at least one of the
+	   options in <keepOptions> as applied to <referenceDataSet>.
+	   <matchField> should be a common field in both data sets, as it is
+	   used to map the keep/drop decisions from one to the other. */
+	console.log(keepOptions);
+	// generate a list of students whose data we are keeping
+	var keepList = [];
+	for(let entry of referenceDataSet){
+	    console.log(entry);
+	    /* Iterate through each possible option in <keepOptions>.
+	     * set. The entry only needs to satisfy the criteria of
+	     * one option in order to be kept. */
+	    for(let option of keepOptions){
+		let criteriaMet = true;
+		/* Each option consists of one or more distinct
+		   criteria.  A criterion consists of a field, a
+		   relation (either '=' or '!='), and a comparison
+		   value. Within an option, all criteria must be met 
+		   to keep the entry. */
+		console.log(option);
+		for(let criterion of option){
+		    if(criterion.relation == '='){
+			if(entry[criterion.field] != criterion.value){
+			    criteriaMet = false;
+			    break;
+			}
+		    } else if(criterion.relation == '!='){
+			if(entry[criterion.field] == criterion.value){
+			    criteriaMet = false;
+			    break;
+			}
+		    }
+		}
+		if(criteriaMet){
+		    console.log('keep!');
+		    keepList.push(entry[matchField]);
+		    break;
+		}
+	    }
+	}
+	return targetDataSet.filter(entry => keepList.includes(entry[matchField]));
+	
+    } // applyFilterSet
+
+    /**************************************************************************/
+    
     static findData (searchTag, searchField, searchValue, returnField) {
 	/* In the data set <searchTag>, look through the values of
 	   <searchField> for the first match with <searchValue>. If

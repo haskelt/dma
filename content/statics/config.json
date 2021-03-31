@@ -35,6 +35,13 @@
 				"best describes your race/ethnicity" : "ethnicity",
 				"Purpose and Benefit" : "consent"
 			},
+			"responseMappings" : {
+				"consent" : {
+					"I am over 18 and give permission to include my responses in this study" : "I consent",
+					"I do not give my permission to include my responses in this study" : "I do not consent",
+					"I am under 18 and give permission to include my responses in the study. My parent/guardian will email their permission to the course instructor." : "My parents will consent"
+				}
+			},
 			"requiredFields" : [ "consent" ],
 			"possibleIdentifiers" : {
 				"name" : "pretty_name",
@@ -72,5 +79,36 @@
 				"id" : null
 			}
 		}
-	}
+	},
+	"consentOptions" : [
+		[
+			{
+				"field" : "consent",
+				"relation" : "=",
+				"value" : "I consent"
+			},
+			{
+				"field" : "age",
+				"relation" : "!=",
+				"value" : "17 or younger"
+			}
+		],
+		[
+			{
+				"field" : "consent",
+				"relation" : "=",
+				"value" : "My parents will consent"
+			},
+			{
+				"field" : "age",
+				"relation" : "=",
+				"value" : "17 or younger"
+			},
+			{
+				"field" : "1_7",
+				"relation" : "=",
+				"value" : "VERIFIED"
+			}
+		]
+	]
 }

@@ -32,7 +32,8 @@
 				"Question 4:Scored Answer" : "parent_degree",
 				"Question 5:Scored Answer" : "gender",
 				"Question 6:Scored Answer" : "ethnicity",
-				"Question 7:Scored Answer" : "consent"
+				"Question 7:Scored Answer" : "consent",
+				"Question 7:Scored Correct Answer" : "consent_verification"
 			},
 			"requiredFields" : [ "consent" ],
 			"possibleIdentifiers" : {
@@ -61,8 +62,9 @@
 					"13" : "Prefer not to answer"
 				},
 				"consent" : {
-					"0" : "I give permission to include my responses in this study",
-					"1" : "I do not consent"
+					"0" : "I consent",
+					"1" : "My parents will consent",
+					"2" : "I do not consent"
 				},
 				"age" : {
 					"0" : "17 or younger",
@@ -139,5 +141,36 @@
 				"Name" : "Name"
 			}
 		}
-	}
+	},
+	"consentOptions" : [
+		[
+			{
+				"field" : "consent",
+				"relation" : "=",
+				"value" : "I consent"
+			},
+			{
+				"field" : "age",
+				"relation" : "!=",
+				"value" : "17 or younger"
+			}
+		],
+		[
+			{
+				"field" : "consent",
+				"relation" : "=",
+				"value" : "My parents will consent"
+			},
+			{
+				"field" : "age",
+				"relation" : "=",
+				"value" : "17 or younger"
+			},
+			{
+				"field" : "consent_verification",
+				"relation" : "=",
+				"value" : "VERIFIED"
+			}
+		]
+	]
 }

@@ -137,8 +137,10 @@ class DataSpecialist {
 		let sheetRange = xlsx.decodeRange(sheet['!ref']);
 		for(let col = sheetRange.s.c; col <= sheetRange.e.c; col++){
 		    let address = xlsx.encodeAddress({c: col, r: this.headerRow});
+		    console.log(sheet[address].v);
 		    for(let pattern in this.config.headerMappings){
 			if(sheet[address].t == 's' && sheet[address].v.includes(pattern)){
+			    console.log('Replacing ' + pattern + ' with ' + this.config.headerMappings[pattern]);
 			    sheet[address].v = this.config.headerMappings[pattern];
 			}
 		    }
@@ -224,11 +226,10 @@ class DataSpecialist {
 		for(let row of this.curData[sheet]){
 		    for(let mapping in this.config.responseMappings){
 			if(mapping in row){
-			    console.log('doing response mappings for ' + mapping + ' with value ' + row[mapping]);
-			    for(let pattern in this.config.responseMappings[mapping]){
-				if(row[mapping] == pattern){
-				    row[mapping] = this.config.responseMappings[mapping][pattern];
-				    console.log('Replaced ' + pattern + ' with ' + row[mapping]);
+			    for(let target in this.config.responseMappings[mapping]){
+				if(row[mapping] == target){
+				    row[mapping] = this.config.responseMappings[mapping][target];
+				    console.log('Replaced ' + target + ' with ' + row[mapping]);
 				    break;
 				}
 			    }
@@ -263,7 +264,6 @@ class DataSpecialist {
 	/* Create identifiers based on a cryptographic hash of the 
 	   canonicalIdentifier field */
 
-	console.log(this.config.canonicalIdentifier);
 	for(let sheet in this.curData){
 	    for(let row of this.curData[sheet]){
 		console.log(row[this.config.canonicalIdentifier]);

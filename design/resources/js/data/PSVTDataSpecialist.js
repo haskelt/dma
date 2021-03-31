@@ -15,6 +15,7 @@ class PSVTDataSpecialist extends DataSpecialist {
 	    this.convertWorkbookToJSON,
 	    this.doIdentifierCheck,
 	    this.doRequiredFieldsCheck,
+	    this.applyResponseMappings,
 	    this.anonymizeData,
 	    this.setData
 	];

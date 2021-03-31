@@ -5,7 +5,7 @@ import DataManager from '{{project.site_path}}/js/data/DataManager.js?v={{projec
 
 function initialize () {
     
-    DataManager.configure(config.getConfig('data'));
+    DataManager.initialize();
 
 } // initialize
 
