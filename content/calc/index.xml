@@ -39,6 +39,12 @@
       <task-wrapper label="Step 3 - Data Files">
 	<task-set id="taskset3">
 	  <spreadsheet-selector id="pretest1" label="Pretest 1" optional="true"/>
+	  <spreadsheet-selector id="pretest2" label="Pretest 2" optional="true"/>
+	  <spreadsheet-selector id="pretest3" label="Pretest 3" optional="true"/>
+	  <spreadsheet-selector id="test1" label="Test 1" optional="true"/>
+	  <spreadsheet-selector id="test2" label="Test 2" optional="true"/>
+	  <spreadsheet-selector id="test3" label="Test 3" optional="true"/>
+	  <spreadsheet-selector id="psvt" label="PSVTR" optional="true"/>
 	</task-set>
       </task-wrapper>
       <task-wrapper label="Step 4 - Export">

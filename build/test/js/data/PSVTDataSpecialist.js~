@@ -1,0 +1,28 @@
+{{project.js_copyright_notice}}
+
+import logger from '{{project.site_path}}/js/logger/logger.js?v={{project.version}}';
+import DataSpecialist from '{{project.site_path}}/js/data/DataSpecialist.js?v={{project.version}}';
+
+class WAMAPDataSpecialist extends DataSpecialist {
+
+    /**************************************************************************/
+
+    constructor () {
+
+	super();
+	this.processingSteps = [
+	    this.fixWAMAPHeadings,
+	    this.convertWorkbookToJSON,
+	    this.doIdentifierCheck,
+	    this.doRequiredFieldsCheck,
+	    this.anonymizeData,
+	    this.setData
+	];
+
+    } // constructor
+    
+    /**************************************************************************/
+
+} // WAMAPDataSpecialist
+
+export default WAMAPDataSpecialist;

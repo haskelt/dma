@@ -1,7 +1,7 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/dma/js/logger/logger.js?v=0.6.0-beta';
-import Roster from '/dma/js/data/Roster.js?v=0.6.0-beta';
+import logger from '/dma/js/logger/logger.js?v=0.7.0-beta';
+import Roster from '/dma/js/data/Roster.js?v=0.7.0-beta';
 
 class Consent {
 
@@ -20,8 +20,6 @@ class Consent {
 	var data = raw_data[Object.keys(raw_data)[0]]
 	this.doConsentFieldCheck(data);
 	var identifiers = this.doIdentifierCheck(data);
-
-
 
     } // setData
     

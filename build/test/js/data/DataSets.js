@@ -1,9 +1,9 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/js/logger/logger.js?v=0.6.1-beta';
-import DataError from '/js/errors/DataError.js?v=0.6.1-beta';
-import DataWarning from '/js/errors/DataWarning.js?v=0.6.1-beta';
-import xlsx from '/js/xlsx/xlsx.js?v=0.6.1-beta';
+import logger from '/js/logger/logger.js?v=0.7.0-beta';
+import DataError from '/js/errors/DataError.js?v=0.7.0-beta';
+import DataWarning from '/js/errors/DataWarning.js?v=0.7.0-beta';
+import xlsx from '/js/xlsx/xlsx.js?v=0.7.0-beta';
 
 class DataSets {
 
@@ -14,8 +14,6 @@ class DataSets {
     static setDataSet (tag, data) {
 
 	this.dataSets[tag] = data;
-	console.log('setDataSet ' + tag);
-	console.log(data);
 	
     } // getDataSet
 
