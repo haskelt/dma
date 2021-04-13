@@ -1,7 +1,7 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import config from '/js/config.js?v=0.9.0-beta';
-import DataManager from '/js/data/DataManager.js?v=0.9.0-beta';
+import config from '/js/config.js?v=0.10.0-beta';
+import DataManager from '/js/data/DataManager.js?v=0.10.0-beta';
 
 function initialize () {
     

@@ -1,0 +1,136 @@
+{
+	"data" : {
+		"instructor" : {
+			"class" : "Metadata"
+		},
+		"institution" : {
+			"class" : "Metadata"
+		},
+		"course" : {
+			"class" : "Metadata"
+		},
+		"condition" : {
+			"class" : "Metadata"
+		},
+		"modality" : {
+			"class" : "Metadata"
+		},
+		"term" : {
+			"class" : "Metadata"
+		},
+	    "_roster" : {
+			"class" : "CanvasRoster",
+		        "requiredFields" : [ "STUDENT'S NAME", "SID", "EMAIL" ],
+			"canonicalIdentifier" : "pretty_sid"
+		},
+		"demographics" : {
+			"class" : "CanvasData",
+			"headerMappings" : {
+				"first time taking this course" : "first_time",
+				"grade you received in Engineering Physics 1" : "phys1_grade",
+				"grade you received in Calculus 2" : "calc2_grade",
+				"your age fall in" : "age",
+				"parents earned a 4-year college degree" : "parent_degree",
+				"gender do you most identify with" : "gender",
+				"best describes your race/ethnicity" : "ethnicity",
+				"Purpose and Benefit" : "consent"
+			},
+			"responseMappings" : {
+				"consent" : {
+					"I am over 18 and give permission to include my responses in this study" : "I consent",
+					"I do not give my permission to include my responses in this study" : "I do not consent",
+					"I am under 18 and give permission to include my responses in the study. My parent/guardian will email their permission to the course instructor." : "My parents will consent"
+				}
+			},
+			"requiredFields" : [ "consent" ],
+			"possibleIdentifiers" : {
+				"name" : "pretty_name",
+				"sis_id" : "pretty_sid",
+				"id" : null
+			}
+		},
+	    "psvt_pre" : {
+			"class" : "CanvasData",
+			"possibleIdentifiers" : {
+				"name" : "pretty_name",
+				"sis_id" : "pretty_sid",
+				"id" : null
+			}
+		},
+		"psvt_post" : {
+			"class" : "CanvasData",
+			"possibleIdentifiers" : {
+				"name" : "pretty_name",
+				"sis_id" : "pretty_sid",
+				"id" : null
+			}
+		},
+		"pretest1" : {
+			"class" : "WAMAPData",
+			"possibleIdentifiers" : {
+				"Name" : "Name"
+			}
+		},
+		"pretest2" : {
+			"class" : "WAMAPData",
+			"possibleIdentifiers" : {
+				"Name" : "Name"
+			}
+		},
+		"pretest3" : {
+			"class" : "WAMAPData",
+			"possibleIdentifiers" : {
+				"Name" : "Name"
+			}
+		},
+		"test1" : {
+			"class" : "WAMAPData",
+			"possibleIdentifiers" : {
+				"Name" : "Name"
+			}
+		},
+		"test2" : {
+			"class" : "WAMAPData",
+			"possibleIdentifiers" : {
+				"Name" : "Name"
+			}
+		},
+		"test3" : {
+			"class" : "WAMAPData",
+			"possibleIdentifiers" : {
+				"Name" : "Name"
+			}
+		}
+	},
+	"consentOptions" : [
+		[
+			{
+				"field" : "consent",
+				"relation" : "=",
+				"value" : "I consent"
+			},
+			{
+				"field" : "age",
+				"relation" : "!=",
+				"value" : "17 or younger"
+			}
+		],
+		[
+			{
+				"field" : "consent",
+				"relation" : "=",
+				"value" : "My parents will consent"
+			},
+			{
+				"field" : "age",
+				"relation" : "=",
+				"value" : "17 or younger"
+			},
+			{
+				"field" : "consent_verification",
+				"relation" : "=",
+				"value" : "VERIFIED"
+			}
+		]
+	]
+}

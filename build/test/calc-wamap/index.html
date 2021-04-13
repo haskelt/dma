@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang=en>
+
+  <head>
+    <meta charset=utf-8>
+    <title>DMA</title>
+    
+    <link rel="stylesheet" href="/css/app.css?v=0.10.0-beta" type="text/css" />
+    
+    
+    
+    <link rel="stylesheet" href="/css/status/status.css?v=0.10.0-beta" type="text/css" />
+    
+    <link rel="stylesheet" href="/css/fields/fields.css?v=0.10.0-beta" type="text/css" />
+    
+    <link rel="stylesheet" href="/css/tasks/tasks.css?v=0.10.0-beta" type="text/css" />
+    
+    
+    
+  </head>
+  
+  <body>
+    
+    <header>
+      <h1>EMARCS Data Management App</h1>
+    </header>
+    <main>
+      
+      
+  <section id="content">
+  
+    <div id="tasksequence" class="tasks__task-sequence">
+
+      <div class="tasks__task-wrapper" data-label="Step 1 - Course Information">
+  <div class="tasks__task-wrapper--header">
+    Step 1 - Course Information
+  </div>
+  <div class="tasks__task-wrapper--container collapsed">
+    
+	<div id="taskset1" class="tasks__task-set">
+  
+	  <div id="instructor" class="fields__text-input tasks__task" data-label="Name of instructor" data-task-type="text-input">
+  <span class="fields__text-input--label">Name of instructor</span>
+  <input type="text" class="fields__text-input--input"/>
+</div>
+	  <div id="institution" class="fields__text-input tasks__task" data-label="Institution" data-task-type="text-input">
+  <span class="fields__text-input--label">Institution</span>
+  <input type="text" class="fields__text-input--input"/>
+</div>
+	  <div id="course" class="fields__multiple-choice tasks__task" data-label="Is this data from Calc II or Statics?" data-task-type="multiple-choice">
+  <span>Is this data from Calc II or Statics?</span>
+  
+  
+  <div>
+  <input class="fields__multiple-choice--option" type="radio" name="course" value="Calc II">
+  <label for="Calc II">Calc II</label>
+  </div>
+  
+  
+  <div>
+  <input class="fields__multiple-choice--option" type="radio" name="course" value="Statics">
+  <label for="Statics">Statics</label>
+  </div>
+  
+</div>
+	  <div id="condition" class="fields__multiple-choice tasks__task" data-label="Is this an intervention or control section?" data-task-type="multiple-choice">
+  <span>Is this an intervention or control section?</span>
+  
+  
+  <div>
+  <input class="fields__multiple-choice--option" type="radio" name="condition" value="Intervention">
+  <label for="Intervention">Intervention</label>
+  </div>
+  
+  
+  <div>
+  <input class="fields__multiple-choice--option" type="radio" name="condition" value="Control">
+  <label for="Control">Control</label>
+  </div>
+  
+</div>
+	  <div id="modality" class="fields__multiple-choice tasks__task" data-label="Course modality" data-task-type="multiple-choice">
+  <span>Course modality</span>
+  
+  
+  <div>
+  <input class="fields__multiple-choice--option" type="radio" name="modality" value="F2F">
+  <label for="F2F">F2F</label>
+  </div>
+  
+  
+  <div>
+  <input class="fields__multiple-choice--option" type="radio" name="modality" value="On-line">
+  <label for="On-line">On-line</label>
+  </div>
+  
+</div>
+	  <div id="term" class="fields__select tasks__task" data-label="What term was this data collected?" data-task-type="select">
+  <div>What term was this data collected?</div>
+  <select class="fields__select--select">
+    <option class="fields__select--hidden-option" selected disabled></option>
+  
+  
+        <option class="fields__select--option" value="Fall 2019">Fall 2019</option>
+  
+  
+        <option class="fields__select--option" value="Winter 2020">Winter 2020</option>
+  
+  
+        <option class="fields__select--option" value="Spring 2020">Spring 2020</option>
+  
+  
+        <option class="fields__select--option" value="Fall 2020">Fall 2020</option>
+  
+  
+        <option class="fields__select--option" value="Winter 2021">Winter 2021</option>
+  
+  
+        <option class="fields__select--option" value="Spring 2021">Spring 2021</option>
+  
+  
+        <option class="fields__select--option" value="Fall 2021">Fall 2021</option>
+  
+  
+        <option class="fields__select--option" value="Winter 2022">Winter 2022</option>
+  
+  
+        <option class="fields__select--option" value="Spring 2022">Spring 2022</option>
+  
+  </select>
+</div>
+	
+</div>
+
+      
+    <div class="tasks__task-wrapper--footer">
+      <button class="tasks__task-wrapper--button" data-action="previous">Previous</button>
+      <button class="tasks__task-wrapper--button" data-action="next" disabled>Next</button>
+    </div>
+  </div>
+</div>
+      <div class="tasks__task-wrapper" data-label="Step 2 - Roster and Consent">
+  <div class="tasks__task-wrapper--header">
+    Step 2 - Roster and Consent
+  </div>
+  <div class="tasks__task-wrapper--container collapsed">
+    
+	<div id="taskset2" class="tasks__task-set">
+  
+	  <div id="_roster" class="fields__spreadsheet-selector tasks__task" data-label="Master Student Roster" data-task-type="spreadsheet-selector" data-optional="">
+  <span class="fields__spreadsheet-selector--label">Master Student Roster</span>
+  
+  <input type="file" class="fields__spreadsheet-selector--selector"/>
+</div>
+	  <div id="demographics" class="fields__spreadsheet-selector tasks__task" data-label="Consent and Demographics" data-task-type="spreadsheet-selector" data-optional="">
+  <span class="fields__spreadsheet-selector--label">Consent and Demographics</span>
+  
+  <input type="file" class="fields__spreadsheet-selector--selector"/>
+</div>
+	
+</div>
+
+      
+    <div class="tasks__task-wrapper--footer">
+      <button class="tasks__task-wrapper--button" data-action="previous">Previous</button>
+      <button class="tasks__task-wrapper--button" data-action="next" disabled>Next</button>
+    </div>
+  </div>
+</div>
+      <div class="tasks__task-wrapper" data-label="Step 3 - Data Files">
+  <div class="tasks__task-wrapper--header">
+    Step 3 - Data Files
+  </div>
+  <div class="tasks__task-wrapper--container collapsed">
+    
+	<div id="taskset3" class="tasks__task-set">
+  
+	  <div id="pretest1" class="fields__spreadsheet-selector tasks__task" data-label="Pretest 1" data-task-type="spreadsheet-selector" data-optional="true">
+  <span class="fields__spreadsheet-selector--label">Pretest 1</span>
+  <input type="checkbox" class="fields__spreadsheet-selector--checkbox"/><span class="fields__spreadsheet-selector--checkbox-label">Skip</span>
+  <input type="file" class="fields__spreadsheet-selector--selector"/>
+</div>
+	  <div id="pretest2" class="fields__spreadsheet-selector tasks__task" data-label="Pretest 2" data-task-type="spreadsheet-selector" data-optional="true">
+  <span class="fields__spreadsheet-selector--label">Pretest 2</span>
+  <input type="checkbox" class="fields__spreadsheet-selector--checkbox"/><span class="fields__spreadsheet-selector--checkbox-label">Skip</span>
+  <input type="file" class="fields__spreadsheet-selector--selector"/>
+</div>
+	  <div id="pretest3" class="fields__spreadsheet-selector tasks__task" data-label="Pretest 3" data-task-type="spreadsheet-selector" data-optional="true">
+  <span class="fields__spreadsheet-selector--label">Pretest 3</span>
+  <input type="checkbox" class="fields__spreadsheet-selector--checkbox"/><span class="fields__spreadsheet-selector--checkbox-label">Skip</span>
+  <input type="file" class="fields__spreadsheet-selector--selector"/>
+</div>
+	  <div id="test1" class="fields__spreadsheet-selector tasks__task" data-label="Test 1" data-task-type="spreadsheet-selector" data-optional="true">
+  <span class="fields__spreadsheet-selector--label">Test 1</span>
+  <input type="checkbox" class="fields__spreadsheet-selector--checkbox"/><span class="fields__spreadsheet-selector--checkbox-label">Skip</span>
+  <input type="file" class="fields__spreadsheet-selector--selector"/>
+</div>
+	  <div id="test2" class="fields__spreadsheet-selector tasks__task" data-label="Test 2" data-task-type="spreadsheet-selector" data-optional="true">
+  <span class="fields__spreadsheet-selector--label">Test 2</span>
+  <input type="checkbox" class="fields__spreadsheet-selector--checkbox"/><span class="fields__spreadsheet-selector--checkbox-label">Skip</span>
+  <input type="file" class="fields__spreadsheet-selector--selector"/>
+</div>
+	  <div id="test3" class="fields__spreadsheet-selector tasks__task" data-label="Test 3" data-task-type="spreadsheet-selector" data-optional="true">
+  <span class="fields__spreadsheet-selector--label">Test 3</span>
+  <input type="checkbox" class="fields__spreadsheet-selector--checkbox"/><span class="fields__spreadsheet-selector--checkbox-label">Skip</span>
+  <input type="file" class="fields__spreadsheet-selector--selector"/>
+</div>
+	  <div id="psvt" class="fields__spreadsheet-selector tasks__task" data-label="PSVTR" data-task-type="spreadsheet-selector" data-optional="true">
+  <span class="fields__spreadsheet-selector--label">PSVTR</span>
+  <input type="checkbox" class="fields__spreadsheet-selector--checkbox"/><span class="fields__spreadsheet-selector--checkbox-label">Skip</span>
+  <input type="file" class="fields__spreadsheet-selector--selector"/>
+</div>
+	
+</div>
+
+      
+    <div class="tasks__task-wrapper--footer">
+      <button class="tasks__task-wrapper--button" data-action="previous">Previous</button>
+      <button class="tasks__task-wrapper--button" data-action="next" disabled>Next</button>
+    </div>
+  </div>
+</div>
+      <div class="tasks__task-wrapper" data-label="Step 4 - Export">
+  <div class="tasks__task-wrapper--header">
+    Step 4 - Export
+  </div>
+  <div class="tasks__task-wrapper--container collapsed">
+    
+	<div id="taskset4" class="tasks__task-set">
+  
+	  <div id="export" class="fields__export-button tasks__task" data-task-type="export-button">
+  <button class="fields__export-button--button disabled">Export</button>
+</div>
+	
+</div>
+
+      
+    <div class="tasks__task-wrapper--footer">
+      <button class="tasks__task-wrapper--button" data-action="previous">Previous</button>
+      <button class="tasks__task-wrapper--button" data-action="next" disabled>Next</button>
+    </div>
+  </div>
+</div>
+    
+</div>
+  
+</section>
+  <aside id="sidebar">
+  
+    <div id="status-wrapper">
+  <h2>Processing Status</h2>
+  <div id="status-messages">
+
+  </div>
+</div>
+  
+</aside>
+      
+    </main>
+
+    
+    
+    <script src="/js/logger/logger.js?v=0.10.0-beta" type="module"></script>
+    <script src="/js/data/data.js?v=0.10.0-beta" type="module"></script>
+    
+    
+    
+    <script type="module">
+      import "/js/status/status.js?v=0.10.0-beta"
+    </script>
+    
+    <script type="module">
+      import "/js/fields/fields.js?v=0.10.0-beta"
+    </script>
+    
+    <script type="module">
+      import "/js/tasks/tasks.js?v=0.10.0-beta"
+    </script>
+    
+    
+    <script src="/js/app.js?v=0.10.0-beta" type="module"></script>
+    
+
+  
+  </body>
+
+</html>
