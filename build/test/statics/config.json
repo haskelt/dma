@@ -44,25 +44,25 @@
 			},
 			"requiredFields" : [ "consent" ],
 			"possibleIdentifiers" : {
-				"name" : "pretty_name",
 				"sis_id" : "pretty_sid",
-				"id" : null
+				"id" : "CANVAS ID",
+				"name" : "pretty_name"
 			}
 		},
 		"mct_pre" : {
 			"class" : "CanvasData",
 			"possibleIdentifiers" : {
-				"name" : "pretty_name",
 				"sis_id" : "pretty_sid",
-				"id" : null
+				"id" : "CANVAS ID",
+				"name" : "pretty_name"
 			}
 		},
 		"mct_post" : {
 			"class" : "CanvasData",
 			"possibleIdentifiers" : {
-				"name" : "pretty_name",
 				"sis_id" : "pretty_sid",
-				"id" : null
+				"id" : "CANVAS ID",
+				"name" : "pretty_name"
 			}
 		},
 		"cw" : {
@@ -75,8 +75,8 @@
 			"class" : "ExamData",
 			"possibleIdentifiers" : {
 				"sis_id" : "pretty_sid",
-				"name" : "pretty_name",
-				"id" : null
+				"id" : "CANVAS ID",
+				"name" : "pretty_name"
 			}
 		}
 	},
