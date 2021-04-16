@@ -1,4 +1,22 @@
 {
+	"possibleIdentifiers" : [
+		{
+			"data" : "name",
+			"roster" : "pretty_name"
+		},
+		{
+			"data" : "Name",
+			"roster" : "Name"
+		},
+		{
+			"data" : "sis_id",
+			"roster" : "pretty_sid"
+		},
+		{
+			"data" : "id",
+			"roster" : null
+		}
+	],
 	"data" : {
 		"instructor" : {
 			"class" : "Metadata"
@@ -18,9 +36,9 @@
 		"term" : {
 			"class" : "Metadata"
 		},
-	    "_roster" : {
+		"_roster" : {
 			"class" : "CanvasRoster",
-		        "requiredFields" : [ "STUDENT'S NAME", "SID", "EMAIL" ],
+			"requiredFields" : [ "STUDENT'S NAME", "SID", "EMAIL" ],
 			"canonicalIdentifier" : "pretty_sid"
 		},
 		"demographics" : {
@@ -42,64 +60,31 @@
 					"I am under 18 and give permission to include my responses in the study. My parent/guardian will email their permission to the course instructor." : "My parents will consent"
 				}
 			},
-			"requiredFields" : [ "consent" ],
-			"possibleIdentifiers" : {
-				"name" : "pretty_name",
-				"sis_id" : "pretty_sid",
-				"id" : null
-			}
-		},
-	    "psvt_pre" : {
-			"class" : "CanvasData",
-			"possibleIdentifiers" : {
-				"name" : "pretty_name",
-				"sis_id" : "pretty_sid",
-				"id" : null
-			}
-		},
-		"psvt_post" : {
-			"class" : "CanvasData",
-			"possibleIdentifiers" : {
-				"name" : "pretty_name",
-				"sis_id" : "pretty_sid",
-				"id" : null
-			}
+			"requiredFields" : [ "consent" ]
 		},
 		"pretest1" : {
-			"class" : "WAMAPData",
-			"possibleIdentifiers" : {
-				"Name" : "Name"
-			}
+			"class" : "WAMAPData"
 		},
 		"pretest2" : {
-			"class" : "WAMAPData",
-			"possibleIdentifiers" : {
-				"Name" : "Name"
-			}
+			"class" : "WAMAPData"
 		},
 		"pretest3" : {
-			"class" : "WAMAPData",
-			"possibleIdentifiers" : {
-				"Name" : "Name"
-			}
+			"class" : "WAMAPData"
 		},
 		"test1" : {
-			"class" : "WAMAPData",
-			"possibleIdentifiers" : {
-				"Name" : "Name"
-			}
+			"class" : "WAMAPData"
 		},
 		"test2" : {
-			"class" : "WAMAPData",
-			"possibleIdentifiers" : {
-				"Name" : "Name"
-			}
+			"class" : "WAMAPData"
 		},
 		"test3" : {
-			"class" : "WAMAPData",
-			"possibleIdentifiers" : {
-				"Name" : "Name"
-			}
+			"class" : "WAMAPData"
+		},
+		"psvt_pre" : {
+			"class" : "CanvasData"
+		},
+		"psvt_post" : {
+			"class" : "CanvasData"
 		}
 	},
 	"consentOptions" : [

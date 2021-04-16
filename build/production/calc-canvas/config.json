@@ -1,4 +1,9 @@
 {
+    "possibleIdentifiers" : [
+	{ "data": "name", "roster": "pretty_name"}, 
+	{"data": "sis_id", "roster": "pretty_sid"},
+	{"data": "id", "roster" : null }
+    ],
 	"data" : {
 		"instructor" : {
 			"class" : "Metadata"
@@ -42,76 +47,31 @@
 					"I am under 18 and give permission to include my responses in the study. My parent/guardian will email their permission to the course instructor." : "My parents will consent"
 				}
 			},
-			"requiredFields" : [ "consent" ],
-			"possibleIdentifiers" : {
-				"name" : "pretty_name",
-				"sis_id" : "pretty_sid",
-				"id" : null
-			}
+			"requiredFields" : [ "consent" ]
 		},
 	    "psvt_pre" : {
-			"class" : "CanvasData",
-			"possibleIdentifiers" : {
-				"name" : "pretty_name",
-				"sis_id" : "pretty_sid",
-				"id" : null
-			}
+			"class" : "CanvasData"
 		},
 		"psvt_post" : {
-			"class" : "CanvasData",
-			"possibleIdentifiers" : {
-				"name" : "pretty_name",
-				"sis_id" : "pretty_sid",
-				"id" : null
-			}
+			"class" : "CanvasData"
 		},
 	    "pretest1" : {
-			"class" : "CanvasData",
-			"possibleIdentifiers" : {
-				"name" : "pretty_name",
-				"sis_id" : "pretty_sid",
-				"id" : null
-			}
+			"class" : "CanvasData"
 		},
 		"pretest2" : {
-			"class" : "CanvasData",
-			"possibleIdentifiers" : {
-				"name" : "pretty_name",
-				"sis_id" : "pretty_sid",
-				"id" : null
-			}
+			"class" : "CanvasData"
 		},
 		"pretest3" : {
-			"class" : "CanvasData",
-			"possibleIdentifiers" : {
-				"name" : "pretty_name",
-				"sis_id" : "pretty_sid",
-				"id" : null
-			}
+			"class" : "CanvasData"
 		},
 		"test1" : {
-			"class" : "CanvasData",
-			"possibleIdentifiers" : {
-				"name" : "pretty_name",
-				"sis_id" : "pretty_sid",
-				"id" : null
-			}
+			"class" : "CanvasData"
 		},
 		"test2" : {
-			"class" : "CanvasData",
-			"possibleIdentifiers" : {
-				"name" : "pretty_name",
-				"sis_id" : "pretty_sid",
-				"id" : null
-			}
+			"class" : "CanvasData"
 		},
 		"test3" : {
-			"class" : "CanvasData",
-			"possibleIdentifiers" : {
-				"name" : "pretty_name",
-				"sis_id" : "pretty_sid",
-				"id" : null
-			}
+			"class" : "CanvasData"
 		}
 	},
 	"consentOptions" : [

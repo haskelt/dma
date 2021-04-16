@@ -1,4 +1,26 @@
 {
+	"possibleIdentifiers" : [
+		{
+			"data" : "sis_id",
+			"roster" : "pretty_sid"
+		},
+		{
+			"data" : "id",
+			"roster" : "CANVAS ID"
+		},
+		{
+			"data" : "E-mail",
+			"roster" : "EMAIL"
+		},
+		{
+			"data" : "name",
+			"roster" : "STUDENT'S NAME"
+		},
+		{
+			"data" : "name",
+			"roster" : "pretty_name"
+		}
+	],
 	"data" : {
 		"instructor" : {
 			"class" : "Metadata"
@@ -42,42 +64,19 @@
 					"I am under 18 and give permission to include my responses in the study. My parent/guardian will email their permission to the course instructor." : "My parents will consent"
 				}
 			},
-			"requiredFields" : [ "consent" ],
-			"possibleIdentifiers" : {
-				"sis_id" : "pretty_sid",
-				"id" : "CANVAS ID",
-				"name" : "pretty_name"
-			}
+			"requiredFields" : [ "consent" ]
 		},
 		"mct_pre" : {
-			"class" : "CanvasData",
-			"possibleIdentifiers" : {
-				"sis_id" : "pretty_sid",
-				"id" : "CANVAS ID",
-				"name" : "pretty_name"
-			}
+			"class" : "CanvasData"
 		},
 		"mct_post" : {
-			"class" : "CanvasData",
-			"possibleIdentifiers" : {
-				"sis_id" : "pretty_sid",
-				"id" : "CANVAS ID",
-				"name" : "pretty_name"
-			}
+			"class" : "CanvasData"
 		},
 		"cw" : {
-			"class" : "CWData",
-			"possibleIdentifiers" : {
-				"E-mail" : "EMAIL"
-			}
+			"class" : "CWData"
 		},
 		"exam" : {
-			"class" : "ExamData",
-			"possibleIdentifiers" : {
-				"sis_id" : "pretty_sid",
-				"id" : "CANVAS ID",
-				"name" : "pretty_name"
-			}
+			"class" : "ExamData"
 		}
 	},
 	"consentOptions" : [

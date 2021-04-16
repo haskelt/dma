@@ -1,10 +1,10 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/dma/js/logger/logger.js?v=0.10.1-beta';
-import config from '/dma/js/config.js?v=0.10.1-beta';
-import DataError from '/dma/js/errors/DataError.js?v=0.10.1-beta';
-import DataSpecialistFactory from '/dma/js/data/DataSpecialistFactory.js?v=0.10.1-beta';
-import DataSets from '/dma/js/data/DataSets.js?v=0.10.1-beta';
+import logger from '/dma/js/logger/logger.js?v=0.11.0-beta';
+import config from '/dma/js/config.js?v=0.11.0-beta';
+import DataError from '/dma/js/errors/DataError.js?v=0.11.0-beta';
+import DataSpecialistFactory from '/dma/js/data/DataSpecialistFactory.js?v=0.11.0-beta';
+import DataSets from '/dma/js/data/DataSets.js?v=0.11.0-beta';
 
 class DataManager {
 
@@ -16,7 +16,7 @@ class DataManager {
 
     static initialize () {
 
-	this.dataConfig = config.getConfig('data');
+	this.dataConfigSection = config.getConfig('data');
 	this.consentOptions = config.getConfig('consentOptions');
 	
     } // initialize
@@ -26,9 +26,9 @@ class DataManager {
     static postData (tag, data) {
 
 	logger.postMessage('DEBUG', 'data', 'Posting data for tag ' + tag + ' of ' + data);
-	if(tag in this.dataConfig){
-	    let specialist = DataSpecialistFactory.build(this.dataConfig[tag]['class']);
-	    specialist.processData.bind(specialist)(tag, data, this.dataConfig[tag]);
+	if(tag in this.dataConfigSection){
+	    let specialist = DataSpecialistFactory.build(this.dataConfigSection[tag]['class']);
+	    specialist.processData.bind(specialist)(tag, data, this.dataConfigSection[tag]);
 	} else {
 	    throw Error('No data handling configured for ' + tag);
 	}

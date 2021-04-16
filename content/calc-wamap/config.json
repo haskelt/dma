@@ -1,4 +1,14 @@
 {
+	"possibleIdentifiers" : [
+		{
+			"data" : "Name",
+			"roster" : "Name"
+		},
+		{
+			"data" : "Code",
+			"roster" : "pretty_sid"
+		}
+	],
 	"data" : {
 		"instructor" : {
 			"class" : "Metadata"
@@ -35,11 +45,12 @@
 				"Question 7:Scored Answer" : "consent",
 				"Question 7:Scored Correct Answer" : "consent_verification"
 			},
-			"requiredFields" : [ "consent" ],
-			"possibleIdentifiers" : {
-				"Name" : "Name"
-			},
 			"responseMappings" : {
+				"consent" : {
+					"0" : "I consent",
+					"1" : "My parents will consent",
+					"2" : "I do not consent"
+				},
 				"first_time" : {
 					"0" : "Yes",
 					"1" : "No",
@@ -60,11 +71,6 @@
 					"11" : "S (satisfactory)",
 					"12" : "U (unsatisfactory)",
 					"13" : "Prefer not to answer"
-				},
-				"consent" : {
-					"0" : "I consent",
-					"1" : "My parents will consent",
-					"2" : "I do not consent"
 				},
 				"age" : {
 					"0" : "17 or younger",
@@ -91,54 +97,33 @@
 					"6" : "A race/ethnicity not listed here",
 					"7" : "Prefer not to answer"
 				}
-			}
+			},
+			"requiredFields" : [ "consent" ]
+		},
+		"pretest1" : {
+			"class" : "WAMAPData"
+		},
+		"pretest2" : {
+			"class" : "WAMAPData"
+		},
+		"pretest3" : {
+			"class" : "WAMAPData"
+		},
+		"test1" : {
+			"class" : "WAMAPData"
+		},
+		"test2" : {
+			"class" : "WAMAPData"
+		},
+		"test3" : {
+			"class" : "WAMAPData"
 		},
 		"psvt" : {
 			"class" : "PSVTData",
-			"possibleIdentifiers" : {
-				"Name" : "Name",
-				"Code" : "null"
-			},
 			"headerMappings" : {
 				"Name" : "Name",
 				"Pre-Course Assessment" : "psvt_pre",
 				"Post-Course Assessment" : "psvt_post"
-			}
-		},
-		"pretest1" : {
-			"class" : "WAMAPData",
-			"possibleIdentifiers" : {
-				"Name" : "Name"
-			}
-		},
-		"pretest2" : {
-			"class" : "WAMAPData",
-			"possibleIdentifiers" : {
-				"Name" : "Name"
-			}
-		},
-		"pretest3" : {
-			"class" : "WAMAPData",
-			"possibleIdentifiers" : {
-				"Name" : "Name"
-			}
-		},
-		"test1" : {
-			"class" : "WAMAPData",
-			"possibleIdentifiers" : {
-				"Name" : "Name"
-			}
-		},
-		"test2" : {
-			"class" : "WAMAPData",
-			"possibleIdentifiers" : {
-				"Name" : "Name"
-			}
-		},
-		"test3" : {
-			"class" : "WAMAPData",
-			"possibleIdentifiers" : {
-				"Name" : "Name"
 			}
 		}
 	},

@@ -16,7 +16,7 @@ class DataManager {
 
     static initialize () {
 
-	this.dataConfig = config.getConfig('data');
+	this.dataConfigSection = config.getConfig('data');
 	this.consentOptions = config.getConfig('consentOptions');
 	
     } // initialize
@@ -26,9 +26,9 @@ class DataManager {
     static postData (tag, data) {
 
 	logger.postMessage('DEBUG', 'data', 'Posting data for tag ' + tag + ' of ' + data);
-	if(tag in this.dataConfig){
-	    let specialist = DataSpecialistFactory.build(this.dataConfig[tag]['class']);
-	    specialist.processData.bind(specialist)(tag, data, this.dataConfig[tag]);
+	if(tag in this.dataConfigSection){
+	    let specialist = DataSpecialistFactory.build(this.dataConfigSection[tag]['class']);
+	    specialist.processData.bind(specialist)(tag, data, this.dataConfigSection[tag]);
 	} else {
 	    throw Error('No data handling configured for ' + tag);
 	}

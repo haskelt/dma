@@ -1,9 +1,9 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/js/logger/logger.js?v=0.10.1-beta';
-import DataError from '/js/errors/DataError.js?v=0.10.1-beta';
-import DataWarning from '/js/errors/DataWarning.js?v=0.10.1-beta';
-import xlsx from '/js/xlsx/xlsx.js?v=0.10.1-beta';
+import logger from '/js/logger/logger.js?v=0.11.0-beta';
+import DataError from '/js/errors/DataError.js?v=0.11.0-beta';
+import DataWarning from '/js/errors/DataWarning.js?v=0.11.0-beta';
+import xlsx from '/js/xlsx/xlsx.js?v=0.11.0-beta';
 
 class DataSets {
 
@@ -107,11 +107,9 @@ class DataSets {
 	   options in <keepOptions> as applied to <referenceDataSet>.
 	   <matchField> should be a common field in both data sets, as it is
 	   used to map the keep/drop decisions from one to the other. */
-	console.log(keepOptions);
 	// generate a list of students whose data we are keeping
 	var keepList = [];
 	for(let entry of referenceDataSet){
-	    console.log(entry);
 	    /* Iterate through each possible option in <keepOptions>.
 	     * set. The entry only needs to satisfy the criteria of
 	     * one option in order to be kept. */
@@ -122,7 +120,6 @@ class DataSets {
 		   relation (either '=' or '!='), and a comparison
 		   value. Within an option, all criteria must be met 
 		   to keep the entry. */
-		console.log(option);
 		for(let criterion of option){
 		    if(criterion.relation == '='){
 			if(entry[criterion.field] != criterion.value){
@@ -137,7 +134,6 @@ class DataSets {
 		    }
 		}
 		if(criteriaMet){
-		    console.log('keep!');
 		    keepList.push(entry[matchField]);
 		    break;
 		}
