@@ -18,7 +18,7 @@ class DataSets {
     } // getDataSet
 
     /**************************************************************************/
-
+    
     static getDataSet (tag) {
 
 	if(tag in this.dataSets){
@@ -36,6 +36,18 @@ class DataSets {
 	return Object.keys(this.dataSets);
 	
     } // getDataTags
+    
+    /**************************************************************************/
+
+    static dataFieldExists (tag, field) {
+
+	if(tag in this.dataSets && field in this.dataSets[tag][0]){
+	    return true;
+	} else {
+	    return false;
+	}
+	
+    } // dataFieldExists
     
     /**************************************************************************/
 

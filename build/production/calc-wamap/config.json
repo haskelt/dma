@@ -2,7 +2,7 @@
 	"possibleIdentifiers" : [
 		{
 			"data" : "Name",
-			"roster" : "Name"
+			"roster" : "STUDENT'S NAME"
 		},
 		{
 			"data" : "Code",
@@ -29,8 +29,8 @@
 			"class" : "Metadata"
 		},
 		"_roster" : {
-			"class" : "WAMAPRoster",
-			"requiredFields" : [ "Name", "SID" ],
+			"class" : "CanvasRoster",
+			"requiredFields" : [ "STUDENT'S NAME", "SID" ],
 			"canonicalIdentifier" : "SID"
 		},
 		"demographics" : {

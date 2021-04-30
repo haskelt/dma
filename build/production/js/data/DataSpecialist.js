@@ -375,9 +375,11 @@ class DataSpecialist {
     /**************************************************************************/
 
     partitionCanvasRoster () {
-	
-	DataSets.partitionDataSet('_roster', 'course_grade', ['GRADE']);
 
+	if(DataSets.dataFieldExists('_roster', 'GRADE')){
+	    DataSets.partitionDataSet('_roster', 'course_grade', ['GRADE']);
+	}
+	    
     } // partitionCanvasRoster
 
     /**************************************************************************/
