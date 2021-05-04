@@ -11,7 +11,9 @@ class CWDataSpecialist extends DataSpecialist {
 	super();
 	this.processingSteps = [
 	    this.preprocessCWWorkbook,
+	    this.standardizeIdentifierHeadings,
 	    this.convertWorkbookToJSON,
+	    this.formatIdentifierValues,
 	    this.doIdentifierCheck,
 	    this.doRequiredFieldsCheck,
 	    this.applyResponseMappings,

@@ -1,10 +1,10 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/dma/js/logger/logger.js?v=0.11.0-beta';
-import config from '/dma/js/config.js?v=0.11.0-beta';
-import DataError from '/dma/js/errors/DataError.js?v=0.11.0-beta';
-import DataSpecialistFactory from '/dma/js/data/DataSpecialistFactory.js?v=0.11.0-beta';
-import DataSets from '/dma/js/data/DataSets.js?v=0.11.0-beta';
+import logger from '/dma/js/logger/logger.js?v=0.12.0-beta';
+import config from '/dma/js/config.js?v=0.12.0-beta';
+import DataError from '/dma/js/errors/DataError.js?v=0.12.0-beta';
+import DataSpecialistFactory from '/dma/js/data/DataSpecialistFactory.js?v=0.12.0-beta';
+import DataSets from '/dma/js/data/DataSets.js?v=0.12.0-beta';
 
 class DataManager {
 
@@ -16,6 +16,7 @@ class DataManager {
 
     static initialize () {
 
+	this.identifiers = config.getConfig('identifiers');
 	this.dataConfigSection = config.getConfig('data');
 	this.consentOptions = config.getConfig('consentOptions');
 	
@@ -57,7 +58,6 @@ class DataManager {
     
     static checkConsent (dataSets) {
 
-	console.log(this.consentOptions);
 	var demographicsDataSet = DataSets.getDataSet('demographics');
 	var filteredDataSets = {};
 	for(let targetTag in dataSets){
@@ -78,14 +78,15 @@ class DataManager {
 
     static generateMissingRecords (dataSets) {
 
+	var canonicalIdentifier = this.dataConfigSection['_roster']['canonicalIdentifier'];
 	var noMissingRecordsDataSets = {};
 	for(let targetTag in dataSets){
 	    logger.postMessage('DEBUG', 'data', 'Ensuring dataset "' + targetTag + '" contains records for each student in dataset "_roster"');
 	    let missingList = [];
 	    noMissingRecordsDataSets[targetTag] = DataSets.generateMissingRecords(dataSets[targetTag], dataSets['_roster'], 'anonID', missingList);
 	    for(let student of missingList){
-		let name = DataSets.findData('_roster', 'anonID', student, "STUDENT'S NAME");
-		logger.postMessage('WARN', 'data', 'Data set "' + targetTag + '" is missing student "' + name + '", created empty record.');
+		let canonicalID = DataSets.findData('_roster', 'anonID', student, canonicalIdentifier);
+		logger.postMessage('WARN', 'data', 'Data set "' + targetTag + '" is missing student "' + canonicalID + '", created empty record.');
 	    }
 	    logger.postMessage('DEBUG', 'data', 'Sorting dataset "' + targetTag + '" by field "anonID"');
 	}

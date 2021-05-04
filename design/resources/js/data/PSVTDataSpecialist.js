@@ -12,7 +12,9 @@ class PSVTDataSpecialist extends DataSpecialist {
 	this.processingSteps = [
 	    this.preprocessPSVTWorkbook,
 	    this.applyHeaderMappings,
+	    this.standardizeIdentifierHeadings,
 	    this.convertWorkbookToJSON,
+	    this.formatIdentifierValues,
 	    this.doIdentifierCheck,
 	    this.doRequiredFieldsCheck,
 	    this.applyResponseMappings,

@@ -11,8 +11,10 @@ class CanvasDataSpecialist extends DataSpecialist {
 	super();
 	this.processingSteps = [
 	    this.applyHeaderMappings,
+	    this.standardizeIdentifierHeadings,
 	    this.convertWorkbookToJSON,
 	    this.doSingleWorksheetCheck,
+	    this.formatIdentifierValues,
 	    this.doIdentifierCheck,
 	    this.doRequiredFieldsCheck,
 	    this.applyResponseMappings,

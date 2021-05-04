@@ -1,13 +1,24 @@
 {
-	"possibleIdentifiers" : [
-		{
-			"data" : "Name",
-			"roster" : "STUDENT'S NAME"
-		},
-		{
-			"data" : "Code",
-			"roster" : "pretty_sid"
-		}
+    "identifiers" : [
+	{
+	    "standardHeading": "Name",
+	    "headingPattern": "Name$",
+	    "formatStandardization": {
+		"trim": true,
+		"upper": true,
+		"find": "([ a-zA-z]+), ([ a-zA-Z]+)",
+		"replace": "$2 $1"
+	    }
+	},
+	{
+	    "standardHeading": "Student ID",
+	    "headingPattern": "^Code$|^Student SIS ID$|^SID$",
+	    "formatStandardization": {
+		"trim": true,
+		"find": "-",
+		"replace": ""
+	    }
+	}
 	],
 	"data" : {
 		"instructor" : {
@@ -30,8 +41,8 @@
 		},
 		"_roster" : {
 			"class" : "CanvasRoster",
-			"requiredFields" : [ "STUDENT'S NAME", "SID" ],
-			"canonicalIdentifier" : "SID"
+			"requiredFields" : [ "Student ID" ],
+			"canonicalIdentifier" : "Student ID"
 		},
 		"demographics" : {
 			"class" : "WAMAPData",

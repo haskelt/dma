@@ -21,14 +21,14 @@ class DataSpecialist {
     
     /**************************************************************************/
 
-    processData (tag, data, dataConfig, possibleIdentifiers) {
+    processData (tag, data, dataConfig) {
 
 	logger.postMessage('DEBUG', 'data', 'Setting data ' + tag);
 
 	this.tag = tag;
 	this.curData = data;
 	this.dataConfig = dataConfig;
-	this.possibleIdentifiers = config.getConfig('possibleIdentifiers');
+	this.identifiers = config.getConfig('identifiers');
 	
 	for(let step of this.processingSteps){
 	    step.bind(this)();
@@ -96,7 +96,6 @@ class DataSpecialist {
     preprocessPSVTWorkbook () {
 
 	for(let sheet of Object.values(this.curData.Sheets)){
-	    console.log(sheet);
 	    let sheetRange = xlsx.decodeRange(sheet['!ref']);
 	    for(let col = sheetRange.s.c; col <= sheetRange.e.c; col++){
 		/* PSVT files have a header row, followed by a blank
@@ -142,6 +141,7 @@ class DataSpecialist {
 		    for(let pattern in this.dataConfig.headerMappings){
 			if(sheet[address].t == 's' && sheet[address].v.includes(pattern)){
 			    sheet[address].v = this.dataConfig.headerMappings[pattern];
+			    sheet[address].w = undefined;
 			}
 		    }
 		}
@@ -149,6 +149,28 @@ class DataSpecialist {
 	}
 	
     } // applyHeaderMappings
+    
+    /**************************************************************************/
+
+    standardizeIdentifierHeadings () {
+
+	for(let sheet of Object.values(this.curData.Sheets)){
+	    let sheetRange = xlsx.decodeRange(sheet['!ref']);
+	    for(let col = sheetRange.s.c; col <= sheetRange.e.c; col++){
+		let address = xlsx.encodeAddress({c: col, r: this.headerRow});
+		if(address in sheet){
+		    for(let identifier of this.identifiers){
+			let pattern = new RegExp(identifier.headingPattern, 'i');
+			if(sheet[address].t == 's' && pattern.test(sheet[address].v)){
+			    sheet[address].v = identifier.standardHeading;
+			    sheet[address].w = undefined;
+			}
+		    }
+		}
+	    }
+	}
+	
+    } // standardizeIdentifierHeadings
     
     /**************************************************************************/
 
@@ -176,44 +198,82 @@ class DataSpecialist {
 
     /**************************************************************************/
 
+    formatIdentifierValues () {
+	var findPattern, replacement;
+	
+	for(let sheet in this.curData){
+	    for(let identifier of this.identifiers){
+		if(identifier.standardHeading in this.curData[sheet][0]){
+		    let heading = identifier.standardHeading;
+
+		    if(identifier.formatStandardization.find && identifier.formatStandardization.replace){
+			findPattern = new RegExp(identifier.formatStandardization.find, 'g');
+			replacement = identifier.formatStandardization.replace;
+		    }
+		    for(let row of this.curData[sheet]){
+			if(identifier.formatStandardization.trim){
+			    row[heading] = row[heading].trim();
+			}
+			if(identifier.formatStandardization.upper){
+			    row[heading] = row[heading].toUpperCase();
+			}
+			if(identifier.formatStandardization.find && identifier.formatStandardization.replace){
+			    row[heading] = row[heading].replace(findPattern, replacement);
+			}
+		    }
+		}
+	    }
+	}
+	    
+    } // formatIdentifierValues
+    
+    /**************************************************************************/
+    
     doIdentifierCheck () {
 	/* Check that the data has at least one field for a recognized student
 	   identifier. If it has more than one, determine which one works
 	   best for looking up students in the roster. */
 
+	var rosterFields = DataSets.getDataSetFields('_roster');
+	this.matchingIdentifiers = {};
 	this.lookupIdentifiers = {};
 	for(let sheet in this.curData){
-	    var matches = [];
-	    for(let identifier of this.possibleIdentifiers){
-		if(identifier.data in this.curData[sheet][0]){
-		    matches.push(identifier);
+	    /* First look for matching pairs of identifiers in the data file
+	       and the roster */
+	    let matches = [];
+	    this.matchingIdentifiers[sheet] = [];
+	    for(let identifier of this.identifiers){
+		if(identifier.standardHeading in this.curData[sheet][0]){
+		    this.matchingIdentifiers[sheet].push(identifier.standardHeading);
+		    if(rosterFields.includes(identifier.standardHeading)){
+			matches.push(identifier.standardHeading);
+		    }
 		}
 	    }
 	    if(matches.length == 0){
-		throw new DataError('Sheet "' + sheet + '" does not have any columns with valid student identifiers. Please fix and reupload.');
-	    } else {
-		let bestIdentifier = null;
-		let bestIdentifierPerformance = 0;
-		for(let identifier of matches){
-		    let dataIDEntries = this.curData[sheet].map(entry => entry[identifier.data]);
-		    let rosterIDEntries = DataSets.getDataField('_roster', identifier.roster);
-		    let overlap = dataIDEntries.filter(entry => rosterIDEntries.includes(entry));
-		    let identifierPerformance = overlap.length / dataIDEntries.length * 100;
-		    console.log(identifier);
-		    console.log(identifierPerformance);
-		    if(identifierPerformance > bestIdentifierPerformance){
-			bestIdentifier = identifier;
-			bestIdentifierPerformance = identifierPerformance;
-		    }
-		}
-		if(bestIdentifierPerformance == 0){
-		    throw new DataError('Unable to locate any of the students in "' + sheet + '" in the roster based on the known identifiers. Please double-check that there are identifiers in the file.');
-		} else {
-		    logger.postMessage('DEBUG', 'data', 'Will look up students in "' + this.tag + ':' + sheet + '" using column "' + bestIdentifier.data + '" in the data and column "' + bestIdentifier.roster + '" in the roster (' + parseInt(bestIdentifierPerformance) + '% effective)');
-		    this.lookupIdentifiers[sheet] = bestIdentifier;
+		throw new DataError('Sheet "' + sheet + '" does not have any columns with student identifiers that also appear in the roster. Please fix and reupload.');
+	    }
+	    
+	    let bestMatch = null;
+	    let bestMatchPerformance = 0;
+	    for(let match of matches){
+		let identifier = this.identifiers.find(element => element.standardHeading == match);
+		let dataIDEntries = this.curData[sheet].map(entry => entry[match]);
+		let rosterIDEntries = DataSets.getDataField('_roster', match);
+		let overlap = dataIDEntries.filter(entry => rosterIDEntries.includes(entry));
+		let matchPerformance = overlap.length / dataIDEntries.length * 100;
+		if(matchPerformance > bestMatchPerformance){
+		    bestMatch = match;
+		    bestMatchPerformance = matchPerformance;
 		}
 	    }
-	}
+	    if(bestMatchPerformance == 0){
+		throw new DataError('Unable to locate any of the students in "' + sheet + '" in the roster based on the known identifiers. Please double-check that there are identifiers in the file.');
+	    } else {
+		logger.postMessage('DEBUG', 'data', 'Will look up students in "' + this.tag + ':' + sheet + '" using column "' + bestMatch + '" (' + parseInt(bestMatchPerformance) + '% effective)');
+		this.lookupIdentifiers[sheet] = bestMatch;
+	    }
+	}	
 
     } // doIdentifierCheck
 
@@ -293,32 +353,6 @@ class DataSpecialist {
 
     /**************************************************************************/
 
-    computeCanvasPrettyNames () {
-	
-	for(let sheet in this.curData){
-	    for(let row of this.curData[sheet]){
-		let nameFields = row["STUDENT'S NAME"].split(' ');
-		row['pretty_name'] = nameFields[1] + ' ' + nameFields[0];
-	    }
-	}
-	
-    } // computeCanvasPrettyNames
-    
-    /**************************************************************************/
-
-    computeCanvasPrettySIDs () {
-	
-	for(let sheet in this.curData){
-	    for(let row of this.curData[sheet]){
-		let sidFields = row['SID'].split('-');
-		row['pretty_sid'] = sidFields[0] + sidFields[1] + sidFields[2];
-	    }
-	}
-	
-    } // computeCanvasPrettySIDs
-    
-    /**************************************************************************/
-
     anonymizeData () {
     	/* We use the best identifier that was found in the data file
 	   to look up student anonymous IDs. We then add that to each
@@ -326,18 +360,17 @@ class DataSpecialist {
 
 	for(let sheet in this.curData){
 	    let newData = [];
-	    let rosterIDType = this.lookupIdentifiers[sheet].roster;
 	    let processedStudents = [];
 	    for(let row of this.curData[sheet]){
 		try {
-		    let anonID = DataSets.findData('_roster', rosterIDType, row[this.lookupIdentifiers[sheet].data], 'anonID');
+		    let anonID = DataSets.findData('_roster', this.lookupIdentifiers[sheet], row[this.lookupIdentifiers[sheet]], 'anonID');
 		    if(processedStudents.includes(anonID)){
-			throw new DataError('Sheet "' + sheet + '" has duplicate entry for student with ' + this.lookupIdentifiers[sheet].data + ' "' + row[this.lookupIdentifiers[sheet].data] + '"; please fix and re-upload the file');
+			throw new DataError('Sheet "' + sheet + '" has duplicate entry for student with ' + this.lookupIdentifiers[sheet] + ' "' + row[this.lookupIdentifiers[sheet].data] + '"; please fix and re-upload the file');
 		    }
 		    processedStudents.push(anonID);
 		    let newRow = { 'anonID': anonID };
 		    for(let field in row){
-			if(!(this.possibleIdentifiers.find(identifier => identifier.data == field))){
+			if(!this.matchingIdentifiers[sheet].includes(field)){
 			    newRow[field] = row[field];
 			}
 		    }
@@ -345,7 +378,7 @@ class DataSpecialist {
 		}
 		catch (error) {
 		    if (error instanceof DataWarning) {
-			error.message = this.tag + ':' + sheet + ' - Unable to find student with ' + this.lookupIdentifiers[sheet].data + ' "' + row[this.lookupIdentifiers[sheet].data] + '" in the roster, skipping';
+			error.message = this.tag + ':' + sheet + ' - Unable to find student with ' + this.lookupIdentifiers[sheet] + ' "' + row[this.lookupIdentifiers[sheet]] + '" in the roster, skipping';
 			logger.postMessage('WARN', 'data', error.message);
 		    } else {
 			throw error;

@@ -1,9 +1,9 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/js/logger/logger.js?v=0.11.0-beta';
-import DataError from '/js/errors/DataError.js?v=0.11.0-beta';
-import DataWarning from '/js/errors/DataWarning.js?v=0.11.0-beta';
-import xlsx from '/js/xlsx/xlsx.js?v=0.11.0-beta';
+import logger from '/js/logger/logger.js?v=0.12.0-beta';
+import DataError from '/js/errors/DataError.js?v=0.12.0-beta';
+import DataWarning from '/js/errors/DataWarning.js?v=0.12.0-beta';
+import xlsx from '/js/xlsx/xlsx.js?v=0.12.0-beta';
 
 class DataSets {
 
@@ -37,6 +37,18 @@ class DataSets {
 	
     } // getDataTags
     
+    /**************************************************************************/
+
+    static getDataSetFields (tag) {
+
+	if(tag in this.dataSets){
+	    return Object.keys(this.dataSets[tag][0]);
+	} else {
+	    return null;
+	}
+
+    } // getDataSet
+
     /**************************************************************************/
 
     static dataFieldExists (tag, field) {

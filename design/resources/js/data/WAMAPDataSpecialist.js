@@ -12,7 +12,9 @@ class WAMAPDataSpecialist extends DataSpecialist {
 	this.processingSteps = [
 	    this.preprocessWAMAPWorkbook,
 	    this.applyHeaderMappings,
+	    this.standardizeIdentifierHeadings,
 	    this.convertWorkbookToJSON,
+	    this.formatIdentifierValues,
 	    this.doIdentifierCheck,
 	    this.doRequiredFieldsCheck,
 	    this.applyResponseMappings,

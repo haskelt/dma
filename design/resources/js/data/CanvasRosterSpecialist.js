@@ -10,12 +10,12 @@ class CanvasRosterSpecialist extends DataSpecialist {
 
 	super();
 	this.processingSteps = [
+	    this.standardizeIdentifierHeadings,
 	    this.convertWorkbookToJSON,
 	    this.doSingleWorksheetCheck,
+	    this.formatIdentifierValues,
 	    this.doRequiredFieldsCheck,
 	    this.doUniqueIdentifiersCheck,
-	    this.computeCanvasPrettyNames,
-	    this.computeCanvasPrettySIDs,
 	    this.computeAnonymousIdentifier,
 	    this.setData,
 	    this.partitionCanvasRoster

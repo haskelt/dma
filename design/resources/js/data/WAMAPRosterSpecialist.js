@@ -12,8 +12,10 @@ class WAMAPRosterSpecialist extends DataSpecialist {
 
 	this.processingSteps = [
 	    this.preprocessWAMAPWorkbook,
+	    this.standardizeIdentifierHeadings,
 	    this.convertWorkbookToJSON,
 	    this.doSingleWorksheetCheck,
+	    this.formatIdentifierValues,
 	    this.doRequiredFieldsCheck,
 	    this.doUniqueIdentifiersCheck,
 	    this.computeAnonymousIdentifier,

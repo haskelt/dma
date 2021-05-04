@@ -1,25 +1,34 @@
 {
-	"possibleIdentifiers" : [
-		{
-			"data" : "sis_id",
-			"roster" : "pretty_sid"
-		},
-		{
-			"data" : "id",
-			"roster" : "CANVAS ID"
-		},
-		{
-			"data" : "E-mail",
-			"roster" : "EMAIL"
-		},
-		{
-			"data" : "name",
-			"roster" : "STUDENT'S NAME"
-		},
-		{
-			"data" : "name",
-			"roster" : "pretty_name"
-		}
+    "identifiers" : [
+	{
+	    "standardHeading": "Name",
+	    "headingPattern": "Name$",
+	    "formatStandardization": {
+		"trim": true,
+		"upper": true,
+		"find": "([ a-zA-z]+), ([ a-zA-Z]+)",
+		"replace": "$2 $1"
+	    }
+	},
+	{
+	    "standardHeading": "Student ID",
+	    "headingPattern": "^sis_id$|^SID$",
+	    "formatStandardization": {
+		"trim": true,
+		"find": "-",
+		"replace": ""
+	    }
+	},
+	{
+	    "standardHeading": "E-Mail",
+	    "headingPattern": "E-?[mM]ail",
+	    "formatStandardization": {}
+	},
+	{
+	    "standardHeading": "Canvas ID",
+	    "headingPattern": "^id$|^CANVAS ID$",
+	    "formatStandardization": {}
+	}
 	],
 	"data" : {
 		"instructor" : {
@@ -42,8 +51,8 @@
 		},
 		"_roster" : {
 			"class" : "CanvasRoster",
-		    "requiredFields" : [ "STUDENT'S NAME", "SID", "EMAIL", "GRADE" ],
-			"canonicalIdentifier" : "pretty_sid"
+		    "requiredFields" : [ "Student ID" ],
+			"canonicalIdentifier" : "Student ID"
 		},
 		"demographics" : {
 			"class" : "CanvasData",
