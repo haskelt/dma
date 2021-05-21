@@ -1,4 +1,4 @@
-{{project.js_copyright_notice}}
+{{globals.js_copyright_notice}}
 
 class MessageDispatcher {
 

@@ -1,4 +1,4 @@
-{{project.js_copyright_notice}}
+{{globals.js_copyright_notice}}
 
 class DataWarning extends Error {
 /* For issues with the data that the user should be aware of, but which

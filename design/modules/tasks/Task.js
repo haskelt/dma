@@ -1,6 +1,6 @@
-{{project.js_copyright_notice}}
+{{globals.js_copyright_notice}}
 
-import logger from '{{project.site_path}}/js/logger/logger.js?v={{project.version}}';
+import logger from '{{globals.site_path}}/js/logger/logger.js?v={{globals.version}}';
 
 class Task {
 

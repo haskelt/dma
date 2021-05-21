@@ -45,8 +45,15 @@
 			"canonicalIdentifier" : "Student ID"
 		},
 		"demographics" : {
-			"class" : "WAMAPData",
-			"headerMappings" : {
+			"class" : "AutoData",
+		    "headerMappings" : {
+							"first time taking this course" : "first_time",
+				"grade you received in Calculus 1" : "calc1_grade",
+				"your age fall in" : "age",
+				"parents earned a 4-year college degree" : "parent_degree",
+				"gender do you most identify with" : "gender",
+				"best describes your race/ethnicity" : "ethnicity",
+			"Purpose and Benefit" : "consent",
 				"Question 1:Scored Answer" : "first_time",
 				"Question 2:Scored Answer" : "calc1_grade",
 				"Question 3:Scored Answer" : "age",
@@ -60,7 +67,10 @@
 				"consent" : {
 					"0" : "I consent",
 					"1" : "My parents will consent",
-					"2" : "I do not consent"
+				    "2" : "I do not consent",
+					"I am over 18 and give permission to include my responses in this study" : "I consent",
+					"I do not give my permission to include my responses in this study" : "I do not consent",
+					"I am under 18 and give permission to include my responses in the study. My parent/guardian will email their permission to the course instructor." : "My parents will consent"
 				},
 				"first_time" : {
 					"0" : "Yes",
@@ -112,22 +122,22 @@
 			"requiredFields" : [ "consent" ]
 		},
 		"pretest1" : {
-			"class" : "WAMAPData"
+			"class" : "AutoData"
 		},
 		"pretest2" : {
-			"class" : "WAMAPData"
+			"class" : "AutoData"
 		},
 		"pretest3" : {
-			"class" : "WAMAPData"
+			"class" : "AutoData"
 		},
 		"test1" : {
-			"class" : "WAMAPData"
+			"class" : "AutoData"
 		},
 		"test2" : {
-			"class" : "WAMAPData"
+			"class" : "AutoData"
 		},
 		"test3" : {
-			"class" : "WAMAPData"
+			"class" : "AutoData"
 		},
 		"psvt" : {
 			"class" : "PSVTData",
@@ -164,6 +174,23 @@
 			},
 			{
 				"field" : "consent_verification",
+				"relation" : "=",
+				"value" : "VERIFIED"
+			}
+		],
+	    [
+			{
+				"field" : "consent",
+				"relation" : "=",
+				"value" : "My parents will consent"
+			},
+			{
+				"field" : "age",
+				"relation" : "=",
+				"value" : "17 or younger"
+			},
+			{
+				"field" : "1_6",
 				"relation" : "=",
 				"value" : "VERIFIED"
 			}

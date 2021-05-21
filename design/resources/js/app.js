@@ -1,6 +1,6 @@
-{{project.js_copyright_notice}}
+{{globals.js_copyright_notice}}
 
-import config from '{{project.site_path}}/js/config.js?v={{project.version}}';
+import config from '{{globals.site_path}}/js/config.js?v={{globals.version}}';
 
 config.initialize();
 

@@ -5,11 +5,11 @@
     <meta charset=utf-8>
     <title>DMA</title>
     {% block css %}
-    <link rel="stylesheet" href="{{project.site_path}}/css/app.css?v={{project.version}}" type="text/css" />
+    <link rel="stylesheet" href="{{globals.site_path}}/css/app.css?v={{globals.version}}" type="text/css" />
     {% if this.styles %}
     {% set style_data = this.styles.split() %}
     {% for style in style_data %}
-    <link rel="stylesheet" href="{{project.site_path}}{{style}}?v={{project.version}}" type="text/css" />
+    <link rel="stylesheet" href="{{globals.site_path}}{{style}}?v={{globals.version}}" type="text/css" />
     {% endfor %}
     {% endif %}
     {% endblock %}
@@ -18,7 +18,7 @@
   <body>
     {% block body %}
     <header>
-      <h1>EMARCS Data Management App</h1>
+      <h1>EMARCS Data Management App v{{globals.version}}</h1>
     </header>
     <main>
       {% block content %}
@@ -28,17 +28,17 @@
 
     
     {% block javascript %}
-    <script src="{{project.site_path}}/js/logger/logger.js?v={{project.version}}" type="module"></script>
-    <script src="{{project.site_path}}/js/data/data.js?v={{project.version}}" type="module"></script>
+    <script src="{{globals.site_path}}/js/logger/logger.js?v={{globals.version}}" type="module"></script>
+    <script src="{{globals.site_path}}/js/data/data.js?v={{globals.version}}" type="module"></script>
     {% if this.scripts %}
     {% set script_data = this.scripts.split() %}
     {% for script in script_data %}
     <script type="module">
-      import "{{project.site_path}}{{script}}?v={{project.version}}"
+      import "{{globals.site_path}}{{script}}?v={{globals.version}}"
     </script>
     {% endfor %}
     {% endif %}
-    <script src="{{project.site_path}}/js/app.js?v={{project.version}}" type="module"></script>
+    <script src="{{globals.site_path}}/js/app.js?v={{globals.version}}" type="module"></script>
     {% endblock %}
 
   {% endblock %}

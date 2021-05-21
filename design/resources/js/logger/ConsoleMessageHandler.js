@@ -1,6 +1,6 @@
-{{project.js_copyright_notice}}
+{{globals.js_copyright_notice}}
 
-import message_dispatcher from '{{project.site_path}}/js/logger/MessageDispatcher.js?v={{project.version}}';
+import message_dispatcher from '{{globals.site_path}}/js/logger/MessageDispatcher.js?v={{globals.version}}';
 
 class ConsoleMessageHandler {
 

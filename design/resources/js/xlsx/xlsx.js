@@ -1,8 +1,8 @@
-{{project.js_copyright_notice}}
+{{globals.js_copyright_notice}}
 
-import sheetjs from '{{project.site_path}}/js/sheetjs/xlsx.full.min.js?v={{project.version}}';
-import logger from '{{project.site_path}}/js/logger/logger.js?v={{project.version}}';
-import xlsxReader from '{{project.site_path}}/js/xlsx/xlsxReader.js?v={{project.version}}';
+import sheetjs from '{{globals.site_path}}/js/sheetjs/xlsx.full.min.js?v={{globals.version}}';
+import logger from '{{globals.site_path}}/js/logger/logger.js?v={{globals.version}}';
+import xlsxReader from '{{globals.site_path}}/js/xlsx/xlsxReader.js?v={{globals.version}}';
 
 class XLSX {
 

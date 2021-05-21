@@ -1,12 +1,12 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/dma/js/logger/logger.js?v=0.12.0-beta';
-import config from '/dma/js/config.js?v=0.12.0-beta';
-import DataError from '/dma/js/errors/DataError.js?v=0.12.0-beta';
-import DataWarning from '/dma/js/errors/DataWarning.js?v=0.12.0-beta';
-import DataSets from '/dma/js/data/DataSets.js?v=0.12.0-beta';
-import xlsx from '/dma/js/xlsx/xlsx.js?v=0.12.0-beta';
-import CryptoJS from '/dma/js/cryptojs/sha256.js?v=0.12.0-beta';
+import logger from '/dma/js/logger/logger.js?v=0.13.0-beta';
+import config from '/dma/js/config.js?v=0.13.0-beta';
+import DataError from '/dma/js/errors/DataError.js?v=0.13.0-beta';
+import DataWarning from '/dma/js/errors/DataWarning.js?v=0.13.0-beta';
+import DataSets from '/dma/js/data/DataSets.js?v=0.13.0-beta';
+import xlsx from '/dma/js/xlsx/xlsx.js?v=0.13.0-beta';
+import CryptoJS from '/dma/js/cryptojs/sha256.js?v=0.13.0-beta';
 
 class DataSpecialist {
 
@@ -119,14 +119,42 @@ class DataSpecialist {
 
     preprocessExamWorkbook () {
 
-	/* PSVT files have a blank first row with the header in the second
-	   row. */ 
+	/* Exam files have the meaningful header in the second row. */ 
 	this.headerRow = 1;
 	
     } // preprocessExamWorkbook
     
     /**************************************************************************/
 
+    autoPreprocessWorkbook () {
+	/* This attempts to deduce the file's format based on inspecting the
+	   contents. It currently can only distinguish between Canvas and
+	   WAMAP formats. */
+	var firstSheet = this.curData.Sheets[this.curData.SheetNames[0]];
+	let sheetRange = xlsx.decodeRange(firstSheet['!ref']);
+	var foundPoints = false;
+	var foundScored = false;
+	for(let col = sheetRange.s.c; col <= sheetRange.e.c; col++){
+	    let row2cell = xlsx.encodeAddress({c: col, r: 1});
+	    if(row2cell in firstSheet && firstSheet[row2cell].t == 's'){
+		if(firstSheet[row2cell].v.includes('Points')){
+		    foundPoints = true;
+		} else if(firstSheet[row2cell].v.includes('Scored')){
+		    foundScored = true;
+		}
+	    }
+	}
+	if(foundPoints && foundScored){
+	    logger.postMessage('DEBUG', 'data', 'Auto format detection: WAMAP');
+	    this.preprocessWAMAPWorkbook()
+	} else {
+	    logger.postMessage('DEBUG', 'data', 'Auto format detection: Canvas');
+	}
+	
+    } // autoPreprocessWorkbook
+    
+    /**************************************************************************/
+    
     applyHeaderMappings () {
 	/* For each key in the 'headerMappings' attribute of the config
 	   object, look for that text within the column headings in the

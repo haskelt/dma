@@ -1,8 +1,8 @@
-{{project.js_copyright_notice}}
+{{globals.js_copyright_notice}}
 
-import logger from '{{project.site_path}}/js/logger/logger.js?v={{project.version}}';
-import DataSpecialist from '{{project.site_path}}/js/data/DataSpecialist.js?v={{project.version}}';
-import DataSets from '{{project.site_path}}/js/data/DataSets.js?v={{project.version}}';
+import logger from '{{globals.site_path}}/js/logger/logger.js?v={{globals.version}}';
+import DataSpecialist from '{{globals.site_path}}/js/data/DataSpecialist.js?v={{globals.version}}';
+import DataSets from '{{globals.site_path}}/js/data/DataSets.js?v={{globals.version}}';
 
 class MetadataSpecialist extends DataSpecialist {
 

@@ -1,7 +1,7 @@
-{{project.js_copyright_notice}}
+{{globals.js_copyright_notice}}
 
-import config from '{{project.site_path}}/js/config.js?v={{project.version}}';
-import DataManager from '{{project.site_path}}/js/data/DataManager.js?v={{project.version}}';
+import config from '{{globals.site_path}}/js/config.js?v={{globals.version}}';
+import DataManager from '{{globals.site_path}}/js/data/DataManager.js?v={{globals.version}}';
 
 function initialize () {
     

@@ -1,12 +1,12 @@
-{{project.js_copyright_notice}}
+{{globals.js_copyright_notice}}
 
-import logger from '{{project.site_path}}/js/logger/logger.js?v={{project.version}}';
-import config from '{{project.site_path}}/js/config.js?v={{project.version}}';
-import DataError from '{{project.site_path}}/js/errors/DataError.js?v={{project.version}}';
-import DataWarning from '{{project.site_path}}/js/errors/DataWarning.js?v={{project.version}}';
-import DataSets from '{{project.site_path}}/js/data/DataSets.js?v={{project.version}}';
-import xlsx from '{{project.site_path}}/js/xlsx/xlsx.js?v={{project.version}}';
-import CryptoJS from '{{project.site_path}}/js/cryptojs/sha256.js?v={{project.version}}';
+import logger from '{{globals.site_path}}/js/logger/logger.js?v={{globals.version}}';
+import config from '{{globals.site_path}}/js/config.js?v={{globals.version}}';
+import DataError from '{{globals.site_path}}/js/errors/DataError.js?v={{globals.version}}';
+import DataWarning from '{{globals.site_path}}/js/errors/DataWarning.js?v={{globals.version}}';
+import DataSets from '{{globals.site_path}}/js/data/DataSets.js?v={{globals.version}}';
+import xlsx from '{{globals.site_path}}/js/xlsx/xlsx.js?v={{globals.version}}';
+import CryptoJS from '{{globals.site_path}}/js/cryptojs/sha256.js?v={{globals.version}}';
 
 class DataSpecialist {
 
@@ -119,14 +119,42 @@ class DataSpecialist {
 
     preprocessExamWorkbook () {
 
-	/* PSVT files have a blank first row with the header in the second
-	   row. */ 
+	/* Exam files have the meaningful header in the second row. */ 
 	this.headerRow = 1;
 	
     } // preprocessExamWorkbook
     
     /**************************************************************************/
 
+    autoPreprocessWorkbook () {
+	/* This attempts to deduce the file's format based on inspecting the
+	   contents. It currently can only distinguish between Canvas and
+	   WAMAP formats. */
+	var firstSheet = this.curData.Sheets[this.curData.SheetNames[0]];
+	let sheetRange = xlsx.decodeRange(firstSheet['!ref']);
+	var foundPoints = false;
+	var foundScored = false;
+	for(let col = sheetRange.s.c; col <= sheetRange.e.c; col++){
+	    let row2cell = xlsx.encodeAddress({c: col, r: 1});
+	    if(row2cell in firstSheet && firstSheet[row2cell].t == 's'){
+		if(firstSheet[row2cell].v.includes('Points')){
+		    foundPoints = true;
+		} else if(firstSheet[row2cell].v.includes('Scored')){
+		    foundScored = true;
+		}
+	    }
+	}
+	if(foundPoints && foundScored){
+	    logger.postMessage('DEBUG', 'data', 'Auto format detection: WAMAP');
+	    this.preprocessWAMAPWorkbook()
+	} else {
+	    logger.postMessage('DEBUG', 'data', 'Auto format detection: Canvas');
+	}
+	
+    } // autoPreprocessWorkbook
+    
+    /**************************************************************************/
+    
     applyHeaderMappings () {
 	/* For each key in the 'headerMappings' attribute of the config
 	   object, look for that text within the column headings in the

@@ -1,6 +1,6 @@
-{{project.js_copyright_notice}}
+{{globals.js_copyright_notice}}
 
-import DataSpecialist from '{{project.site_path}}/js/data/DataSpecialist.js?v={{project.version}}';
+import DataSpecialist from '{{globals.site_path}}/js/data/DataSpecialist.js?v={{globals.version}}';
 
 class CanvasRosterSpecialist extends DataSpecialist {
 
