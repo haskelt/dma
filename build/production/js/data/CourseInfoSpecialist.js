@@ -1,7 +1,7 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/dma/js/logger/logger.js?v=0.13.0-beta';
-import DataSets from '/dma/js/data/DataSets.js?v=0.13.0-beta';
+import logger from '/dma/js/logger/logger.js?v=0.13.1-beta';
+import DataSets from '/dma/js/data/DataSets.js?v=0.13.1-beta';
 
 class CourseInfoSpecialist {
 

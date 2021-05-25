@@ -12,12 +12,17 @@
 	},
 	{
 	    "standardHeading": "Student ID",
-	    "headingPattern": "^Code$|^Student SIS ID$|^SID$",
+	    "headingPattern": "^Student ID$|^Code$|^Student SIS ID$|^SID$|^sis_id$",
 	    "formatStandardization": {
 		"trim": true,
 		"find": "-",
 		"replace": ""
 	    }
+	},
+	{
+	    "standardHeading": "Canvas ID",
+	    "headingPattern": "^id$|^CANVAS ID$",
+	    "formatStandardization": {}
 	}
 	],
 	"data" : {
