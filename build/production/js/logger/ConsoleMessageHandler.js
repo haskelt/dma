@@ -1,6 +1,6 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import message_dispatcher from '/dma/js/logger/MessageDispatcher.js?v=0.13.1-beta';
+import message_dispatcher from '/dma/js/logger/MessageDispatcher.js?v=0.14.0-beta';
 
 class ConsoleMessageHandler {
 

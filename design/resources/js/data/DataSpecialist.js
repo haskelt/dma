@@ -154,6 +154,38 @@ class DataSpecialist {
     } // autoPreprocessWorkbook
     
     /**************************************************************************/
+
+    ensureUniqueHeadings () {
+
+	for(let sheet of Object.values(this.curData.Sheets)){
+	    let headingAddresses = {};
+	    let sheetRange = xlsx.decodeRange(sheet['!ref']);
+	    for(let col = sheetRange.s.c; col <= sheetRange.e.c; col++){
+		let address = xlsx.encodeAddress({c: col, r: this.headerRow});
+		if(sheet[address].t != 's'){
+		    sheet[address].t = 's';
+		    sheet[address].v = sheet[address].v.toString();
+		    sheet[address].w = undefined;
+		}
+		if(sheet[address].v in headingAddresses){
+		    headingAddresses[sheet[address].v].push(address);
+		} else {
+		    headingAddresses[sheet[address].v] = [ address ];
+		}
+	    }
+	    console.log(headingAddresses);
+	    for(let heading in headingAddresses){
+		if(headingAddresses[heading].length > 1){
+		    for(let i in headingAddresses[heading]){
+			sheet[headingAddresses[heading][i]].v += '_' + i.toString();
+		    }
+		}
+	    }
+	}
+
+    } // ensureUniqueHeadings
+    
+    /**************************************************************************/
     
     applyHeaderMappings () {
 	/* For each key in the 'headerMappings' attribute of the config
@@ -166,6 +198,7 @@ class DataSpecialist {
 		let sheetRange = xlsx.decodeRange(sheet['!ref']);
 		for(let col = sheetRange.s.c; col <= sheetRange.e.c; col++){
 		    let address = xlsx.encodeAddress({c: col, r: this.headerRow});
+		    console.log(sheet[address].v);
 		    for(let pattern in this.dataConfig.headerMappings){
 			if(sheet[address].t == 's' && sheet[address].v.includes(pattern)){
 			    sheet[address].v = this.dataConfig.headerMappings[pattern];
@@ -437,8 +470,8 @@ class DataSpecialist {
 
     partitionCanvasRoster () {
 
-	if(DataSets.dataFieldExists('_roster', 'GRADE')){
-	    DataSets.partitionDataSet('_roster', 'course_grade', ['GRADE']);
+	if(DataSets.dataFieldExists('_roster', 'Grade')){
+	    DataSets.partitionDataSet('_roster', 'course_grade', ['Grade']);
 	}
 	    
     } // partitionCanvasRoster

@@ -11,10 +11,10 @@ class AutoDataSpecialist extends DataSpecialist {
 	super();
 	this.processingSteps = [
 	    this.autoPreprocessWorkbook,
+	    this.ensureUniqueHeadings,
 	    this.applyHeaderMappings,
 	    this.standardizeIdentifierHeadings,
 	    this.convertWorkbookToJSON,
-	    this.doSingleWorksheetCheck,
 	    this.formatIdentifierValues,
 	    this.doIdentifierCheck,
 	    this.doRequiredFieldsCheck,

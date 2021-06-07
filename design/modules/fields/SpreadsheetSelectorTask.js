@@ -62,7 +62,6 @@ class SpreadsheetSelectorTask extends FieldTask {
     handleCheckbox (e) {
 	
 	if(this.checkbox.checked){
-	    console.log('checked the checkbox');
 	    logger.postMessage('INFO', 'fields', 'Choosing to skip "' + this.label + '"');
 	    this.selector.value = null;
 	    this.data = null;

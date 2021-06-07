@@ -12,6 +12,7 @@ class ExamDataSpecialist extends DataSpecialist {
 
 	this.processingSteps = [
 	    this.preprocessExamWorkbook,
+	    this.ensureUniqueHeadings,
 	    this.standardizeIdentifierHeadings,
 	    this.convertWorkbookToJSON,
 	    this.formatIdentifierValues,

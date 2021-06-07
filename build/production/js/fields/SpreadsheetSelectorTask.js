@@ -1,8 +1,8 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/dma/js/logger/logger.js?v=0.13.1-beta';
-import FieldTask from '/dma/js/fields/FieldTask.js?v=0.13.1-beta';
-import xlsx from '/dma/js/xlsx/xlsx.js?v=0.13.1-beta';
+import logger from '/dma/js/logger/logger.js?v=0.14.0-beta';
+import FieldTask from '/dma/js/fields/FieldTask.js?v=0.14.0-beta';
+import xlsx from '/dma/js/xlsx/xlsx.js?v=0.14.0-beta';
 
 class SpreadsheetSelectorTask extends FieldTask {
     
@@ -62,7 +62,6 @@ class SpreadsheetSelectorTask extends FieldTask {
     handleCheckbox (e) {
 	
 	if(this.checkbox.checked){
-	    console.log('checked the checkbox');
 	    logger.postMessage('INFO', 'fields', 'Choosing to skip "' + this.label + '"');
 	    this.selector.value = null;
 	    this.data = null;

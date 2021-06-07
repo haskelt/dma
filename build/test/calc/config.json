@@ -1,29 +1,34 @@
 {
-    "identifiers" : [
-	{
-	    "standardHeading": "Name",
-	    "headingPattern": "Name$",
-	    "formatStandardization": {
-		"trim": true,
-		"upper": true,
-		"find": "([ a-zA-z]+), ([ a-zA-Z]+)",
-		"replace": "$2 $1"
-	    }
-	},
-	{
-	    "standardHeading": "Student ID",
-	    "headingPattern": "^Student ID$|^Code$|^Student SIS ID$|^SID$|^sis_id$",
-	    "formatStandardization": {
-		"trim": true,
-		"find": "-",
-		"replace": ""
-	    }
-	},
-	{
-	    "standardHeading": "Canvas ID",
-	    "headingPattern": "^id$|^CANVAS ID$",
-	    "formatStandardization": {}
-	}
+	"identifiers" : [
+		{
+			"standardHeading" : "Name",
+			"headingPattern" : "Name$",
+			"formatStandardization" : {
+				"trim" : true,
+				"upper" : true,
+				"find" : "([ a-zA-z]+), ([ a-zA-Z]+)",
+				"replace" : "$2 $1"
+			}
+		},
+		{
+			"standardHeading" : "Student ID",
+			"headingPattern" : "^Student ID$|^Code$|^Student SIS ID$|^SID$|^sis_id$",
+			"formatStandardization" : {
+				"trim" : true,
+				"find" : "-",
+				"replace" : ""
+			}
+		},
+		{
+			"standardHeading" : "Canvas ID",
+			"headingPattern" : "^id$|^CANVAS ID$",
+			"formatStandardization" : {}
+		},
+		{
+			"standardHeading" : "E-Mail",
+			"headingPattern" : "E-?[mM]ail",
+			"formatStandardization" : {}
+		}
 	],
 	"data" : {
 		"instructor" : {
@@ -51,14 +56,15 @@
 		},
 		"demographics" : {
 			"class" : "AutoData",
-		    "headerMappings" : {
-							"first time taking this course" : "first_time",
-				"grade you received in Calculus 1" : "calc1_grade",
+			"headerMappings" : {
+				"first time taking this course" : "first_time",
 				"your age fall in" : "age",
 				"parents earned a 4-year college degree" : "parent_degree",
 				"gender do you most identify with" : "gender",
 				"best describes your race/ethnicity" : "ethnicity",
-			"Purpose and Benefit" : "consent",
+				"Purpose and Benefit" : "consent",
+				"grade you received in Calculus 1" : "calc1_grade",
+				"1_6" : "consent_verification",
 				"Question 1:Scored Answer" : "first_time",
 				"Question 2:Scored Answer" : "calc1_grade",
 				"Question 3:Scored Answer" : "age",
@@ -66,16 +72,24 @@
 				"Question 5:Scored Answer" : "gender",
 				"Question 6:Scored Answer" : "ethnicity",
 				"Question 7:Scored Answer" : "consent",
-				"Question 7:Scored Correct Answer" : "consent_verification"
+				"Question 7:Points" : "consent_verification",
+				"Question 1_2" : "first_time",
+				"Question 2_2" : "calc1_grade",
+				"Question 3_2" : "age",
+				"Question 4_2" : "parent_degree",
+				"Question 5_2" : "gender",
+				"Question 6_2" : "ethnicity",
+				"Question 7_2" : "consent",
+				"Question 7_3" : "consent_verification"
 			},
 			"responseMappings" : {
 				"consent" : {
-					"0" : "I consent",
-					"1" : "My parents will consent",
-				    "2" : "I do not consent",
 					"I am over 18 and give permission to include my responses in this study" : "I consent",
 					"I do not give my permission to include my responses in this study" : "I do not consent",
-					"I am under 18 and give permission to include my responses in the study. My parent/guardian will email their permission to the course instructor." : "My parents will consent"
+					"I am under 18 and give permission to include my responses in the study. My parent/guardian will email their permission to the course instructor." : "My parents will consent",
+					"0" : "I consent",
+					"1" : "My parents will consent",
+					"2" : "I do not consent"
 				},
 				"first_time" : {
 					"0" : "Yes",
@@ -179,23 +193,6 @@
 			},
 			{
 				"field" : "consent_verification",
-				"relation" : "=",
-				"value" : "VERIFIED"
-			}
-		],
-	    [
-			{
-				"field" : "consent",
-				"relation" : "=",
-				"value" : "My parents will consent"
-			},
-			{
-				"field" : "age",
-				"relation" : "=",
-				"value" : "17 or younger"
-			},
-			{
-				"field" : "1_6",
 				"relation" : "=",
 				"value" : "VERIFIED"
 			}

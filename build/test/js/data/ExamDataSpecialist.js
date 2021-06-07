@@ -1,6 +1,6 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import DataSpecialist from '/js/data/DataSpecialist.js?v=0.13.1-beta';
+import DataSpecialist from '/js/data/DataSpecialist.js?v=0.14.1-beta';
 
 class ExamDataSpecialist extends DataSpecialist {
 
@@ -12,6 +12,7 @@ class ExamDataSpecialist extends DataSpecialist {
 
 	this.processingSteps = [
 	    this.preprocessExamWorkbook,
+	    this.ensureUniqueHeadings,
 	    this.standardizeIdentifierHeadings,
 	    this.convertWorkbookToJSON,
 	    this.formatIdentifierValues,
