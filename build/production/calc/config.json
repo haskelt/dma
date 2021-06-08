@@ -72,7 +72,7 @@
 				"Question 5:Scored Answer" : "gender",
 				"Question 6:Scored Answer" : "ethnicity",
 				"Question 7:Scored Answer" : "consent",
-				"Question 7:Scored Correct Answer" : "consent_verification",
+				"Question 7:Points" : "consent_verification",
 				"Question 1_2" : "first_time",
 				"Question 2_2" : "calc1_grade",
 				"Question 3_2" : "age",
@@ -159,11 +159,13 @@
 			"class" : "AutoData"
 		},
 		"psvt" : {
-			"class" : "PSVTData",
+			"class" : "AutoData",
 			"headerMappings" : {
 				"Name" : "Name",
 				"Pre-Course Assessment" : "psvt_pre",
-				"Post-Course Assessment" : "psvt_post"
+			    "Post-Course Assessment" : "psvt_post",
+			    "Visualization of Rotations TAKE 2": "psvt_post",
+			    "Visualization of Rotations": "psvt_pre"
 			}
 		}
 	},

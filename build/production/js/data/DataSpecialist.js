@@ -1,12 +1,12 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/dma/js/logger/logger.js?v=0.14.0-beta';
-import config from '/dma/js/config.js?v=0.14.0-beta';
-import DataError from '/dma/js/errors/DataError.js?v=0.14.0-beta';
-import DataWarning from '/dma/js/errors/DataWarning.js?v=0.14.0-beta';
-import DataSets from '/dma/js/data/DataSets.js?v=0.14.0-beta';
-import xlsx from '/dma/js/xlsx/xlsx.js?v=0.14.0-beta';
-import CryptoJS from '/dma/js/cryptojs/sha256.js?v=0.14.0-beta';
+import logger from '/dma/js/logger/logger.js?v=0.15.0-beta';
+import config from '/dma/js/config.js?v=0.15.0-beta';
+import DataError from '/dma/js/errors/DataError.js?v=0.15.0-beta';
+import DataWarning from '/dma/js/errors/DataWarning.js?v=0.15.0-beta';
+import DataSets from '/dma/js/data/DataSets.js?v=0.15.0-beta';
+import xlsx from '/dma/js/xlsx/xlsx.js?v=0.15.0-beta';
+import CryptoJS from '/dma/js/cryptojs/sha256.js?v=0.15.0-beta';
 
 class DataSpecialist {
 
@@ -38,7 +38,7 @@ class DataSpecialist {
     
     /**************************************************************************/
     
-    preprocessWAMAPWorkbook () {
+    preprocessWAMAPAssessment () {
 
 	for(let sheet in this.curData.Sheets){
 	    if('!ref' in this.curData.Sheets[sheet]){
@@ -65,7 +65,7 @@ class DataSpecialist {
 	}
 	this.headerRow = 1;
 	
-    } // preprocessWAMAPWorkbook
+    } // preprocessWAMAPAssessment
     
     /**************************************************************************/
 
@@ -93,19 +93,19 @@ class DataSpecialist {
     
     /**************************************************************************/
 
-    preprocessPSVTWorkbook () {
+    preprocessWAMAPGradebook () {
 
 	for(let sheet of Object.values(this.curData.Sheets)){
 	    let sheetRange = xlsx.decodeRange(sheet['!ref']);
 	    for(let col = sheetRange.s.c; col <= sheetRange.e.c; col++){
-		/* PSVT files have a header row, followed by a blank
+		/* Gradebook files have a header row, followed by a blank
 		   row, then the data. This copies the entries in the first
 		   row to the second row, and sets the header row to be the
 		   2nd row (index 1). */
 		let upper_heading = xlsx.encodeAddress({c: col, r: 0});
 		let lower_heading = xlsx.encodeAddress({c: col, r: 1});
 		sheet[lower_heading] = {t: 's', v: sheet[upper_heading].v};
-		/* PSVT files also have an Averages row at the bottom; we
+		/* Gradebook files also have an Averages row at the bottom; we
 		   remove this row here. */
 		let average_row = xlsx.encodeAddress({c: col, r: sheetRange.e.r});
 		delete sheet[average_row];
@@ -113,7 +113,7 @@ class DataSpecialist {
 	}
 	this.headerRow = 1;
 	
-    } // preprocessPSVTWorkbook
+    } // preprocessWAMAPGradebook
     
     /**************************************************************************/
 
@@ -128,12 +128,13 @@ class DataSpecialist {
 
     autoPreprocessWorkbook () {
 	/* This attempts to deduce the file's format based on inspecting the
-	   contents. It currently can only distinguish between Canvas and
-	   WAMAP formats. */
+	   contents. It currently can only distinguish between Canvas, and
+	   WAMAP assessment, and WAMAP gradebook formats. */
 	var firstSheet = this.curData.Sheets[this.curData.SheetNames[0]];
 	let sheetRange = xlsx.decodeRange(firstSheet['!ref']);
 	var foundPoints = false;
 	var foundScored = false;
+	var foundAverages = false;
 	for(let col = sheetRange.s.c; col <= sheetRange.e.c; col++){
 	    let row2cell = xlsx.encodeAddress({c: col, r: 1});
 	    if(row2cell in firstSheet && firstSheet[row2cell].t == 's'){
@@ -144,9 +145,18 @@ class DataSpecialist {
 		}
 	    }
 	}
+	var averagesCell = xlsx.encodeAddress({c: 0, r: sheetRange.e.r});
+	if(averagesCell in firstSheet && firstSheet[averagesCell].t == 's'){
+	    if(firstSheet[averagesCell].v.includes('Averages')){
+		foundAverages = true;
+	    }
+	}
 	if(foundPoints && foundScored){
-	    logger.postMessage('DEBUG', 'data', 'Auto format detection: WAMAP');
-	    this.preprocessWAMAPWorkbook()
+	    logger.postMessage('DEBUG', 'data', 'Auto format detection: WAMAP Assessment');
+	    this.preprocessWAMAPAssessment();
+	} else if(foundAverages){
+	    logger.postMessage('DEBUG', 'data', 'Auto format detection: WAMAP Gradebook');
+	    this.preprocessWAMAPGradebook();
 	} else {
 	    logger.postMessage('DEBUG', 'data', 'Auto format detection: Canvas');
 	}
@@ -198,7 +208,6 @@ class DataSpecialist {
 		let sheetRange = xlsx.decodeRange(sheet['!ref']);
 		for(let col = sheetRange.s.c; col <= sheetRange.e.c; col++){
 		    let address = xlsx.encodeAddress({c: col, r: this.headerRow});
-		    console.log(sheet[address].v);
 		    for(let pattern in this.dataConfig.headerMappings){
 			if(sheet[address].t == 's' && sheet[address].v.includes(pattern)){
 			    sheet[address].v = this.dataConfig.headerMappings[pattern];

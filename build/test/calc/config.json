@@ -159,11 +159,13 @@
 			"class" : "AutoData"
 		},
 		"psvt" : {
-			"class" : "PSVTData",
+			"class" : "AutoData",
 			"headerMappings" : {
 				"Name" : "Name",
 				"Pre-Course Assessment" : "psvt_pre",
-				"Post-Course Assessment" : "psvt_post"
+			    "Post-Course Assessment" : "psvt_post",
+			    "Visualization of Rotations TAKE 2": "psvt_post",
+			    "Visualization of Rotations": "psvt_pre"
 			}
 		}
 	},

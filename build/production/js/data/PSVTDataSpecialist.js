@@ -1,6 +1,6 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import DataSpecialist from '/dma/js/data/DataSpecialist.js?v=0.14.0-beta';
+import DataSpecialist from '/dma/js/data/DataSpecialist.js?v=0.15.0-beta';
 
 class PSVTDataSpecialist extends DataSpecialist {
 
@@ -10,7 +10,7 @@ class PSVTDataSpecialist extends DataSpecialist {
 
 	super();
 	this.processingSteps = [
-	    this.preprocessPSVTWorkbook,
+	    this.preprocessWAMAPGradebook,
 	    this.ensureUniqueHeadings,
 	    this.applyHeaderMappings,
 	    this.standardizeIdentifierHeadings,

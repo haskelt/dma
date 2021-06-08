@@ -159,7 +159,7 @@
 			"class" : "AutoData"
 		},
 		"psvt" : {
-			"class" : "PSVTData",
+			"class" : "AutoData",
 			"headerMappings" : {
 				"Name" : "Name",
 				"Pre-Course Assessment" : "psvt_pre",

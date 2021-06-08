@@ -10,7 +10,7 @@ class WAMAPDataSpecialist extends DataSpecialist {
 
 	super();
 	this.processingSteps = [
-	    this.preprocessWAMAPWorkbook,
+	    this.preprocessWAMAPAssessment,
 	    this.ensureUniqueHeadings,
 	    this.applyHeaderMappings,
 	    this.standardizeIdentifierHeadings,

@@ -10,7 +10,7 @@ class PSVTDataSpecialist extends DataSpecialist {
 
 	super();
 	this.processingSteps = [
-	    this.preprocessPSVTWorkbook,
+	    this.preprocessWAMAPGradebook,
 	    this.ensureUniqueHeadings,
 	    this.applyHeaderMappings,
 	    this.standardizeIdentifierHeadings,
