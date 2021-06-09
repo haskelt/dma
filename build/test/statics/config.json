@@ -1,34 +1,34 @@
 {
-    "identifiers" : [
-	{
-	    "standardHeading": "Name",
-	    "headingPattern": "Name$",
-	    "formatStandardization": {
-		"trim": true,
-		"upper": true,
-		"find": "([ a-zA-z]+), ([ a-zA-Z]+)",
-		"replace": "$2 $1"
-	    }
-	},
-	{
-	    "standardHeading": "Student ID",
-	    "headingPattern": "^sis_id$|^SID$",
-	    "formatStandardization": {
-		"trim": true,
-		"find": "-",
-		"replace": ""
-	    }
-	},
-	{
-	    "standardHeading": "E-Mail",
-	    "headingPattern": "E-?[mM]ail",
-	    "formatStandardization": {}
-	},
-	{
-	    "standardHeading": "Canvas ID",
-	    "headingPattern": "^id$|^CANVAS ID$",
-	    "formatStandardization": {}
-	}
+    	"identifiers" : [
+		{
+			"standardHeading" : "Name",
+			"headingPattern" : "Name|Student",
+			"formatStandardization" : {
+				"trim" : true,
+				"upper" : true,
+				"find" : "([ a-zA-z]+), ([ a-zA-Z]+)",
+				"replace" : "$2 $1"
+			}
+		},
+		{
+			"standardHeading" : "Student ID",
+			"headingPattern" : "^Student ID$|^Code$|^SID$|^sis_id$|^SIS User ID$",
+			"formatStandardization" : {
+				"trim" : true,
+				"find" : "-",
+				"replace" : ""
+			}
+		},
+		{
+			"standardHeading" : "Canvas ID",
+			"headingPattern" : "^id$|^CANVAS ID$",
+			"formatStandardization" : {}
+		},
+		{
+			"standardHeading" : "E-Mail",
+			"headingPattern" : "E-?[mM]ail|SIS Login ID",
+			"formatStandardization" : {}
+		}
 	],
 	"data" : {
 		"instructor" : {
@@ -76,16 +76,16 @@
 			"requiredFields" : [ "consent" ]
 		},
 		"mct_pre" : {
-			"class" : "CanvasData"
+			"class" : "AutoData"
 		},
 		"mct_post" : {
-			"class" : "CanvasData"
+			"class" : "AutoData"
 		},
 		"cw" : {
 			"class" : "CWData"
 		},
 		"exam" : {
-			"class" : "ExamData"
+			"class" : "AutoData"
 		}
 	},
 	"consentOptions" : [

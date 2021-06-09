@@ -2,7 +2,7 @@
 	"identifiers" : [
 		{
 			"standardHeading" : "Name",
-			"headingPattern" : "Name$",
+			"headingPattern" : "Name|Student",
 			"formatStandardization" : {
 				"trim" : true,
 				"upper" : true,
@@ -12,7 +12,7 @@
 		},
 		{
 			"standardHeading" : "Student ID",
-			"headingPattern" : "^Student ID$|^Code$|^Student SIS ID$|^SID$|^sis_id$",
+			"headingPattern" : "^Student ID$|^Code$|^Student SIS ID$|^SID$|^sis_id$|^SIS User ID$",
 			"formatStandardization" : {
 				"trim" : true,
 				"find" : "-",
@@ -26,7 +26,7 @@
 		},
 		{
 			"standardHeading" : "E-Mail",
-			"headingPattern" : "E-?[mM]ail",
+			"headingPattern" : "E-?[mM]ail|SIS Login ID",
 			"formatStandardization" : {}
 		}
 	],

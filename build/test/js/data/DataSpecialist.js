@@ -38,6 +38,24 @@ class DataSpecialist {
     
     /**************************************************************************/
     
+    preprocessCanvasGradebook () {
+	/* Canvas gradebook files have three header rows, but only the first
+	   has anything useful. This copies the entries in the first row
+	   to the third row, and sets the header row to the 3rd row. */
+	for(let sheet of Object.values(this.curData.Sheets)){
+	    let sheetRange = xlsx.decodeRange(sheet['!ref']);
+	    for(let col = sheetRange.s.c; col <= sheetRange.e.c; col++){
+		let top = xlsx.encodeAddress({c: col, r: 0});
+		let bottom = xlsx.encodeAddress({c: col, r: 2});
+		sheet[bottom] = sheet[top];
+	    }
+	}
+	this.headerRow = 2;
+	
+    } // preprocessCanvasGradebook
+    
+    /**************************************************************************/
+
     preprocessWAMAPAssessment () {
 
 	for(let sheet in this.curData.Sheets){
@@ -117,12 +135,31 @@ class DataSpecialist {
     
     /**************************************************************************/
 
-    preprocessExamWorkbook () {
-
-	/* Exam files have the meaningful header in the second row. */ 
+    preprocessAnnotatedCanvasAssessment () {
+	/* This is for Canvas assessment files where an extra header row
+	   has been manually added at the top. It combines the 1st and 2nd
+	   header rows into a single header in the 2nd row. */
+	for(let sheet in this.curData.Sheets){
+	    let sheetRange = xlsx.decodeRange(this.curData.Sheets[sheet]['!ref']);
+	    for(let col = sheetRange.s.c; col <= sheetRange.e.c; col++){
+		let top = xlsx.encodeAddress({c: col, r: 0});
+		let bottom = xlsx.encodeAddress({c: col, r: 1});
+		let fullHeading = '';
+		if(top in this.curData.Sheets[sheet]){
+		    fullHeading += this.curData.Sheets[sheet][top].v;
+		}
+		if(bottom in this.curData.Sheets[sheet]){
+		    if(fullHeading.length > 0){
+			fullHeading += ':';
+		    }
+		    fullHeading += this.curData.Sheets[sheet][bottom].v
+		}
+		this.curData.Sheets[sheet][bottom] = {t: 's', v: fullHeading};
+	    }
+	}
 	this.headerRow = 1;
 	
-    } // preprocessExamWorkbook
+    } // preprocessAnnotatedCanvasAssessment
     
     /**************************************************************************/
 
@@ -132,9 +169,13 @@ class DataSpecialist {
 	   WAMAP assessment, and WAMAP gradebook formats. */
 	var firstSheet = this.curData.Sheets[this.curData.SheetNames[0]];
 	let sheetRange = xlsx.decodeRange(firstSheet['!ref']);
+
 	var foundPoints = false;
 	var foundScored = false;
 	var foundAverages = false;
+	var foundPointsPossible = false;
+	var foundOffsetName = false;
+	
 	for(let col = sheetRange.s.c; col <= sheetRange.e.c; col++){
 	    let row2cell = xlsx.encodeAddress({c: col, r: 1});
 	    if(row2cell in firstSheet && firstSheet[row2cell].t == 's'){
@@ -145,20 +186,42 @@ class DataSpecialist {
 		}
 	    }
 	}
+
 	var averagesCell = xlsx.encodeAddress({c: 0, r: sheetRange.e.r});
 	if(averagesCell in firstSheet && firstSheet[averagesCell].t == 's'){
 	    if(firstSheet[averagesCell].v.includes('Averages')){
 		foundAverages = true;
 	    }
 	}
+
+	var pointsPossibleCell = xlsx.encodeAddress({c: 0, r: 2});
+	if(pointsPossibleCell in firstSheet && firstSheet[pointsPossibleCell].t == 's'){
+	    if(firstSheet[pointsPossibleCell].v.includes('Points Possible')){
+		foundPointsPossible = true;
+	    }
+	}
+
+	var offsetNameCell = xlsx.encodeAddress({c: 0, r: 1});
+	if(offsetNameCell in firstSheet && firstSheet[offsetNameCell].t == 's'){
+	    if(firstSheet[offsetNameCell].v == 'name'){
+		foundOffsetName = true;
+	    }
+	}
+	
 	if(foundPoints && foundScored){
 	    logger.postMessage('DEBUG', 'data', 'Auto format detection: WAMAP Assessment');
 	    this.preprocessWAMAPAssessment();
+	} else if(foundPointsPossible){
+	    logger.postMessage('DEBUG', 'data', 'Auto format detection: Canvas Gradebook');
+	    this.preprocessCanvasGradebook();
 	} else if(foundAverages){
 	    logger.postMessage('DEBUG', 'data', 'Auto format detection: WAMAP Gradebook');
 	    this.preprocessWAMAPGradebook();
+	} else if(foundOffsetName){
+	    logger.postMessage('DEBUG', 'data', 'Auto format detection: Annotated Canvas Assessment');
+	    this.preprocessAnnotatedCanvasAssessment();
 	} else {
-	    logger.postMessage('DEBUG', 'data', 'Auto format detection: Canvas');
+	    logger.postMessage('DEBUG', 'data', 'Auto format detection: Canvas Assessment');
 	}
 	
     } // autoPreprocessWorkbook
@@ -183,7 +246,6 @@ class DataSpecialist {
 		    headingAddresses[sheet[address].v] = [ address ];
 		}
 	    }
-	    console.log(headingAddresses);
 	    for(let heading in headingAddresses){
 		if(headingAddresses[heading].length > 1){
 		    for(let i in headingAddresses[heading]){
