@@ -235,15 +235,17 @@ class DataSpecialist {
 	    let sheetRange = xlsx.decodeRange(sheet['!ref']);
 	    for(let col = sheetRange.s.c; col <= sheetRange.e.c; col++){
 		let address = xlsx.encodeAddress({c: col, r: this.headerRow});
-		if(sheet[address].t != 's'){
-		    sheet[address].t = 's';
-		    sheet[address].v = sheet[address].v.toString();
-		    sheet[address].w = undefined;
-		}
-		if(sheet[address].v in headingAddresses){
-		    headingAddresses[sheet[address].v].push(address);
-		} else {
-		    headingAddresses[sheet[address].v] = [ address ];
+		if(address in sheet){
+		    if(sheet[address].t != 's'){
+			sheet[address].t = 's';
+			sheet[address].v = sheet[address].v.toString();
+			sheet[address].w = undefined;
+		    }
+		    if(sheet[address].v in headingAddresses){
+			headingAddresses[sheet[address].v].push(address);
+		    } else {
+			headingAddresses[sheet[address].v] = [ address ];
+		    }
 		}
 	    }
 	    for(let heading in headingAddresses){

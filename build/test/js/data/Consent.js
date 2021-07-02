@@ -1,7 +1,7 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/js/logger/logger.js?v=0.15.0-beta';
-import Roster from '/js/data/Roster.js?v=0.15.0-beta';
+import logger from '/js/logger/logger.js?v=0.17.1-beta';
+import Roster from '/js/data/Roster.js?v=0.17.1-beta';
 
 class Consent {
 

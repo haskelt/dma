@@ -1,7 +1,7 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import config from '/js/config.js?v=0.15.0-beta';
-import message_dispatcher from '/js/logger/MessageDispatcher.js?v=0.15.0-beta';
+import config from '/js/config.js?v=0.17.1-beta';
+import message_dispatcher from '/js/logger/MessageDispatcher.js?v=0.17.1-beta';
 
 class StatusMessageHandler {
 

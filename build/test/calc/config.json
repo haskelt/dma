@@ -167,7 +167,13 @@
 			    "Visualization of Rotations TAKE 2": "psvt_post",
 			    "Visualization of Rotations": "psvt_pre"
 			}
-		}
+		},
+	    "psvt-pre" : {
+			"class" : "AutoData"
+	    },
+	    "psvt-post" : {
+			"class" : "AutoData"
+	    }
 	},
 	"consentOptions" : [
 		[

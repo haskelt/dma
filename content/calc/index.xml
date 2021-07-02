@@ -44,7 +44,17 @@
 	  <spreadsheet-selector id="test1" label="Test 1 (Integral Basics)" optional="true"/>
 	  <spreadsheet-selector id="test2" label="Test 2 (Centroids)" optional="true"/>
 	  <spreadsheet-selector id="test3" label="Test 3 (Volumes)" optional="true"/>
-	  <spreadsheet-selector id="psvt" label="PSVTR" optional="true"/>
+	  <task-heading label="PSVT:R Option A"/>
+	  <task-note>
+	    Use this option if your PSVT:R pretest and posttest scores are in the same file. Otherwise check the 'Skip' box.
+	  </task-note>
+	  <spreadsheet-selector id="psvt" label="PSVT:R Combined" note="" optional="true"/>
+	  <task-heading label="PSVT:R Option B"/>
+	  <task-note>
+	    Use this option if your PSVT:R pretest and posttest scores are in different files. Otherwise check the 'Skip' boxes.
+	  </task-note>
+	  <spreadsheet-selector id="psvt-pre" label="PSVT:R Pretest" optional="true"/>
+	  <spreadsheet-selector id="psvt-post" label="PSVT:R Posttest" optional="true"/>
 	</task-set>
       </task-wrapper>
       <task-wrapper label="Step 4 - Export">

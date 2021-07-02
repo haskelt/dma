@@ -1,7 +1,7 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/dma/js/logger/logger.js?v=0.16.0-beta';
-import FieldTask from '/dma/js/fields/FieldTask.js?v=0.16.0-beta';
+import logger from '/dma/js/logger/logger.js?v=0.17.1-beta';
+import FieldTask from '/dma/js/fields/FieldTask.js?v=0.17.1-beta';
 
 class SelectTask extends FieldTask {
     

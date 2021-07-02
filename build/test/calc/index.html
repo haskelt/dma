@@ -5,15 +5,15 @@
     <meta charset=utf-8>
     <title>DMA</title>
     
-    <link rel="stylesheet" href="/css/app.css?v=0.15.0-beta" type="text/css" />
+    <link rel="stylesheet" href="/css/app.css?v=0.17.1-beta" type="text/css" />
     
     
     
-    <link rel="stylesheet" href="/css/status/status.css?v=0.15.0-beta" type="text/css" />
+    <link rel="stylesheet" href="/css/status/status.css?v=0.17.1-beta" type="text/css" />
     
-    <link rel="stylesheet" href="/css/fields/fields.css?v=0.15.0-beta" type="text/css" />
+    <link rel="stylesheet" href="/css/fields/fields.css?v=0.17.1-beta" type="text/css" />
     
-    <link rel="stylesheet" href="/css/tasks/tasks.css?v=0.15.0-beta" type="text/css" />
+    <link rel="stylesheet" href="/css/tasks/tasks.css?v=0.17.1-beta" type="text/css" />
     
     
     
@@ -22,7 +22,7 @@
   <body>
     
     <header>
-      <h1>EMARCS Data Management App v0.15.0-beta</h1>
+      <h1>EMARCS Data Management App v0.17.1-beta</h1>
     </header>
     <main>
       
@@ -78,6 +78,14 @@
   <label for="Control">Control</label>
   </div>
   
+</div>
+	  <div class="tasks__task-heading">
+  My Heading
+</div>
+	  <div class="tasks__task-note">
+  
+	    Inserting a note here to check how the styling of notes looks. We need enough content to make it wrap at least once.
+	  
 </div>
 	  <div id="modality" class="fields__multiple-choice tasks__task" data-label="Course modality" data-task-type="multiple-choice">
   <span>Course modality</span>
@@ -205,8 +213,34 @@
   <input type="checkbox" class="fields__spreadsheet-selector--checkbox"/><span class="fields__spreadsheet-selector--checkbox-label">Skip</span>
   <input type="file" class="fields__spreadsheet-selector--selector"/>
 </div>
-	  <div id="psvt" class="fields__spreadsheet-selector tasks__task" data-label="PSVTR" data-task-type="spreadsheet-selector" data-optional="true">
-  <span class="fields__spreadsheet-selector--label">PSVTR</span>
+	  <div class="tasks__task-heading">
+  PSVT:R Option A
+</div>
+	  <div class="tasks__task-note">
+  
+	    Use this option if your PSVT:R pretest and posttest scores are in the same file. Otherwise check the 'Skip' box.
+	  
+</div>
+	  <div id="psvt" class="fields__spreadsheet-selector tasks__task" data-label="PSVT:R Combined" data-task-type="spreadsheet-selector" data-optional="true">
+  <span class="fields__spreadsheet-selector--label">PSVT:R Combined</span>
+  <input type="checkbox" class="fields__spreadsheet-selector--checkbox"/><span class="fields__spreadsheet-selector--checkbox-label">Skip</span>
+  <input type="file" class="fields__spreadsheet-selector--selector"/>
+</div>
+	  <div class="tasks__task-heading">
+  PSVT:R Option B
+</div>
+	  <div class="tasks__task-note">
+  
+	    Use this option if your PSVT:R pretest and posttest scores are in different files. Otherwise check the 'Skip' boxes.
+	  
+</div>
+	  <div id="psvt-pre" class="fields__spreadsheet-selector tasks__task" data-label="PSVT:R Pretest" data-task-type="spreadsheet-selector" data-optional="true">
+  <span class="fields__spreadsheet-selector--label">PSVT:R Pretest</span>
+  <input type="checkbox" class="fields__spreadsheet-selector--checkbox"/><span class="fields__spreadsheet-selector--checkbox-label">Skip</span>
+  <input type="file" class="fields__spreadsheet-selector--selector"/>
+</div>
+	  <div id="psvt-post" class="fields__spreadsheet-selector tasks__task" data-label="PSVT:R Posttest" data-task-type="spreadsheet-selector" data-optional="true">
+  <span class="fields__spreadsheet-selector--label">PSVT:R Posttest</span>
   <input type="checkbox" class="fields__spreadsheet-selector--checkbox"/><span class="fields__spreadsheet-selector--checkbox-label">Skip</span>
   <input type="file" class="fields__spreadsheet-selector--selector"/>
 </div>
@@ -260,25 +294,25 @@
 
     
     
-    <script src="/js/logger/logger.js?v=0.15.0-beta" type="module"></script>
-    <script src="/js/data/data.js?v=0.15.0-beta" type="module"></script>
+    <script src="/js/logger/logger.js?v=0.17.1-beta" type="module"></script>
+    <script src="/js/data/data.js?v=0.17.1-beta" type="module"></script>
     
     
     
     <script type="module">
-      import "/js/status/status.js?v=0.15.0-beta"
+      import "/js/status/status.js?v=0.17.1-beta"
     </script>
     
     <script type="module">
-      import "/js/fields/fields.js?v=0.15.0-beta"
+      import "/js/fields/fields.js?v=0.17.1-beta"
     </script>
     
     <script type="module">
-      import "/js/tasks/tasks.js?v=0.15.0-beta"
+      import "/js/tasks/tasks.js?v=0.17.1-beta"
     </script>
     
     
-    <script src="/js/app.js?v=0.15.0-beta" type="module"></script>
+    <script src="/js/app.js?v=0.17.1-beta" type="module"></script>
     
 
   

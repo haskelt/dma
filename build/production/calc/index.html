@@ -5,15 +5,15 @@
     <meta charset=utf-8>
     <title>DMA</title>
     
-    <link rel="stylesheet" href="/dma/css/app.css?v=0.16.0-beta" type="text/css" />
+    <link rel="stylesheet" href="/dma/css/app.css?v=0.17.1-beta" type="text/css" />
     
     
     
-    <link rel="stylesheet" href="/dma/css/status/status.css?v=0.16.0-beta" type="text/css" />
+    <link rel="stylesheet" href="/dma/css/status/status.css?v=0.17.1-beta" type="text/css" />
     
-    <link rel="stylesheet" href="/dma/css/fields/fields.css?v=0.16.0-beta" type="text/css" />
+    <link rel="stylesheet" href="/dma/css/fields/fields.css?v=0.17.1-beta" type="text/css" />
     
-    <link rel="stylesheet" href="/dma/css/tasks/tasks.css?v=0.16.0-beta" type="text/css" />
+    <link rel="stylesheet" href="/dma/css/tasks/tasks.css?v=0.17.1-beta" type="text/css" />
     
     
     
@@ -22,7 +22,7 @@
   <body>
     
     <header>
-      <h1>EMARCS Data Management App v0.16.0-beta</h1>
+      <h1>EMARCS Data Management App v0.17.1-beta</h1>
     </header>
     <main>
       
@@ -205,8 +205,34 @@
   <input type="checkbox" class="fields__spreadsheet-selector--checkbox"/><span class="fields__spreadsheet-selector--checkbox-label">Skip</span>
   <input type="file" class="fields__spreadsheet-selector--selector"/>
 </div>
-	  <div id="psvt" class="fields__spreadsheet-selector tasks__task" data-label="PSVTR" data-task-type="spreadsheet-selector" data-optional="true">
-  <span class="fields__spreadsheet-selector--label">PSVTR</span>
+	  <div class="tasks__task-heading">
+  PSVT:R Option A
+</div>
+	  <div class="tasks__task-note">
+  
+	    Use this option if your PSVT:R pretest and posttest scores are in the same file. Otherwise check the 'Skip' box.
+	  
+</div>
+	  <div id="psvt" class="fields__spreadsheet-selector tasks__task" data-label="PSVT:R Combined" data-task-type="spreadsheet-selector" data-optional="true">
+  <span class="fields__spreadsheet-selector--label">PSVT:R Combined</span>
+  <input type="checkbox" class="fields__spreadsheet-selector--checkbox"/><span class="fields__spreadsheet-selector--checkbox-label">Skip</span>
+  <input type="file" class="fields__spreadsheet-selector--selector"/>
+</div>
+	  <div class="tasks__task-heading">
+  PSVT:R Option B
+</div>
+	  <div class="tasks__task-note">
+  
+	    Use this option if your PSVT:R pretest and posttest scores are in different files. Otherwise check the 'Skip' boxes.
+	  
+</div>
+	  <div id="psvt-pre" class="fields__spreadsheet-selector tasks__task" data-label="PSVT:R Pretest" data-task-type="spreadsheet-selector" data-optional="true">
+  <span class="fields__spreadsheet-selector--label">PSVT:R Pretest</span>
+  <input type="checkbox" class="fields__spreadsheet-selector--checkbox"/><span class="fields__spreadsheet-selector--checkbox-label">Skip</span>
+  <input type="file" class="fields__spreadsheet-selector--selector"/>
+</div>
+	  <div id="psvt-post" class="fields__spreadsheet-selector tasks__task" data-label="PSVT:R Posttest" data-task-type="spreadsheet-selector" data-optional="true">
+  <span class="fields__spreadsheet-selector--label">PSVT:R Posttest</span>
   <input type="checkbox" class="fields__spreadsheet-selector--checkbox"/><span class="fields__spreadsheet-selector--checkbox-label">Skip</span>
   <input type="file" class="fields__spreadsheet-selector--selector"/>
 </div>
@@ -260,25 +286,25 @@
 
     
     
-    <script src="/dma/js/logger/logger.js?v=0.16.0-beta" type="module"></script>
-    <script src="/dma/js/data/data.js?v=0.16.0-beta" type="module"></script>
+    <script src="/dma/js/logger/logger.js?v=0.17.1-beta" type="module"></script>
+    <script src="/dma/js/data/data.js?v=0.17.1-beta" type="module"></script>
     
     
     
     <script type="module">
-      import "/dma/js/status/status.js?v=0.16.0-beta"
+      import "/dma/js/status/status.js?v=0.17.1-beta"
     </script>
     
     <script type="module">
-      import "/dma/js/fields/fields.js?v=0.16.0-beta"
+      import "/dma/js/fields/fields.js?v=0.17.1-beta"
     </script>
     
     <script type="module">
-      import "/dma/js/tasks/tasks.js?v=0.16.0-beta"
+      import "/dma/js/tasks/tasks.js?v=0.17.1-beta"
     </script>
     
     
-    <script src="/dma/js/app.js?v=0.16.0-beta" type="module"></script>
+    <script src="/dma/js/app.js?v=0.17.1-beta" type="module"></script>
     
 
   
