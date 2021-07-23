@@ -2,7 +2,7 @@
     	"identifiers" : [
 		{
 			"standardHeading" : "Name",
-			"headingPattern" : "Name|Student",
+			"headingPattern" : "Name|^Student$",
 			"formatStandardization" : {
 				"trim" : true,
 				"upper" : true,

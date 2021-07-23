@@ -419,6 +419,7 @@ class DataSpecialist {
 	if('requiredFields' in this.dataConfig){
 	    for(let field of this.dataConfig.requiredFields){
 		for(let sheet in this.curData){
+		    console.log(this.curData[sheet][0]);
 		    if(!(field in this.curData[sheet][0])){
 			throw new DataError('A column "' + field + '" is required. Please fix and then reupload the file.');
 		    }
