@@ -8,6 +8,7 @@ import xlsx from '/js/xlsx/xlsx.js?v=0.17.2-beta';
 class DataSets {
 
     static dataSets = {};
+    static aliases = {};
 
     /**************************************************************************/
 
@@ -73,6 +74,41 @@ class DataSets {
 
     } // getDataField
 
+    /**************************************************************************/
+
+    static setStudentAlias (identifier, standardValue, aliasValue) {
+	/* An alias is an alternative form of a student identifier
+	   already present in the roster. For example, if the name
+	   'Robert Wang' is in the roster, 'Bob Wang' could be an
+	   alias for that student. By setting an alias, we can avoid
+	   student lookup errors when the alternative form appears in
+	   a data file. In this example the we could call this
+	   function as: 
+	       setStudentAlias('Name', 'Robert Wang', 'Bob Wang'). 
+	*/
+
+	if(!(identifier in this.aliases)){
+	    this.aliases[identifier] = {};
+	}
+	this.aliases[identifier][aliasValue] = standardValue;
+	
+    } // setStudentAlias
+
+    /**************************************************************************/
+
+    static checkStudentAlias (identifier, value) {
+	/* Checks if <value> has been registered as an alias in the context
+	   of <identifier>. If so, returns the standard value for that 
+	   identifier, otherwise returns null. */
+
+	if(identifier in this.aliases && value in this.aliases[identifier]){
+	    return this.aliases[identifier][value];
+	} else {
+	    return null;
+	}
+
+    } // checkStudentAlias
+    
     /**************************************************************************/
 
     static generateMissingRecords (targetDataSet, referenceDataSet, matchField, missingList) {

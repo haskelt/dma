@@ -8,7 +8,6 @@ class Dialog {
 
     static show () {
 
-	console.log("showing");
 	this.element.classList.remove("hidden");
 	
     } // show
@@ -17,7 +16,6 @@ class Dialog {
 
     static hide () {
 
-	console.log("hiding");
 	this.element.classList.add("hidden");
 	
     } // hide

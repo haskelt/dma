@@ -19,8 +19,6 @@ class StudentSelectorDialog extends Dialog {
 	this.targetIdentifierElement = this.element.querySelector('#student-selector__target-identifier');
 	this.targetStudentElement = this.element.querySelector('#student-selector__target-student');
 	this.studentListElement = this.element.querySelector('#student-selector__student-list');
-	this.showButton = document.querySelector('.dialogs__show-button');
-	this.showButton.addEventListener('click', this.testDialog.bind(this));
 	this.okButton = this.element.querySelector('.dialogs__ok-button');
 	this.okButton.addEventListener('click', this.processResponse.bind(this));
 	
@@ -45,8 +43,9 @@ class StudentSelectorDialog extends Dialog {
     
     /**************************************************************************/
 
-    static getUserSelection (targetIdentifier, targetStudent, studentList) {
+    static getUserSelection (targetIdentifier, targetStudent, studentList, onResponse) {
 
+	logger.postMessage('DEBUG', 'dialogs', 'Prompting user to select student with ' + targetIdentifier + ' "' + targetStudent + '"');
 	this.targetIdentifierElement.textContent = targetIdentifier;
 	this.targetStudentElement.textContent = targetStudent;
 	this.options = [];
@@ -55,12 +54,9 @@ class StudentSelectorDialog extends Dialog {
 	for(let student of studentList){
 	    this.createOption(student);	    
 	}
+	this.onResponse = onResponse;
 	super.show();
-/*	return new Promise((resolve, reject)  => {
-	    this.promiseResolver = resolve;
-	});
-*/
-	return null;
+	
     } // getUserSelection
 
     /**************************************************************************/
@@ -78,22 +74,10 @@ class StudentSelectorDialog extends Dialog {
 	while(this.studentListElement.firstChild){
 	    this.studentListElement.removeChild(this.studentListElement.firstChild);
 	}
-	logger.postMessage('INFO', 'dialogs', 'Option "' + response + '" chosen in student selector');
-	//this.promiseResolver(response);
+	logger.postMessage('DEBUG', 'dialogs', 'Option "' + response + '" chosen in student selector');
+	this.onResponse(this.targetIdentifierElement.textContent, this.targetStudentElement.textContent, response);
 	
     } // processResponse
-    
-    /**************************************************************************/
-    
-    static testDialog () {
-	
-	var targetIdentifier = 'Name';
-	var targetStudent = 'Nate';
-	var studentList = ['Frank', 'Grace', 'Nathan'];
-	this.getUserSelection(targetIdentifier, targetStudent, studentList);
-//	    .then(function (response) { console.log(response); });
-	
-    } // testDialog
     
     /**************************************************************************/
     

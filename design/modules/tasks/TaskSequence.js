@@ -2,6 +2,8 @@
 
 import logger from '{{globals.site_path}}/js/logger/logger.js?v={{globals.version}}';
 import DataError from '{{globals.site_path}}/js/errors/DataError.js?v={{globals.version}}';
+import UserInputNeeded from '{{globals.site_path}}/js/errors/UserInputNeeded.js?v={{globals.version}}';
+import errors from '{{globals.site_path}}/js/errors/errors.js?v={{globals.version}}';
 import Task from '{{globals.site_path}}/js/tasks/Task.js?v={{globals.version}}';
 
 class TaskSequence extends Task {
@@ -107,6 +109,8 @@ class TaskSequence extends Task {
 	    catch (error) {
 		if (error instanceof DataError) {
 		    logger.postMessage('DEBUG', 'tasks', 'Advancing to next task sequence interrupted by error.');
+		} else if (error instanceof UserInputNeeded) {
+		    errors.setResumePoint(this.goToNext.bind(this));
 		} else {
 		    throw error;
 		}

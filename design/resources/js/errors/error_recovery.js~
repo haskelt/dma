@@ -1,0 +1,18 @@
+{{globals.js_copyright_notice}}
+
+class ErrorRecovery {
+    
+    /**************************************************************************/
+
+    constructor(message) {
+
+	super(message);
+	this.name = "UserInputNeeded";
+
+    } // constructor
+
+    /**************************************************************************/
+
+}
+
+export default ErrorRecovery;

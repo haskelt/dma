@@ -45,8 +45,9 @@ class StudentSelectorDialog extends Dialog {
     
     /**************************************************************************/
 
-    static getUserSelection (targetIdentifier, targetStudent, studentList) {
+    static getUserSelection (targetIdentifier, targetStudent, studentList, onResponse) {
 
+	logger.postMessage('DEBUG', 'dialogs', 'Prompting user to select student with ' + targetIdentifier + ' "' + targetStudent + '"');
 	this.targetIdentifierElement.textContent = targetIdentifier;
 	this.targetStudentElement.textContent = targetStudent;
 	this.options = [];
@@ -55,12 +56,9 @@ class StudentSelectorDialog extends Dialog {
 	for(let student of studentList){
 	    this.createOption(student);	    
 	}
+	this.onResponse = onResponse;
 	super.show();
-/*	return new Promise((resolve, reject)  => {
-	    this.promiseResolver = resolve;
-	});
-*/
-	return null;
+	
     } // getUserSelection
 
     /**************************************************************************/
@@ -78,8 +76,8 @@ class StudentSelectorDialog extends Dialog {
 	while(this.studentListElement.firstChild){
 	    this.studentListElement.removeChild(this.studentListElement.firstChild);
 	}
-	logger.postMessage('INFO', 'dialogs', 'Option "' + response + '" chosen in student selector');
-	//this.promiseResolver(response);
+	logger.postMessage('DEBUG', 'dialogs', 'Option "' + response + '" chosen in student selector');
+	this.onResponse(this.targetIdentifierElement.textContent, this.targetStudentElement.textContent, response);
 	
     } // processResponse
     

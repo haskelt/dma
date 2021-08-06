@@ -4,6 +4,8 @@ import logger from '/js/logger/logger.js?v=0.17.2-beta';
 import config from '/js/config.js?v=0.17.2-beta';
 import DataError from '/js/errors/DataError.js?v=0.17.2-beta';
 import DataWarning from '/js/errors/DataWarning.js?v=0.17.2-beta';
+import UserInputNeeded from '/js/errors/UserInputNeeded.js?v=0.17.2-beta';
+import errors from '/js/errors/errors.js?v=0.17.2-beta';
 import DataSets from '/js/data/DataSets.js?v=0.17.2-beta';
 import xlsx from '/js/xlsx/xlsx.js?v=0.17.2-beta';
 import CryptoJS from '/js/cryptojs/sha256.js?v=0.17.2-beta';
@@ -497,13 +499,18 @@ class DataSpecialist {
 	    let newData = [];
 	    let processedStudents = [];
 	    for(let row of this.curData[sheet]){
-		let anonID = DataSets.findData('_roster', this.lookupIdentifiers[sheet], row[this.lookupIdentifiers[sheet]], 'anonID');
+		var lookupValue = row[this.lookupIdentifiers[sheet]]
+		var standardValue = DataSets.checkStudentAlias(this.lookupIdentifiers[sheet], row[this.lookupIdentifiers[sheet]]);
+		if(standardValue){
+		    logger.postMessage('DEBUG', 'data', '"' + row[this.lookupIdentifiers[sheet]] + '" is an alias for ' + this.lookupIdentifiers[sheet] + ' "' + standardValue + '", converting before lookup');
+		    lookupValue = standardValue;
+		}
+		let anonID = DataSets.findData('_roster', this.lookupIdentifiers[sheet], lookupValue, 'anonID');
 		if(!anonID){
-		    logger.postMessage('WARN', 'data', this.tag + ':' + sheet + ' - Unable to find student with ' + this.lookupIdentifiers[sheet] + ' "' + row[this.lookupIdentifiers[sheet]] + '" in the roster, prompting user to locate student in the roster');
-		    anonID = StudentSelectorDialog.getUserSelection(this.lookupIdentifiers[sheet], row[this.lookupIdentifiers[sheet]], ['Frank', 'Grace', 'Nathan']);
-		    if(!anonID){
-			logger.postMessage('INFO', 'data', this.tag + ':' + sheet + ' - User verified that student with ' + this.lookupIdentifiers[sheet] + ' "' + row[this.lookupIdentifiers[sheet]] + '" is not in the class');
-		    }
+		    logger.postMessage('WARN', 'data', this.tag + ':' + sheet + ' - Unable to find student with ' + this.lookupIdentifiers[sheet] + ' "' + row[this.lookupIdentifiers[sheet]] + '" in the roster, prompting user to identify student');
+		    let studentList = DataSets.getDataField('_roster', this.lookupIdentifiers[sheet]);
+		    StudentSelectorDialog.getUserSelection(this.lookupIdentifiers[sheet], row[this.lookupIdentifiers[sheet]], studentList, this.handleStudentSelection.bind(this));
+		    throw new UserInputNeeded();
 		}
 		if(processedStudents.includes(anonID)){
 		    throw new DataError('Sheet "' + sheet + '" has duplicate entry for student with ' + this.lookupIdentifiers[sheet] + ' "' + row[this.lookupIdentifiers[sheet].data] + '"; please fix and re-upload the file');
@@ -523,7 +530,17 @@ class DataSpecialist {
     } // anonymizeData
 
     /**************************************************************************/
-    
+
+    handleStudentSelection (targetIdentifier, targetStudent, response) {
+
+	logger.postMessage('DEBUG', 'data', 'Setting "' + response + '" as an alias for "' + targetStudent + '" for identifier "' + targetIdentifier + '" and re-trying data processing');
+	DataSets.setStudentAlias(targetIdentifier, response, targetStudent);
+	errors.resume()
+	
+    } // handleStudentSelection
+
+    /**************************************************************************/
+
     setData () {
 	
     	var sheetNames = Object.keys(this.curData);
