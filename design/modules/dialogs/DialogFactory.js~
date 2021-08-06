@@ -1,0 +1,31 @@
+{{globals.js_copyright_notice}}
+
+import logger from '{{globals.site_path}}/js/logger/logger.js?v={{globals.version}}';
+
+class DialogFactory {
+
+    static builders = {};
+    
+    /**************************************************************************/
+
+    static registerBuilder (dialogType, builder) {
+
+	logger.postMessage('TRACE', 'dialogs', 'Registering dialog builder of type ' + dialogType);
+	DialogFactory.builders[dialogType] = builder;
+	
+    } // registerBuilder
+
+    /**************************************************************************/
+
+    static build (dialogType, element) {
+
+	logger.postMessage('DEBUG', 'dialogs', 'Building dialog of type ' + dialogType);
+	return new DialogFactory.builders[dialogType](element);
+	
+    } // build
+
+    /**************************************************************************/
+    
+}
+
+export default DialogFactory;

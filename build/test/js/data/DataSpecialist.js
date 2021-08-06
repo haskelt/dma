@@ -1,12 +1,13 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/js/logger/logger.js?v=0.17.1-beta';
-import config from '/js/config.js?v=0.17.1-beta';
-import DataError from '/js/errors/DataError.js?v=0.17.1-beta';
-import DataWarning from '/js/errors/DataWarning.js?v=0.17.1-beta';
-import DataSets from '/js/data/DataSets.js?v=0.17.1-beta';
-import xlsx from '/js/xlsx/xlsx.js?v=0.17.1-beta';
-import CryptoJS from '/js/cryptojs/sha256.js?v=0.17.1-beta';
+import logger from '/js/logger/logger.js?v=0.17.2-beta';
+import config from '/js/config.js?v=0.17.2-beta';
+import DataError from '/js/errors/DataError.js?v=0.17.2-beta';
+import DataWarning from '/js/errors/DataWarning.js?v=0.17.2-beta';
+import DataSets from '/js/data/DataSets.js?v=0.17.2-beta';
+import xlsx from '/js/xlsx/xlsx.js?v=0.17.2-beta';
+import CryptoJS from '/js/cryptojs/sha256.js?v=0.17.2-beta';
+import StudentSelectorDialog from '/js/dialogs/StudentSelectorDialog.js?v=0.17.2-beta';
 
 class DataSpecialist {
 
@@ -419,7 +420,6 @@ class DataSpecialist {
 	if('requiredFields' in this.dataConfig){
 	    for(let field of this.dataConfig.requiredFields){
 		for(let sheet in this.curData){
-		    console.log(this.curData[sheet][0]);
 		    if(!(field in this.curData[sheet][0])){
 			throw new DataError('A column "' + field + '" is required. Please fix and then reupload the file.');
 		    }
@@ -497,28 +497,25 @@ class DataSpecialist {
 	    let newData = [];
 	    let processedStudents = [];
 	    for(let row of this.curData[sheet]){
-		try {
-		    let anonID = DataSets.findData('_roster', this.lookupIdentifiers[sheet], row[this.lookupIdentifiers[sheet]], 'anonID');
-		    if(processedStudents.includes(anonID)){
-			throw new DataError('Sheet "' + sheet + '" has duplicate entry for student with ' + this.lookupIdentifiers[sheet] + ' "' + row[this.lookupIdentifiers[sheet].data] + '"; please fix and re-upload the file');
-		    }
-		    processedStudents.push(anonID);
-		    let newRow = { 'anonID': anonID };
-		    for(let field in row){
-			if(!this.matchingIdentifiers[sheet].includes(field)){
-			    newRow[field] = row[field];
-			}
-		    }
-		    newData.push(newRow);
-		}
-		catch (error) {
-		    if (error instanceof DataWarning) {
-			error.message = this.tag + ':' + sheet + ' - Unable to find student with ' + this.lookupIdentifiers[sheet] + ' "' + row[this.lookupIdentifiers[sheet]] + '" in the roster, skipping';
-			logger.postMessage('WARN', 'data', error.message);
-		    } else {
-			throw error;
+		let anonID = DataSets.findData('_roster', this.lookupIdentifiers[sheet], row[this.lookupIdentifiers[sheet]], 'anonID');
+		if(!anonID){
+		    logger.postMessage('WARN', 'data', this.tag + ':' + sheet + ' - Unable to find student with ' + this.lookupIdentifiers[sheet] + ' "' + row[this.lookupIdentifiers[sheet]] + '" in the roster, prompting user to locate student in the roster');
+		    anonID = StudentSelectorDialog.getUserSelection(this.lookupIdentifiers[sheet], row[this.lookupIdentifiers[sheet]], ['Frank', 'Grace', 'Nathan']);
+		    if(!anonID){
+			logger.postMessage('INFO', 'data', this.tag + ':' + sheet + ' - User verified that student with ' + this.lookupIdentifiers[sheet] + ' "' + row[this.lookupIdentifiers[sheet]] + '" is not in the class');
 		    }
 		}
+		if(processedStudents.includes(anonID)){
+		    throw new DataError('Sheet "' + sheet + '" has duplicate entry for student with ' + this.lookupIdentifiers[sheet] + ' "' + row[this.lookupIdentifiers[sheet].data] + '"; please fix and re-upload the file');
+		}
+		processedStudents.push(anonID);
+		let newRow = { 'anonID': anonID };
+		for(let field in row){
+		    if(!this.matchingIdentifiers[sheet].includes(field)){
+			newRow[field] = row[field];
+		    }
+		}
+		newData.push(newRow);
 	    }
 	    this.curData[sheet] = newData;
 	}

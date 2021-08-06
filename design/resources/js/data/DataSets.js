@@ -181,7 +181,7 @@ class DataSets {
 		return row[returnField];
 	    }
 	}
-	throw new DataWarning('Unable to find record of "' + searchTag + '" where "' + searchField + '" is "' + searchValue + '"');
+	return null;
 	
     } // findData
     

@@ -1,4 +1,4 @@
-<page modules="status fields tasks">
+<page modules="status fields tasks dialogs">
   <content>
     <task-sequence id="tasksequence">
       <task-wrapper label="Step 1 - Course Information">
@@ -67,4 +67,5 @@
   <sidebar>
     <status/>
   </sidebar>
+  <student-selector-dialog/>
 </page>

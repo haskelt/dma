@@ -1,0 +1,26 @@
+{{globals.js_copyright_notice}}
+
+class Utilities {
+    
+/*****************************************************************************/
+
+    expandTemplate (template_html, variables) {
+
+        var split_template = template_html.split(/{= | =}/);
+        for(let i = 0; i < split_template.length; i++){
+            if(i % 2 == 1){
+                split_template[i] = variables.get(split_template[i]);
+            }
+        }
+        var temp_div = document.createElement('div');
+        temp_div.innerHTML = split_template.join('');
+
+        return temp_div.firstChild;
+
+    } // expandTemplate
+
+/*****************************************************************************/
+
+} // Utilities
+
+export default Utilities;

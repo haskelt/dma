@@ -1,0 +1,8 @@
+<button class="dialogs__show-button">Show</button>
+<div class="dialogs__dialog-wrapper hidden" data-dialog-type="student-selector">
+  <div class="dialogs__dialog">
+    <div class="dialogs__content-area">
+    </div>
+    <button class="dialogs__ok-button">OK</button>
+  </div>
+</div>

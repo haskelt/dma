@@ -1,0 +1,14 @@
+{{globals.js_copyright_notice}}
+
+import config from '{{globals.site_path}}/js/config.js?v={{globals.version}}';
+import DialogFactory from '{{globals.site_path}}/js/dialogs/DialogFactory.js?v={{globals.version}}';
+import StudentSelectorDialog from '{{globals.site_path}}/js/dialogs/StudentSelectorDialog.js?v={{globals.version}}';
+
+function initialize () {
+    DialogFactory.registerBuilder('student-selector', StudentSelectorDialog);
+    for (let dialogElement of document.querySelectorAll('.dialogs__dialog-wrapper')) {
+	let dialog = DialogFactory.build(dialogElement.dataset.dialogType, dialogElement);
+    }
+}
+
+config.registerModule('dialogs', initialize);

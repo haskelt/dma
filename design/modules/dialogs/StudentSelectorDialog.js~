@@ -1,0 +1,24 @@
+{{globals.js_copyright_notice}}
+
+import Dialog from '{{globals.site_path}}/js/dialogs/Dialog.js?v={{globals.version}}';
+
+class StudentSelectorDialog extends Dialog {
+    
+    /**************************************************************************/
+
+    constructor (element) {
+
+	super(element);
+	this.showButton = document.querySelector('.dialogs__show-button');
+	this.showButton.addEventListener('click', this.show.bind(this));
+	this.okButton = element.querySelector('.dialogs__ok-button');
+	this.okButton.addEventListener('click', this.hide.bind(this));
+	
+    } // constructor
+    
+    /**************************************************************************/
+
+} // StudentSelectorDialog
+
+export default StudentSelectorDialog;
+

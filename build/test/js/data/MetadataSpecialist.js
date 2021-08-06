@@ -1,8 +1,8 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/js/logger/logger.js?v=0.17.1-beta';
-import DataSpecialist from '/js/data/DataSpecialist.js?v=0.17.1-beta';
-import DataSets from '/js/data/DataSets.js?v=0.17.1-beta';
+import logger from '/js/logger/logger.js?v=0.17.2-beta';
+import DataSpecialist from '/js/data/DataSpecialist.js?v=0.17.2-beta';
+import DataSets from '/js/data/DataSets.js?v=0.17.2-beta';
 
 class MetadataSpecialist extends DataSpecialist {
 

@@ -1,0 +1,38 @@
+{{globals.js_copyright_notice}}
+
+import logger from '{{globals.site_path}}/js/logger/logger.js?v={{globals.version}}';
+
+class Dialog {
+
+    /**************************************************************************/
+
+    constructor (element) {
+
+	this.element = element;
+	this.id = element.id;
+	
+    } // constructor
+
+    /**************************************************************************/
+
+    show () {
+
+	console.log("showing");
+	this.element.classList.remove("hidden");
+	
+    } // show
+
+    /**************************************************************************/
+
+    hide () {
+
+	console.log("hiding");
+	this.element.classList.add("hidden");
+	
+    } // hide
+
+    /**************************************************************************/
+    
+} // Dialog
+
+export default Dialog;

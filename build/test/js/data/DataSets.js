@@ -1,9 +1,9 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/js/logger/logger.js?v=0.17.1-beta';
-import DataError from '/js/errors/DataError.js?v=0.17.1-beta';
-import DataWarning from '/js/errors/DataWarning.js?v=0.17.1-beta';
-import xlsx from '/js/xlsx/xlsx.js?v=0.17.1-beta';
+import logger from '/js/logger/logger.js?v=0.17.2-beta';
+import DataError from '/js/errors/DataError.js?v=0.17.2-beta';
+import DataWarning from '/js/errors/DataWarning.js?v=0.17.2-beta';
+import xlsx from '/js/xlsx/xlsx.js?v=0.17.2-beta';
 
 class DataSets {
 
@@ -181,7 +181,7 @@ class DataSets {
 		return row[returnField];
 	    }
 	}
-	throw new DataWarning('Unable to find record of "' + searchTag + '" where "' + searchField + '" is "' + searchValue + '"');
+	return null;
 	
     } // findData
     

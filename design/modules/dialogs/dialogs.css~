@@ -1,0 +1,29 @@
+.dialog-wrapper {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background: rgba(75, 75, 75, 0.5);
+}
+
+.dialog-wrapper.hidden {
+    display: none;
+}
+
+.dialog {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-style: none;
+    border-width: thin;
+    border-color: var(--twilight-charcoal);
+    padding: 0;
+    min-width: 20rem;
+    max-width: 60%;
+    max-height: 90%;
+}

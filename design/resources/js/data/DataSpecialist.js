@@ -7,6 +7,7 @@ import DataWarning from '{{globals.site_path}}/js/errors/DataWarning.js?v={{glob
 import DataSets from '{{globals.site_path}}/js/data/DataSets.js?v={{globals.version}}';
 import xlsx from '{{globals.site_path}}/js/xlsx/xlsx.js?v={{globals.version}}';
 import CryptoJS from '{{globals.site_path}}/js/cryptojs/sha256.js?v={{globals.version}}';
+import StudentSelectorDialog from '{{globals.site_path}}/js/dialogs/StudentSelectorDialog.js?v={{globals.version}}';
 
 class DataSpecialist {
 
@@ -496,28 +497,25 @@ class DataSpecialist {
 	    let newData = [];
 	    let processedStudents = [];
 	    for(let row of this.curData[sheet]){
-		try {
-		    let anonID = DataSets.findData('_roster', this.lookupIdentifiers[sheet], row[this.lookupIdentifiers[sheet]], 'anonID');
-		    if(processedStudents.includes(anonID)){
-			throw new DataError('Sheet "' + sheet + '" has duplicate entry for student with ' + this.lookupIdentifiers[sheet] + ' "' + row[this.lookupIdentifiers[sheet].data] + '"; please fix and re-upload the file');
-		    }
-		    processedStudents.push(anonID);
-		    let newRow = { 'anonID': anonID };
-		    for(let field in row){
-			if(!this.matchingIdentifiers[sheet].includes(field)){
-			    newRow[field] = row[field];
-			}
-		    }
-		    newData.push(newRow);
-		}
-		catch (error) {
-		    if (error instanceof DataWarning) {
-			error.message = this.tag + ':' + sheet + ' - Unable to find student with ' + this.lookupIdentifiers[sheet] + ' "' + row[this.lookupIdentifiers[sheet]] + '" in the roster, skipping';
-			logger.postMessage('WARN', 'data', error.message);
-		    } else {
-			throw error;
+		let anonID = DataSets.findData('_roster', this.lookupIdentifiers[sheet], row[this.lookupIdentifiers[sheet]], 'anonID');
+		if(!anonID){
+		    logger.postMessage('WARN', 'data', this.tag + ':' + sheet + ' - Unable to find student with ' + this.lookupIdentifiers[sheet] + ' "' + row[this.lookupIdentifiers[sheet]] + '" in the roster, prompting user to locate student in the roster');
+		    anonID = StudentSelectorDialog.getUserSelection(this.lookupIdentifiers[sheet], row[this.lookupIdentifiers[sheet]], ['Frank', 'Grace', 'Nathan']);
+		    if(!anonID){
+			logger.postMessage('INFO', 'data', this.tag + ':' + sheet + ' - User verified that student with ' + this.lookupIdentifiers[sheet] + ' "' + row[this.lookupIdentifiers[sheet]] + '" is not in the class');
 		    }
 		}
+		if(processedStudents.includes(anonID)){
+		    throw new DataError('Sheet "' + sheet + '" has duplicate entry for student with ' + this.lookupIdentifiers[sheet] + ' "' + row[this.lookupIdentifiers[sheet].data] + '"; please fix and re-upload the file');
+		}
+		processedStudents.push(anonID);
+		let newRow = { 'anonID': anonID };
+		for(let field in row){
+		    if(!this.matchingIdentifiers[sheet].includes(field)){
+			newRow[field] = row[field];
+		    }
+		}
+		newData.push(newRow);
 	    }
 	    this.curData[sheet] = newData;
 	}
