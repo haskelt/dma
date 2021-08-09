@@ -1,7 +1,7 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import config from '/dma/js/config.js?v=0.17.2-beta';
-import message_dispatcher from '/dma/js/logger/MessageDispatcher.js?v=0.17.2-beta';
+import config from '/dma/js/config.js?v=0.18.0-beta';
+import message_dispatcher from '/dma/js/logger/MessageDispatcher.js?v=0.18.0-beta';
 
 class StatusMessageHandler {
 
@@ -23,7 +23,6 @@ class StatusMessageHandler {
 	messageNode.classList.add('message');
 	messageNode.classList.add(level.toLowerCase());
 	this.statusMessagesElement.appendChild(messageNode);
-	messageNode.scrollIntoView(false);
 	
     } // handleMessage
     

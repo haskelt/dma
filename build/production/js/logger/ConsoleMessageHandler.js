@@ -1,6 +1,6 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import message_dispatcher from '/dma/js/logger/MessageDispatcher.js?v=0.17.2-beta';
+import message_dispatcher from '/dma/js/logger/MessageDispatcher.js?v=0.18.0-beta';
 
 class ConsoleMessageHandler {
 
@@ -14,7 +14,7 @@ class ConsoleMessageHandler {
 
     static loggingLevel = 'DEBUG';
 
-    static namespacesToPost = ['config', 'tasks', 'fields', 'data', 'files', 'xlsx'];
+    static namespacesToPost = ['config', 'errors', 'tasks', 'fields', 'data', 'files', 'dialogs', 'xlsx'];
 
     /**************************************************************************/
 

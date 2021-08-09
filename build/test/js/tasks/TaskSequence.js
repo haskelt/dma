@@ -1,10 +1,10 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/js/logger/logger.js?v=0.17.2-beta';
-import DataError from '/js/errors/DataError.js?v=0.17.2-beta';
-import UserInputNeeded from '/js/errors/UserInputNeeded.js?v=0.17.2-beta';
-import errors from '/js/errors/errors.js?v=0.17.2-beta';
-import Task from '/js/tasks/Task.js?v=0.17.2-beta';
+import logger from '/js/logger/logger.js?v=0.18.0-beta';
+import DataError from '/js/errors/DataError.js?v=0.18.0-beta';
+import UserInputNeeded from '/js/errors/UserInputNeeded.js?v=0.18.0-beta';
+import errors from '/js/errors/errors.js?v=0.18.0-beta';
+import Task from '/js/tasks/Task.js?v=0.18.0-beta';
 
 class TaskSequence extends Task {
 

@@ -23,7 +23,6 @@ class StatusMessageHandler {
 	messageNode.classList.add('message');
 	messageNode.classList.add(level.toLowerCase());
 	this.statusMessagesElement.appendChild(messageNode);
-	messageNode.scrollIntoView(false);
 	
     } // handleMessage
     

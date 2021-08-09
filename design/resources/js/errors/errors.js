@@ -17,7 +17,6 @@ class Errors {
     static resume () {
 
 	if(this.resumePoint){
-	    console.log('resuming after after');
 	    this.resumePoint();
 	}
 	

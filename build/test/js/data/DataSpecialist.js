@@ -1,15 +1,15 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/js/logger/logger.js?v=0.17.2-beta';
-import config from '/js/config.js?v=0.17.2-beta';
-import DataError from '/js/errors/DataError.js?v=0.17.2-beta';
-import DataWarning from '/js/errors/DataWarning.js?v=0.17.2-beta';
-import UserInputNeeded from '/js/errors/UserInputNeeded.js?v=0.17.2-beta';
-import errors from '/js/errors/errors.js?v=0.17.2-beta';
-import DataSets from '/js/data/DataSets.js?v=0.17.2-beta';
-import xlsx from '/js/xlsx/xlsx.js?v=0.17.2-beta';
-import CryptoJS from '/js/cryptojs/sha256.js?v=0.17.2-beta';
-import StudentSelectorDialog from '/js/dialogs/StudentSelectorDialog.js?v=0.17.2-beta';
+import logger from '/js/logger/logger.js?v=0.18.0-beta';
+import config from '/js/config.js?v=0.18.0-beta';
+import DataError from '/js/errors/DataError.js?v=0.18.0-beta';
+import DataWarning from '/js/errors/DataWarning.js?v=0.18.0-beta';
+import UserInputNeeded from '/js/errors/UserInputNeeded.js?v=0.18.0-beta';
+import errors from '/js/errors/errors.js?v=0.18.0-beta';
+import DataSets from '/js/data/DataSets.js?v=0.18.0-beta';
+import xlsx from '/js/xlsx/xlsx.js?v=0.18.0-beta';
+import CryptoJS from '/js/cryptojs/sha256.js?v=0.18.0-beta';
+import StudentSelectorDialog from '/js/dialogs/StudentSelectorDialog.js?v=0.18.0-beta';
 
 class DataSpecialist {
 
@@ -502,8 +502,13 @@ class DataSpecialist {
 		var lookupValue = row[this.lookupIdentifiers[sheet]]
 		var standardValue = DataSets.checkStudentAlias(this.lookupIdentifiers[sheet], row[this.lookupIdentifiers[sheet]]);
 		if(standardValue){
-		    logger.postMessage('DEBUG', 'data', '"' + row[this.lookupIdentifiers[sheet]] + '" is an alias for ' + this.lookupIdentifiers[sheet] + ' "' + standardValue + '", converting before lookup');
-		    lookupValue = standardValue;
+		    if(standardValue == 'not-in-class'){
+			logger.postMessage('DEBUG', 'data', 'Student with ' + this.lookupIdentifiers[sheet] + ' "' +row[this.lookupIdentifiers[sheet]] + '" is not in the class, skipping');
+			continue;
+		    } else {
+			logger.postMessage('DEBUG', 'data', '"' + row[this.lookupIdentifiers[sheet]] + '" is an alias for ' + this.lookupIdentifiers[sheet] + ' "' + standardValue + '", converting before lookup');
+			lookupValue = standardValue;
+		    }
 		}
 		let anonID = DataSets.findData('_roster', this.lookupIdentifiers[sheet], lookupValue, 'anonID');
 		if(!anonID){

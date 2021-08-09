@@ -502,8 +502,13 @@ class DataSpecialist {
 		var lookupValue = row[this.lookupIdentifiers[sheet]]
 		var standardValue = DataSets.checkStudentAlias(this.lookupIdentifiers[sheet], row[this.lookupIdentifiers[sheet]]);
 		if(standardValue){
-		    logger.postMessage('DEBUG', 'data', '"' + row[this.lookupIdentifiers[sheet]] + '" is an alias for ' + this.lookupIdentifiers[sheet] + ' "' + standardValue + '", converting before lookup');
-		    lookupValue = standardValue;
+		    if(standardValue == 'not-in-class'){
+			logger.postMessage('DEBUG', 'data', 'Student with ' + this.lookupIdentifiers[sheet] + ' "' +row[this.lookupIdentifiers[sheet]] + '" is not in the class, skipping');
+			continue;
+		    } else {
+			logger.postMessage('DEBUG', 'data', '"' + row[this.lookupIdentifiers[sheet]] + '" is an alias for ' + this.lookupIdentifiers[sheet] + ' "' + standardValue + '", converting before lookup');
+			lookupValue = standardValue;
+		    }
 		}
 		let anonID = DataSets.findData('_roster', this.lookupIdentifiers[sheet], lookupValue, 'anonID');
 		if(!anonID){

@@ -28,9 +28,29 @@
     max-height: 90%;
 }
 
+.dialogs__header, dialogs__content-area, .dialogs_footer {
+    font-size: 1.1rem;
+    padding: 0.6rem;
+}
+
 .dialogs__content-area {
-    color: hsl(0, 5%, 50%);
-    font-size: large;
     overflow: auto;
-    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+}
+
+.dialogs__footer button {
+    margin: 0.6rem;
+    font-size: 1.1rem;
+}
+
+.dialogs__radio-option {
+    padding: .5rem .5rem .5rem 1.5rem;
+}
+
+
+#student-selector__student-list {
+    background-color: hsl(0, 0%, 89%);
+}
+
+#student-selector__student-list label {
+    padding: 0rem 0rem 0rem 1rem;
 }

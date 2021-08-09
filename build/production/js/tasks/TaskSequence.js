@@ -1,8 +1,10 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/dma/js/logger/logger.js?v=0.17.2-beta';
-import DataError from '/dma/js/errors/DataError.js?v=0.17.2-beta';
-import Task from '/dma/js/tasks/Task.js?v=0.17.2-beta';
+import logger from '/dma/js/logger/logger.js?v=0.18.0-beta';
+import DataError from '/dma/js/errors/DataError.js?v=0.18.0-beta';
+import UserInputNeeded from '/dma/js/errors/UserInputNeeded.js?v=0.18.0-beta';
+import errors from '/dma/js/errors/errors.js?v=0.18.0-beta';
+import Task from '/dma/js/tasks/Task.js?v=0.18.0-beta';
 
 class TaskSequence extends Task {
 
@@ -107,6 +109,8 @@ class TaskSequence extends Task {
 	    catch (error) {
 		if (error instanceof DataError) {
 		    logger.postMessage('DEBUG', 'tasks', 'Advancing to next task sequence interrupted by error.');
+		} else if (error instanceof UserInputNeeded) {
+		    errors.setResumePoint(this.goToNext.bind(this));
 		} else {
 		    throw error;
 		}

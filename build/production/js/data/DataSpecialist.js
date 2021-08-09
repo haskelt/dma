@@ -1,12 +1,15 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/dma/js/logger/logger.js?v=0.17.2-beta';
-import config from '/dma/js/config.js?v=0.17.2-beta';
-import DataError from '/dma/js/errors/DataError.js?v=0.17.2-beta';
-import DataWarning from '/dma/js/errors/DataWarning.js?v=0.17.2-beta';
-import DataSets from '/dma/js/data/DataSets.js?v=0.17.2-beta';
-import xlsx from '/dma/js/xlsx/xlsx.js?v=0.17.2-beta';
-import CryptoJS from '/dma/js/cryptojs/sha256.js?v=0.17.2-beta';
+import logger from '/dma/js/logger/logger.js?v=0.18.0-beta';
+import config from '/dma/js/config.js?v=0.18.0-beta';
+import DataError from '/dma/js/errors/DataError.js?v=0.18.0-beta';
+import DataWarning from '/dma/js/errors/DataWarning.js?v=0.18.0-beta';
+import UserInputNeeded from '/dma/js/errors/UserInputNeeded.js?v=0.18.0-beta';
+import errors from '/dma/js/errors/errors.js?v=0.18.0-beta';
+import DataSets from '/dma/js/data/DataSets.js?v=0.18.0-beta';
+import xlsx from '/dma/js/xlsx/xlsx.js?v=0.18.0-beta';
+import CryptoJS from '/dma/js/cryptojs/sha256.js?v=0.18.0-beta';
+import StudentSelectorDialog from '/dma/js/dialogs/StudentSelectorDialog.js?v=0.18.0-beta';
 
 class DataSpecialist {
 
@@ -496,28 +499,35 @@ class DataSpecialist {
 	    let newData = [];
 	    let processedStudents = [];
 	    for(let row of this.curData[sheet]){
-		try {
-		    let anonID = DataSets.findData('_roster', this.lookupIdentifiers[sheet], row[this.lookupIdentifiers[sheet]], 'anonID');
-		    if(processedStudents.includes(anonID)){
-			throw new DataError('Sheet "' + sheet + '" has duplicate entry for student with ' + this.lookupIdentifiers[sheet] + ' "' + row[this.lookupIdentifiers[sheet].data] + '"; please fix and re-upload the file');
-		    }
-		    processedStudents.push(anonID);
-		    let newRow = { 'anonID': anonID };
-		    for(let field in row){
-			if(!this.matchingIdentifiers[sheet].includes(field)){
-			    newRow[field] = row[field];
-			}
-		    }
-		    newData.push(newRow);
-		}
-		catch (error) {
-		    if (error instanceof DataWarning) {
-			error.message = this.tag + ':' + sheet + ' - Unable to find student with ' + this.lookupIdentifiers[sheet] + ' "' + row[this.lookupIdentifiers[sheet]] + '" in the roster, skipping';
-			logger.postMessage('WARN', 'data', error.message);
+		var lookupValue = row[this.lookupIdentifiers[sheet]]
+		var standardValue = DataSets.checkStudentAlias(this.lookupIdentifiers[sheet], row[this.lookupIdentifiers[sheet]]);
+		if(standardValue){
+		    if(standardValue == 'not-in-class'){
+			logger.postMessage('DEBUG', 'data', 'Student with ' + this.lookupIdentifiers[sheet] + ' "' +row[this.lookupIdentifiers[sheet]] + '" is not in the class, skipping');
+			continue;
 		    } else {
-			throw error;
+			logger.postMessage('DEBUG', 'data', '"' + row[this.lookupIdentifiers[sheet]] + '" is an alias for ' + this.lookupIdentifiers[sheet] + ' "' + standardValue + '", converting before lookup');
+			lookupValue = standardValue;
 		    }
 		}
+		let anonID = DataSets.findData('_roster', this.lookupIdentifiers[sheet], lookupValue, 'anonID');
+		if(!anonID){
+		    logger.postMessage('WARN', 'data', this.tag + ':' + sheet + ' - Unable to find student with ' + this.lookupIdentifiers[sheet] + ' "' + row[this.lookupIdentifiers[sheet]] + '" in the roster, prompting user to identify student');
+		    let studentList = DataSets.getDataField('_roster', this.lookupIdentifiers[sheet]);
+		    StudentSelectorDialog.getUserSelection(this.lookupIdentifiers[sheet], row[this.lookupIdentifiers[sheet]], studentList, this.handleStudentSelection.bind(this));
+		    throw new UserInputNeeded();
+		}
+		if(processedStudents.includes(anonID)){
+		    throw new DataError('Sheet "' + sheet + '" has duplicate entry for student with ' + this.lookupIdentifiers[sheet] + ' "' + row[this.lookupIdentifiers[sheet].data] + '"; please fix and re-upload the file');
+		}
+		processedStudents.push(anonID);
+		let newRow = { 'anonID': anonID };
+		for(let field in row){
+		    if(!this.matchingIdentifiers[sheet].includes(field)){
+			newRow[field] = row[field];
+		    }
+		}
+		newData.push(newRow);
 	    }
 	    this.curData[sheet] = newData;
 	}
@@ -525,7 +535,17 @@ class DataSpecialist {
     } // anonymizeData
 
     /**************************************************************************/
-    
+
+    handleStudentSelection (targetIdentifier, targetStudent, response) {
+
+	logger.postMessage('DEBUG', 'data', 'Setting "' + response + '" as an alias for "' + targetStudent + '" for identifier "' + targetIdentifier + '" and re-trying data processing');
+	DataSets.setStudentAlias(targetIdentifier, response, targetStudent);
+	errors.resume()
+	
+    } // handleStudentSelection
+
+    /**************************************************************************/
+
     setData () {
 	
     	var sheetNames = Object.keys(this.curData);

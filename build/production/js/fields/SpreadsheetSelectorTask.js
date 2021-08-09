@@ -1,8 +1,8 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/dma/js/logger/logger.js?v=0.17.2-beta';
-import FieldTask from '/dma/js/fields/FieldTask.js?v=0.17.2-beta';
-import xlsx from '/dma/js/xlsx/xlsx.js?v=0.17.2-beta';
+import logger from '/dma/js/logger/logger.js?v=0.18.0-beta';
+import FieldTask from '/dma/js/fields/FieldTask.js?v=0.18.0-beta';
+import xlsx from '/dma/js/xlsx/xlsx.js?v=0.18.0-beta';
 
 class SpreadsheetSelectorTask extends FieldTask {
     
