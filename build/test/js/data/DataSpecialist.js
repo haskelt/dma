@@ -518,7 +518,7 @@ class DataSpecialist {
 		    throw new UserInputNeeded();
 		}
 		if(processedStudents.includes(anonID)){
-		    throw new DataError('Sheet "' + sheet + '" has duplicate entry for student with ' + this.lookupIdentifiers[sheet] + ' "' + row[this.lookupIdentifiers[sheet].data] + '"; please fix and re-upload the file');
+		    throw new DataError('Sheet "' + sheet + '" has duplicate entry for student with ' + this.lookupIdentifiers[sheet] + ' "' + row[this.lookupIdentifiers[sheet]] + '"; please fix and re-upload the file');
 		}
 		processedStudents.push(anonID);
 		let newRow = { 'anonID': anonID };
