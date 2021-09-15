@@ -1,15 +1,15 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/dma/js/logger/logger.js?v=0.18.0-beta';
-import config from '/dma/js/config.js?v=0.18.0-beta';
-import DataError from '/dma/js/errors/DataError.js?v=0.18.0-beta';
-import DataWarning from '/dma/js/errors/DataWarning.js?v=0.18.0-beta';
-import UserInputNeeded from '/dma/js/errors/UserInputNeeded.js?v=0.18.0-beta';
-import errors from '/dma/js/errors/errors.js?v=0.18.0-beta';
-import DataSets from '/dma/js/data/DataSets.js?v=0.18.0-beta';
-import xlsx from '/dma/js/xlsx/xlsx.js?v=0.18.0-beta';
-import CryptoJS from '/dma/js/cryptojs/sha256.js?v=0.18.0-beta';
-import StudentSelectorDialog from '/dma/js/dialogs/StudentSelectorDialog.js?v=0.18.0-beta';
+import logger from '/dma/js/logger/logger.js?v=0.18.1-beta';
+import config from '/dma/js/config.js?v=0.18.1-beta';
+import DataError from '/dma/js/errors/DataError.js?v=0.18.1-beta';
+import DataWarning from '/dma/js/errors/DataWarning.js?v=0.18.1-beta';
+import UserInputNeeded from '/dma/js/errors/UserInputNeeded.js?v=0.18.1-beta';
+import errors from '/dma/js/errors/errors.js?v=0.18.1-beta';
+import DataSets from '/dma/js/data/DataSets.js?v=0.18.1-beta';
+import xlsx from '/dma/js/xlsx/xlsx.js?v=0.18.1-beta';
+import CryptoJS from '/dma/js/cryptojs/sha256.js?v=0.18.1-beta';
+import StudentSelectorDialog from '/dma/js/dialogs/StudentSelectorDialog.js?v=0.18.1-beta';
 
 class DataSpecialist {
 
@@ -518,7 +518,7 @@ class DataSpecialist {
 		    throw new UserInputNeeded();
 		}
 		if(processedStudents.includes(anonID)){
-		    throw new DataError('Sheet "' + sheet + '" has duplicate entry for student with ' + this.lookupIdentifiers[sheet] + ' "' + row[this.lookupIdentifiers[sheet].data] + '"; please fix and re-upload the file');
+		    throw new DataError('Sheet "' + sheet + '" has duplicate entry for student with ' + this.lookupIdentifiers[sheet] + ' "' + row[this.lookupIdentifiers[sheet]] + '"; please fix and re-upload the file');
 		}
 		processedStudents.push(anonID);
 		let newRow = { 'anonID': anonID };
