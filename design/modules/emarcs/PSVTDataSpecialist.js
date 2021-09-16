@@ -1,15 +1,17 @@
 {{globals.js_copyright_notice}}
 
 import DataSpecialist from '{{globals.site_path}}/js/data/DataSpecialist.js?v={{globals.version}}';
+import DataSpecialistFactory from '{{globals.site_path}}/js/data/DataSpecialistFactory.js?v={{globals.version}}';
 
-class CanvasDataSpecialist extends DataSpecialist {
+class PSVTDataSpecialist extends DataSpecialist {
 
-    /**************************************************************************/
+    /*************************************************************************/
 
     constructor () {
 
 	super();
 	this.processingSteps = [
+	    this.preprocessWAMAPGradebook,
 	    this.ensureUniqueHeadings,
 	    this.applyHeaderMappings,
 	    this.standardizeIdentifierHeadings,
@@ -24,8 +26,8 @@ class CanvasDataSpecialist extends DataSpecialist {
 
     } // constructor
     
-    /**************************************************************************/
+    /*************************************************************************/
 
-} // CanvasDataSpecialist
+} // PSVTDataSpecialist
 
-export default CanvasDataSpecialist;
+DataSpecialistFactory.register('PSVTData', PSVTDataSpecialist);

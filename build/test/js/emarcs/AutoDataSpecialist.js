@@ -1,15 +1,17 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import DataSpecialist from '/js/data/DataSpecialist.js?v=0.18.0-beta';
+import DataSpecialist from '/js/data/DataSpecialist.js?v=0.18.1-beta';
+import DataSpecialistFactory from '/js/data/DataSpecialistFactory.js?v=0.18.1-beta';
 
-class CanvasDataSpecialist extends DataSpecialist {
+class AutoDataSpecialist extends DataSpecialist {
 
-    /**************************************************************************/
+    /*************************************************************************/
 
     constructor () {
 
 	super();
 	this.processingSteps = [
+	    this.autoPreprocessWorkbook,
 	    this.ensureUniqueHeadings,
 	    this.applyHeaderMappings,
 	    this.standardizeIdentifierHeadings,
@@ -24,8 +26,8 @@ class CanvasDataSpecialist extends DataSpecialist {
 
     } // constructor
     
-    /**************************************************************************/
+    /*************************************************************************/
 
-} // CanvasDataSpecialist
+} // AutoDataSpecialist
 
-export default CanvasDataSpecialist;
+DataSpecialistFactory.register('AutoData', AutoDataSpecialist);

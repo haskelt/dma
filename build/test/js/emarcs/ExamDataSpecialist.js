@@ -1,10 +1,11 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import DataSpecialist from '/js/data/DataSpecialist.js?v=0.18.0-beta';
+import DataSpecialist from '/js/data/DataSpecialist.js?v=0.18.1-beta';
+import DataSpecialistFactory from '/js/data/DataSpecialistFactory.js?v=0.18.1-beta';
 
 class ExamDataSpecialist extends DataSpecialist {
 
-    /**************************************************************************/
+    /*************************************************************************/
 
     constructor () {
 
@@ -25,8 +26,8 @@ class ExamDataSpecialist extends DataSpecialist {
 
     } // constructor
     
-    /**************************************************************************/
+    /*************************************************************************/
 
 } // ExamDataSpecialist
 
-export default ExamDataSpecialist;
+DataSpecialistFactory.register('ExamData', ExamDataSpecialist);

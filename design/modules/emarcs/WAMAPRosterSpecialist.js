@@ -1,25 +1,25 @@
 {{globals.js_copyright_notice}}
 
 import DataSpecialist from '{{globals.site_path}}/js/data/DataSpecialist.js?v={{globals.version}}';
+import DataSpecialistFactory from '{{globals.site_path}}/js/data/DataSpecialistFactory.js?v={{globals.version}}';
 
-class AutoDataSpecialist extends DataSpecialist {
+class WAMAPRosterSpecialist extends DataSpecialist {
 
     /**************************************************************************/
 
     constructor () {
 
 	super();
+
 	this.processingSteps = [
-	    this.autoPreprocessWorkbook,
-	    this.ensureUniqueHeadings,
-	    this.applyHeaderMappings,
+	    this.preprocessWAMAPWorkbook,
 	    this.standardizeIdentifierHeadings,
 	    this.convertWorkbookToJSON,
+	    this.doSingleWorksheetCheck,
 	    this.formatIdentifierValues,
-	    this.doIdentifierCheck,
 	    this.doRequiredFieldsCheck,
-	    this.applyResponseMappings,
-	    this.anonymizeData,
+	    this.doUniqueIdentifiersCheck,
+	    this.computeAnonymousIdentifier,
 	    this.setData
 	];
 
@@ -27,6 +27,6 @@ class AutoDataSpecialist extends DataSpecialist {
     
     /**************************************************************************/
 
-} // AutoDataSpecialist
+} // WAMAPRosterSpecialist
 
-export default AutoDataSpecialist;
+DataSpecialistFactory.register('WAMAPRoster', WAMAPRosterSpecialist);

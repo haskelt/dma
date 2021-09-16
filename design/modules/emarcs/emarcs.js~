@@ -1,0 +1,10 @@
+{{globals.js_copyright_notice}}
+
+import '{{globals.site_path}}/js/data/CanvasRosterSpecialist.js?v={{globals.version}}';
+import '{{globals.site_path}}/js/data/WAMAPRosterSpecialist.js?v={{globals.version}}';
+import '{{globals.site_path}}/js/data/CanvasDataSpecialist.js?v={{globals.version}}';
+import '{{globals.site_path}}/js/data/CWDataSpecialist.js?v={{globals.version}}';
+import '{{globals.site_path}}/js/data/WAMAPDataSpecialist.js?v={{globals.version}}';
+import '{{globals.site_path}}/js/data/ExamDataSpecialist.js?v={{globals.version}}';
+import '{{globals.site_path}}/js/data/PSVTDataSpecialist.js?v={{globals.version}}';
+import '{{globals.site_path}}/js/data/AutoDataSpecialist.js?v={{globals.version}}';

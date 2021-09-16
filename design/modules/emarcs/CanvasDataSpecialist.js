@@ -1,8 +1,9 @@
 {{globals.js_copyright_notice}}
 
 import DataSpecialist from '{{globals.site_path}}/js/data/DataSpecialist.js?v={{globals.version}}';
+import DataSpecialistFactory from '{{globals.site_path}}/js/data/DataSpecialistFactory.js?v={{globals.version}}';
 
-class CanvasRosterSpecialist extends DataSpecialist {
+class CanvasDataSpecialist extends DataSpecialist {
 
     /**************************************************************************/
 
@@ -10,22 +11,22 @@ class CanvasRosterSpecialist extends DataSpecialist {
 
 	super();
 	this.processingSteps = [
+	    this.ensureUniqueHeadings,
+	    this.applyHeaderMappings,
 	    this.standardizeIdentifierHeadings,
 	    this.convertWorkbookToJSON,
-	    this.doSingleWorksheetCheck,
 	    this.formatIdentifierValues,
+	    this.doIdentifierCheck,
 	    this.doRequiredFieldsCheck,
-	    this.doUniqueIdentifiersCheck,
-	    this.computeAnonymousIdentifier,
-	    this.setData,
-	    this.partitionCanvasRoster
+	    this.applyResponseMappings,
+	    this.anonymizeData,
+	    this.setData
 	];
 
     } // constructor
     
     /**************************************************************************/
 
+} // CanvasDataSpecialist
 
-} // CanvasRosterSpecialist
-
-export default CanvasRosterSpecialist;
+DataSpecialistFactory.register('CanvasData', CanvasDataSpecialist);

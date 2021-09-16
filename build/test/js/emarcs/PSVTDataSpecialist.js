@@ -1,16 +1,17 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import DataSpecialist from '/js/data/DataSpecialist.js?v=0.18.0-beta';
+import DataSpecialist from '/js/data/DataSpecialist.js?v=0.18.1-beta';
+import DataSpecialistFactory from '/js/data/DataSpecialistFactory.js?v=0.18.1-beta';
 
-class AutoDataSpecialist extends DataSpecialist {
+class PSVTDataSpecialist extends DataSpecialist {
 
-    /**************************************************************************/
+    /*************************************************************************/
 
     constructor () {
 
 	super();
 	this.processingSteps = [
-	    this.autoPreprocessWorkbook,
+	    this.preprocessWAMAPGradebook,
 	    this.ensureUniqueHeadings,
 	    this.applyHeaderMappings,
 	    this.standardizeIdentifierHeadings,
@@ -25,8 +26,8 @@ class AutoDataSpecialist extends DataSpecialist {
 
     } // constructor
     
-    /**************************************************************************/
+    /*************************************************************************/
 
-} // AutoDataSpecialist
+} // PSVTDataSpecialist
 
-export default AutoDataSpecialist;
+DataSpecialistFactory.register('PSVTData', PSVTDataSpecialist);

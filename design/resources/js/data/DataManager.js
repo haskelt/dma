@@ -4,6 +4,7 @@ import logger from '{{globals.site_path}}/js/logger/logger.js?v={{globals.versio
 import config from '{{globals.site_path}}/js/config.js?v={{globals.version}}';
 import DataError from '{{globals.site_path}}/js/errors/DataError.js?v={{globals.version}}';
 import DataSpecialistFactory from '{{globals.site_path}}/js/data/DataSpecialistFactory.js?v={{globals.version}}';
+import '{{globals.site_path}}/js/data/MetadataSpecialist.js?v={{globals.version}}';
 import DataSets from '{{globals.site_path}}/js/data/DataSets.js?v={{globals.version}}';
 
 class DataManager {
@@ -12,7 +13,7 @@ class DataManager {
     static dataConfig = {};
     static consentOptions = {};
 
-    /**************************************************************************/
+    /*************************************************************************/
 
     static initialize () {
 
@@ -22,7 +23,7 @@ class DataManager {
 	
     } // initialize
     
-    /**************************************************************************/
+    /*************************************************************************/
 
     static postData (tag, data) {
 
@@ -36,7 +37,7 @@ class DataManager {
 	
     } // postData
     
-    /**************************************************************************/
+    /*************************************************************************/
 
     static buildCourseInfoData () {
 	
@@ -54,7 +55,7 @@ class DataManager {
 
     } // buildCourseInfoData
     
-    /**************************************************************************/
+    /*************************************************************************/
     
     static checkConsent (dataSets) {
 
@@ -74,7 +75,7 @@ class DataManager {
 	
     } // checkConsent
 
-    /**************************************************************************/
+    /*************************************************************************/
 
     static generateMissingRecords (dataSets) {
 
@@ -94,7 +95,7 @@ class DataManager {
 	
     } // generateMissingRecords
 
-    /**************************************************************************/
+    /*************************************************************************/
 
     static sortData (dataSets) {
 	
@@ -107,7 +108,7 @@ class DataManager {
 	
     } // sortData
     
-    /**************************************************************************/
+    /*************************************************************************/
 
     static prepareExports (dataSets) {
 
@@ -124,7 +125,7 @@ class DataManager {
 	
     } // prepareExports
     
-    /**************************************************************************/
+    /*************************************************************************/
     
     static finalizeData () {
 
@@ -145,7 +146,7 @@ class DataManager {
 	
     } // finalizeData
 
-    /**************************************************************************/
+    /*************************************************************************/
     
     static exportData () {
 
@@ -153,7 +154,7 @@ class DataManager {
 	
     } // exportData
     
-    /**************************************************************************/
+    /*************************************************************************/
     
 }
 

@@ -1,10 +1,11 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import DataSpecialist from '/js/data/DataSpecialist.js?v=0.18.0-beta';
+import DataSpecialist from '/js/data/DataSpecialist.js?v=0.18.1-beta';
+import DataSpecialistFactory from '/js/data/DataSpecialistFactory.js?v=0.18.1-beta';
 
 class CWDataSpecialist extends DataSpecialist {
 
-    /**************************************************************************/
+    /*************************************************************************/
 
     constructor () {
 
@@ -24,8 +25,8 @@ class CWDataSpecialist extends DataSpecialist {
 
     } // constructor
     
-    /**************************************************************************/
+    /*************************************************************************/
     
 } // CWDataSpecialist
 
-export default CWDataSpecialist;
+DataSpecialistFactory.register('CWData', CWDataSpecialist);

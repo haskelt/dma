@@ -1,8 +1,9 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import DataSpecialist from '/js/data/DataSpecialist.js?v=0.18.0-beta';
+import DataSpecialist from '/js/data/DataSpecialist.js?v=0.18.1-beta';
+import DataSpecialistFactory from '/js/data/DataSpecialistFactory.js?v=0.18.1-beta';
 
-class WAMAPDataSpecialist extends DataSpecialist {
+class CanvasDataSpecialist extends DataSpecialist {
 
     /**************************************************************************/
 
@@ -10,7 +11,6 @@ class WAMAPDataSpecialist extends DataSpecialist {
 
 	super();
 	this.processingSteps = [
-	    this.preprocessWAMAPAssessment,
 	    this.ensureUniqueHeadings,
 	    this.applyHeaderMappings,
 	    this.standardizeIdentifierHeadings,
@@ -27,6 +27,6 @@ class WAMAPDataSpecialist extends DataSpecialist {
     
     /**************************************************************************/
 
-} // WAMAPDataSpecialist
+} // CanvasDataSpecialist
 
-export default WAMAPDataSpecialist;
+DataSpecialistFactory.register('CanvasData', CanvasDataSpecialist);

@@ -1,4 +1,4 @@
-<page modules="status fields tasks dialogs">
+<page modules="status fields tasks dialogs emarcs">
   <content>
     <task-sequence id="tasksequence">
       <task-wrapper label="Step 1 - Course Information">

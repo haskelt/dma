@@ -1,17 +1,19 @@
 {{globals.js_copyright_notice}}
 
 import DataSpecialist from '{{globals.site_path}}/js/data/DataSpecialist.js?v={{globals.version}}';
+import DataSpecialistFactory from '{{globals.site_path}}/js/data/DataSpecialistFactory.js?v={{globals.version}}';
 
-class CWDataSpecialist extends DataSpecialist {
+class AutoDataSpecialist extends DataSpecialist {
 
-    /**************************************************************************/
+    /*************************************************************************/
 
     constructor () {
 
 	super();
 	this.processingSteps = [
-	    this.preprocessCWWorkbook,
+	    this.autoPreprocessWorkbook,
 	    this.ensureUniqueHeadings,
+	    this.applyHeaderMappings,
 	    this.standardizeIdentifierHeadings,
 	    this.convertWorkbookToJSON,
 	    this.formatIdentifierValues,
@@ -24,8 +26,8 @@ class CWDataSpecialist extends DataSpecialist {
 
     } // constructor
     
-    /**************************************************************************/
-    
-} // CWDataSpecialist
+    /*************************************************************************/
 
-export default CWDataSpecialist;
+} // AutoDataSpecialist
+
+DataSpecialistFactory.register('AutoData', AutoDataSpecialist);
