@@ -1,10 +1,10 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/dma/js/logger/logger.js?v=0.19.1-beta';
-import DataError from '/dma/js/errors/DataError.js?v=0.19.1-beta';
-import UserInputNeeded from '/dma/js/errors/UserInputNeeded.js?v=0.19.1-beta';
-import errors from '/dma/js/errors/errors.js?v=0.19.1-beta';
-import Task from '/dma/js/tasks/Task.js?v=0.19.1-beta';
+import logger from '/dma/js/logger/logger.js?v=0.21.0-beta';
+import DataError from '/dma/js/errors/DataError.js?v=0.21.0-beta';
+import UserInputNeeded from '/dma/js/errors/UserInputNeeded.js?v=0.21.0-beta';
+import errors from '/dma/js/errors/errors.js?v=0.21.0-beta';
+import Task from '/dma/js/tasks/Task.js?v=0.21.0-beta';
 
 class TaskSequence extends Task {
 
@@ -16,6 +16,7 @@ class TaskSequence extends Task {
 	this.taskWrappers = [];
 	for (let taskWrapperElement of sequenceElement.querySelectorAll('.tasks__task-wrapper')){
 	    let taskWrapperData = {};
+	    taskWrapperData['wrapper'] = taskWrapperElement;
 	    taskWrapperData['label'] = taskWrapperElement.dataset.label;
 	    taskWrapperData['container'] = taskWrapperElement.querySelector('.tasks__task-wrapper--container');
 	    taskWrapperData['previous_button'] = taskWrapperElement.querySelector('.tasks__task-wrapper--button[data-action="previous"]');
@@ -48,7 +49,7 @@ class TaskSequence extends Task {
     
     show (taskIndex) {
 
-	this.taskWrappers[taskIndex]['container'].classList.remove('collapsed');
+	this.taskWrappers[taskIndex]['wrapper'].classList.remove('collapsed');
 
     } // show
 
@@ -56,7 +57,7 @@ class TaskSequence extends Task {
 
     hide (taskIndex) {
 
-	this.taskWrappers[taskIndex]['container'].classList.add('collapsed');
+	this.taskWrappers[taskIndex]['wrapper'].classList.add('collapsed');
 
     } // hide
 
@@ -71,8 +72,10 @@ class TaskSequence extends Task {
 	    this.taskWrappers[taskIndex][button].classList.remove('hidden');
 	} else if(state == 'disabled'){
 	    this.taskWrappers[taskIndex][button].disabled = true;
+	    this.taskWrappers[taskIndex][button].classList.add('disabled');
 	} else if(state == 'enabled'){
 	    this.taskWrappers[taskIndex][button].disabled = false;
+	    this.taskWrappers[taskIndex][button].classList.remove('disabled');
 	} else {
 	    logger.postMessage('ERROR', 'tasks', 'Unrecognized button state <' + state + '>');
 	}

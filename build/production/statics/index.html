@@ -5,17 +5,17 @@
     <meta charset=utf-8>
     <title>DMA</title>
     
-    <link rel="stylesheet" href="/dma/css/app.css?v=0.19.1-beta" type="text/css" />
+    <link rel="stylesheet" href="/dma/css/app.css?v=0.21.0-beta" type="text/css" />
     
     
     
-    <link rel="stylesheet" href="/dma/css/status/status.css?v=0.19.1-beta" type="text/css" />
+    <link rel="stylesheet" href="/dma/css/status/status.css?v=0.21.0-beta" type="text/css" />
     
-    <link rel="stylesheet" href="/dma/css/fields/fields.css?v=0.19.1-beta" type="text/css" />
+    <link rel="stylesheet" href="/dma/css/fields/fields.css?v=0.21.0-beta" type="text/css" />
     
-    <link rel="stylesheet" href="/dma/css/tasks/tasks.css?v=0.19.1-beta" type="text/css" />
+    <link rel="stylesheet" href="/dma/css/tasks/tasks.css?v=0.21.0-beta" type="text/css" />
     
-    <link rel="stylesheet" href="/dma/css/dialogs/dialogs.css?v=0.19.1-beta" type="text/css" />
+    <link rel="stylesheet" href="/dma/css/dialogs/dialogs.css?v=0.21.0-beta" type="text/css" />
     
     
     
@@ -24,7 +24,7 @@
   <body>
     
     <header>
-      <h1>EMARCS Data Management App v0.19.1-beta</h1>
+      <h1>EMARCS Data Management App v0.21.0-beta</h1>
     </header>
     <main>
       
@@ -33,11 +33,14 @@
   
     <div id="tasksequence" class="tasks__task-sequence">
 
-      <div class="tasks__task-wrapper" data-label="Step 1 - Course Information">
-  <div class="tasks__task-wrapper--header">
+      <div class="tasks__task-wrapper collapsed" data-label="Step 1 - Course Information">
+  <div class="tasks__task-wrapper--navigation collapsible">
+    <button class="tasks__task-wrapper--button" data-action="previous"><object data="/dma/svg/up-button.svg" height="100%"></object></button>
+  </div>
+  <div class="tasks__task-wrapper--label">
     Step 1 - Course Information
   </div>
-  <div class="tasks__task-wrapper--container collapsed">
+  <div class="tasks__task-wrapper--container collapsible">
     
 	<div id="taskset1" class="tasks__task-set">
   
@@ -135,17 +138,19 @@
 </div>
 
       
-    <div class="tasks__task-wrapper--footer">
-      <button class="tasks__task-wrapper--button" data-action="previous">Previous</button>
-      <button class="tasks__task-wrapper--button" data-action="next" disabled>Next</button>
-    </div>
+  </div>
+  <div class="tasks__task-wrapper--navigation collapsible">
+    <button class="tasks__task-wrapper--button disabled" data-action="next" disabled><object data="/dma/svg/down-button.svg" height="100%"></object></button>
   </div>
 </div>
-      <div class="tasks__task-wrapper" data-label="Step 2 - Roster and Consent">
-  <div class="tasks__task-wrapper--header">
+      <div class="tasks__task-wrapper collapsed" data-label="Step 2 - Roster and Consent">
+  <div class="tasks__task-wrapper--navigation collapsible">
+    <button class="tasks__task-wrapper--button" data-action="previous"><object data="/dma/svg/up-button.svg" height="100%"></object></button>
+  </div>
+  <div class="tasks__task-wrapper--label">
     Step 2 - Roster and Consent
   </div>
-  <div class="tasks__task-wrapper--container collapsed">
+  <div class="tasks__task-wrapper--container collapsible">
     
 	<div id="taskset2" class="tasks__task-set">
   
@@ -163,17 +168,19 @@
 </div>
 
       
-    <div class="tasks__task-wrapper--footer">
-      <button class="tasks__task-wrapper--button" data-action="previous">Previous</button>
-      <button class="tasks__task-wrapper--button" data-action="next" disabled>Next</button>
-    </div>
+  </div>
+  <div class="tasks__task-wrapper--navigation collapsible">
+    <button class="tasks__task-wrapper--button disabled" data-action="next" disabled><object data="/dma/svg/down-button.svg" height="100%"></object></button>
   </div>
 </div>
-      <div class="tasks__task-wrapper" data-label="Step 3 - Data Files">
-  <div class="tasks__task-wrapper--header">
+      <div class="tasks__task-wrapper collapsed" data-label="Step 3 - Data Files">
+  <div class="tasks__task-wrapper--navigation collapsible">
+    <button class="tasks__task-wrapper--button" data-action="previous"><object data="/dma/svg/up-button.svg" height="100%"></object></button>
+  </div>
+  <div class="tasks__task-wrapper--label">
     Step 3 - Data Files
   </div>
-  <div class="tasks__task-wrapper--container collapsed">
+  <div class="tasks__task-wrapper--container collapsible">
     
 	<div id="taskset3" class="tasks__task-set">
   
@@ -201,17 +208,19 @@
 </div>
 
       
-    <div class="tasks__task-wrapper--footer">
-      <button class="tasks__task-wrapper--button" data-action="previous">Previous</button>
-      <button class="tasks__task-wrapper--button" data-action="next" disabled>Next</button>
-    </div>
+  </div>
+  <div class="tasks__task-wrapper--navigation collapsible">
+    <button class="tasks__task-wrapper--button disabled" data-action="next" disabled><object data="/dma/svg/down-button.svg" height="100%"></object></button>
   </div>
 </div>
-      <div class="tasks__task-wrapper" data-label="Step 4 - Export">
-  <div class="tasks__task-wrapper--header">
+      <div class="tasks__task-wrapper collapsed" data-label="Step 4 - Export">
+  <div class="tasks__task-wrapper--navigation collapsible">
+    <button class="tasks__task-wrapper--button" data-action="previous"><object data="/dma/svg/up-button.svg" height="100%"></object></button>
+  </div>
+  <div class="tasks__task-wrapper--label">
     Step 4 - Export
   </div>
-  <div class="tasks__task-wrapper--container collapsed">
+  <div class="tasks__task-wrapper--container collapsible">
     
 	<div id="taskset4" class="tasks__task-set">
   
@@ -222,10 +231,9 @@
 </div>
 
       
-    <div class="tasks__task-wrapper--footer">
-      <button class="tasks__task-wrapper--button" data-action="previous">Previous</button>
-      <button class="tasks__task-wrapper--button" data-action="next" disabled>Next</button>
-    </div>
+  </div>
+  <div class="tasks__task-wrapper--navigation collapsible">
+    <button class="tasks__task-wrapper--button disabled" data-action="next" disabled><object data="/dma/svg/down-button.svg" height="100%"></object></button>
   </div>
 </div>
     
@@ -264,33 +272,33 @@
 
     
     
-    <script src="/dma/js/logger/logger.js?v=0.19.1-beta" type="module"></script>
-    <script src="/dma/js/data/data.js?v=0.19.1-beta" type="module"></script>
+    <script src="/dma/js/logger/logger.js?v=0.21.0-beta" type="module"></script>
+    <script src="/dma/js/data/data.js?v=0.21.0-beta" type="module"></script>
     
     
     
     <script type="module">
-      import "/dma/js/status/status.js?v=0.19.1-beta"
+      import "/dma/js/status/status.js?v=0.21.0-beta"
     </script>
     
     <script type="module">
-      import "/dma/js/fields/fields.js?v=0.19.1-beta"
+      import "/dma/js/fields/fields.js?v=0.21.0-beta"
     </script>
     
     <script type="module">
-      import "/dma/js/tasks/tasks.js?v=0.19.1-beta"
+      import "/dma/js/tasks/tasks.js?v=0.21.0-beta"
     </script>
     
     <script type="module">
-      import "/dma/js/dialogs/dialogs.js?v=0.19.1-beta"
+      import "/dma/js/dialogs/dialogs.js?v=0.21.0-beta"
     </script>
     
     <script type="module">
-      import "/dma/js/emarcs/emarcs.js?v=0.19.1-beta"
+      import "/dma/js/emarcs/emarcs.js?v=0.21.0-beta"
     </script>
     
     
-    <script src="/dma/js/app.js?v=0.19.1-beta" type="module"></script>
+    <script src="/dma/js/app.js?v=0.21.0-beta" type="module"></script>
     
 
   

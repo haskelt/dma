@@ -1,12 +1,14 @@
-<div class="tasks__task-wrapper" data-label="{{this.label}}">
-  <div class="tasks__task-wrapper--header">
+<div class="tasks__task-wrapper collapsed" data-label="{{this.label}}">
+  <div class="tasks__task-wrapper--navigation collapsible">
+    <button class="tasks__task-wrapper--button" data-action="previous"><object data="{{globals.site_path}}/svg/up-button.svg" height="100%"></object></button>
+  </div>
+  <div class="tasks__task-wrapper--label">
     {{this.label}}
   </div>
-  <div class="tasks__task-wrapper--container collapsed">
+  <div class="tasks__task-wrapper--container collapsible">
     {{this.content}}
-    <div class="tasks__task-wrapper--footer">
-      <button class="tasks__task-wrapper--button" data-action="previous">Previous</button>
-      <button class="tasks__task-wrapper--button" data-action="next" disabled>Next</button>
-    </div>
+  </div>
+  <div class="tasks__task-wrapper--navigation collapsible">
+    <button class="tasks__task-wrapper--button disabled" data-action="next" disabled><object data="{{globals.site_path}}/svg/down-button.svg" height="100%"></object></button>
   </div>
 </div>
