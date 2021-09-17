@@ -1,10 +1,11 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/dma/js/logger/logger.js?v=0.18.1-beta';
-import config from '/dma/js/config.js?v=0.18.1-beta';
-import DataError from '/dma/js/errors/DataError.js?v=0.18.1-beta';
-import DataSpecialistFactory from '/dma/js/data/DataSpecialistFactory.js?v=0.18.1-beta';
-import DataSets from '/dma/js/data/DataSets.js?v=0.18.1-beta';
+import logger from '/dma/js/logger/logger.js?v=0.19.0-beta';
+import config from '/dma/js/config.js?v=0.19.0-beta';
+import DataError from '/dma/js/errors/DataError.js?v=0.19.0-beta';
+import DataSpecialistFactory from '/dma/js/data/DataSpecialistFactory.js?v=0.19.0-beta';
+import '/dma/js/data/MetadataSpecialist.js?v=0.19.0-beta';
+import DataSets from '/dma/js/data/DataSets.js?v=0.19.0-beta';
 
 class DataManager {
 
@@ -12,7 +13,7 @@ class DataManager {
     static dataConfig = {};
     static consentOptions = {};
 
-    /**************************************************************************/
+    /*************************************************************************/
 
     static initialize () {
 
@@ -22,7 +23,7 @@ class DataManager {
 	
     } // initialize
     
-    /**************************************************************************/
+    /*************************************************************************/
 
     static postData (tag, data) {
 
@@ -36,7 +37,7 @@ class DataManager {
 	
     } // postData
     
-    /**************************************************************************/
+    /*************************************************************************/
 
     static buildCourseInfoData () {
 	
@@ -54,7 +55,7 @@ class DataManager {
 
     } // buildCourseInfoData
     
-    /**************************************************************************/
+    /*************************************************************************/
     
     static checkConsent (dataSets) {
 
@@ -74,7 +75,7 @@ class DataManager {
 	
     } // checkConsent
 
-    /**************************************************************************/
+    /*************************************************************************/
 
     static generateMissingRecords (dataSets) {
 
@@ -94,7 +95,7 @@ class DataManager {
 	
     } // generateMissingRecords
 
-    /**************************************************************************/
+    /*************************************************************************/
 
     static sortData (dataSets) {
 	
@@ -107,7 +108,7 @@ class DataManager {
 	
     } // sortData
     
-    /**************************************************************************/
+    /*************************************************************************/
 
     static prepareExports (dataSets) {
 
@@ -124,7 +125,7 @@ class DataManager {
 	
     } // prepareExports
     
-    /**************************************************************************/
+    /*************************************************************************/
     
     static finalizeData () {
 
@@ -145,7 +146,7 @@ class DataManager {
 	
     } // finalizeData
 
-    /**************************************************************************/
+    /*************************************************************************/
     
     static exportData () {
 
@@ -153,7 +154,7 @@ class DataManager {
 	
     } // exportData
     
-    /**************************************************************************/
+    /*************************************************************************/
     
 }
 
