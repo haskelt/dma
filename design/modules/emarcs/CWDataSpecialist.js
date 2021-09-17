@@ -1,9 +1,9 @@
 {{globals.js_copyright_notice}}
 
-import DataSpecialist from '{{globals.site_path}}/js/data/DataSpecialist.js?v={{globals.version}}';
+import EMARCSDataSpecialist from '{{globals.site_path}}/js/emarcs/EMARCSDataSpecialist.js?v={{globals.version}}';
 import DataSpecialistFactory from '{{globals.site_path}}/js/data/DataSpecialistFactory.js?v={{globals.version}}';
 
-class CWDataSpecialist extends DataSpecialist {
+class CWDataSpecialist extends EMARCSDataSpecialist {
 
     /*************************************************************************/
 
