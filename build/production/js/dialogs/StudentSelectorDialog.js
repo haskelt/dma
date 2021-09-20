@@ -1,8 +1,8 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import utilities from '/dma/js/utilities.js?v=0.21.0-beta';
-import logger from '/dma/js/logger/logger.js?v=0.21.0-beta';
-import Dialog from '/dma/js/dialogs/Dialog.js?v=0.21.0-beta';
+import utilities from '/dma/js/utilities.js?v=0.21.1-beta';
+import logger from '/dma/js/logger/logger.js?v=0.21.1-beta';
+import Dialog from '/dma/js/dialogs/Dialog.js?v=0.21.1-beta';
 
 class StudentSelectorDialog extends Dialog {
 

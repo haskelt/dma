@@ -1,7 +1,7 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import sheetjs from '/js/sheetjs/xlsx.full.min.js?v=0.21.0-beta';
-import logger from '/js/logger/logger.js?v=0.21.0-beta';
+import sheetjs from '/js/sheetjs/xlsx.full.min.js?v=0.21.1-beta';
+import logger from '/js/logger/logger.js?v=0.21.1-beta';
 
 class xlsxReader {
 

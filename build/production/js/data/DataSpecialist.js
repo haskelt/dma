@@ -1,15 +1,16 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/dma/js/logger/logger.js?v=0.21.0-beta';
-import config from '/dma/js/config.js?v=0.21.0-beta';
-import DataError from '/dma/js/errors/DataError.js?v=0.21.0-beta';
-import DataWarning from '/dma/js/errors/DataWarning.js?v=0.21.0-beta';
-import UserInputNeeded from '/dma/js/errors/UserInputNeeded.js?v=0.21.0-beta';
-import errors from '/dma/js/errors/errors.js?v=0.21.0-beta';
-import DataSets from '/dma/js/data/DataSets.js?v=0.21.0-beta';
-import xlsx from '/dma/js/xlsx/xlsx.js?v=0.21.0-beta';
-import CryptoJS from '/dma/js/cryptojs/sha256.js?v=0.21.0-beta';
-import StudentSelectorDialog from '/dma/js/dialogs/StudentSelectorDialog.js?v=0.21.0-beta';
+import logger from '/dma/js/logger/logger.js?v=0.21.1-beta';
+import config from '/dma/js/config.js?v=0.21.1-beta';
+import utilities from '/dma/js/utilities.js?v=0.21.1-beta';
+import DataError from '/dma/js/errors/DataError.js?v=0.21.1-beta';
+import DataWarning from '/dma/js/errors/DataWarning.js?v=0.21.1-beta';
+import UserInputNeeded from '/dma/js/errors/UserInputNeeded.js?v=0.21.1-beta';
+import errors from '/dma/js/errors/errors.js?v=0.21.1-beta';
+import DataSets from '/dma/js/data/DataSets.js?v=0.21.1-beta';
+import xlsx from '/dma/js/xlsx/xlsx.js?v=0.21.1-beta';
+import CryptoJS from '/dma/js/cryptojs/sha256.js?v=0.21.1-beta';
+import StudentSelectorDialog from '/dma/js/dialogs/StudentSelectorDialog.js?v=0.21.1-beta';
 
 class DataSpecialist {
 
@@ -29,7 +30,11 @@ class DataSpecialist {
 	logger.postMessage('DEBUG', 'data', 'Setting data ' + tag);
 
 	this.tag = tag;
-	this.curData = data;
+	this.rawWorkbook = data;
+	/* we make a copy of the raw spreadsheet data rather than
+	   modifying the original in case there is an error and we
+	   need to reprocess the file */
+	this.curData = utilities.deepCopy(data);
 	this.dataConfig = dataConfig;
 	this.identifiers = config.getConfig('identifiers');
 	

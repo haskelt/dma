@@ -2,6 +2,7 @@
 
 import logger from '{{globals.site_path}}/js/logger/logger.js?v={{globals.version}}';
 import config from '{{globals.site_path}}/js/config.js?v={{globals.version}}';
+import utilities from '{{globals.site_path}}/js/utilities.js?v={{globals.version}}';
 import DataError from '{{globals.site_path}}/js/errors/DataError.js?v={{globals.version}}';
 import DataWarning from '{{globals.site_path}}/js/errors/DataWarning.js?v={{globals.version}}';
 import UserInputNeeded from '{{globals.site_path}}/js/errors/UserInputNeeded.js?v={{globals.version}}';
@@ -29,7 +30,11 @@ class DataSpecialist {
 	logger.postMessage('DEBUG', 'data', 'Setting data ' + tag);
 
 	this.tag = tag;
-	this.curData = data;
+	this.rawWorkbook = data;
+	/* we make a copy of the raw spreadsheet data rather than
+	   modifying the original in case there is an error and we
+	   need to reprocess the file */
+	this.curData = utilities.deepCopy(data);
 	this.dataConfig = dataConfig;
 	this.identifiers = config.getConfig('identifiers');
 	

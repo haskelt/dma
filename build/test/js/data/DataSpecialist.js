@@ -1,15 +1,16 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/js/logger/logger.js?v=0.21.0-beta';
-import config from '/js/config.js?v=0.21.0-beta';
-import DataError from '/js/errors/DataError.js?v=0.21.0-beta';
-import DataWarning from '/js/errors/DataWarning.js?v=0.21.0-beta';
-import UserInputNeeded from '/js/errors/UserInputNeeded.js?v=0.21.0-beta';
-import errors from '/js/errors/errors.js?v=0.21.0-beta';
-import DataSets from '/js/data/DataSets.js?v=0.21.0-beta';
-import xlsx from '/js/xlsx/xlsx.js?v=0.21.0-beta';
-import CryptoJS from '/js/cryptojs/sha256.js?v=0.21.0-beta';
-import StudentSelectorDialog from '/js/dialogs/StudentSelectorDialog.js?v=0.21.0-beta';
+import logger from '/js/logger/logger.js?v=0.21.1-beta';
+import config from '/js/config.js?v=0.21.1-beta';
+import utilities from '/js/utilities.js?v=0.21.1-beta';
+import DataError from '/js/errors/DataError.js?v=0.21.1-beta';
+import DataWarning from '/js/errors/DataWarning.js?v=0.21.1-beta';
+import UserInputNeeded from '/js/errors/UserInputNeeded.js?v=0.21.1-beta';
+import errors from '/js/errors/errors.js?v=0.21.1-beta';
+import DataSets from '/js/data/DataSets.js?v=0.21.1-beta';
+import xlsx from '/js/xlsx/xlsx.js?v=0.21.1-beta';
+import CryptoJS from '/js/cryptojs/sha256.js?v=0.21.1-beta';
+import StudentSelectorDialog from '/js/dialogs/StudentSelectorDialog.js?v=0.21.1-beta';
 
 class DataSpecialist {
 
@@ -29,7 +30,11 @@ class DataSpecialist {
 	logger.postMessage('DEBUG', 'data', 'Setting data ' + tag);
 
 	this.tag = tag;
-	this.curData = data;
+	this.rawWorkbook = data;
+	/* we make a copy of the raw spreadsheet data rather than
+	   modifying the original in case there is an error and we
+	   need to reprocess the file */
+	this.curData = utilities.deepCopy(data);
 	this.dataConfig = dataConfig;
 	this.identifiers = config.getConfig('identifiers');
 	
