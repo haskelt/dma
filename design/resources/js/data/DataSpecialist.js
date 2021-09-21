@@ -362,7 +362,14 @@ class DataSpecialist {
     /**************************************************************************/
 
     setData () {
-	
+
+	/* Clear out any previously set data associated with this data tag.
+	   This includes both the tag on its own as well as any tag + sheet
+	   combinations. This ensures the data don't get corrupted if the user
+	   goes back in the task sequence. */
+	console.log('setting data for ' + this.tag);
+	DataSets.deleteDataSet(this.tag);
+	DataSets.deleteMatchingDataSets('^' + this.tag + '\.');
     	var sheetNames = Object.keys(this.curData);
 	if(sheetNames.length == 1){
 	    DataSets.setDataSet(this.tag, this.curData[sheetNames[0]]);

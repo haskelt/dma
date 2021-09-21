@@ -1,9 +1,9 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/js/logger/logger.js?v=0.21.2-beta';
-import DataError from '/js/errors/DataError.js?v=0.21.2-beta';
-import Task from '/js/tasks/Task.js?v=0.21.2-beta';
-import DataManager from '/js/data/DataManager.js?v=0.21.2-beta';
+import logger from '/js/logger/logger.js?v=0.21.3-beta';
+import DataError from '/js/errors/DataError.js?v=0.21.3-beta';
+import Task from '/js/tasks/Task.js?v=0.21.3-beta';
+import DataManager from '/js/data/DataManager.js?v=0.21.3-beta';
 
 class FieldTask extends Task {
     

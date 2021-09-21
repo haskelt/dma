@@ -1,16 +1,16 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/dma/js/logger/logger.js?v=0.21.2-beta';
-import config from '/dma/js/config.js?v=0.21.2-beta';
-import utilities from '/dma/js/utilities.js?v=0.21.2-beta';
-import DataError from '/dma/js/errors/DataError.js?v=0.21.2-beta';
-import DataWarning from '/dma/js/errors/DataWarning.js?v=0.21.2-beta';
-import UserInputNeeded from '/dma/js/errors/UserInputNeeded.js?v=0.21.2-beta';
-import errors from '/dma/js/errors/errors.js?v=0.21.2-beta';
-import DataSets from '/dma/js/data/DataSets.js?v=0.21.2-beta';
-import xlsx from '/dma/js/xlsx/xlsx.js?v=0.21.2-beta';
-import CryptoJS from '/dma/js/cryptojs/sha256.js?v=0.21.2-beta';
-import StudentSelectorDialog from '/dma/js/dialogs/StudentSelectorDialog.js?v=0.21.2-beta';
+import logger from '/dma/js/logger/logger.js?v=0.21.3-beta';
+import config from '/dma/js/config.js?v=0.21.3-beta';
+import utilities from '/dma/js/utilities.js?v=0.21.3-beta';
+import DataError from '/dma/js/errors/DataError.js?v=0.21.3-beta';
+import DataWarning from '/dma/js/errors/DataWarning.js?v=0.21.3-beta';
+import UserInputNeeded from '/dma/js/errors/UserInputNeeded.js?v=0.21.3-beta';
+import errors from '/dma/js/errors/errors.js?v=0.21.3-beta';
+import DataSets from '/dma/js/data/DataSets.js?v=0.21.3-beta';
+import xlsx from '/dma/js/xlsx/xlsx.js?v=0.21.3-beta';
+import CryptoJS from '/dma/js/cryptojs/sha256.js?v=0.21.3-beta';
+import StudentSelectorDialog from '/dma/js/dialogs/StudentSelectorDialog.js?v=0.21.3-beta';
 
 class DataSpecialist {
 
@@ -362,7 +362,14 @@ class DataSpecialist {
     /**************************************************************************/
 
     setData () {
-	
+
+	/* Clear out any previously set data associated with this data tag.
+	   This includes both the tag on its own as well as any tag + sheet
+	   combinations. This ensures the data don't get corrupted if the user
+	   goes back in the task sequence. */
+	console.log('setting data for ' + this.tag);
+	DataSets.deleteDataSet(this.tag);
+	DataSets.deleteMatchingDataSets('^' + this.tag + '\.');
     	var sheetNames = Object.keys(this.curData);
 	if(sheetNames.length == 1){
 	    DataSets.setDataSet(this.tag, this.curData[sheetNames[0]]);

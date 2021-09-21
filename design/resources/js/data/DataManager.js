@@ -2,7 +2,7 @@
 
 import logger from '{{globals.site_path}}/js/logger/logger.js?v={{globals.version}}';
 import config from '{{globals.site_path}}/js/config.js?v={{globals.version}}';
-import DataError from '{{globals.site_path}}/js/errors/DataError.js?v={{globals.version}}';
+import utilities from '{{globals.site_path}}/js/utilities.js?v={{globals.version}}';
 import DataSpecialistFactory from '{{globals.site_path}}/js/data/DataSpecialistFactory.js?v={{globals.version}}';
 import '{{globals.site_path}}/js/data/MetadataSpecialist.js?v={{globals.version}}';
 import DataSets from '{{globals.site_path}}/js/data/DataSets.js?v={{globals.version}}';
@@ -28,7 +28,6 @@ class DataManager {
     static postData (tag, data) {
 
 	logger.postMessage('DEBUG', 'data', 'Posting data for tag ' + tag + ' of ' + data);
-	console.log(this.dataConfigSection);
 	if(tag in this.dataConfigSection){
 	    let specialist = DataSpecialistFactory.build(this.dataConfigSection[tag]['class']);
 	    specialist.processData.bind(specialist)(tag, data, this.dataConfigSection[tag]);
@@ -58,13 +57,9 @@ class DataManager {
     
     /*************************************************************************/
 
-    static checkConsent (targetTag) {
+    static checkConsent (dataSet) {
 
-	logger.postMessage('DEBUG', 'data', 'Removing students from "' + targetTag + '" who do not meet the consent criteria');
-	var demographicsDataSet = DataSets.getDataSet('demographics');
-	var targetDataSet = DataSets.getDataSet(targetTag);
-	var filteredDataSet = DataSets.applyFilterSet(targetDataSet, demographicsDataSet, 'anonID', this.consentOptions);
-	DataSets.setDataSet(targetTag, filteredDataSet);
+	return DataSets.applyFilterSet(dataSet, this.consentData, 'anonID', this.consentOptions);
 	
     } // checkConsent
     
@@ -74,15 +69,12 @@ class DataManager {
 
 	logger.postMessage('DEBUG', 'data', 'Ensuring dataset "' + targetTag + '" contains records for each student in dataset "@roster"');
 	var canonicalIdentifier = this.dataConfigSection['@roster']['canonicalIdentifier'];
-	var rosterDataSet = DataSets.getDataSet('@roster');
-	var targetDataSet = DataSets.getDataSet(targetTag);
 	let missingList = [];
-	var noMissingRecordsDataSet = DataSets.generateMissingRecords(targetDataSet, rosterDataSet, 'anonID', missingList);
+	this.exportDataSets[targetTag] = DataSets.generateMissingRecords(this.exportDataSets[targetTag], this.rosterData, 'anonID', missingList);
 	for(let student of missingList){
 	    let canonicalID = DataSets.findData('@roster', 'anonID', student, canonicalIdentifier);
 	    logger.postMessage('WARN', 'data', 'Data set "' + targetTag + '" is missing student "' + canonicalID + '", created empty record.');
 	}
-	DataSets.setDataSet(targetTag, noMissingRecordsDataSet);
 	
     } // generateMissingRecords
 
@@ -91,9 +83,7 @@ class DataManager {
     static sortData (targetTag) {
 
 	logger.postMessage('DEBUG', 'data', 'Sorting dataset "' + targetTag + '"');
-	var targetDataSet = DataSets.getDataSet(targetTag);
-	var sortedDataSet = DataSets.sortBy(targetDataSet, 'anonID');
-	DataSets.setDataSet(targetTag, sortedDataSet);
+	this.exportDataSets[targetTag] = DataSets.sortBy(this.exportDataSets[targetTag], 'anonID');
 	
     } // sortData
     
@@ -102,18 +92,22 @@ class DataManager {
     static finalizeData () {
 
 	this.buildCourseInfoData();
-	this.checkConsent('@roster');
 
-	this.exportableDataSets = {};
+	this.rosterData = utilities.deepCopy(DataSets.getDataSet('@roster'));
+	this.consentData = utilities.deepCopy(DataSets.getDataSet('demographics'));
+	this.rosterData = this.checkConsent(this.rosterData);
+
+	this.exportDataSets = {};
 	for(let targetTag of DataSets.getDataTags()){
 	    /* a tag beginning with '@' indicates data for internal
 	       use that should not be exported */
 	    if(!targetTag.startsWith('@')){
 		logger.postMessage('DEBUG', 'data', 'Preparing dataset "' + targetTag + '" for export');
-		this.checkConsent(targetTag);
+		this.exportDataSets[targetTag] = utilities.deepCopy(DataSets.getDataSet(targetTag));
+		logger.postMessage('DEBUG', 'data', 'Removing students from "' + targetTag + '" who do not meet the consent criteria');
+		this.exportDataSets[targetTag] = this.checkConsent(this.exportDataSets[targetTag]);
 		this.generateMissingRecords(targetTag);
 		this.sortData(targetTag);
-		this.exportableDataSets[targetTag] = DataSets.getDataSet(targetTag);
 	    }
 	}
 	
@@ -123,7 +117,7 @@ class DataManager {
     
     static exportData () {
 
-	DataSets.exportData(this.exportableDataSets, 'EMARCS Data.xlsx');
+	DataSets.exportData(this.exportDataSets, 'EMARCS Data.xlsx');
 	
     } // exportData
     

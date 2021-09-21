@@ -1,9 +1,9 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/dma/js/logger/logger.js?v=0.21.2-beta';
-import DataError from '/dma/js/errors/DataError.js?v=0.21.2-beta';
-import DataWarning from '/dma/js/errors/DataWarning.js?v=0.21.2-beta';
-import xlsx from '/dma/js/xlsx/xlsx.js?v=0.21.2-beta';
+import logger from '/dma/js/logger/logger.js?v=0.21.3-beta';
+import DataError from '/dma/js/errors/DataError.js?v=0.21.3-beta';
+import DataWarning from '/dma/js/errors/DataWarning.js?v=0.21.3-beta';
+import xlsx from '/dma/js/xlsx/xlsx.js?v=0.21.3-beta';
 
 class DataSets {
 
@@ -32,6 +32,28 @@ class DataSets {
 
     /**************************************************************************/
 
+    static deleteDataSet (tag) {
+
+	if(tag in this.dataSets){
+	    delete this.dataSets[tag];
+	}
+	
+    } // deleteDataSet
+    
+    /**************************************************************************/
+    
+    static deleteMatchingDataSets (pattern) {
+
+	for(let key of Object.keys(this.dataSets)){
+	    if(key.search(pattern) != -1){
+		delete this.dataSets[key];
+	    }
+	}
+	
+    } // deleteMatchingDataSets
+    
+    /**************************************************************************/
+    
     static getDataTags () {
 
 	return Object.keys(this.dataSets);
