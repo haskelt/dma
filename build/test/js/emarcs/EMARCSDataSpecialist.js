@@ -1,9 +1,9 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/js/logger/logger.js?v=0.21.1-beta';
-import DataSets from '/js/data/DataSets.js?v=0.21.1-beta';
-import xlsx from '/js/xlsx/xlsx.js?v=0.21.1-beta';
-import DataSpecialist from '/js/data/DataSpecialist.js?v=0.21.1-beta';
+import logger from '/js/logger/logger.js?v=0.21.2-beta';
+import DataSets from '/js/data/DataSets.js?v=0.21.2-beta';
+import xlsx from '/js/xlsx/xlsx.js?v=0.21.2-beta';
+import DataSpecialist from '/js/data/DataSpecialist.js?v=0.21.2-beta';
 
 class EMARCSDataSpecialist extends DataSpecialist {
 
@@ -209,8 +209,8 @@ class EMARCSDataSpecialist extends DataSpecialist {
 
     partitionCanvasRoster () {
 
-	if(DataSets.dataFieldExists('_roster', 'Grade')){
-	    DataSets.partitionDataSet('_roster', 'course_grade', ['Grade']);
+	if(DataSets.dataFieldExists('@roster', 'Grade')){
+	    DataSets.partitionDataSet('@roster', 'course_grade', ['Grade']);
 	}
 	    
     } // partitionCanvasRoster

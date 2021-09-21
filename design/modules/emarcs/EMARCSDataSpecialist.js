@@ -209,8 +209,8 @@ class EMARCSDataSpecialist extends DataSpecialist {
 
     partitionCanvasRoster () {
 
-	if(DataSets.dataFieldExists('_roster', 'Grade')){
-	    DataSets.partitionDataSet('_roster', 'course_grade', ['Grade']);
+	if(DataSets.dataFieldExists('@roster', 'Grade')){
+	    DataSets.partitionDataSet('@roster', 'course_grade', ['Grade']);
 	}
 	    
     } // partitionCanvasRoster

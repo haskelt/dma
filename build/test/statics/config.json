@@ -49,7 +49,7 @@
 		"term" : {
 			"class" : "Metadata"
 		},
-		"_roster" : {
+		"@roster" : {
 			"class" : "CanvasRoster",
 		    "requiredFields" : [ "Student ID" ],
 			"canonicalIdentifier" : "Student ID"

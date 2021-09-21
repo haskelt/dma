@@ -32,7 +32,7 @@
       </task-wrapper>
       <task-wrapper label="Step 2 - Roster and Consent">
 	<task-set id="taskset2">
-	  <spreadsheet-selector id="_roster" label="Master Student Roster"/>
+	  <spreadsheet-selector id="@roster" label="Master Student Roster"/>
 	  <spreadsheet-selector id="demographics" label="Consent and Demographics"/>
 	</task-set>
       </task-wrapper>

@@ -1,16 +1,16 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/dma/js/logger/logger.js?v=0.21.1-beta';
-import config from '/dma/js/config.js?v=0.21.1-beta';
-import utilities from '/dma/js/utilities.js?v=0.21.1-beta';
-import DataError from '/dma/js/errors/DataError.js?v=0.21.1-beta';
-import DataWarning from '/dma/js/errors/DataWarning.js?v=0.21.1-beta';
-import UserInputNeeded from '/dma/js/errors/UserInputNeeded.js?v=0.21.1-beta';
-import errors from '/dma/js/errors/errors.js?v=0.21.1-beta';
-import DataSets from '/dma/js/data/DataSets.js?v=0.21.1-beta';
-import xlsx from '/dma/js/xlsx/xlsx.js?v=0.21.1-beta';
-import CryptoJS from '/dma/js/cryptojs/sha256.js?v=0.21.1-beta';
-import StudentSelectorDialog from '/dma/js/dialogs/StudentSelectorDialog.js?v=0.21.1-beta';
+import logger from '/dma/js/logger/logger.js?v=0.21.2-beta';
+import config from '/dma/js/config.js?v=0.21.2-beta';
+import utilities from '/dma/js/utilities.js?v=0.21.2-beta';
+import DataError from '/dma/js/errors/DataError.js?v=0.21.2-beta';
+import DataWarning from '/dma/js/errors/DataWarning.js?v=0.21.2-beta';
+import UserInputNeeded from '/dma/js/errors/UserInputNeeded.js?v=0.21.2-beta';
+import errors from '/dma/js/errors/errors.js?v=0.21.2-beta';
+import DataSets from '/dma/js/data/DataSets.js?v=0.21.2-beta';
+import xlsx from '/dma/js/xlsx/xlsx.js?v=0.21.2-beta';
+import CryptoJS from '/dma/js/cryptojs/sha256.js?v=0.21.2-beta';
+import StudentSelectorDialog from '/dma/js/dialogs/StudentSelectorDialog.js?v=0.21.2-beta';
 
 class DataSpecialist {
 
@@ -186,7 +186,7 @@ class DataSpecialist {
 	   identifier. If it has more than one, determine which one works
 	   best for looking up students in the roster. */
 
-	var rosterFields = DataSets.getDataSetFields('_roster');
+	var rosterFields = DataSets.getDataSetFields('@roster');
 	this.matchingIdentifiers = {};
 	this.lookupIdentifiers = {};
 	for(let sheet in this.curData){
@@ -211,7 +211,7 @@ class DataSpecialist {
 	    for(let match of matches){
 		let identifier = this.identifiers.find(element => element.standardHeading == match);
 		let dataIDEntries = this.curData[sheet].map(entry => entry[match]);
-		let rosterIDEntries = DataSets.getDataField('_roster', match);
+		let rosterIDEntries = DataSets.getDataField('@roster', match);
 		let overlap = dataIDEntries.filter(entry => rosterIDEntries.includes(entry));
 		let matchPerformance = overlap.length / dataIDEntries.length * 100;
 		if(matchPerformance > bestMatchPerformance){
@@ -325,10 +325,10 @@ class DataSpecialist {
 			lookupValue = standardValue;
 		    }
 		}
-		let anonID = DataSets.findData('_roster', this.lookupIdentifiers[sheet], lookupValue, 'anonID');
+		let anonID = DataSets.findData('@roster', this.lookupIdentifiers[sheet], lookupValue, 'anonID');
 		if(!anonID){
 		    logger.postMessage('WARN', 'data', this.tag + ':' + sheet + ' - Unable to find student with ' + this.lookupIdentifiers[sheet] + ' "' + row[this.lookupIdentifiers[sheet]] + '" in the roster, prompting user to identify student');
-		    let studentList = DataSets.getDataField('_roster', this.lookupIdentifiers[sheet]);
+		    let studentList = DataSets.getDataField('@roster', this.lookupIdentifiers[sheet]);
 		    StudentSelectorDialog.getUserSelection(this.lookupIdentifiers[sheet], row[this.lookupIdentifiers[sheet]], studentList, this.handleStudentSelection.bind(this));
 		    throw new UserInputNeeded();
 		}
