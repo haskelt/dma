@@ -1,6 +1,6 @@
 {{globals.js_copyright_notice}}
 
-import logger from '{{globals.site_path}}/js/logger/logger.js?v={{globals.version}}';
+import logger from '../logger/logger.js?v={{globals.version}}';
 
 class DataSpecialistFactory {
 

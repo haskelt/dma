@@ -1,7 +1,7 @@
 {{globals.js_copyright_notice}}
 
-import config from '{{globals.site_path}}/js/config.js?v={{globals.version}}';
-import message_dispatcher from '{{globals.site_path}}/js/logger/MessageDispatcher.js?v={{globals.version}}';
+import config from '../config.js?v={{globals.version}}';
+import message_dispatcher from '../logger/MessageDispatcher.js?v={{globals.version}}';
 
 class StatusMessageHandler {
 

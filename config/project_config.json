@@ -13,6 +13,6 @@
     },
     "globals": {
 	"js_copyright_notice": "// Copyright 2021 Todd R. Haskell\\n// Distributed under the terms of the Gnu GPL 3.0",
-	"version": "0.21.3-beta"
+	"version": "0.22.0-beta"
     }
 }

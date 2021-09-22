@@ -1,16 +1,16 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/dma/js/logger/logger.js?v=0.21.3-beta';
-import config from '/dma/js/config.js?v=0.21.3-beta';
-import utilities from '/dma/js/utilities.js?v=0.21.3-beta';
-import DataError from '/dma/js/errors/DataError.js?v=0.21.3-beta';
-import DataWarning from '/dma/js/errors/DataWarning.js?v=0.21.3-beta';
-import UserInputNeeded from '/dma/js/errors/UserInputNeeded.js?v=0.21.3-beta';
-import errors from '/dma/js/errors/errors.js?v=0.21.3-beta';
-import DataSets from '/dma/js/data/DataSets.js?v=0.21.3-beta';
-import xlsx from '/dma/js/xlsx/xlsx.js?v=0.21.3-beta';
-import CryptoJS from '/dma/js/cryptojs/sha256.js?v=0.21.3-beta';
-import StudentSelectorDialog from '/dma/js/dialogs/StudentSelectorDialog.js?v=0.21.3-beta';
+import logger from '../logger/logger.js?v=0.21.3-beta';
+import config from '../config.js?v=0.21.3-beta';
+import utilities from '../utilities.js?v=0.21.3-beta';
+import DataError from '../errors/DataError.js?v=0.21.3-beta';
+import DataWarning from '../errors/DataWarning.js?v=0.21.3-beta';
+import UserInputNeeded from '../errors/UserInputNeeded.js?v=0.21.3-beta';
+import errors from '../errors/errors.js?v=0.21.3-beta';
+import DataSets from './DataSets.js?v=0.21.3-beta';
+import xlsx from '../xlsx/xlsx.js?v=0.21.3-beta';
+import CryptoJS from '../cryptojs/sha256.js?v=0.21.3-beta';
+import StudentSelectorDialog from '../dialogs/StudentSelectorDialog.js?v=0.21.3-beta';
 
 class DataSpecialist {
 

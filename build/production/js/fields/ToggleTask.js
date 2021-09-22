@@ -1,7 +1,7 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '/dma/js/logger/logger.js?v=0.21.3-beta';
-import Task from '/dma/js/tasks/Task.js?v=0.21.3-beta';
+import logger from '../logger/logger.js?v=0.21.3-beta';
+import Task from '../tasks/Task.js?v=0.21.3-beta';
 
 class ToggleTask extends Task {
 

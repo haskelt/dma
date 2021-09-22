@@ -1,7 +1,7 @@
 {{globals.js_copyright_notice}}
 
-import DataSpecialist from '{{globals.site_path}}/js/data/DataSpecialist.js?v={{globals.version}}';
-import DataSpecialistFactory from '{{globals.site_path}}/js/data/DataSpecialistFactory.js?v={{globals.version}}';
+import DataSpecialist from '../data/DataSpecialist.js?v={{globals.version}}';
+import DataSpecialistFactory from '../data/DataSpecialistFactory.js?v={{globals.version}}';
 
 class CanvasDataSpecialist extends DataSpecialist {
 

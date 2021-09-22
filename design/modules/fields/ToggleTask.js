@@ -1,7 +1,7 @@
 {{globals.js_copyright_notice}}
 
-import logger from '{{globals.site_path}}/js/logger/logger.js?v={{globals.version}}';
-import Task from '{{globals.site_path}}/js/tasks/Task.js?v={{globals.version}}';
+import logger from '../logger/logger.js?v={{globals.version}}';
+import Task from '../tasks/Task.js?v={{globals.version}}';
 
 class ToggleTask extends Task {
 

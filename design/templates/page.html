@@ -5,11 +5,11 @@
     <meta charset=utf-8>
     <title>DMA</title>
     {% block css %}
-    <link rel="stylesheet" href="{{globals.site_path}}/css/app.css?v={{globals.version}}" type="text/css" />
+    <link rel="stylesheet" href="../css/app.css?v={{globals.version}}" type="text/css" />
     {% if this.styles %}
     {% set style_data = this.styles.split() %}
     {% for style in style_data %}
-    <link rel="stylesheet" href="{{globals.site_path}}{{style}}?v={{globals.version}}" type="text/css" />
+    <link rel="stylesheet" href="..{{style}}?v={{globals.version}}" type="text/css" />
     {% endfor %}
     {% endif %}
     {% endblock %}
@@ -28,17 +28,17 @@
 
     
     {% block javascript %}
-    <script src="{{globals.site_path}}/js/logger/logger.js?v={{globals.version}}" type="module"></script>
-    <script src="{{globals.site_path}}/js/data/data.js?v={{globals.version}}" type="module"></script>
+    <script src="../js/logger/logger.js?v={{globals.version}}" type="module"></script>
+    <script src="../js/data/data.js?v={{globals.version}}" type="module"></script>
     {% if this.scripts %}
     {% set script_data = this.scripts.split() %}
     {% for script in script_data %}
     <script type="module">
-      import "{{globals.site_path}}{{script}}?v={{globals.version}}"
+      import "..{{script}}?v={{globals.version}}"
     </script>
     {% endfor %}
     {% endif %}
-    <script src="{{globals.site_path}}/js/app.js?v={{globals.version}}" type="module"></script>
+    <script src="../js/app.js?v={{globals.version}}" type="module"></script>
     {% endblock %}
 
   {% endblock %}

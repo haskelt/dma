@@ -1,11 +1,11 @@
 {{globals.js_copyright_notice}}
 
-import logger from '{{globals.site_path}}/js/logger/logger.js?v={{globals.version}}';
-import config from '{{globals.site_path}}/js/config.js?v={{globals.version}}';
-import utilities from '{{globals.site_path}}/js/utilities.js?v={{globals.version}}';
-import DataSpecialistFactory from '{{globals.site_path}}/js/data/DataSpecialistFactory.js?v={{globals.version}}';
-import '{{globals.site_path}}/js/data/MetadataSpecialist.js?v={{globals.version}}';
-import DataSets from '{{globals.site_path}}/js/data/DataSets.js?v={{globals.version}}';
+import logger from '../logger/logger.js?v={{globals.version}}';
+import config from '../config.js?v={{globals.version}}';
+import utilities from '../utilities.js?v={{globals.version}}';
+import DataSpecialistFactory from './DataSpecialistFactory.js?v={{globals.version}}';
+import './MetadataSpecialist.js?v={{globals.version}}';
+import DataSets from './DataSets.js?v={{globals.version}}';
 
 class DataManager {
 

@@ -1,8 +1,8 @@
 {{globals.js_copyright_notice}}
 
-import utilities from '{{globals.site_path}}/js/utilities.js?v={{globals.version}}';
-import logger from '{{globals.site_path}}/js/logger/logger.js?v={{globals.version}}';
-import Dialog from '{{globals.site_path}}/js/dialogs/Dialog.js?v={{globals.version}}';
+import utilities from '../utilities.js?v={{globals.version}}';
+import logger from '../logger/logger.js?v={{globals.version}}';
+import Dialog from './Dialog.js?v={{globals.version}}';
 
 class StudentSelectorDialog extends Dialog {
 

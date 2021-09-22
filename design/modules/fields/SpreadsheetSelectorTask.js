@@ -1,8 +1,8 @@
 {{globals.js_copyright_notice}}
 
-import logger from '{{globals.site_path}}/js/logger/logger.js?v={{globals.version}}';
-import FieldTask from '{{globals.site_path}}/js/fields/FieldTask.js?v={{globals.version}}';
-import xlsx from '{{globals.site_path}}/js/xlsx/xlsx.js?v={{globals.version}}';
+import logger from '../logger/logger.js?v={{globals.version}}';
+import FieldTask from './FieldTask.js?v={{globals.version}}';
+import xlsx from '../xlsx/xlsx.js?v={{globals.version}}';
 
 class SpreadsheetSelectorTask extends FieldTask {
     

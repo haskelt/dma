@@ -1,9 +1,9 @@
 {{globals.js_copyright_notice}}
 
-import config from '{{globals.site_path}}/js/config.js?v={{globals.version}}';
-import TaskSet from '{{globals.site_path}}/js/tasks/TaskSet.js?v={{globals.version}}';
-import TaskSequence from '{{globals.site_path}}/js/tasks/TaskSequence.js?v={{globals.version}}';
-import TaskFactory from '{{globals.site_path}}/js/tasks/TaskFactory.js?v={{globals.version}}';
+import config from '../config.js?v={{globals.version}}';
+import TaskSet from './TaskSet.js?v={{globals.version}}';
+import TaskSequence from './TaskSequence.js?v={{globals.version}}';
+import TaskFactory from './TaskFactory.js?v={{globals.version}}';
 
 function initialize () {
     for (let taskSequenceElement of document.querySelectorAll('.tasks__task-sequence')) {

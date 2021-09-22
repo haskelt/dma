@@ -1,13 +1,13 @@
 {{globals.js_copyright_notice}}
 
-import config from '{{globals.site_path}}/js/config.js?v={{globals.version}}';
-import TaskFactory from '{{globals.site_path}}/js/tasks/TaskFactory.js?v={{globals.version}}';
-import ToggleTask from '{{globals.site_path}}/js/fields/ToggleTask.js?v={{globals.version}}';
-import TextInputTask from '{{globals.site_path}}/js/fields/TextInputTask.js?v={{globals.version}}';
-import MultipleChoiceTask from '{{globals.site_path}}/js/fields/MultipleChoiceTask.js?v={{globals.version}}';
-import SelectTask from '{{globals.site_path}}/js/fields/SelectTask.js?v={{globals.version}}';
-import SpreadsheetSelectorTask from '{{globals.site_path}}/js/fields/SpreadsheetSelectorTask.js?v={{globals.version}}';
-import ExportButtonTask from '{{globals.site_path}}/js/fields/ExportButtonTask.js?v={{globals.version}}';
+import config from '../config.js?v={{globals.version}}';
+import TaskFactory from '../tasks/TaskFactory.js?v={{globals.version}}';
+import ToggleTask from './ToggleTask.js?v={{globals.version}}';
+import TextInputTask from './TextInputTask.js?v={{globals.version}}';
+import MultipleChoiceTask from './MultipleChoiceTask.js?v={{globals.version}}';
+import SelectTask from './SelectTask.js?v={{globals.version}}';
+import SpreadsheetSelectorTask from './SpreadsheetSelectorTask.js?v={{globals.version}}';
+import ExportButtonTask from './ExportButtonTask.js?v={{globals.version}}';
 
 function initialize () {
     TaskFactory.registerBuilder('toggle', ToggleTask);

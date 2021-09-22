@@ -1,9 +1,9 @@
 {{globals.js_copyright_notice}}
 
-import logger from '{{globals.site_path}}/js/logger/logger.js?v={{globals.version}}';
-import DataError from '{{globals.site_path}}/js/errors/DataError.js?v={{globals.version}}';
-import DataWarning from '{{globals.site_path}}/js/errors/DataWarning.js?v={{globals.version}}';
-import xlsx from '{{globals.site_path}}/js/xlsx/xlsx.js?v={{globals.version}}';
+import logger from '../logger/logger.js?v={{globals.version}}';
+import DataError from '../errors/DataError.js?v={{globals.version}}';
+import DataWarning from '../errors/DataWarning.js?v={{globals.version}}';
+import xlsx from '../xlsx/xlsx.js?v={{globals.version}}';
 
 class DataSets {
 

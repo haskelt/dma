@@ -1,9 +1,9 @@
 {{globals.js_copyright_notice}}
 
-import logger from '{{globals.site_path}}/js/logger/logger.js?v={{globals.version}}';
-import DataError from '{{globals.site_path}}/js/errors/DataError.js?v={{globals.version}}';
-import Task from '{{globals.site_path}}/js/tasks/Task.js?v={{globals.version}}';
-import DataManager from '{{globals.site_path}}/js/data/DataManager.js?v={{globals.version}}';
+import logger from '../logger/logger.js?v={{globals.version}}';
+import DataError from '../errors/DataError.js?v={{globals.version}}';
+import Task from '../tasks/Task.js?v={{globals.version}}';
+import DataManager from '../data/DataManager.js?v={{globals.version}}';
 
 class FieldTask extends Task {
     

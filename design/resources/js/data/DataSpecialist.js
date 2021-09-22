@@ -1,16 +1,16 @@
 {{globals.js_copyright_notice}}
 
-import logger from '{{globals.site_path}}/js/logger/logger.js?v={{globals.version}}';
-import config from '{{globals.site_path}}/js/config.js?v={{globals.version}}';
-import utilities from '{{globals.site_path}}/js/utilities.js?v={{globals.version}}';
-import DataError from '{{globals.site_path}}/js/errors/DataError.js?v={{globals.version}}';
-import DataWarning from '{{globals.site_path}}/js/errors/DataWarning.js?v={{globals.version}}';
-import UserInputNeeded from '{{globals.site_path}}/js/errors/UserInputNeeded.js?v={{globals.version}}';
-import errors from '{{globals.site_path}}/js/errors/errors.js?v={{globals.version}}';
-import DataSets from '{{globals.site_path}}/js/data/DataSets.js?v={{globals.version}}';
-import xlsx from '{{globals.site_path}}/js/xlsx/xlsx.js?v={{globals.version}}';
-import CryptoJS from '{{globals.site_path}}/js/cryptojs/sha256.js?v={{globals.version}}';
-import StudentSelectorDialog from '{{globals.site_path}}/js/dialogs/StudentSelectorDialog.js?v={{globals.version}}';
+import logger from '../logger/logger.js?v={{globals.version}}';
+import config from '../config.js?v={{globals.version}}';
+import utilities from '../utilities.js?v={{globals.version}}';
+import DataError from '../errors/DataError.js?v={{globals.version}}';
+import DataWarning from '../errors/DataWarning.js?v={{globals.version}}';
+import UserInputNeeded from '../errors/UserInputNeeded.js?v={{globals.version}}';
+import errors from '../errors/errors.js?v={{globals.version}}';
+import DataSets from './DataSets.js?v={{globals.version}}';
+import xlsx from '../xlsx/xlsx.js?v={{globals.version}}';
+import CryptoJS from '../cryptojs/sha256.js?v={{globals.version}}';
+import StudentSelectorDialog from '../dialogs/StudentSelectorDialog.js?v={{globals.version}}';
 
 class DataSpecialist {
 
