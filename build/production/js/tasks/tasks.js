@@ -1,9 +1,9 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import config from '../config.js?v=0.21.3-beta';
-import TaskSet from './TaskSet.js?v=0.21.3-beta';
-import TaskSequence from './TaskSequence.js?v=0.21.3-beta';
-import TaskFactory from './TaskFactory.js?v=0.21.3-beta';
+import config from '../config.js?v=0.22.1-beta';
+import TaskSet from './TaskSet.js?v=0.22.1-beta';
+import TaskSequence from './TaskSequence.js?v=0.22.1-beta';
+import TaskFactory from './TaskFactory.js?v=0.22.1-beta';
 
 function initialize () {
     for (let taskSequenceElement of document.querySelectorAll('.tasks__task-sequence')) {

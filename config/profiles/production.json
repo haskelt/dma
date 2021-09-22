@@ -1,9 +1,6 @@
 {
     "parameters": {
-	"deploy_destination": "todhas2@trapline.dreamhost.com:apps.craggypeak.com/dma2/"
-    },
-    "globals": {
-	"site_path": "/dma"
+	"deploy_destination": "todhas2@trapline.dreamhost.com:apps.craggypeak.com/dma/"
     }
 }
  

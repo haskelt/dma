@@ -1,7 +1,7 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import logger from '../logger/logger.js?v=0.21.3-beta';
-import FieldTask from './FieldTask.js?v=0.21.3-beta';
+import logger from '../logger/logger.js?v=0.22.1-beta';
+import FieldTask from './FieldTask.js?v=0.22.1-beta';
 
 class TextInputTask extends FieldTask {
     
