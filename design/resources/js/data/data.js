@@ -6,6 +6,7 @@ import DataManager from './DataManager.js?v={{globals.version}}';
 function initialize () {
     
     DataManager.initialize();
+    return Promise.resolve(true);
 
 } // initialize
 

@@ -11,6 +11,7 @@ class StatusMessageHandler {
 
 	this.statusMessagesElement = document.querySelector('#status-messages');
 	message_dispatcher.subscribe('INFO', this.handleMessage.bind(this));
+	return Promise.resolve(true);
 	
     } // initialize
 

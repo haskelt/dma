@@ -49,22 +49,36 @@ class ConfigManager {
 
     /**************************************************************************/
 
-    static initializeModules () {
+    static prepareNextModule () {
 
-	for(let entry of this.moduleRegistry){
-	    logger.postMessage('DEBUG', 'config', 'Initializing module ' + entry.name);
-	    entry.initializer();
+	console.log('preparing next module');
+	if(this.moduleRegistry.length > 0){
+	    return this.doNextModule.bind(this)();
+	} else {
+	    this.loaded = true;
+	    return Promise.resolve(true);
 	}
 	
-    } // initializeModules
+    } // prepareNextModule
     
+    /**************************************************************************/
+
+    static doNextModule () {
+
+	var moduleSpecs = this.moduleRegistry.shift();
+	logger.postMessage('DEBUG', 'config', 'Initializing module ' + moduleSpecs.name);
+	return moduleSpecs.initializer()
+	    .then(this.prepareNextModule.bind(this));
+	
+    } // doNextModule
+
     /**************************************************************************/
 
     static initialize () {
 
 	this.fetchJSON('config.json')
 	    .then(this.storeConfig.bind(this))
-	    .then(this.initializeModules.bind(this));
+	    .then(this.prepareNextModule.bind(this));
 	
     } // initialize
     

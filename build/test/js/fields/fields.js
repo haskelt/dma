@@ -16,6 +16,7 @@ function initialize () {
     TaskFactory.registerBuilder('select', SelectTask);
     TaskFactory.registerBuilder('spreadsheet-selector', SpreadsheetSelectorTask);
     TaskFactory.registerBuilder('export-button', ExportButtonTask);
+    return Promise.resolve(true);
 }
 
 config.registerModule('fields', initialize);

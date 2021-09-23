@@ -6,6 +6,7 @@ import StudentSelectorDialog from './StudentSelectorDialog.js?v={{globals.versio
 function initialize () {
 
     StudentSelectorDialog.initialize();
+    return Promise.resolve(true);
 
 } // initialize
 

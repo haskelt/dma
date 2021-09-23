@@ -20,6 +20,7 @@ function initialize () {
 	}
 	taskSequence.setup();
     }
+    return Promise.resolve(true);
 }
 
 config.registerModule('tasks', initialize);
