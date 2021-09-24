@@ -1,26 +1,12 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
+import utilities from './utilities.js?v=0.22.1-beta';
 import logger from './logger/logger.js?v=0.22.1-beta';
 
 class ConfigManager {
 
     static moduleRegistry = [];
     
-    /**************************************************************************/
-
-    static fetchJSON (filename) {
-
-	return fetch(filename)
-            .then(function(response) {
-		if(response.ok){
-                    return response.json();
-		} else {
-                    return { error: 'Failed to load JSON' };
-		}
-            });
-
-    } // fetchJSON
-
     /**************************************************************************/
     
     static storeConfig (response) {
@@ -49,36 +35,23 @@ class ConfigManager {
 
     /**************************************************************************/
 
-    static prepareNextModule () {
-
-	console.log('preparing next module');
-	if(this.moduleRegistry.length > 0){
-	    return this.doNextModule.bind(this)();
-	} else {
-	    this.loaded = true;
-	    return Promise.resolve(true);
+    static initializeModules () {
+	
+	var curPromise = Promise.resolve(true); 
+	for(let moduleSpecs of this.moduleRegistry) {
+	    logger.postMessage('TRACE', 'config', 'Queuing initialization for module ' + moduleSpecs.name);
+	    curPromise = curPromise.then(moduleSpecs.initializer); 
 	}
 	
-    } // prepareNextModule
+    } // initializeModules
     
     /**************************************************************************/
-
-    static doNextModule () {
-
-	var moduleSpecs = this.moduleRegistry.shift();
-	logger.postMessage('DEBUG', 'config', 'Initializing module ' + moduleSpecs.name);
-	return moduleSpecs.initializer()
-	    .then(this.prepareNextModule.bind(this));
-	
-    } // doNextModule
-
-    /**************************************************************************/
-
+    
     static initialize () {
 
-	this.fetchJSON('config.json')
+	utilities.fetchJSON('config.json')
 	    .then(this.storeConfig.bind(this))
-	    .then(this.prepareNextModule.bind(this));
+	    .then(this.initializeModules.bind(this));
 	
     } // initialize
     

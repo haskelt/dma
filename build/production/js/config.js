@@ -1,26 +1,12 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
+import utilities from './utilities.js?v=0.22.1-beta';
 import logger from './logger/logger.js?v=0.22.1-beta';
 
 class ConfigManager {
 
     static moduleRegistry = [];
     
-    /**************************************************************************/
-
-    static fetchJSON (filename) {
-
-	return fetch(filename)
-            .then(function(response) {
-		if(response.ok){
-                    return response.json();
-		} else {
-                    return { error: 'Failed to load JSON' };
-		}
-            });
-
-    } // fetchJSON
-
     /**************************************************************************/
     
     static storeConfig (response) {
@@ -50,19 +36,20 @@ class ConfigManager {
     /**************************************************************************/
 
     static initializeModules () {
-
-	for(let entry of this.moduleRegistry){
-	    logger.postMessage('DEBUG', 'config', 'Initializing module ' + entry.name);
-	    entry.initializer();
+	
+	var curPromise = Promise.resolve(true); 
+	for(let moduleSpecs of this.moduleRegistry) {
+	    logger.postMessage('TRACE', 'config', 'Queuing initialization for module ' + moduleSpecs.name);
+	    curPromise = curPromise.then(moduleSpecs.initializer); 
 	}
 	
     } // initializeModules
     
     /**************************************************************************/
-
+    
     static initialize () {
 
-	this.fetchJSON('config.json')
+	utilities.fetchJSON('config.json')
 	    .then(this.storeConfig.bind(this))
 	    .then(this.initializeModules.bind(this));
 	

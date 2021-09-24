@@ -1,6 +1,7 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
 import config from '../config.js?v=0.22.1-beta';
+import logger from '../logger/logger.js?v=0.22.1-beta';
 import message_dispatcher from '../logger/MessageDispatcher.js?v=0.22.1-beta';
 
 class StatusMessageHandler {
@@ -8,9 +9,10 @@ class StatusMessageHandler {
     /**************************************************************************/
 
     static initialize () {
-
+	logger.postMessage('DEBUG', 'status', 'Initializing status module');
 	this.statusMessagesElement = document.querySelector('#status-messages');
 	message_dispatcher.subscribe('INFO', this.handleMessage.bind(this));
+	return Promise.resolve(true);
 	
     } // initialize
 

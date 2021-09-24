@@ -1,6 +1,7 @@
 {{globals.js_copyright_notice}}
 
 import config from '../config.js?v={{globals.version}}';
+import logger from '../logger/logger.js?v={{globals.version}}';
 import TaskFactory from '../tasks/TaskFactory.js?v={{globals.version}}';
 import ToggleTask from './ToggleTask.js?v={{globals.version}}';
 import TextInputTask from './TextInputTask.js?v={{globals.version}}';
@@ -10,6 +11,7 @@ import SpreadsheetSelectorTask from './SpreadsheetSelectorTask.js?v={{globals.ve
 import ExportButtonTask from './ExportButtonTask.js?v={{globals.version}}';
 
 function initialize () {
+    logger.postMessage('DEBUG', 'fields', 'Initializing fields module');
     TaskFactory.registerBuilder('toggle', ToggleTask);
     TaskFactory.registerBuilder('text-input', TextInputTask);
     TaskFactory.registerBuilder('multiple-choice', MultipleChoiceTask);

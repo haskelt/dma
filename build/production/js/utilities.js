@@ -25,14 +25,44 @@ class Utilities {
 	}
 	
     } // deepCopy
+
+    /**************************************************************************/
     
-/*****************************************************************************/
-/* <template> should be a string of HTML, with variable names indicated by
-   surrounding them with {= and =}, e.g., '{=foo=}'. <variables> is an 
-   object holding the values for each variable in the template, e.g.,
-   there would be a 'foo' attribute on <variables> that might have the
-   value 'bar'. Then '{=foo=}' in the template would become 'bar' after
-   expansion. */
+    static fetchJSON (filename) {
+
+	return fetch(filename)
+            .then(function(response) {
+		if(response.ok){
+                    return response.json();
+		} else {
+                    return { error: 'Failed to load JSON' };
+		}
+            });
+
+    } // fetchJSON
+
+    /**************************************************************************/
+    
+    static fetchText(filename) {
+
+	return fetch(filename)
+            .then(function(response) {
+		if(response.ok){
+                    return response.text();
+		} else {
+                    return { error: 'Failed to load text document' };
+		}
+            });
+
+    } // fetchText
+
+    /**************************************************************************/
+    /* <template> should be a string of HTML, with variable names indicated by
+       surrounding them with {= and =}, e.g., '{=foo=}'. <variables> is an 
+       object holding the values for each variable in the template, e.g.,
+       there would be a 'foo' attribute on <variables> that might have the
+       value 'bar'. Then '{=foo=}' in the template would become 'bar' after
+       expansion. */
     
     static expandHTMLTemplate (template, variables) {
 
