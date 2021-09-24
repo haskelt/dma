@@ -1,8 +1,8 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import config from '../config.js?v=0.22.1-beta';
 import utilities from '../utilities.js?v=0.22.1-beta';
 import logger from '../logger/logger.js?v=0.22.1-beta';
+import ConfigError from '../errors/ConfigError.js?v=0.22.1-beta';
 
 class TemplateManager {
 
@@ -12,12 +12,10 @@ class TemplateManager {
 
     static initialize () {
 
-	logger.postMessage('DEBUG', 'templates', 'Initializing templates module');
 	return this.getConfig()
 	    .then(this.loadAll.bind(this));
 
     } // initialize
-
 
     /**************************************************************************/
 
@@ -43,14 +41,13 @@ class TemplateManager {
 
 	this.templates = {};
 	if(!('templates' in this.configData)){
-	    logger.postMessage('ERROR', 'templates', 'Templates config file does not have a list of templates');
-	    return Promise.reject(false);
+	    throw new ConfigError('Templates config file does not have a list of templates');
 	}
 	
 	var curPromise = Promise.resolve(true); 
 	for(let template of this.configData.templates){
 	    logger.postMessage('DEBUG', 'templates', 'Loading template ' + template);
-	    curPromise = curPromise.then(this.loadTemplate.bind(this, template));
+	    curPromise = curPromise.then(this.load.bind(this, template));
 	}
 	return curPromise;
 	
@@ -68,8 +65,7 @@ class TemplateManager {
     static expand (templateName, variables) {
 
 	if(!(templateName in this.templates)){
-	    logger.postMessage('ERROR', 'templates', 'Template ' + templateName + ' does not exist');
-	    return null;
+	    throw new ConfigError('Template ' + templateName + ' does not exist');
 	}
 
 	var split_template = this.templates[templateName].split(/{=|=}/);
@@ -88,5 +84,4 @@ class TemplateManager {
 
 } // TemplateManager
 
-config.registerModule('templates', TemplateManager.initialize.bind(TemplateManager));
-
+export default TemplateManager;

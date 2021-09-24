@@ -2,12 +2,12 @@
 
 import utilities from '../utilities.js?v=0.22.1-beta';
 import logger from '../logger/logger.js?v=0.22.1-beta';
+import TemplateManager from '../templates/TemplateManager.js?v=0.22.1-beta';
 import Dialog from './Dialog.js?v=0.22.1-beta';
 
 class StudentSelectorDialog extends Dialog {
 
     static promptTemplate = 'Unable to find the student with <span id="student-selector__target-identifier"> </span> "<span id="student-selector__target-student"> </span>" in the roster. Please indicate below which student this is or if they are not in your class. If they are not in the list but you would like to add them to the roster, you can click cancel, edit your roster file to add them, and then go back and re-upload your roster.';
-    static optionTemplate = '<div class="dialogs__radio-option"><input type="radio" name="{=id=}" value="{=optionValue=}"><label for="{=optionValue=}">{=optionText=}</label></div>';
     
     /**************************************************************************/
 
@@ -32,7 +32,7 @@ class StudentSelectorDialog extends Dialog {
 
     static createOption (optionValue, optionText, checked = false) {
 
-	var optionElement = utilities.expandHTMLTemplate(this.optionTemplate, { id: 'student-selector', optionValue: optionValue, optionText: optionText });
+	var optionElement = TemplateManager.expand('student-option', { id: 'student-selector', optionValue: optionValue, optionText: optionText });
 	/* this assumes there is an input element defined by the template,
 	   which is reasonable since the point is to create a selectable
 	   option */

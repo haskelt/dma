@@ -1,5 +1,6 @@
 {
     "templates": [
+	"student-option",
 	"t1",
 	"t2"
     ]
