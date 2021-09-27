@@ -1,0 +1,4 @@
+<div>
+  <input class="fields__multiple-choice--option" type="radio" name="{{ this.id }}" value="{{ option }}">
+  <label for="{{ option }}">{{option}}</label>
+</div>

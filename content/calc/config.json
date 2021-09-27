@@ -30,6 +30,107 @@
 			"formatStandardization" : {}
 		}
 	],
+	"layout" : [
+		{
+			"template" : "task-set",
+			"parameters" : {
+				"id" : "taskset1",
+				"label" : "Step 1 - Course Information"
+			},
+			"children" : [
+				{
+					"template" : "text-input",
+					"parameters" : {
+						"id" : "instructor",
+						"label" : "Name of instructor"
+					}
+				},
+				{
+					"template" : "text-input",
+					"parameters" : {
+						"id" : "institution",
+						"label" : "Institution"
+					}
+				},
+				{
+					"template" : "multiple-choice",
+					"parameters" : {
+						"id" : "course",
+						"label" : "Is this data from Calc II or Statics?"
+					},
+					"children" : [
+						{
+							"template" : "multiple-choice-option",
+							"parameters" : {
+								"id" : "course",
+								"option" : "Calc II"
+							}
+						},
+						{
+							"template" : "multiple-choice-option",
+							"parameters" : {
+								"id" : "course",
+								"option" : "Statics"
+							}
+						}
+					]
+				},
+				{
+					"template" : "multiple-choice",
+					"parameters" : {
+						"id" : "condition",
+						"label" : "Is this an intervention or control section?"
+					},
+					"children" : [
+						{
+							"template" : "multiple-choice-option",
+							"parameters" : {
+								"id" : "condition",
+								"option" : "Intervention"
+							}
+						},
+						{
+							"template" : "multiple-choice-option",
+							"parameters" : {
+								"id" : "condition",
+								"option" : "Control"
+							}
+						}
+					]
+				},
+				{
+					"template" : "multiple-choice",
+					"parameters" : {
+						"id" : "modality",
+						"label" : "Course modality"
+					},
+					"children" : [
+						{
+							"template" : "multiple-choice-option",
+							"parameters" : {
+								"id" : "modality",
+								"option" : "F2F"
+							}
+						},
+						{
+							"template" : "multiple-choice-option",
+							"parameters" : {
+								"id" : "modality",
+								"option" : "On-line"
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"template" : "task-set",
+			"parameters" : {
+				"id" : "taskset2b",
+				"label" : "Step 2 - Roster and Consent"
+			}
+		}
+	],
 	"data" : {
 		"instructor" : {
 			"class" : "Metadata"
@@ -163,17 +264,17 @@
 			"headerMappings" : {
 				"Name" : "Name",
 				"Pre-Course Assessment" : "psvt_pre",
-			    "Post-Course Assessment" : "psvt_post",
-			    "Visualization of Rotations TAKE 2": "psvt_post",
-			    "Visualization of Rotations": "psvt_pre"
+				"Post-Course Assessment" : "psvt_post",
+				"Visualization of Rotations TAKE 2" : "psvt_post",
+				"Visualization of Rotations" : "psvt_pre"
 			}
 		},
-	    "psvt-pre" : {
+		"psvt-pre" : {
 			"class" : "AutoData"
-	    },
-	    "psvt-post" : {
+		},
+		"psvt-post" : {
 			"class" : "AutoData"
-	    }
+		}
 	},
 	"consentOptions" : [
 		[

@@ -1,0 +1,7 @@
+<div id="{{this.id}}" class="fields__multiple-choice tasks__task tasks__child-tasks" data-label="{{this.label}}" data-task-type="multiple-choice">
+  <span>{{this.label}}</span>
+  {% for raw_option in this.content.strip().split('\n') %}
+  {% set option = raw_option.strip() %}
+  
+  {% endfor %}
+</div>

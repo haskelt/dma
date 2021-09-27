@@ -1,0 +1,15 @@
+<div class="tasks__task-wrapper collapsed" data-label="{=label=}">
+  <div class="tasks__task-wrapper--navigation collapsible">
+    <button class="tasks__task-wrapper--button" data-action="previous"><object data="../svg/up-button.svg" height="100%"></object></button>
+  </div>
+  <div class="tasks__task-wrapper--label">
+    {=label=}
+  </div>
+  <div class="tasks__task-wrapper--container collapsible">
+    <div id="{=id=}" class="tasks__task-set tasks__child-tasks">
+    </div>
+  </div>
+  <div class="tasks__task-wrapper--navigation collapsible">
+    <button class="tasks__task-wrapper--button disabled" data-action="next" disabled><object data="../svg/down-button.svg" height="100%"></object></button>
+  </div>
+</div>

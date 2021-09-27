@@ -1,7 +1,10 @@
 {
     "templates": [
 	"student-option",
-	"t1",
-	"t2"
+	"student-selector-prompt",
+	"task-set",
+	"text-input",
+	"multiple-choice",
+	"multiple-choice-option"
     ]
 }
