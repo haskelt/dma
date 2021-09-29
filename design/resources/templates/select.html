@@ -1,0 +1,9 @@
+<div id="{=id=}" class="fields__select tasks__task" data-label="{=label=}" data-task-type="select">
+  <div>{=label=}</div>
+  <select class="fields__select--select">
+    <option class="fields__select--hidden-option" selected disabled></option>
+    {=for[option:options]=}
+    <option class="fields__select--option" value="{=option=}">{=option=}</option>
+    {=endfor=}
+  </select>
+</div>

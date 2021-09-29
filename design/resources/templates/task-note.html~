@@ -1,0 +1,3 @@
+<div class="tasks__task-note">
+  {=content=}
+</div>

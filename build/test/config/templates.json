@@ -1,10 +1,14 @@
 {
     "templates": [
-	"student-option",
 	"student-selector-prompt",
+	"student-option",
 	"task-set",
+	"task-heading",
+	"task-note",
 	"text-input",
 	"multiple-choice",
-	"multiple-choice-option"
+	"select",
+	"spreadsheet-selector",
+	"export-button"
     ]
 }

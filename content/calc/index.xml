@@ -1,56 +1,6 @@
 <page modules="status fields tasks dialogs emarcs">
   <content>
     <task-sequence id="tasksequence">
-      <?ignore
-      <task-wrapper label="Step 1 - Course Information">
-	<task-set id="taskset1">
-	  <select id="term" label="What term was this data collected?">
-	    Fall 2019
-	    Winter 2020
-	    Spring 2020
-	    Fall 2020
-	    Winter 2021
-	    Spring 2021
-	    Fall 2021
-	    Winter 2022
-	    Spring 2022
-	  </select>
-	</task-set>
-      </task-wrapper>
-      <task-wrapper label="Step 2 - Roster and Consent">
-	<task-set id="taskset2">
-	  <spreadsheet-selector id="@roster" label="Master Student Roster"/>
-	  <spreadsheet-selector id="demographics" label="Consent and Demographics"/>
-	</task-set>
-      </task-wrapper>
-      <task-wrapper label="Step 3 - Data Files">
-	<task-set id="taskset3">
-	  <spreadsheet-selector id="pretest1" label="Pretest 1 (Integral Basics)" optional="true"/>
-	  <spreadsheet-selector id="pretest2" label="Pretest 2 (Centroids)" optional="true"/>
-	  <spreadsheet-selector id="pretest3" label="Pretest 3 (Volumes)" optional="true"/>
-	  <spreadsheet-selector id="test1" label="Test 1 (Integral Basics)" optional="true"/>
-	  <spreadsheet-selector id="test2" label="Test 2 (Centroids)" optional="true"/>
-	  <spreadsheet-selector id="test3" label="Test 3 (Volumes)" optional="true"/>
-
-	  <task-heading label="PSVT:R Option A"/>
-	  <task-note>
-	    Use this option if your PSVT:R pretest and posttest scores are in the same file. Otherwise check the 'Skip' box.
-	  </task-note>
-	  <spreadsheet-selector id="psvt" label="PSVT:R Combined" note="" optional="true"/>
-	  <task-heading label="PSVT:R Option B"/>
-	  <task-note>
-	    Use this option if your PSVT:R pretest and posttest scores are in different files. Otherwise check the 'Skip' boxes.
-	  </task-note>
-	  <spreadsheet-selector id="psvt-pre" label="PSVT:R Pretest" optional="true"/>
-	  <spreadsheet-selector id="psvt-post" label="PSVT:R Posttest" optional="true"/>
-	</task-set>
-      </task-wrapper>
-      <task-wrapper label="Step 4 - Export">
-	<task-set id="taskset4">
-	  <export-button id="export" label="Export"/>
-	</task-set>
-      </task-wrapper>
-      ?>
     </task-sequence>
   </content>
   <sidebar>

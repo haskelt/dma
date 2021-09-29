@@ -56,79 +56,189 @@
 					"template" : "multiple-choice",
 					"parameters" : {
 						"id" : "course",
-						"label" : "Is this data from Calc II or Statics?"
-					},
-					"children" : [
-						{
-							"template" : "multiple-choice-option",
-							"parameters" : {
-								"id" : "course",
-								"option" : "Calc II"
-							}
-						},
-						{
-							"template" : "multiple-choice-option",
-							"parameters" : {
-								"id" : "course",
-								"option" : "Statics"
-							}
-						}
-					]
+						"label" : "Is this data from Calc II or Statics?",
+						"options" : [ "Calc II", "Statics" ]
+					}
 				},
 				{
 					"template" : "multiple-choice",
 					"parameters" : {
 						"id" : "condition",
-						"label" : "Is this an intervention or control section?"
-					},
-					"children" : [
-						{
-							"template" : "multiple-choice-option",
-							"parameters" : {
-								"id" : "condition",
-								"option" : "Intervention"
-							}
-						},
-						{
-							"template" : "multiple-choice-option",
-							"parameters" : {
-								"id" : "condition",
-								"option" : "Control"
-							}
-						}
-					]
+						"label" : "Is this an intervention or control section?",
+						"options" : [ "Intervention", "Control" ]
+					}
 				},
 				{
 					"template" : "multiple-choice",
 					"parameters" : {
 						"id" : "modality",
-						"label" : "Course modality"
-					},
-					"children" : [
-						{
-							"template" : "multiple-choice-option",
-							"parameters" : {
-								"id" : "modality",
-								"option" : "F2F"
-							}
-						},
-						{
-							"template" : "multiple-choice-option",
-							"parameters" : {
-								"id" : "modality",
-								"option" : "On-line"
-							}
-						}
-					]
+						"label" : "Course modality",
+						"options" : [ "F2F", "On-line" ]
+					}
+				},
+				{
+					"template" : "select",
+					"parameters" : {
+						"id" : "term",
+						"label" : "What term was this data collected?",
+						"options" : [
+							"Fall 2019",
+							"Winter 2020",
+							"Spring 2020",
+							"Fall 2020",
+							"Winter 2021",
+							"Spring 2021",
+							"Fall 2021",
+							"Winter 2022",
+							"Spring 2022"
+						]
+					}
 				}
 			]
 		},
 		{
 			"template" : "task-set",
 			"parameters" : {
-				"id" : "taskset2b",
+				"id" : "taskset2",
 				"label" : "Step 2 - Roster and Consent"
-			}
+			},
+			"children" : [
+				{
+					"template" : "spreadsheet-selector",
+					"parameters" : {
+						"id" : "@roster",
+						"label" : "Master Student Roster"
+					}
+				},
+				{
+					"template" : "spreadsheet-selector",
+					"parameters" : {
+						"id" : "demographics",
+						"label" : "Consent and Demographics"
+					}
+				}
+			]
+		},
+		{
+			"template" : "task-set",
+			"parameters" : {
+				"id" : "taskset3",
+				"label" : "Step 3 - Data Files"
+			},
+			"children" : [
+				{
+					"template" : "spreadsheet-selector",
+					"parameters" : {
+						"id" : "pretest1",
+						"label" : "Pretest 1 (Integral Basics)",
+						"optional" : true
+					}
+				},
+				{
+					"template" : "spreadsheet-selector",
+					"parameters" : {
+						"id" : "pretest2",
+						"label" : "Pretest 2 (Centroids)",
+						"optional" : true
+					}
+				},
+				{
+					"template" : "spreadsheet-selector",
+					"parameters" : {
+						"id" : "pretest3",
+						"label" : "Pretest 3 (Volumes)",
+						"optional" : true
+					}
+				},
+				{
+					"template" : "spreadsheet-selector",
+					"parameters" : {
+						"id" : "test1",
+						"label" : "Test 1 (Integral Basics)",
+						"optional" : true
+					}
+				},
+				{
+					"template" : "spreadsheet-selector",
+					"parameters" : {
+						"id" : "test2",
+						"label" : "Test 2 (Centroids)",
+						"optional" : true
+					}
+				},
+				{
+					"template" : "spreadsheet-selector",
+					"parameters" : {
+						"id" : "test3",
+						"label" : "Test 3 (Volumes)",
+						"optional" : true
+					}
+				},
+				{
+					"template" : "task-heading",
+					"parameters" : {
+						"label" : "PSVT:R Option A"
+					}
+				},
+				{
+					"template" : "task-note",
+					"parameters" : {
+						"text" : "Use this option if your PSVT:R pretest and posttest scores are in the same file. Otherwise check the 'Skip' box."
+					}
+				},
+				{
+					"template" : "spreadsheet-selector",
+					"parameters" : {
+						"id" : "psvt",
+						"label" : "PSVT:R Combined",
+						"optional" : true
+					}
+				},
+				{
+					"template" : "task-heading",
+					"parameters" : {
+						"label" : "PSVT:R Option B"
+					}
+				},
+				{
+					"template" : "task-note",
+					"parameters" : {
+						"text" : "Use this option if your PSVT:R pretest and posttest scores are in different files. Otherwise check the 'Skip' boxes."
+					}
+				},
+				{
+					"template" : "spreadsheet-selector",
+					"parameters" : {
+						"id" : "psvt-pre",
+						"label" : "PSVT:R Pretest",
+						"optional" : true
+					}
+				},
+				{
+					"template" : "spreadsheet-selector",
+					"parameters" : {
+						"id" : "psvt-post",
+						"label" : "PSVT:R Posttest",
+						"optional" : true
+					}
+				}
+			]
+		},
+		{
+			"template" : "task-set",
+			"parameters" : {
+				"id" : "taskset4",
+				"label" : "Step 4 - Export"
+			},
+			"children" : [
+				{
+					"template" : "export-button",
+					"parameters" : {
+						"id" : "export",
+						"label" : "Export"
+					}
+				}
+			]
 		}
 	],
 	"data" : {
