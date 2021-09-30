@@ -4,7 +4,11 @@ import logger from '../logger/logger.js?v={{globals.version}}';
 import DataError from '../errors/DataError.js?v={{globals.version}}';
 import UserInputNeeded from '../errors/UserInputNeeded.js?v={{globals.version}}';
 import errors from '../errors/errors.js?v={{globals.version}}';
+import ConfigError from '../errors/ConfigError.js?v={{globals.version}}';
+import TemplateManager from '../templates/TemplateManager.js?v={{globals.version}}';
 import Task from './Task.js?v={{globals.version}}';
+import TaskSet from './TaskSet.js?v={{globals.version}}';
+import TaskFactory from './TaskFactory.js?v={{globals.version}}';
 
 class TaskSequence extends Task {
 
@@ -13,6 +17,24 @@ class TaskSequence extends Task {
     constructor (sequenceElement) {
 
 	super(sequenceElement);
+	
+	// build the task layout in the DOM
+	config.getConfig('layout').foreach(taskSpecs => sequenceElement.appendChild(this.buildTaskElement(taskSpecs)));
+	}
+	
+	// initialize the sub-tasks in each task set
+	for (let taskSetElement of taskSequenceElement.querySelectorAll('.tasks__task-set')){
+	    let taskSet = new TaskSet(taskSetElement);
+	    this.addChild(taskSet);
+	    taskSet.setParent(this);
+	    for (let taskElement of taskSetElement.querySelectorAll('.tasks__task')){
+		let task = TaskFactory.build(taskElement.dataset.taskType, taskElement);
+		taskSet.addChild(task);
+		task.setParent(taskSet);
+	    }
+	}
+	
+	// configure the wrappers (previous and next buttons)
 	this.taskWrappers = [];
 	for (let taskWrapperElement of sequenceElement.querySelectorAll('.tasks__task-wrapper')){
 	    let taskWrapperData = {};
@@ -28,14 +50,36 @@ class TaskSequence extends Task {
 
 	this.curTask = 0;
 	
-	// make the first task visible
+	// make the first task set visible
 	this.show(this.curTask);
-	// hide the <previous> button for the first task
+	// hide the <previous> button for the first task set
 	this.setButtonState(0, 'previous_button', 'hidden');
-	// hide the <next> button for the last task
+	// hide the <next> button for the last task set
 	this.setButtonState(this.taskWrappers.length - 1, 'next_button', 'hidden');
+
+	// call the setup hook for this task
+	this.setup();
 	
     } // constructor
+
+    /**************************************************************************/
+
+    buildTaskElement (taskSpecs){
+
+	var taskElement = TemplateManager.expand(taskSpecs.template, taskSpecs.parameters);
+	if('children' in taskSpecs){
+	    var childContainer = taskElement.querySelector('.tasks__child-tasks');
+	    if(!childContainer){
+		throw new ConfigError('Attempt to add children to template ' + taskSpecs.template + ', but that template does not permit children');
+	    }
+	    for(let child of taskSpecs.children){
+		var childElement = buildTask(child);
+		childContainer.appendChild(childElement);
+	    }
+	}
+	return taskElement;
+
+    } // buildTaskElement
 
     /**************************************************************************/
 

@@ -1,14 +1,12 @@
 // Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
 
-import utilities from '../utilities.js?v=0.22.1-beta';
-import logger from '../logger/logger.js?v=0.22.1-beta';
-import templates from '../logger/templates.js?v=0.22.1-beta';
-import Dialog from './Dialog.js?v=0.22.1-beta';
+import utilities from '../utilities.js?v=0.23.0-beta';
+import logger from '../logger/logger.js?v=0.23.0-beta';
+import TemplateManager from '../templates/TemplateManager.js?v=0.23.0-beta';
+import Dialog from './Dialog.js?v=0.23.0-beta';
 
 class StudentSelectorDialog extends Dialog {
 
-    static promptTemplate = 'Unable to find the student with <span id="student-selector__target-identifier"> </span> "<span id="student-selector__target-student"> </span>" in the roster. Please indicate below which student this is or if they are not in your class. If they are not in the list but you would like to add them to the roster, you can click cancel, edit your roster file to add them, and then go back and re-upload your roster.';
-    
     /**************************************************************************/
 
     static initialize () {
@@ -17,10 +15,10 @@ class StudentSelectorDialog extends Dialog {
 	   only the first one will be initialized */
 	this.element = document.querySelector('#student-selector');
 	if(this.element){
-	    this.prompt = this.element.querySelector('#student-selector__prompt');
-	    this.prompt.innerHTML = this.promptTemplate;
-	    this.targetIdentifierElement = this.element.querySelector('#student-selector__target-identifier');
-	    this.targetStudentElement = this.element.querySelector('#student-selector__target-student');
+	    this.header = this.element.querySelector('.dialogs__header');
+	    this.header.appendChild(TemplateManager.expand('student-selector-prompt', {}));
+	    this.targetIdentifierElement = this.header.querySelector('#student-selector__target-identifier');
+	    this.targetStudentElement = this.header.querySelector('#student-selector__target-student');
 	    this.studentListElement = this.element.querySelector('#student-selector__student-list');
 	    this.element.querySelector('.dialogs__ok-button').addEventListener('click', this.handleOK.bind(this));
 	    this.element.querySelector('.dialogs__cancel-button').addEventListener('click', this.handleCancel.bind(this));
@@ -32,7 +30,7 @@ class StudentSelectorDialog extends Dialog {
 
     static createOption (optionValue, optionText, checked = false) {
 
-	var optionElement = templates.expand('student-option', { id: 'student-selector', optionValue: optionValue, optionText: optionText });
+	var optionElement = TemplateManager.expand('student-option', { id: 'student-selector', optionValue: optionValue, optionText: optionText });
 	/* this assumes there is an input element defined by the template,
 	   which is reasonable since the point is to create a selectable
 	   option */
