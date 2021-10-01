@@ -1,8 +1,8 @@
 /* Copyright 2021 Todd R. Haskell\nDistributed under the terms of the Gnu GPL 3.0 */
 
-import logger from '../logger/logger.js?v=0.23.0-beta';
-import Task from '../tasks/Task.js?v=0.23.0-beta';
-import DataManager from '../data/DataManager.js?v=0.23.0-beta';
+import logger from '../logger/logger.js?v=0.23.2-beta';
+import Task from '../tasks/Task.js?v=0.23.2-beta';
+import DataManager from '../data/DataManager.js?v=0.23.2-beta';
 
 class ExportButtonTask extends Task {
     

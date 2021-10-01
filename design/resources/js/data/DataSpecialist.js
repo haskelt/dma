@@ -8,7 +8,7 @@ import DataWarning from '../errors/DataWarning.js?v={{globals.version}}';
 import UserInputNeeded from '../errors/UserInputNeeded.js?v={{globals.version}}';
 import errors from '../errors/errors.js?v={{globals.version}}';
 import DataSets from './DataSets.js?v={{globals.version}}';
-import xlsx from '../xlsx/xlsx.js?v={{globals.version}}';
+import XLSXManager from '../xlsx/XLSXManager.js?v={{globals.version}}';
 import CryptoJS from '../cryptojs/sha256.js?v={{globals.version}}';
 import StudentSelectorDialog from '../dialogs/StudentSelectorDialog.js?v={{globals.version}}';
 
@@ -50,9 +50,9 @@ class DataSpecialist {
 
 	for(let sheet of Object.values(this.curData.Sheets)){
 	    let headingAddresses = {};
-	    let sheetRange = xlsx.decodeRange(sheet['!ref']);
+	    let sheetRange = XLSXManager.decodeRange(sheet['!ref']);
 	    for(let col = sheetRange.s.c; col <= sheetRange.e.c; col++){
-		let address = xlsx.encodeAddress({c: col, r: this.headerRow});
+		let address = XLSXManager.encodeAddress({c: col, r: this.headerRow});
 		if(address in sheet){
 		    if(sheet[address].t != 's'){
 			sheet[address].t = 's';
@@ -87,9 +87,9 @@ class DataSpecialist {
 
 	if('headerMappings' in this.dataConfig){
 	    for(let sheet of Object.values(this.curData.Sheets)){
-		let sheetRange = xlsx.decodeRange(sheet['!ref']);
+		let sheetRange = XLSXManager.decodeRange(sheet['!ref']);
 		for(let col = sheetRange.s.c; col <= sheetRange.e.c; col++){
-		    let address = xlsx.encodeAddress({c: col, r: this.headerRow});
+		    let address = XLSXManager.encodeAddress({c: col, r: this.headerRow});
 		    for(let pattern in this.dataConfig.headerMappings){
 			if(sheet[address].t == 's' && sheet[address].v.includes(pattern)){
 			    sheet[address].v = this.dataConfig.headerMappings[pattern];
@@ -107,9 +107,9 @@ class DataSpecialist {
     standardizeIdentifierHeadings () {
 
 	for(let sheet of Object.values(this.curData.Sheets)){
-	    let sheetRange = xlsx.decodeRange(sheet['!ref']);
+	    let sheetRange = XLSXManager.decodeRange(sheet['!ref']);
 	    for(let col = sheetRange.s.c; col <= sheetRange.e.c; col++){
-		let address = xlsx.encodeAddress({c: col, r: this.headerRow});
+		let address = XLSXManager.encodeAddress({c: col, r: this.headerRow});
 		if(address in sheet){
 		    for(let identifier of this.identifiers){
 			let pattern = new RegExp(identifier.headingPattern, 'i');
@@ -131,7 +131,7 @@ class DataSpecialist {
 
 	var JSONData = {};
 	for(let sheet in this.curData.Sheets){
-	    JSONData[sheet] = xlsx.sheetToJSON(this.curData.Sheets[sheet], {raw: false, range: this.headerRow, defval: ''});
+	    JSONData[sheet] = XLSXManager.sheetToJSON(this.curData.Sheets[sheet], {raw: false, range: this.headerRow, defval: ''});
 	}
 	this.curData = JSONData;
 	

@@ -1,8 +1,8 @@
-// Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
+/* Copyright 2021 Todd R. Haskell\nDistributed under the terms of the Gnu GPL 3.0 */
 
-import utilities from '../utilities.js?v=0.23.0-beta';
-import logger from '../logger/logger.js?v=0.23.0-beta';
-import ConfigError from '../errors/ConfigError.js?v=0.23.0-beta';
+import utilities from '../utilities.js?v=0.23.2-beta';
+import logger from '../logger/logger.js?v=0.23.2-beta';
+import ConfigError from '../errors/ConfigError.js?v=0.23.2-beta';
 
 class TemplateManager {
 
@@ -21,6 +21,7 @@ class TemplateManager {
 
     static getConfig () {
 
+	// fetch is relative to the page, not this file
 	return utilities.fetchJSON('../config/templates.json')
 	    .then((response) => this.configData = response);
 
@@ -28,9 +29,10 @@ class TemplateManager {
 
     /**************************************************************************/
 
-    static load (name, content) {
+    static load (name) {
 
-	return utilities.fetchText('../../templates/' + name + '.html')
+	// fetch is relative to the page, not this file
+	return utilities.fetchText('../templates/' + name + '.html')
 	    .then((response) => this.templates[name] = response);
 	
     } // load

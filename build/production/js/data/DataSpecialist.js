@@ -1,16 +1,16 @@
-// Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
+/* Copyright 2021 Todd R. Haskell\nDistributed under the terms of the Gnu GPL 3.0 */
 
-import logger from '../logger/logger.js?v=0.23.0-beta';
-import config from '../config.js?v=0.23.0-beta';
-import utilities from '../utilities.js?v=0.23.0-beta';
-import DataError from '../errors/DataError.js?v=0.23.0-beta';
-import DataWarning from '../errors/DataWarning.js?v=0.23.0-beta';
-import UserInputNeeded from '../errors/UserInputNeeded.js?v=0.23.0-beta';
-import errors from '../errors/errors.js?v=0.23.0-beta';
-import DataSets from './DataSets.js?v=0.23.0-beta';
-import xlsx from '../xlsx/xlsx.js?v=0.23.0-beta';
-import CryptoJS from '../cryptojs/sha256.js?v=0.23.0-beta';
-import StudentSelectorDialog from '../dialogs/StudentSelectorDialog.js?v=0.23.0-beta';
+import logger from '../logger/logger.js?v=0.23.2-beta';
+import config from '../config.js?v=0.23.2-beta';
+import utilities from '../utilities.js?v=0.23.2-beta';
+import DataError from '../errors/DataError.js?v=0.23.2-beta';
+import DataWarning from '../errors/DataWarning.js?v=0.23.2-beta';
+import UserInputNeeded from '../errors/UserInputNeeded.js?v=0.23.2-beta';
+import errors from '../errors/errors.js?v=0.23.2-beta';
+import DataSets from './DataSets.js?v=0.23.2-beta';
+import XLSXManager from '../xlsx/XLSXManager.js?v=0.23.2-beta';
+import CryptoJS from '../cryptojs/sha256.js?v=0.23.2-beta';
+import StudentSelectorDialog from '../dialogs/StudentSelectorDialog.js?v=0.23.2-beta';
 
 class DataSpecialist {
 
@@ -50,9 +50,9 @@ class DataSpecialist {
 
 	for(let sheet of Object.values(this.curData.Sheets)){
 	    let headingAddresses = {};
-	    let sheetRange = xlsx.decodeRange(sheet['!ref']);
+	    let sheetRange = XLSXManager.decodeRange(sheet['!ref']);
 	    for(let col = sheetRange.s.c; col <= sheetRange.e.c; col++){
-		let address = xlsx.encodeAddress({c: col, r: this.headerRow});
+		let address = XLSXManager.encodeAddress({c: col, r: this.headerRow});
 		if(address in sheet){
 		    if(sheet[address].t != 's'){
 			sheet[address].t = 's';
@@ -87,9 +87,9 @@ class DataSpecialist {
 
 	if('headerMappings' in this.dataConfig){
 	    for(let sheet of Object.values(this.curData.Sheets)){
-		let sheetRange = xlsx.decodeRange(sheet['!ref']);
+		let sheetRange = XLSXManager.decodeRange(sheet['!ref']);
 		for(let col = sheetRange.s.c; col <= sheetRange.e.c; col++){
-		    let address = xlsx.encodeAddress({c: col, r: this.headerRow});
+		    let address = XLSXManager.encodeAddress({c: col, r: this.headerRow});
 		    for(let pattern in this.dataConfig.headerMappings){
 			if(sheet[address].t == 's' && sheet[address].v.includes(pattern)){
 			    sheet[address].v = this.dataConfig.headerMappings[pattern];
@@ -107,9 +107,9 @@ class DataSpecialist {
     standardizeIdentifierHeadings () {
 
 	for(let sheet of Object.values(this.curData.Sheets)){
-	    let sheetRange = xlsx.decodeRange(sheet['!ref']);
+	    let sheetRange = XLSXManager.decodeRange(sheet['!ref']);
 	    for(let col = sheetRange.s.c; col <= sheetRange.e.c; col++){
-		let address = xlsx.encodeAddress({c: col, r: this.headerRow});
+		let address = XLSXManager.encodeAddress({c: col, r: this.headerRow});
 		if(address in sheet){
 		    for(let identifier of this.identifiers){
 			let pattern = new RegExp(identifier.headingPattern, 'i');
@@ -131,7 +131,7 @@ class DataSpecialist {
 
 	var JSONData = {};
 	for(let sheet in this.curData.Sheets){
-	    JSONData[sheet] = xlsx.sheetToJSON(this.curData.Sheets[sheet], {raw: false, range: this.headerRow, defval: ''});
+	    JSONData[sheet] = XLSXManager.sheetToJSON(this.curData.Sheets[sheet], {raw: false, range: this.headerRow, defval: ''});
 	}
 	this.curData = JSONData;
 	

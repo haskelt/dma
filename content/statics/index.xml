@@ -1,7 +1,6 @@
 <page modules="status fields tasks dialogs emarcs">
   <content>
-    <task-sequence id="tasksequence">
-    </task-sequence>
+    <task-sequence/>
   </content>
   <sidebar>
     <status/>

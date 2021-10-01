@@ -1,8 +1,8 @@
 /* Copyright 2021 Todd R. Haskell\nDistributed under the terms of the Gnu GPL 3.0 */
 
-import logger from '../logger/logger.js?v=0.23.0-beta';
-import FieldTask from './FieldTask.js?v=0.23.0-beta';
-import xlsx from '../xlsx/xlsx.js?v=0.23.0-beta';
+import logger from '../logger/logger.js?v=0.23.2-beta';
+import FieldTask from './FieldTask.js?v=0.23.2-beta';
+import XLSXManager from '../xlsx/XLSXManager.js?v=0.23.2-beta';
 
 class SpreadsheetSelectorTask extends FieldTask {
     
@@ -29,7 +29,7 @@ class SpreadsheetSelectorTask extends FieldTask {
         if (this.selector.files.length > 0) {
 	    let excelRegex = /(.xls|.xlsx|.csv)$/;
 	    if(excelRegex.test(this.selector.files[0].name.toLowerCase())) {
-		xlsx.read(this.selector.files[0], this.fileReadCallback.bind(this));
+		XLSXManager.read(this.selector.files[0], this.fileReadCallback.bind(this));
 	    } else {
 		logger.postMessage('ERROR', 'fields', 'Please choose an Excel or CSV file', 'error');
 		this.selector.value = null;

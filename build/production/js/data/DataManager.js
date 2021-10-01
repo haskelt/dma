@@ -1,11 +1,11 @@
-// Copyright 2021 Todd R. Haskell\n// Distributed under the terms of the Gnu GPL 3.0
+/* Copyright 2021 Todd R. Haskell\nDistributed under the terms of the Gnu GPL 3.0 */
 
-import logger from '../logger/logger.js?v=0.23.0-beta';
-import config from '../config.js?v=0.23.0-beta';
-import utilities from '../utilities.js?v=0.23.0-beta';
-import DataSpecialistFactory from './DataSpecialistFactory.js?v=0.23.0-beta';
-import './MetadataSpecialist.js?v=0.23.0-beta';
-import DataSets from './DataSets.js?v=0.23.0-beta';
+import logger from '../logger/logger.js?v=0.23.2-beta';
+import config from '../config.js?v=0.23.2-beta';
+import utilities from '../utilities.js?v=0.23.2-beta';
+import DataSpecialistFactory from './DataSpecialistFactory.js?v=0.23.2-beta';
+import './MetadataSpecialist.js?v=0.23.2-beta';
+import DataSets from './DataSets.js?v=0.23.2-beta';
 
 class DataManager {
 

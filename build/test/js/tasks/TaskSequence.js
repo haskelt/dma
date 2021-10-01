@@ -1,14 +1,15 @@
 /* Copyright 2021 Todd R. Haskell\nDistributed under the terms of the Gnu GPL 3.0 */
 
-import logger from '../logger/logger.js?v=0.23.0-beta';
-import DataError from '../errors/DataError.js?v=0.23.0-beta';
-import UserInputNeeded from '../errors/UserInputNeeded.js?v=0.23.0-beta';
-import errors from '../errors/errors.js?v=0.23.0-beta';
-import ConfigError from '../errors/ConfigError.js?v=0.23.0-beta';
-import TemplateManager from '../templates/TemplateManager.js?v=0.23.0-beta';
-import Task from './Task.js?v=0.23.0-beta';
-import TaskSet from './TaskSet.js?v=0.23.0-beta';
-import TaskFactory from './TaskFactory.js?v=0.23.0-beta';
+import logger from '../logger/logger.js?v=0.23.2-beta';
+import config from '../config.js?v=0.23.2-beta';
+import DataError from '../errors/DataError.js?v=0.23.2-beta';
+import UserInputNeeded from '../errors/UserInputNeeded.js?v=0.23.2-beta';
+import errors from '../errors/errors.js?v=0.23.2-beta';
+import ConfigError from '../errors/ConfigError.js?v=0.23.2-beta';
+import TemplateManager from '../templates/TemplateManager.js?v=0.23.2-beta';
+import Task from './Task.js?v=0.23.2-beta';
+import TaskSet from './TaskSet.js?v=0.23.2-beta';
+import TaskFactory from './TaskFactory.js?v=0.23.2-beta';
 
 class TaskSequence extends Task {
 
@@ -19,11 +20,10 @@ class TaskSequence extends Task {
 	super(sequenceElement);
 	
 	// build the task layout in the DOM
-	config.getConfig('layout').foreach(taskSpecs => sequenceElement.appendChild(this.buildTaskElement(taskSpecs)));
-	}
+	config.getConfig('layout').forEach(taskSpecs => sequenceElement.appendChild(this.buildTaskElement(taskSpecs)));
 	
 	// initialize the sub-tasks in each task set
-	for (let taskSetElement of taskSequenceElement.querySelectorAll('.tasks__task-set')){
+	for (let taskSetElement of sequenceElement.querySelectorAll('.tasks__task-set')){
 	    let taskSet = new TaskSet(taskSetElement);
 	    this.addChild(taskSet);
 	    taskSet.setParent(this);
@@ -73,7 +73,7 @@ class TaskSequence extends Task {
 		throw new ConfigError('Attempt to add children to template ' + taskSpecs.template + ', but that template does not permit children');
 	    }
 	    for(let child of taskSpecs.children){
-		var childElement = buildTask(child);
+		var childElement = this.buildTaskElement(child);
 		childContainer.appendChild(childElement);
 	    }
 	}

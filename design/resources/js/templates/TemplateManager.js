@@ -21,6 +21,7 @@ class TemplateManager {
 
     static getConfig () {
 
+	// fetch is relative to the page, not this file
 	return utilities.fetchJSON('../config/templates.json')
 	    .then((response) => this.configData = response);
 
@@ -28,9 +29,10 @@ class TemplateManager {
 
     /**************************************************************************/
 
-    static load (name, content) {
+    static load (name) {
 
-	return utilities.fetchText('../../templates/' + name + '.html')
+	// fetch is relative to the page, not this file
+	return utilities.fetchText('../templates/' + name + '.html')
 	    .then((response) => this.templates[name] = response);
 	
     } // load

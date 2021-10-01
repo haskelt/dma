@@ -1,7 +1,7 @@
 /* Copyright 2021 Todd R. Haskell\nDistributed under the terms of the Gnu GPL 3.0 */
 
-import sheetjs from '../sheetjs/xlsx.full.min.js?v=0.23.0-beta';
-import logger from '../logger/logger.js?v=0.23.0-beta';
+import sheetjs from '../sheetjs/xlsx.full.min.js?v=0.23.2-beta';
+import logger from '../logger/logger.js?v=0.23.2-beta';
 
 class xlsxReader {
 
@@ -9,19 +9,10 @@ class xlsxReader {
 
     read (fileObject, callback) {
 
-        if (typeof (FileReader) != 'undefined') {
-	    this.callback = callback;
-            var reader = new FileReader();
-            //For Browsers other than IE.
-            if (reader.readAsBinaryString) {
-                reader.onload = this.finishRead.bind(this);                     
-                reader.readAsBinaryString(fileObject);
-            } else {
-		logger.postMessage('ERROR', 'xlsx', 'This app does not work on Internet Explorer');
-            }
-        } else {
-            logger.postMessage('ERROR', 'xlsx', 'This app does not work on browsers without HTML5 support.');
-        }
+	this.callback = callback;
+        var reader = new FileReader();
+        reader.onload = this.finishRead.bind(this);                     
+        reader.readAsBinaryString(fileObject);
 	
     } // read
     

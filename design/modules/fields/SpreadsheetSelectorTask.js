@@ -2,7 +2,7 @@
 
 import logger from '../logger/logger.js?v={{globals.version}}';
 import FieldTask from './FieldTask.js?v={{globals.version}}';
-import xlsx from '../xlsx/xlsx.js?v={{globals.version}}';
+import XLSXManager from '../xlsx/XLSXManager.js?v={{globals.version}}';
 
 class SpreadsheetSelectorTask extends FieldTask {
     
@@ -29,7 +29,7 @@ class SpreadsheetSelectorTask extends FieldTask {
         if (this.selector.files.length > 0) {
 	    let excelRegex = /(.xls|.xlsx|.csv)$/;
 	    if(excelRegex.test(this.selector.files[0].name.toLowerCase())) {
-		xlsx.read(this.selector.files[0], this.fileReadCallback.bind(this));
+		XLSXManager.read(this.selector.files[0], this.fileReadCallback.bind(this));
 	    } else {
 		logger.postMessage('ERROR', 'fields', 'Please choose an Excel or CSV file', 'error');
 		this.selector.value = null;

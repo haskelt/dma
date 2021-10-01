@@ -1,7 +1,7 @@
 /* Copyright 2021 Todd R. Haskell\nDistributed under the terms of the Gnu GPL 3.0 */
 
-import DataSpecialist from '../data/DataSpecialist.js?v=0.23.0-beta';
-import DataSpecialistFactory from '../data/DataSpecialistFactory.js?v=0.23.0-beta';
+import DataSpecialist from '../data/DataSpecialist.js?v=0.23.2-beta';
+import DataSpecialistFactory from '../data/DataSpecialistFactory.js?v=0.23.2-beta';
 
 class CanvasDataSpecialist extends DataSpecialist {
 

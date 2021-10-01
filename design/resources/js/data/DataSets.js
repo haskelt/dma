@@ -3,7 +3,7 @@
 import logger from '../logger/logger.js?v={{globals.version}}';
 import DataError from '../errors/DataError.js?v={{globals.version}}';
 import DataWarning from '../errors/DataWarning.js?v={{globals.version}}';
-import xlsx from '../xlsx/xlsx.js?v={{globals.version}}';
+import XLSXManager from '../xlsx/XLSXManager.js?v={{globals.version}}';
 
 class DataSets {
 
@@ -276,7 +276,7 @@ class DataSets {
     static exportData (dataSets, file) {
 
 	logger.postMessage('DEBUG', 'data', 'Exporting student data');
-	xlsx.write(dataSets, file);
+	XLSXManager.write(dataSets, file);
 	
     } // exportData
     

@@ -9,19 +9,10 @@ class xlsxReader {
 
     read (fileObject, callback) {
 
-        if (typeof (FileReader) != 'undefined') {
-	    this.callback = callback;
-            var reader = new FileReader();
-            //For Browsers other than IE.
-            if (reader.readAsBinaryString) {
-                reader.onload = this.finishRead.bind(this);                     
-                reader.readAsBinaryString(fileObject);
-            } else {
-		logger.postMessage('ERROR', 'xlsx', 'This app does not work on Internet Explorer');
-            }
-        } else {
-            logger.postMessage('ERROR', 'xlsx', 'This app does not work on browsers without HTML5 support.');
-        }
+	this.callback = callback;
+        var reader = new FileReader();
+        reader.onload = this.finishRead.bind(this);                     
+        reader.readAsBinaryString(fileObject);
 	
     } // read
     
