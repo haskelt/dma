@@ -9,9 +9,9 @@ class FieldTask extends Task {
     
     /**************************************************************************/
 
-    constructor (element) {
+    constructor (element, parent) {
 
-	super(element);
+	super(element, parent);
 	this.label = element.dataset.label;
 	this.hasContent = false;
 	this.data = null;
@@ -40,7 +40,7 @@ class FieldTask extends Task {
 		this.clearField();
 		this.data = null;
 		this.hasContent = false;
-		this.parent.setChildStatus(this, 'incomplete');
+		this.setComplete(false);
 		error.message = 'Error while processing data for "' + this.label + '": ' + error.message;
 		logger.postMessage('ERROR', 'fields', error.message);
 	    }

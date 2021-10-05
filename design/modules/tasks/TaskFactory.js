@@ -17,10 +17,10 @@ class TaskFactory {
 
     /**************************************************************************/
 
-    static build (taskType, element) {
+    static build (taskType, element, parent) {
 
 	logger.postMessage('DEBUG', 'tasks', 'Building task of type ' + taskType);
-	return new TaskFactory.builders[taskType](element);
+	return new TaskFactory.builders[taskType](element, parent);
 	
     } // build
 

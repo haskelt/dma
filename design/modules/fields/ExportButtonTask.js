@@ -26,7 +26,7 @@ class ExportButtonTask extends Task {
 	    this.button.disabled = false;;
 	    /* Set the task as complete from the start, on the logic that
 	       clicking the button is optional. */
-	    this.parent.setChildStatus(this, 'complete');
+	    this.setComplete(true);
 	    logger.postMessage('INFO', 'fields', 'Completed final processing of the data');
 	}
 	catch (error) {

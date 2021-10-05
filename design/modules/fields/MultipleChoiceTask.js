@@ -32,7 +32,7 @@ class MultipleChoiceTask extends FieldTask {
 	if(newHasContent != this.hasContent){
 	    this.hasContent = newHasContent;
 	    logger.postMessage('DEBUG', 'fields', 'Task ' + this.id + ' is now complete');	
-	    this.parent.setChildStatus(this, this.hasContent ? 'complete' : 'incomplete');
+	    this.setComplete(this.hasContent ? true : false);
 	}
 
     } // handleInput

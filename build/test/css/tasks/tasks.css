@@ -1,41 +1,41 @@
 /* Copyright 2021 Todd R. Haskell\nDistributed under the terms of the Gnu GPL 3.0 */
 
-.tasks__task-wrapper {
+.tasks__task-set {
     border-style: solid;
     border-width: thin;
     border-color: hsl(180, 0%, 40%);
     margin: .5rem 0;
 }
 
-.tasks__task-wrapper.collapsed {
+.tasks__task-set.collapsed {
     border-color: hsl(180, 0%, 70%);
 }
 
-.tasks__task-wrapper.collapsed .collapsible {
+.tasks__task-set.collapsed .collapsible {
     display: none;
 }
 
-.tasks__task-wrapper--label {
+.tasks__task-set--label {
     padding: 1.0rem;
     background-color: hsl(180, 50%, 80%);
     font-size: 1.6rem;
 }
 
-.tasks__task-wrapper.collapsed .tasks__task-wrapper--label {
+.tasks__task-set.collapsed .tasks__task-set--label {
     color: hsl(180, 0%, 50%);
 }
 
-.tasks__task-wrapper--navigation {
+.tasks__task-set--navigation {
     background-color: hsl(180, 5%, 85%);
     display: flex;
     justify-content: center;
 }
 
-.tasks__task-wrapper--navigation {
+.tasks__task-set--navigation {
 
 }
 
-.tasks__task-wrapper--button {
+.tasks__task-set--button {
     margin: 0.3rem;
     padding: 0.5rem;
     font-size: 1.1rem;
@@ -43,23 +43,23 @@
     width: 3rem;
 }
 
-.tasks__task-wrapper--button:enabled:hover {
+.tasks__task-set--button:enabled:hover {
     cursor: pointer;
 }
 
-.tasks__task-wrapper--button object {
+.tasks__task-set--button object {
     pointer-events: none;
 }
 
-.tasks__task-wrapper--button.disabled object {
+.tasks__task-set--button.disabled object {
     opacity: 50%;
 }
 
-.tasks__task-wrapper--button.hidden {
+.tasks__task-set--button.hidden {
     display: none;
 }
 
-.tasks__task-set {
+.tasks__task-set--subtasks {
     padding: 1.5rem;
 }
 

@@ -5,135 +5,52 @@ import config from '../config.js?v=0.23.2-beta';
 import DataError from '../errors/DataError.js?v=0.23.2-beta';
 import UserInputNeeded from '../errors/UserInputNeeded.js?v=0.23.2-beta';
 import errors from '../errors/errors.js?v=0.23.2-beta';
-import ConfigError from '../errors/ConfigError.js?v=0.23.2-beta';
-import TemplateManager from '../templates/TemplateManager.js?v=0.23.2-beta';
-import Task from './Task.js?v=0.23.2-beta';
 import TaskSet from './TaskSet.js?v=0.23.2-beta';
-import TaskFactory from './TaskFactory.js?v=0.23.2-beta';
 
-class TaskSequence extends Task {
+class TaskSequence {
 
     /**************************************************************************/
 
     constructor (sequenceElement) {
 
-	super(sequenceElement);
+	this.id = sequenceElement.id;
 	
-	// build the task layout in the DOM
-	config.getConfig('layout').forEach(taskSpecs => sequenceElement.appendChild(this.buildTaskElement(taskSpecs)));
-	
-	// initialize the sub-tasks in each task set
+	// initialize each task set
+	this.taskSets = [];
 	for (let taskSetElement of sequenceElement.querySelectorAll('.tasks__task-set')){
 	    let taskSet = new TaskSet(taskSetElement);
-	    this.addChild(taskSet);
-	    taskSet.setParent(this);
-	    for (let taskElement of taskSetElement.querySelectorAll('.tasks__task')){
-		let task = TaskFactory.build(taskElement.dataset.taskType, taskElement);
-		taskSet.addChild(task);
-		task.setParent(taskSet);
-	    }
+	    logger.postMessage('TRACE', 'tasks', `Adding ${taskSet.id} to task sequence`);
+	    this.addTaskSet(taskSet);
 	}
 	
-	// configure the wrappers (previous and next buttons)
-	this.taskWrappers = [];
-	for (let taskWrapperElement of sequenceElement.querySelectorAll('.tasks__task-wrapper')){
-	    let taskWrapperData = {};
-	    taskWrapperData['wrapper'] = taskWrapperElement;
-	    taskWrapperData['label'] = taskWrapperElement.dataset.label;
-	    taskWrapperData['container'] = taskWrapperElement.querySelector('.tasks__task-wrapper--container');
-	    taskWrapperData['previous_button'] = taskWrapperElement.querySelector('.tasks__task-wrapper--button[data-action="previous"]');
-	    taskWrapperData['previous_button'].addEventListener('click', this.goToPrevious.bind(this));
-	    taskWrapperData['next_button'] = taskWrapperElement.querySelector('.tasks__task-wrapper--button[data-action="next"]');
-	    taskWrapperData['next_button'].addEventListener('click', this.goToNext.bind(this));
-	    this.taskWrappers.push(taskWrapperData);
-	}
-
 	this.curTask = 0;
 	
 	// make the first task set visible
-	this.show(this.curTask);
+	this.taskSets[this.curTask].show();
 	// hide the <previous> button for the first task set
-	this.setButtonState(0, 'previous_button', 'hidden');
+	this.taskSets[0].setButtonState('previous', 'hidden');
 	// hide the <next> button for the last task set
-	this.setButtonState(this.taskWrappers.length - 1, 'next_button', 'hidden');
-
-	// call the setup hook for this task
-	this.setup();
+	this.taskSets[this.taskSets.length - 1].setButtonState('next', 'hidden');
 	
     } // constructor
 
     /**************************************************************************/
 
-    buildTaskElement (taskSpecs){
+    addTaskSet (taskSet) {
 
-	var taskElement = TemplateManager.expand(taskSpecs.template, taskSpecs.parameters);
-	if('children' in taskSpecs){
-	    var childContainer = taskElement.querySelector('.tasks__child-tasks');
-	    if(!childContainer){
-		throw new ConfigError('Attempt to add children to template ' + taskSpecs.template + ', but that template does not permit children');
-	    }
-	    for(let child of taskSpecs.children){
-		var childElement = this.buildTaskElement(child);
-		childContainer.appendChild(childElement);
-	    }
-	}
-	return taskElement;
+	taskSet.setTaskSequence(this);
+	this.taskSets.push(taskSet);
 
-    } // buildTaskElement
-
-    /**************************************************************************/
-
-    setup () {
-
-	this.children[this.curTask]['object'].setup();
-	
-    } // setup
+    } // addTaskSet
     
     /**************************************************************************/
-    
-    show (taskIndex) {
 
-	this.taskWrappers[taskIndex]['wrapper'].classList.remove('collapsed');
-
-    } // show
-
-    /**************************************************************************/
-
-    hide (taskIndex) {
-
-	this.taskWrappers[taskIndex]['wrapper'].classList.add('collapsed');
-
-    } // hide
-
-    /**************************************************************************/
-
-    setButtonState (taskIndex, button, state) {
-
-	logger.postMessage('DEBUG', 'tasks', 'Setting state of button ' + button + ' for task wrapper ' + taskIndex + ' to ' + state); 
-	if(state == 'hidden'){
-	    this.taskWrappers[taskIndex][button].classList.add('hidden');
-	} else if(state == 'visible'){
-	    this.taskWrappers[taskIndex][button].classList.remove('hidden');
-	} else if(state == 'disabled'){
-	    this.taskWrappers[taskIndex][button].disabled = true;
-	    this.taskWrappers[taskIndex][button].classList.add('disabled');
-	} else if(state == 'enabled'){
-	    this.taskWrappers[taskIndex][button].disabled = false;
-	    this.taskWrappers[taskIndex][button].classList.remove('disabled');
-	} else {
-	    logger.postMessage('ERROR', 'tasks', 'Unrecognized button state <' + state + '>');
-	}
-	
-    } // setButtonState
-    
-    /**************************************************************************/
-    
     goToPrevious () {
 
 	if(this.curTask > 0){
-	    logger.postMessage('INFO', 'tasks', 'Going back to "' + this.taskWrappers[this.curTask - 1].label + '"');
-	    this.hide(this.curTask);
-	    this.show(this.curTask - 1);
+	    logger.postMessage('INFO', 'tasks', `Going back to "${this.taskSets[this.curTask - 1].label}"`);
+	    this.taskSets[this.curTask].hide();
+	    this.taskSets[this.curTask - 1].show();
 	    this.curTask--;
 	}
 
@@ -143,19 +60,18 @@ class TaskSequence extends Task {
 	
     goToNext () {
 
-	if(this.curTask < this.taskWrappers.length - 1){
-	    logger.postMessage('DEBUG', 'tasks', 'Moving forward from task wrapper ' + this.curTask + ' to task wrapper ' + (this.curTask + 1));
+	if(this.curTask < this.taskSets.length - 1){
+	    logger.postMessage('INFO', 'tasks', `Moving forward to "${this.taskSets[this.curTask + 1].label}"`);
 	    try {
-		this.children[this.curTask]['object'].wrapUp();
-		logger.postMessage('INFO', 'tasks', 'Completed "' + this.taskWrappers[this.curTask].label + '"');
-		this.hide(this.curTask);
-		this.show(this.curTask + 1);
+		this.taskSets[this.curTask].wrapUp();
+		this.taskSets[this.curTask].hide();
+		this.taskSets[this.curTask + 1].show();
 		this.curTask++;
-		this.children[this.curTask]['object'].setup();
+		this.taskSets[this.curTask].setup();
 	    }
 	    catch (error) {
 		if (error instanceof DataError) {
-		    logger.postMessage('DEBUG', 'tasks', 'Advancing to next task sequence interrupted by error.');
+		    logger.postMessage('DEBUG', 'tasks', 'Advancing to next taskset interrupted by error.');
 		} else if (error instanceof UserInputNeeded) {
 		    errors.setResumePoint(this.goToNext.bind(this));
 		} else {
@@ -166,16 +82,6 @@ class TaskSequence extends Task {
 	
     } // goToNext
     
-    /**************************************************************************/
-
-    setChildStatus (child, status) {
-	
-	super.setChildStatus(child, status);
-	var childIndex = this.children.findIndex(entry => entry['object'] == child);
-	this.setButtonState(childIndex, 'next_button', status == 'complete' ? 'enabled' : 'disabled');
-
-    } // setChildStatus
-	
     /**************************************************************************/
 
 } // TaskSequence

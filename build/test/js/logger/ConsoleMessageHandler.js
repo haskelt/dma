@@ -12,7 +12,7 @@ class ConsoleMessageHandler {
         'TRACE': '    ++ '
     };
 
-    static loggingLevel = 'DEBUG';
+    static loggingLevel = 'TRACE';
 
     static namespacesToPost = ['config', 'errors', 'templates', 'tasks', 'fields', 'data', 'files', 'dialogs', 'xlsx'];
 
