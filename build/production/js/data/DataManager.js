@@ -1,6 +1,7 @@
 /* Copyright 2021 Todd R. Haskell\nDistributed under the terms of the Gnu GPL 3.0 */
 
 import logger from '../logger/logger.js?v=0.24.2-beta';
+import warning_tracker from '../logger/WarningTracker.js?v=0.24.2-beta';
 import config from '../config.js?v=0.24.2-beta';
 import utilities from '../utilities.js?v=0.24.2-beta';
 import DataSpecialistFactory from './DataSpecialistFactory.js?v=0.24.2-beta';
@@ -73,7 +74,9 @@ class DataManager {
 	this.exportDataSets[targetTag] = DataSets.generateMissingRecords(this.exportDataSets[targetTag], this.rosterData, 'anonID', missingList);
 	for(let student of missingList){
 	    let canonicalID = DataSets.findData('@roster', 'anonID', student, canonicalIdentifier);
-	    logger.postMessage('WARN', 'data', 'Data set "' + targetTag + '" is missing student "' + canonicalID + '", created empty record.');
+	    let message = `Data set "${targetTag}" is missing student "${canonicalID}", created empty record.`;
+	    logger.postMessage('WARN', 'data', message);
+	    warning_tracker.postMessage(message);
 	}
 	
     } // generateMissingRecords

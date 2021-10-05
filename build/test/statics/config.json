@@ -166,15 +166,27 @@
 				"id" : "taskset4",
 				"label" : "Step 4 - Export"
 			},
-			"children" : [
-				{
-					"template" : "export-button",
-					"parameters" : {
-						"id" : "export",
-						"label" : "Export"
-					}
-				}
-			]
+		    "children" : [
+			{
+			    "template" : "prepare-data",
+			    "parameters" : {
+				"id" : "prepare-for-export"
+			    }
+			},
+			{
+			    "template" : "warning-box",
+			    "parameters" : {
+				"id" : "warnings"
+			    }
+			},
+			{
+			    "template" : "export-button",
+			    "parameters" : {
+				"id" : "export",
+				"label" : "Export"
+			    }
+			}
+		    ]
 		}
 	],
 	"data" : {

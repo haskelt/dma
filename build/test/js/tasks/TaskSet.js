@@ -1,8 +1,9 @@
 /* Copyright 2021 Todd R. Haskell\nDistributed under the terms of the Gnu GPL 3.0 */
 
-import logger from '../logger/logger.js?v=0.24.1-beta';
-import DataError from '../errors/DataError.js?v=0.24.1-beta';
-import TaskFactory from './TaskFactory.js?v=0.24.1-beta';
+import logger from '../logger/logger.js?v=0.24.2-beta';
+import warning_tracker from '../logger/WarningTracker.js?v=0.24.2-beta';
+import DataError from '../errors/DataError.js?v=0.24.2-beta';
+import TaskFactory from './TaskFactory.js?v=0.24.2-beta';
 
 class TaskSet  {
 
@@ -144,9 +145,12 @@ class TaskSet  {
     setup () {
 
 	logger.postMessage('TRACE', 'tasks', 'Doing setup for task ' + this.id);
+	warning_tracker.resetMessages(this.id);
+	warning_tracker.startTracking(this.id);
 	for(let task of this.tasks){
 	    task.setup();
 	}
+	warning_tracker.stopTracking();
 	
     } // setup
     
@@ -154,7 +158,8 @@ class TaskSet  {
 
     wrapUp () {
 
-	logger.postMessage('TRACE', 'tasks', 'Doing wrap-up for task ' + this.id);
+	logger.postMessage('TRACE', 'tasks', 'Doing wrap-up for ' + this.id);
+	warning_tracker.startTracking(this.id);
 	try {
 	    for(let task of this.tasks){
 		task.wrapUp();
@@ -167,6 +172,7 @@ class TaskSet  {
 	    }
 	    throw error;
 	}
+	warning_tracker.stopTracking();
 	
     } // wrapUp
     

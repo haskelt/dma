@@ -1,5 +1,9 @@
 {{globals.css_copyright_notice}}
 
+.tasks__task-sequence {
+    min-width: 45rem;
+}
+
 .tasks__task-set {
     border-style: solid;
     border-width: thin;

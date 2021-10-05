@@ -1,9 +1,4 @@
-<page modules="status fields tasks dialogs emarcs">
-  <content>
-    <task-sequence/>
-  </content>
-  <sidebar>
-    <status/>
-  </sidebar>
+<page modules="fields tasks dialogs emarcs">
+  <task-sequence/>
   <student-selector-dialog/>
 </page>

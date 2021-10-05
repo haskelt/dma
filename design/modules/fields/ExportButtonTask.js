@@ -20,21 +20,8 @@ class ExportButtonTask extends Task {
 
     setup () {
 
-	try {
-	    DataManager.finalizeData();
-	    logger.postMessage('TRACE', 'fields', 'Enabling export button');
-	    this.button.disabled = false;;
-	    /* Set the task as complete from the start, on the logic that
-	       clicking the button is optional. */
-	    this.setComplete(true);
-	    logger.postMessage('INFO', 'fields', 'Completed final processing of the data');
-	}
-	catch (error) {
-	    logger.postMessage('ERROR', 'fields', error.message);
-	    logger.postMessage('TRACE', 'fields', 'Disabling export button');
-	    this.button.disabled = true;
-	    throw error;
-	}
+	logger.postMessage('TRACE', 'fields', 'Enabling export button');
+	this.button.disabled = false;;
 	
     } // setup
 

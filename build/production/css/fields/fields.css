@@ -1,9 +1,41 @@
 /* Copyright 2021 Todd R. Haskell\nDistributed under the terms of the Gnu GPL 3.0 */
 
-.fields__spreadsheet-selector--skip-label {
-    color: hsl(0, 10%, 90%);
-}
-
 .fields__select--hidden-option {
     display: none;
 }
+
+.fields__prepare-data, .fields__warning-box.hidden {
+    display: none;
+}
+
+.fields__warning-box--label {
+    padding: 0.5rem 0.5rem;
+    color: hsl(0, 0%, 15%);
+    font-weight:bold;
+}
+
+.fields__warning-box--message-list {
+    background-color: hsl(0, 5%, 90%);
+}
+
+.fields__warning-box--message-list span {
+    display: block;
+    padding: 1.0rem 0.5rem;
+    color: hsl(25, 100%, 50%);
+    font-weight: bold;
+}
+
+.fields__export-button--button {
+    font-size: 1.2rem;
+    border-color: hsl(180, 50%, 20%);
+    border-width: medium;
+    border-style: solid;
+    border-radius: 0.4rem;
+    background-color: hsl(0, 5%, 90%);
+}
+
+.fields__export-button--button:hover {
+    background-color: hsl(180, 50%, 80%);
+    cursor: pointer;
+}
+

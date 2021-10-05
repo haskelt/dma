@@ -1,6 +1,7 @@
 {{globals.js_copyright_notice}}
 
 import logger from '../logger/logger.js?v={{globals.version}}';
+import warning_tracker from '../logger/WarningTracker.js?v={{globals.version}}';
 import DataError from '../errors/DataError.js?v={{globals.version}}';
 import TaskFactory from './TaskFactory.js?v={{globals.version}}';
 
@@ -144,9 +145,12 @@ class TaskSet  {
     setup () {
 
 	logger.postMessage('TRACE', 'tasks', 'Doing setup for task ' + this.id);
+	warning_tracker.resetMessages(this.id);
+	warning_tracker.startTracking(this.id);
 	for(let task of this.tasks){
 	    task.setup();
 	}
+	warning_tracker.stopTracking();
 	
     } // setup
     
@@ -154,7 +158,8 @@ class TaskSet  {
 
     wrapUp () {
 
-	logger.postMessage('TRACE', 'tasks', 'Doing wrap-up for task ' + this.id);
+	logger.postMessage('TRACE', 'tasks', 'Doing wrap-up for ' + this.id);
+	warning_tracker.startTracking(this.id);
 	try {
 	    for(let task of this.tasks){
 		task.wrapUp();
@@ -167,6 +172,7 @@ class TaskSet  {
 	    }
 	    throw error;
 	}
+	warning_tracker.stopTracking();
 	
     } // wrapUp
     

@@ -1,8 +1,8 @@
 /* Copyright 2021 Todd R. Haskell\nDistributed under the terms of the Gnu GPL 3.0 */
 
-import logger from '../logger/logger.js?v=0.24.1-beta';
-import Task from '../tasks/Task.js?v=0.24.1-beta';
-import DataManager from '../data/DataManager.js?v=0.24.1-beta';
+import logger from '../logger/logger.js?v=0.24.2-beta';
+import Task from '../tasks/Task.js?v=0.24.2-beta';
+import DataManager from '../data/DataManager.js?v=0.24.2-beta';
 
 class ExportButtonTask extends Task {
     
@@ -20,21 +20,8 @@ class ExportButtonTask extends Task {
 
     setup () {
 
-	try {
-	    DataManager.finalizeData();
-	    logger.postMessage('TRACE', 'fields', 'Enabling export button');
-	    this.button.disabled = false;;
-	    /* Set the task as complete from the start, on the logic that
-	       clicking the button is optional. */
-	    this.setComplete(true);
-	    logger.postMessage('INFO', 'fields', 'Completed final processing of the data');
-	}
-	catch (error) {
-	    logger.postMessage('ERROR', 'fields', error.message);
-	    logger.postMessage('TRACE', 'fields', 'Disabling export button');
-	    this.button.disabled = true;
-	    throw error;
-	}
+	logger.postMessage('TRACE', 'fields', 'Enabling export button');
+	this.button.disabled = false;;
 	
     } // setup
 
