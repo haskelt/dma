@@ -14,7 +14,6 @@ class TaskSet  {
 
 	this.id = taskSetElement.id;
 	this.label = taskSetElement.dataset.label;
-	this.container = taskSetElement.querySelector('.tasks__task-set--container');
 	this.previousButton = taskSetElement.querySelector('.tasks__task-set--button[data-action="previous"]');
 	this.previousButton.addEventListener('click', this.goToPrevious.bind(this));
 	this.nextButton = taskSetElement.querySelector('.tasks__task-set--button[data-action="next"]');

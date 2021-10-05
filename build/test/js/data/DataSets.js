@@ -1,9 +1,9 @@
 /* Copyright 2021 Todd R. Haskell\nDistributed under the terms of the Gnu GPL 3.0 */
 
-import logger from '../logger/logger.js?v=0.23.2-beta';
-import DataError from '../errors/DataError.js?v=0.23.2-beta';
-import DataWarning from '../errors/DataWarning.js?v=0.23.2-beta';
-import XLSXManager from '../xlsx/XLSXManager.js?v=0.23.2-beta';
+import logger from '../logger/logger.js?v=0.24.0-beta';
+import DataError from '../errors/DataError.js?v=0.24.0-beta';
+import DataWarning from '../errors/DataWarning.js?v=0.24.0-beta';
+import XLSXManager from '../xlsx/XLSXManager.js?v=0.24.0-beta';
 
 class DataSets {
 

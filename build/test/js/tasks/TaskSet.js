@@ -1,8 +1,8 @@
 /* Copyright 2021 Todd R. Haskell\nDistributed under the terms of the Gnu GPL 3.0 */
 
-import logger from '../logger/logger.js?v=0.23.2-beta';
-import DataError from '../errors/DataError.js?v=0.23.2-beta';
-import TaskFactory from './TaskFactory.js?v=0.23.2-beta';
+import logger from '../logger/logger.js?v=0.24.0-beta';
+import DataError from '../errors/DataError.js?v=0.24.0-beta';
+import TaskFactory from './TaskFactory.js?v=0.24.0-beta';
 
 class TaskSet  {
 
@@ -14,7 +14,6 @@ class TaskSet  {
 
 	this.id = taskSetElement.id;
 	this.label = taskSetElement.dataset.label;
-	this.container = taskSetElement.querySelector('.tasks__task-set--container');
 	this.previousButton = taskSetElement.querySelector('.tasks__task-set--button[data-action="previous"]');
 	this.previousButton.addEventListener('click', this.goToPrevious.bind(this));
 	this.nextButton = taskSetElement.querySelector('.tasks__task-set--button[data-action="next"]');

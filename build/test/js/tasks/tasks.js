@@ -1,10 +1,10 @@
 /* Copyright 2021 Todd R. Haskell\nDistributed under the terms of the Gnu GPL 3.0 */
 
-import config from '../config.js?v=0.23.2-beta';
-import logger from '../logger/logger.js?v=0.23.2-beta';
-import ConfigError from '../errors/ConfigError.js?v=0.23.2-beta';
-import TemplateManager from '../templates/TemplateManager.js?v=0.23.2-beta';
-import TaskSequence from './TaskSequence.js?v=0.23.2-beta';
+import config from '../config.js?v=0.24.0-beta';
+import logger from '../logger/logger.js?v=0.24.0-beta';
+import ConfigError from '../errors/ConfigError.js?v=0.24.0-beta';
+import TemplateManager from '../templates/TemplateManager.js?v=0.24.0-beta';
+import TaskSequence from './TaskSequence.js?v=0.24.0-beta';
 
 /******************************************************************************/
 
@@ -28,7 +28,7 @@ function buildLayoutElement (layoutSpecs){
 
     var layoutElement = TemplateManager.expand(layoutSpecs.template, layoutSpecs.parameters);
     if('children' in layoutSpecs){
-	var childContainer = layoutElement.querySelector('.tasks__task-set--subtasks');
+	var childContainer = layoutElement.querySelector('.tasks__children');
 	if(!childContainer){
 	    throw new ConfigError('Attempt to add children to template ' + layoutSpecs.template + ', but that template does not permit children');
 	}

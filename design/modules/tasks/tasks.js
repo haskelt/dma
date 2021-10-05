@@ -28,7 +28,7 @@ function buildLayoutElement (layoutSpecs){
 
     var layoutElement = TemplateManager.expand(layoutSpecs.template, layoutSpecs.parameters);
     if('children' in layoutSpecs){
-	var childContainer = layoutElement.querySelector('.tasks__task-set--subtasks');
+	var childContainer = layoutElement.querySelector('.tasks__children');
 	if(!childContainer){
 	    throw new ConfigError('Attempt to add children to template ' + layoutSpecs.template + ', but that template does not permit children');
 	}
