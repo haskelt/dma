@@ -36,12 +36,13 @@ class ConfigManager {
     /**************************************************************************/
 
     static initializeModules () {
-	
+
 	var curPromise = Promise.resolve(true); 
 	for(let moduleSpecs of this.moduleRegistry) {
 	    logger.postMessage('TRACE', 'config', 'Queuing initialization for module ' + moduleSpecs.name);
 	    curPromise = curPromise.then(moduleSpecs.initializer); 
 	}
+	return curPromise;
 	
     } // initializeModules
     
@@ -51,7 +52,8 @@ class ConfigManager {
 
 	utilities.fetchJSON('config.json')
 	    .then(this.storeConfig.bind(this))
-	    .then(this.initializeModules.bind(this));
+	    .then(this.initializeModules.bind(this))
+	    .catch(err => window.dispatchEvent(new ErrorEvent('error', {error: err, message: err.message })));
 	
     } // initialize
     

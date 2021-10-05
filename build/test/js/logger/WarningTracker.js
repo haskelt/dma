@@ -1,6 +1,6 @@
 /* Copyright 2021 Todd R. Haskell\nDistributed under the terms of the Gnu GPL 3.0 */
 
-import CodeError from '../errors/CodeError.js?v=0.24.2-beta';
+import CodeError from '../errors/CodeError.js?v=0.26.0-beta';
 
 class WarningTracker {
 

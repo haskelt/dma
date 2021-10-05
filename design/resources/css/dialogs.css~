@@ -1,0 +1,58 @@
+{{globals.css_copyright_notice}}
+
+.dialogs__dialog-wrapper {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background: rgba(75, 75, 75, 0.5);
+}
+
+.dialogs__dialog-wrapper.hidden {
+    display: none;
+}
+
+.dialogs__dialog {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-style: none;
+    border-width: thin;
+    border-color: hsl(0, 5%, 50%);
+    padding: 0;
+    min-width: 20rem;
+    max-width: 60%;
+    max-height: 90%;
+}
+
+.dialogs__header, dialogs__content-area, .dialogs_footer {
+    font-size: 1.1rem;
+    padding: 0.6rem;
+}
+
+.dialogs__content-area {
+    overflow: auto;
+}
+
+.dialogs__footer button {
+    margin: 0.6rem;
+    font-size: 1.1rem;
+}
+
+.dialogs__radio-option {
+    padding: .5rem .5rem .5rem 1.5rem;
+}
+
+#student-selector__student-list {
+    background-color: hsl(0, 0%, 89%);
+}
+
+#student-selector__student-list label {
+    padding: 0rem 0rem 0rem 1rem;
+}
+

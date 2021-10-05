@@ -1,4 +1,5 @@
-<page modules="fields tasks dialogs emarcs">
+<page modules="fields tasks emarcs">
   <task-sequence/>
   <student-selector-dialog/>
+  <error-log-dialog/>
 </page>

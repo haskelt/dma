@@ -1,7 +1,7 @@
 {{globals.css_copyright_notice}}
 
 .tasks__task-sequence {
-    min-width: 45rem;
+    width: 45rem;
 }
 
 .tasks__task-set {
@@ -92,4 +92,3 @@
     margin: 0.5rem 0;
     padding: 0.5rem;
 }
-

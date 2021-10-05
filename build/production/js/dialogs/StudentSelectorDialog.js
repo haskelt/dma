@@ -1,9 +1,8 @@
 /* Copyright 2021 Todd R. Haskell\nDistributed under the terms of the Gnu GPL 3.0 */
 
-import utilities from '../utilities.js?v=0.25.0-beta';
-import logger from '../logger/logger.js?v=0.25.0-beta';
-import TemplateManager from '../templates/TemplateManager.js?v=0.25.0-beta';
-import Dialog from './Dialog.js?v=0.25.0-beta';
+import logger from '../logger/logger.js?v=0.26.0-beta';
+import TemplateManager from '../templates/TemplateManager.js?v=0.26.0-beta';
+import Dialog from './Dialog.js?v=0.26.0-beta';
 
 class StudentSelectorDialog extends Dialog {
 
@@ -16,15 +15,12 @@ class StudentSelectorDialog extends Dialog {
 	this.element = document.querySelector('#student-selector');
 	if(this.element){
 	    this.header = this.element.querySelector('.dialogs__header');
-	    this.header.appendChild(TemplateManager.expand('student-selector-prompt', {}));
-	    this.targetIdentifierElement = this.header.querySelector('#student-selector__target-identifier');
-	    this.targetStudentElement = this.header.querySelector('#student-selector__target-student');
 	    this.studentListElement = this.element.querySelector('#student-selector__student-list');
 	    this.element.querySelector('.dialogs__ok-button').addEventListener('click', this.handleOK.bind(this));
 	    this.element.querySelector('.dialogs__cancel-button').addEventListener('click', this.handleCancel.bind(this));
 	}
 	
-    } // constructor
+    } // initialize
 
     /**************************************************************************/
 
@@ -48,8 +44,15 @@ class StudentSelectorDialog extends Dialog {
     static getUserSelection (targetIdentifier, targetStudent, studentList, onResponse) {
 
 	logger.postMessage('DEBUG', 'dialogs', 'Prompting user to select student with ' + targetIdentifier + ' "' + targetStudent + '"');
+
+	// set up the header
+	this.header.appendChild(TemplateManager.expand('student-selector-prompt', {}));
+	this.targetIdentifierElement = this.header.querySelector('#student-selector__target-identifier');
+	this.targetStudentElement = this.header.querySelector('#student-selector__target-student');
 	this.targetIdentifierElement.textContent = targetIdentifier;
 	this.targetStudentElement.textContent = targetStudent;
+
+	// set up the options list
 	this.options = [];
 	/* we make this option checked by default */ 
 	this.createOption('not-in-class', 'This student is not in my class', true);
@@ -73,6 +76,7 @@ class StudentSelectorDialog extends Dialog {
 		break;
 	    }
 	}
+	this.header.removeChild(this.header.firstChild);
 	while(this.studentListElement.firstChild){
 	    this.studentListElement.removeChild(this.studentListElement.firstChild);
 	}
@@ -89,6 +93,7 @@ class StudentSelectorDialog extends Dialog {
     static handleCancel () {
 	
 	super.hide();
+	this.header.removeChild(this.header.firstChild);
 	while(this.studentListElement.firstChild){
 	    this.studentListElement.removeChild(this.studentListElement.firstChild);
 	}
@@ -100,4 +105,5 @@ class StudentSelectorDialog extends Dialog {
     
 } // StudentSelectorDialog
 
+StudentSelectorDialog.initialize();
 export default StudentSelectorDialog;

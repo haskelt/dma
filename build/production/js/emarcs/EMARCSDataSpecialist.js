@@ -1,9 +1,9 @@
 /* Copyright 2021 Todd R. Haskell\nDistributed under the terms of the Gnu GPL 3.0 */
 
-import logger from '../logger/logger.js?v=0.25.0-beta';
-import DataSets from '../data/DataSets.js?v=0.25.0-beta';
-import XLSXManager from '../xlsx/XLSXManager.js?v=0.25.0-beta';
-import DataSpecialist from '../data/DataSpecialist.js?v=0.25.0-beta';
+import logger from '../logger/logger.js?v=0.26.0-beta';
+import DataSets from '../data/DataSets.js?v=0.26.0-beta';
+import XLSXManager from '../xlsx/XLSXManager.js?v=0.26.0-beta';
+import DataSpecialist from '../data/DataSpecialist.js?v=0.26.0-beta';
 
 class EMARCSDataSpecialist extends DataSpecialist {
 

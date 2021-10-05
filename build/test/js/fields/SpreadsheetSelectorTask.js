@@ -1,8 +1,8 @@
 /* Copyright 2021 Todd R. Haskell\nDistributed under the terms of the Gnu GPL 3.0 */
 
-import logger from '../logger/logger.js?v=0.24.2-beta';
-import FieldTask from './FieldTask.js?v=0.24.2-beta';
-import XLSXManager from '../xlsx/XLSXManager.js?v=0.24.2-beta';
+import logger from '../logger/logger.js?v=0.26.0-beta';
+import FieldTask from './FieldTask.js?v=0.26.0-beta';
+import XLSXManager from '../xlsx/XLSXManager.js?v=0.26.0-beta';
 
 class SpreadsheetSelectorTask extends FieldTask {
     
@@ -12,6 +12,7 @@ class SpreadsheetSelectorTask extends FieldTask {
 
 	super(element);
 	this.selector = element.querySelector('.fields__spreadsheet-selector--selector');
+	this.errorText = element.querySelector('.fields__spreadsheet-selector--error-text');
 	this.selector.addEventListener('change', this.handleSelector.bind(this));
 	if(element.dataset.optional == 'true'){
 	    this.checkbox = element.querySelector('.fields__spreadsheet-selector--checkbox');
@@ -25,6 +26,7 @@ class SpreadsheetSelectorTask extends FieldTask {
     handleSelector (e) {
 
 	logger.postMessage('DEBUG', 'fields', `Content of spreadsheet selector ${this.id} has changed to "${this.selector.value}"`);
+	this.clearError();
 	// if a file has been selected
         if (this.selector.files.length > 0) {
 	    let excelRegex = /(.xls|.xlsx|.csv)$/;
@@ -32,6 +34,7 @@ class SpreadsheetSelectorTask extends FieldTask {
 		XLSXManager.read(this.selector.files[0], this.fileReadCallback.bind(this));
 	    } else {
 		logger.postMessage('ERROR', 'fields', 'Please choose an Excel or CSV file', 'error');
+		this.displayError(`${this.selector.files[0].name} is not XLSX or CSV format`);
 		this.selector.value = null;
 	    }
 	} else {
@@ -42,6 +45,25 @@ class SpreadsheetSelectorTask extends FieldTask {
 
     /**************************************************************************/
 
+    displayError (message) {
+
+	this.errorText.textContent = message;
+	this.errorText.classList.remove('hidden');
+
+    } // displayError
+	
+    /**************************************************************************/
+
+    clearError () {
+
+	this.errorText.classList.add('hidden');
+	this.errorText.textContent = '';
+
+    } // clearError
+    
+    /**************************************************************************/
+
+    
     fileReadCallback (data) {
 
 	if(data == null){

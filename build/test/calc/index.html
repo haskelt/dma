@@ -5,15 +5,14 @@
     <meta charset=utf-8>
     <title>DMA</title>
     
-    <link rel="stylesheet" href="../css/app.css?v=0.24.2-beta" type="text/css" />
+    <link rel="stylesheet" href="../css/app.css?v=0.26.0-beta" type="text/css" />
+    <link rel="stylesheet" href="../css/dialogs.css?v=0.26.0-beta" type="text/css" />
     
     
     
-    <link rel="stylesheet" href="../css/fields/fields.css?v=0.24.2-beta" type="text/css" />
+    <link rel="stylesheet" href="../css/fields/fields.css?v=0.26.0-beta" type="text/css" />
     
-    <link rel="stylesheet" href="../css/tasks/tasks.css?v=0.24.2-beta" type="text/css" />
-    
-    <link rel="stylesheet" href="../css/dialogs/dialogs.css?v=0.24.2-beta" type="text/css" />
+    <link rel="stylesheet" href="../css/tasks/tasks.css?v=0.26.0-beta" type="text/css" />
     
     
     
@@ -22,7 +21,7 @@
   <body>
     
     <header>
-      <h1>EMARCS Data Management App v0.24.2-beta</h1>
+      <h1>EMARCS Data Management App v0.26.0-beta</h1>
     </header>
     <main>
       
@@ -45,36 +44,46 @@
     </div>
   </div>
 </div>
+  <div id="error-log" class="dialogs__dialog-wrapper hidden" data-dialog-type="error-log">
+  <div class="dialogs__dialog">
+    <div class="dialogs__header">
+      Oops, an unexpected error occurred - sorry about that! For technical support, please e-mail the session log below to the system administrator.
+    </div>
+    <div class="dialogs__content-area">
+      <div id="error-log__messages">
+      </div>
+    </div>
+    <div class="dialogs__footer">
+      <button class="dialogs__ok-button">OK</button>
+    </div>
+  </div>
+</div>
       
     </main>
 
     
     
-    <script src="../js/logger/logger.js?v=0.24.2-beta" type="module"></script>
-    <script src="../js/xlsx/xlsx.js?v=0.24.2-beta" type="module"></script>
-    <script src="../js/data/data.js?v=0.24.2-beta" type="module"></script>
-    <script src="../js/templates/templates.js?v=0.24.2-beta" type="module"></script>
+    <script src="../js/logger/logger.js?v=0.26.0-beta" type="module"></script>
+    <script src="../js/xlsx/xlsx.js?v=0.26.0-beta" type="module"></script>
+    <script src="../js/data/data.js?v=0.26.0-beta" type="module"></script>
+    <script src="../js/templates/templates.js?v=0.26.0-beta" type="module"></script>
     
     
     
     <script type="module">
-      import "../js/fields/fields.js?v=0.24.2-beta"
+      import "../js/fields/fields.js?v=0.26.0-beta"
     </script>
     
     <script type="module">
-      import "../js/tasks/tasks.js?v=0.24.2-beta"
+      import "../js/tasks/tasks.js?v=0.26.0-beta"
     </script>
     
     <script type="module">
-      import "../js/dialogs/dialogs.js?v=0.24.2-beta"
-    </script>
-    
-    <script type="module">
-      import "../js/emarcs/emarcs.js?v=0.24.2-beta"
+      import "../js/emarcs/emarcs.js?v=0.26.0-beta"
     </script>
     
     
-    <script src="../js/app.js?v=0.24.2-beta" type="module"></script>
+    <script src="../js/app.js?v=0.26.0-beta" type="module"></script>
     
 
   

@@ -4,6 +4,16 @@
     display: none;
 }
 
+.fields__spreadsheet-selector--error-text {
+    padding: 0.5rem;
+    color: hsl(0, 100%, 30%);
+    font-weight: bold;
+}
+
+.fields__spreadsheet-selector--error-text.hidden {
+    display: none;
+}
+
 .fields__prepare-data, .fields__warning-box.hidden {
     display: none;
 }

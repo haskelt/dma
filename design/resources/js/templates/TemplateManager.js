@@ -12,6 +12,7 @@ class TemplateManager {
 
     static initialize () {
 
+	//throw new Error('fake error in data module code');
 	return this.getConfig()
 	    .then(this.loadAll.bind(this));
 

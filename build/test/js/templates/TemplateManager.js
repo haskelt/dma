@@ -1,8 +1,8 @@
 /* Copyright 2021 Todd R. Haskell\nDistributed under the terms of the Gnu GPL 3.0 */
 
-import utilities from '../utilities.js?v=0.24.2-beta';
-import logger from '../logger/logger.js?v=0.24.2-beta';
-import ConfigError from '../errors/ConfigError.js?v=0.24.2-beta';
+import utilities from '../utilities.js?v=0.26.0-beta';
+import logger from '../logger/logger.js?v=0.26.0-beta';
+import ConfigError from '../errors/ConfigError.js?v=0.26.0-beta';
 
 class TemplateManager {
 
@@ -12,6 +12,7 @@ class TemplateManager {
 
     static initialize () {
 
+	//throw new Error('fake error in data module code');
 	return this.getConfig()
 	    .then(this.loadAll.bind(this));
 

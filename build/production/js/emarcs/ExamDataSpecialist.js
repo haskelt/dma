@@ -1,7 +1,7 @@
 /* Copyright 2021 Todd R. Haskell\nDistributed under the terms of the Gnu GPL 3.0 */
 
-import EMARCSDataSpecialist from './EMARCSDataSpecialist.js?v=0.25.0-beta';
-import DataSpecialistFactory from '../data/DataSpecialistFactory.js?v=0.25.0-beta';
+import EMARCSDataSpecialist from './EMARCSDataSpecialist.js?v=0.26.0-beta';
+import DataSpecialistFactory from '../data/DataSpecialistFactory.js?v=0.26.0-beta';
 
 class ExamDataSpecialist extends EMARCSDataSpecialist {
 

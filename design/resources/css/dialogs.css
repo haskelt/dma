@@ -48,6 +48,15 @@
     padding: .5rem .5rem .5rem 1.5rem;
 }
 
+#error-log__messages {
+    background-color: hsl(0, 0%, 89%);
+    padding: 0.5rem 1rem;
+}
+
+#error-log__messages span {
+    display: block;
+    padding: 0.3rem;
+}
 
 #student-selector__student-list {
     background-color: hsl(0, 0%, 89%);
@@ -56,3 +65,4 @@
 #student-selector__student-list label {
     padding: 0rem 0rem 0rem 1rem;
 }
+
