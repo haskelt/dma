@@ -14,6 +14,6 @@
     "globals": {
 	"js_copyright_notice": "/* Copyright 2021 Todd R. Haskell\\nDistributed under the terms of the Gnu GPL 3.0 */",
 	"css_copyright_notice": "/* Copyright 2021 Todd R. Haskell\\nDistributed under the terms of the Gnu GPL 3.0 */",
-	"version": "0.23.2-beta"
+	"version": "0.24.0-beta"
     }
 }
