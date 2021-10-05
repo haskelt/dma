@@ -1,7 +1,7 @@
 /* Copyright 2021 Todd R. Haskell\nDistributed under the terms of the Gnu GPL 3.0 */
 
-import logger from '../logger/logger.js?v=0.23.2-beta';
-import FieldTask from './FieldTask.js?v=0.23.2-beta';
+import logger from '../logger/logger.js?v=0.24.2-beta';
+import FieldTask from './FieldTask.js?v=0.24.2-beta';
 
 class MultipleChoiceTask extends FieldTask {
     
@@ -32,7 +32,7 @@ class MultipleChoiceTask extends FieldTask {
 	if(newHasContent != this.hasContent){
 	    this.hasContent = newHasContent;
 	    logger.postMessage('DEBUG', 'fields', 'Task ' + this.id + ' is now complete');	
-	    this.parent.setChildStatus(this, this.hasContent ? 'complete' : 'incomplete');
+	    this.setComplete(this.hasContent ? true : false);
 	}
 
     } // handleInput

@@ -1,6 +1,6 @@
 /* Copyright 2021 Todd R. Haskell\nDistributed under the terms of the Gnu GPL 3.0 */
 
-import logger from '../logger/logger.js?v=0.23.2-beta';
+import logger from '../logger/logger.js?v=0.24.2-beta';
 
 class TaskFactory {
 
@@ -17,10 +17,10 @@ class TaskFactory {
 
     /**************************************************************************/
 
-    static build (taskType, element) {
+    static build (taskType, element, parent) {
 
 	logger.postMessage('DEBUG', 'tasks', 'Building task of type ' + taskType);
-	return new TaskFactory.builders[taskType](element);
+	return new TaskFactory.builders[taskType](element, parent);
 	
     } // build
 

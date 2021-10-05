@@ -1,7 +1,7 @@
 /* Copyright 2021 Todd R. Haskell\nDistributed under the terms of the Gnu GPL 3.0 */
 
-import logger from '../logger/logger.js?v=0.23.2-beta';
-import FieldTask from './FieldTask.js?v=0.23.2-beta';
+import logger from '../logger/logger.js?v=0.24.2-beta';
+import FieldTask from './FieldTask.js?v=0.24.2-beta';
 
 class SelectTask extends FieldTask {
     
@@ -21,7 +21,7 @@ class SelectTask extends FieldTask {
 
 	if(!this.data){
 	    logger.postMessage('DEBUG', 'fields', 'Task ' + this.id + ' is now complete');	
-	    this.parent.setChildStatus(this, 'complete');
+	    this.setComplete(true);
 	}
 	this.data = this.select.children[this.select.selectedIndex].value;
 	logger.postMessage('INFO', 'fields', 'Option "' + this.data + '" chosen for "' + this.label + '"');

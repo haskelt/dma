@@ -1,8 +1,8 @@
 /* Copyright 2021 Todd R. Haskell\nDistributed under the terms of the Gnu GPL 3.0 */
 
-import config from '../config.js?v=0.23.2-beta';
-import logger from '../logger/logger.js?v=0.23.2-beta';
-import ConfigError from '../errors/ConfigError.js?v=0.23.2-beta';
+import config from '../config.js?v=0.24.2-beta';
+import logger from '../logger/logger.js?v=0.24.2-beta';
+import ConfigError from '../errors/ConfigError.js?v=0.24.2-beta';
 
 function initialize () {
 

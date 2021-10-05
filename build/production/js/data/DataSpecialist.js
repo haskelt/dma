@@ -1,16 +1,16 @@
 /* Copyright 2021 Todd R. Haskell\nDistributed under the terms of the Gnu GPL 3.0 */
 
-import logger from '../logger/logger.js?v=0.23.2-beta';
-import config from '../config.js?v=0.23.2-beta';
-import utilities from '../utilities.js?v=0.23.2-beta';
-import DataError from '../errors/DataError.js?v=0.23.2-beta';
-import DataWarning from '../errors/DataWarning.js?v=0.23.2-beta';
-import UserInputNeeded from '../errors/UserInputNeeded.js?v=0.23.2-beta';
-import errors from '../errors/errors.js?v=0.23.2-beta';
-import DataSets from './DataSets.js?v=0.23.2-beta';
-import XLSXManager from '../xlsx/XLSXManager.js?v=0.23.2-beta';
-import CryptoJS from '../cryptojs/sha256.js?v=0.23.2-beta';
-import StudentSelectorDialog from '../dialogs/StudentSelectorDialog.js?v=0.23.2-beta';
+import logger from '../logger/logger.js?v=0.24.2-beta';
+import config from '../config.js?v=0.24.2-beta';
+import utilities from '../utilities.js?v=0.24.2-beta';
+import DataError from '../errors/DataError.js?v=0.24.2-beta';
+import DataWarning from '../errors/DataWarning.js?v=0.24.2-beta';
+import UserInputNeeded from '../errors/UserInputNeeded.js?v=0.24.2-beta';
+import errors from '../errors/errors.js?v=0.24.2-beta';
+import DataSets from './DataSets.js?v=0.24.2-beta';
+import XLSXManager from '../xlsx/XLSXManager.js?v=0.24.2-beta';
+import CryptoJS from '../cryptojs/sha256.js?v=0.24.2-beta';
+import StudentSelectorDialog from '../dialogs/StudentSelectorDialog.js?v=0.24.2-beta';
 
 class DataSpecialist {
 
@@ -367,7 +367,6 @@ class DataSpecialist {
 	   This includes both the tag on its own as well as any tag + sheet
 	   combinations. This ensures the data don't get corrupted if the user
 	   goes back in the task sequence. */
-	console.log('setting data for ' + this.tag);
 	DataSets.deleteDataSet(this.tag);
 	DataSets.deleteMatchingDataSets('^' + this.tag + '\.');
     	var sheetNames = Object.keys(this.curData);

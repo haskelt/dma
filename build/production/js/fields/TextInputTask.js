@@ -1,7 +1,7 @@
 /* Copyright 2021 Todd R. Haskell\nDistributed under the terms of the Gnu GPL 3.0 */
 
-import logger from '../logger/logger.js?v=0.23.2-beta';
-import FieldTask from './FieldTask.js?v=0.23.2-beta';
+import logger from '../logger/logger.js?v=0.24.2-beta';
+import FieldTask from './FieldTask.js?v=0.24.2-beta';
 
 class TextInputTask extends FieldTask {
     
@@ -27,11 +27,11 @@ class TextInputTask extends FieldTask {
 	if(!this.hasContent && newHasContent){
 	    logger.postMessage('DEBUG', 'fields', 'Task "' + this.id + '" is now complete');
 	    this.hasContent = true;
-	    this.parent.setChildStatus(this, 'complete');
+	    this.setComplete(true);
 	} else if(this.hasContent && !newHasContent){
 	    logger.postMessage('DEBUG', 'fields', 'Task "' + this.id + '" is now incomplete');
 	    this.hasContent = false;
-	    this.parent.setChildStatus(this, 'incomplete');
+	    this.setComplete(false);
 	}
 	this.hasChanged = true;
 	this.data = this.input.value;
