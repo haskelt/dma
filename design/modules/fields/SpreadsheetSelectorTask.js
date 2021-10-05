@@ -24,7 +24,7 @@ class SpreadsheetSelectorTask extends FieldTask {
 
     handleSelector (e) {
 
-	logger.postMessage('DEBUG', 'fields', 'Content of spreadsheet selector ' + this.id + ' has changed to ' + this.selector.value);
+	logger.postMessage('DEBUG', 'fields', `Content of spreadsheet selector ${this.id} has changed to "${this.selector.value}"`);
 	// if a file has been selected
         if (this.selector.files.length > 0) {
 	    let excelRegex = /(.xls|.xlsx|.csv)$/;
@@ -35,7 +35,7 @@ class SpreadsheetSelectorTask extends FieldTask {
 		this.selector.value = null;
 	    }
 	} else {
-	    this.parent.setChildStatus(this, 'incomplete');
+	    this.setComplete(false);
 	}
 
     } // handleSelector
@@ -52,7 +52,7 @@ class SpreadsheetSelectorTask extends FieldTask {
 	    let filenameRegex = /[^\\/]+$/;
 	    let filename = this.selector.value.match(filenameRegex);
 	    logger.postMessage('INFO', 'fields', 'File "' + filename + '" chosen for "' + this.label + '"');
-	    this.parent.setChildStatus(this, 'complete');
+	    this.setComplete(true);
 	}
 	
     } // fileReadCallback
@@ -66,12 +66,12 @@ class SpreadsheetSelectorTask extends FieldTask {
 	    this.selector.value = null;
 	    this.data = null;
 	    this.selector.disabled = true;
-	    this.parent.setChildStatus(this, 'complete');
+	    this.setComplete(true);
 	} else {
 	    logger.postMessage('INFO', 'fields', 'Choosing to select a file for "' + this.label + '"');
 	    console.log('unchecked the checkbox');
 	    this.selector.disabled = false;
-	    this.parent.setChildStatus(this, 'incomplete');
+	    this.setComplete(false);
 	}
 	
     } // handleCheckbox

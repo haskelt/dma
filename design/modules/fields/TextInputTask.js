@@ -27,11 +27,11 @@ class TextInputTask extends FieldTask {
 	if(!this.hasContent && newHasContent){
 	    logger.postMessage('DEBUG', 'fields', 'Task "' + this.id + '" is now complete');
 	    this.hasContent = true;
-	    this.parent.setChildStatus(this, 'complete');
+	    this.setComplete(true);
 	} else if(this.hasContent && !newHasContent){
 	    logger.postMessage('DEBUG', 'fields', 'Task "' + this.id + '" is now incomplete');
 	    this.hasContent = false;
-	    this.parent.setChildStatus(this, 'incomplete');
+	    this.setComplete(false);
 	}
 	this.hasChanged = true;
 	this.data = this.input.value;

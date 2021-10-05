@@ -21,7 +21,7 @@ class SelectTask extends FieldTask {
 
 	if(!this.data){
 	    logger.postMessage('DEBUG', 'fields', 'Task ' + this.id + ' is now complete');	
-	    this.parent.setChildStatus(this, 'complete');
+	    this.setComplete(true);
 	}
 	this.data = this.select.children[this.select.selectedIndex].value;
 	logger.postMessage('INFO', 'fields', 'Option "' + this.data + '" chosen for "' + this.label + '"');

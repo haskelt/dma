@@ -367,7 +367,6 @@ class DataSpecialist {
 	   This includes both the tag on its own as well as any tag + sheet
 	   combinations. This ensures the data don't get corrupted if the user
 	   goes back in the task sequence. */
-	console.log('setting data for ' + this.tag);
 	DataSets.deleteDataSet(this.tag);
 	DataSets.deleteMatchingDataSets('^' + this.tag + '\.');
     	var sheetNames = Object.keys(this.curData);
