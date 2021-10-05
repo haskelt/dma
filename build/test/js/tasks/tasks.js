@@ -1,10 +1,10 @@
 /* Copyright 2021 Todd R. Haskell\nDistributed under the terms of the Gnu GPL 3.0 */
 
-import config from '../config.js?v=0.24.0-beta';
-import logger from '../logger/logger.js?v=0.24.0-beta';
-import ConfigError from '../errors/ConfigError.js?v=0.24.0-beta';
-import TemplateManager from '../templates/TemplateManager.js?v=0.24.0-beta';
-import TaskSequence from './TaskSequence.js?v=0.24.0-beta';
+import config from '../config.js?v=0.24.1-beta';
+import logger from '../logger/logger.js?v=0.24.1-beta';
+import ConfigError from '../errors/ConfigError.js?v=0.24.1-beta';
+import TemplateManager from '../templates/TemplateManager.js?v=0.24.1-beta';
+import TaskSequence from './TaskSequence.js?v=0.24.1-beta';
 
 /******************************************************************************/
 

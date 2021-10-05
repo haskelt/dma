@@ -106,6 +106,8 @@ class TaskSet  {
 
     updateStatus () {
 
+	this.clearMessage();
+	
 	var newComplete = true;
 	for(let task of this.tasks){
 	    if(!task.isComplete()){
@@ -161,11 +163,30 @@ class TaskSet  {
 	catch (error) {
 	    if (error instanceof DataError){
 		logger.postMessage('DEBUG', 'tasks', 'Interrupted wrap-up for task ' + this.id + ' due to error.');
+		this.showMessage(error.message);
 	    }
 	    throw error;
 	}
 	
     } // wrapUp
+    
+    /**************************************************************************/
+
+    showMessage (message) {
+
+	this.messageBox.innerText = message;
+	this.messageBox.classList.remove('hidden');
+	
+    } // showMessage
+    
+    /**************************************************************************/
+
+    clearMessage () {
+
+	this.messageBox.classList.add('hidden');
+	this.messageBox.innerText = '';
+	
+    } // clearMessage
     
     /**************************************************************************/
 

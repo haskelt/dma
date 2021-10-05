@@ -1,8 +1,8 @@
 /* Copyright 2021 Todd R. Haskell\nDistributed under the terms of the Gnu GPL 3.0 */
 
-import logger from '../logger/logger.js?v=0.24.0-beta';
-import DataError from '../errors/DataError.js?v=0.24.0-beta';
-import TaskFactory from './TaskFactory.js?v=0.24.0-beta';
+import logger from '../logger/logger.js?v=0.24.1-beta';
+import DataError from '../errors/DataError.js?v=0.24.1-beta';
+import TaskFactory from './TaskFactory.js?v=0.24.1-beta';
 
 class TaskSet  {
 
@@ -106,6 +106,8 @@ class TaskSet  {
 
     updateStatus () {
 
+	this.clearMessage();
+	
 	var newComplete = true;
 	for(let task of this.tasks){
 	    if(!task.isComplete()){
@@ -161,11 +163,30 @@ class TaskSet  {
 	catch (error) {
 	    if (error instanceof DataError){
 		logger.postMessage('DEBUG', 'tasks', 'Interrupted wrap-up for task ' + this.id + ' due to error.');
+		this.showMessage(error.message);
 	    }
 	    throw error;
 	}
 	
     } // wrapUp
+    
+    /**************************************************************************/
+
+    showMessage (message) {
+
+	this.messageBox.innerText = message;
+	this.messageBox.classList.remove('hidden');
+	
+    } // showMessage
+    
+    /**************************************************************************/
+
+    clearMessage () {
+
+	this.messageBox.classList.add('hidden');
+	this.messageBox.innerText = '';
+	
+    } // clearMessage
     
     /**************************************************************************/
 

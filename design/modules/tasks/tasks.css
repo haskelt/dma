@@ -63,6 +63,16 @@
     padding: 1.5rem;
 }
 
+.tasks__task-set--message-box {
+    padding: 1.5rem;
+    color: hsl(0, 100%, 30%);
+    font-weight: bold;
+}
+
+.tasks__task-set--message-box.hidden {
+    display: none;
+}
+
 .tasks__task {
     padding: 0.5rem 0;
 }
