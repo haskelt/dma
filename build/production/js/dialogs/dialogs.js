@@ -2,16 +2,16 @@
 
 import config from '../config.js?v=0.26.1-beta';
 import logger from '../logger/logger.js?v=0.26.1-beta';
-import DataManager from './DataManager.js?v=0.26.1-beta';
+import StudentSelectorDialog from './StudentSelectorDialog.js?v=0.26.1-beta';
 
 function initialize () {
 
-    logger.postMessage('DEBUG', 'data', 'Initializing data module');
-    DataManager.initialize();
+    logger.postMessage('DEBUG', 'data', 'Initializing dialogs module');
+    StudentSelectorDialog.initialize();
     return Promise.resolve(true);
 
 } // initialize
 
 /******************************************************************************/
 
-config.registerModule('data', initialize);
+config.registerModule('dialogs', initialize);

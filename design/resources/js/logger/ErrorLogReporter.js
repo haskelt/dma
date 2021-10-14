@@ -1,9 +1,8 @@
 {{globals.js_copyright_notice}}
 
 import message_dispatcher from '../logger/MessageDispatcher.js?v={{globals.version}}';
-import Dialog from './Dialog.js?v={{globals.version}}';
 
-class ErrorLogDialog extends Dialog {
+class ErrorLogReporter {
 
     static prefix = {
         'ERROR': '! ',
@@ -45,22 +44,21 @@ class ErrorLogDialog extends Dialog {
     static handleError (error) {
 
 	this.handleMessage('ERROR', 'window', error.message);
-	super.show();
-	
+	this.element.classList.remove("hidden");
+
     } // handleError
     
     /**************************************************************************/
     
     static handleOK () {
 
-	super.hide();
+	this.element.classList.add("hidden");
 	
     } // handleOK
     
     /**************************************************************************/
 
-} // ErrorLogDialog
+} // ErrorLogReporter
 
-ErrorLogDialog.initialize();
-export default ErrorLogDialog;
+export default ErrorLogReporter;
 

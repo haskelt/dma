@@ -1,9 +1,8 @@
 /* Copyright 2021 Todd R. Haskell\nDistributed under the terms of the Gnu GPL 3.0 */
 
-import message_dispatcher from '../logger/MessageDispatcher.js?v=0.26.0-beta';
-import Dialog from './Dialog.js?v=0.26.0-beta';
+import message_dispatcher from '../logger/MessageDispatcher.js?v=0.26.1-beta';
 
-class ErrorLogDialog extends Dialog {
+class ErrorLogReporter {
 
     static prefix = {
         'ERROR': '! ',
@@ -45,21 +44,20 @@ class ErrorLogDialog extends Dialog {
     static handleError (error) {
 
 	this.handleMessage('ERROR', 'window', error.message);
-	super.show();
-	
+	this.element.classList.remove("hidden");
+
     } // handleError
     
     /**************************************************************************/
     
     static handleOK () {
 
-	super.hide();
+	this.element.classList.add("hidden");
 	
     } // handleOK
     
     /**************************************************************************/
 
-} // ErrorLogDialog
+} // ErrorLogReporter
 
-ErrorLogDialog.initialize();
-export default ErrorLogDialog;
+export default ErrorLogReporter;

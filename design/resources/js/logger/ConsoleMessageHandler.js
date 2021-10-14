@@ -43,6 +43,6 @@ class ConsoleMessageHandler {
 
 }
 
-ConsoleMessageHandler.initialize();
+export default ConsoleMessageHandler;
 
 

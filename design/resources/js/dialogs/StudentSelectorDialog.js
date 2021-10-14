@@ -15,6 +15,10 @@ class StudentSelectorDialog extends Dialog {
 	this.element = document.querySelector('#student-selector');
 	if(this.element){
 	    this.header = this.element.querySelector('.dialogs__header');
+	    // set up the header
+	    this.header.appendChild(TemplateManager.expand('student-selector-prompt', {}));
+	    this.targetIdentifierElement = this.header.querySelector('#student-selector__target-identifier');
+	    this.targetStudentElement = this.header.querySelector('#student-selector__target-student');
 	    this.studentListElement = this.element.querySelector('#student-selector__student-list');
 	    this.element.querySelector('.dialogs__ok-button').addEventListener('click', this.handleOK.bind(this));
 	    this.element.querySelector('.dialogs__cancel-button').addEventListener('click', this.handleCancel.bind(this));
@@ -45,10 +49,6 @@ class StudentSelectorDialog extends Dialog {
 
 	logger.postMessage('DEBUG', 'dialogs', 'Prompting user to select student with ' + targetIdentifier + ' "' + targetStudent + '"');
 
-	// set up the header
-	this.header.appendChild(TemplateManager.expand('student-selector-prompt', {}));
-	this.targetIdentifierElement = this.header.querySelector('#student-selector__target-identifier');
-	this.targetStudentElement = this.header.querySelector('#student-selector__target-student');
 	this.targetIdentifierElement.textContent = targetIdentifier;
 	this.targetStudentElement.textContent = targetStudent;
 
@@ -76,7 +76,6 @@ class StudentSelectorDialog extends Dialog {
 		break;
 	    }
 	}
-	this.header.removeChild(this.header.firstChild);
 	while(this.studentListElement.firstChild){
 	    this.studentListElement.removeChild(this.studentListElement.firstChild);
 	}
@@ -93,7 +92,6 @@ class StudentSelectorDialog extends Dialog {
     static handleCancel () {
 	
 	super.hide();
-	this.header.removeChild(this.header.firstChild);
 	while(this.studentListElement.firstChild){
 	    this.studentListElement.removeChild(this.studentListElement.firstChild);
 	}
@@ -105,6 +103,5 @@ class StudentSelectorDialog extends Dialog {
     
 } // StudentSelectorDialog
 
-StudentSelectorDialog.initialize();
 export default StudentSelectorDialog;
 

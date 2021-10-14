@@ -1,9 +1,9 @@
 /* Copyright 2021 Todd R. Haskell\nDistributed under the terms of the Gnu GPL 3.0 */
 
-import logger from '../logger/logger.js?v=0.26.0-beta';
-import warning_tracker from '../logger/WarningTracker.js?v=0.26.0-beta';
-import DataError from '../errors/DataError.js?v=0.26.0-beta';
-import TaskFactory from './TaskFactory.js?v=0.26.0-beta';
+import logger from '../logger/logger.js?v=0.26.1-beta';
+import warning_tracker from '../logger/WarningTracker.js?v=0.26.1-beta';
+import DataError from '../errors/DataError.js?v=0.26.1-beta';
+import TaskFactory from './TaskFactory.js?v=0.26.1-beta';
 
 class TaskSet  {
 
